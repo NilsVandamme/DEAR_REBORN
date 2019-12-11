@@ -17,12 +17,15 @@ public class SC_GMLocalEditor : Editor
      */
     public override void OnInspectorGUI()
     {
-        EditorGUILayout.BeginHorizontal();
+        if (SC_GM_Master.gm != null)
+        {
+            EditorGUILayout.BeginHorizontal();
 
-        EditorGUILayout.LabelField("Perso de la scene");
-        gmLocal.peopleScore = EditorGUILayout.Popup(gmLocal.peopleScore, SC_GM_Master.gm.listChampsLexicaux.listOfPerso);
+            EditorGUILayout.LabelField("Perso de la scene");
+            gmLocal.peopleScore = EditorGUILayout.Popup(gmLocal.peopleScore, SC_GM_Master.gm.listChampsLexicaux.listOfPerso);
 
-        EditorGUILayout.EndHorizontal();
+            EditorGUILayout.EndHorizontal();
+        }
 
 
 

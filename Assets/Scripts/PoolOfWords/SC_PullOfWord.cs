@@ -186,8 +186,8 @@ public class SC_PullOfWord : MonoBehaviour
             // Ouvre le tuto
             if(SceneManager.GetActiveScene().name == "L_A1")
             {
-                SC_BossHelp.instance.CloseBossHelp(3);
-                SC_BossHelp.instance.OpenBossBubble(3);
+                //SC_BossHelp.instance.CloseBossHelp(3);
+                //SC_BossHelp.instance.OpenBossBubble(3);
             }
 
 
