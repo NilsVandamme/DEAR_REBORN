@@ -13,6 +13,7 @@ public class SC_DragDropControls : MonoBehaviour
     public float SnapSpeed; // Speed of the snapping movement
     public int ParagraphSize; // The number of lines the paragraph contains
     public float TimerDisableHover; // Timer after which the hover is disabled if it fails to get to snap position
+    public float FirstLastSnapPositionOffset; // Offset at which the paragraph will snap if it snap only to first or last positions
 
     private bool IsSelected; // Is the object being selected ?
     private Vector3 OriginalPosition; // Position where the object is at start. Also where the object will return if it isn't snapped
@@ -125,9 +126,9 @@ public class SC_DragDropControls : MonoBehaviour
                         if (SnapPositionObjectTop != null && SnapPositionObjectDown != null) // Snap between the two spots
                             SnapPosition = Vector3.Lerp(SnapPositionObjectTop.transform.position, SnapPositionObjectDown.transform.position, 0.5f);
                         else if (topSnapped == true && SnapPositionObjectDown == null && overTopSnapped == true && SnapPositionObjectTop.tag != "FirstSnapPosition") // Snap on the upper part of the paper
-                            SnapPosition = SnapPositionObjectTop.transform.position + Vector3.forward * 0.4f;
+                            SnapPosition = SnapPositionObjectTop.transform.position + Vector3.forward * FirstLastSnapPositionOffset;
                         else if (downSnapped == true && SnapPositionObjectTop == null && underDownSnapped == true && SnapPositionObjectDown.tag != "LastSnapPosition") // Snap on the lower part of the paper
-                            SnapPosition = SnapPositionObjectDown.transform.position + Vector3.back * 0.4f;
+                            SnapPosition = SnapPositionObjectDown.transform.position + Vector3.back * FirstLastSnapPositionOffset;
                         else if (topSnapped == true && SnapPositionObjectDown == null && underDownSnapped == false && SnapPositionObjectTop.tag == "FirstSnapPosition") // Return to original position because there's not enough space
                             SnapPosition = OriginalPosition;
                         else if (downSnapped == true && SnapPositionObjectTop == null && overTopSnapped == false && SnapPositionObjectDown.tag == "LastSnapPosition") // Return to original position because there's not enough space

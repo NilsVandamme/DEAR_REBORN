@@ -11,10 +11,11 @@ public class SC_WindowTopBar : MonoBehaviour, IDragHandler, IBeginDragHandler
 {
     private Vector2 offset;
     public bool IsOpen;
-
+    public float SnapInterval;
     public Image btnImg;
     //public Text btnText;
     private Animator windowAnim;
+    private RectTransform RT;
 
     private void Start()
     {
@@ -29,9 +30,9 @@ public class SC_WindowTopBar : MonoBehaviour, IDragHandler, IBeginDragHandler
     public void OnBeginDrag(PointerEventData eventData)
     {
         //Debug.Log("being moving " + gameObject.name);
-
+        RT = transform.parent.GetComponent<RectTransform>();
         // position of the mouse
-        RectTransformUtility.ScreenPointToLocalPointInRectangle(transform.parent.parent.GetComponent<RectTransform>(), Input.mousePosition, Camera.main, out Vector2 localpoint);
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(RT, Input.mousePosition, Camera.main, out Vector2 localpoint);
 
         offset = new Vector2(transform.parent.localPosition.x, transform.parent.localPosition.y) - localpoint;
     }
@@ -41,19 +42,27 @@ public class SC_WindowTopBar : MonoBehaviour, IDragHandler, IBeginDragHandler
         //Debug.Log("moving " + gameObject.name + " window");
 
         // position of the mouse
-        RectTransformUtility.ScreenPointToLocalPointInRectangle(transform.parent.parent.GetComponent<RectTransform>(), Input.mousePosition, Camera.main, out Vector2 localpoint);
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(RT, Input.mousePosition, Camera.main, out Vector2 localpoint2);
+
+        Debug.Log("Mouse coordinate on screen Canvas: " + localpoint2);
 
         // move the window on the x axis
-        if(localpoint.x < 363 && localpoint.x > -363)
+        if(localpoint2.x < RT.sizeDelta.x && localpoint2.x > -(RT.sizeDelta.x))
         {
             // Move the window
-            transform.parent.localPosition = new Vector3(Mathf.Round((localpoint.x + offset.x) /10) *10, transform.parent.localPosition.y, transform.parent.localPosition.z);
+            if(SnapInterval>0)
+                transform.localPosition = new Vector3(Mathf.Round((localpoint2.x + offset.x) /SnapInterval) * SnapInterval, transform.localPosition.y, transform.localPosition.z);
+            else
+                transform.localPosition = new Vector3(localpoint2.x + offset.x, transform.localPosition.y, transform.localPosition.z);
         }
 
         // move the window on the y axis
-        if (localpoint.y < 207 && localpoint.y > -207)
+        if (localpoint2.y < RT.sizeDelta.y && localpoint2.y > -(RT.sizeDelta.y))
         {
-            transform.parent.localPosition = new Vector3(transform.parent.localPosition.x, Mathf.Round((localpoint.y + offset.y) /10) *10 , transform.parent.localPosition.z);
+            if(SnapInterval>0)
+                transform.localPosition = new Vector3(transform.localPosition.x, Mathf.Round((localpoint2.y + offset.y) / SnapInterval) * SnapInterval, transform.localPosition.z);
+            else
+                transform.localPosition = new Vector3(transform.localPosition.x,localpoint2.y + offset.y, transform.localPosition.z);
         }
 
     }
