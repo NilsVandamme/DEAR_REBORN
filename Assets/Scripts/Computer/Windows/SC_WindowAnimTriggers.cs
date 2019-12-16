@@ -5,13 +5,13 @@ using UnityEngine;
 public class SC_WindowAnimTriggers : MonoBehaviour
 {
     public GameObject windowName;
-    public GameObject windowLogo;
+    public GameObject windowIconLarge;
     public GameObject windowContent;
 
     // Start is called before the first frame update
     void Start()
     {
-        windowLogo.SetActive(false);
+        windowIconLarge.SetActive(false);
     }
 
 
@@ -28,12 +28,12 @@ public class SC_WindowAnimTriggers : MonoBehaviour
 
     public void DisplayWindowLogo()
     {
-        windowLogo.SetActive(true);
+        windowIconLarge.SetActive(true);
     }
 
     public void HideWindowLogo()
     {
-        windowLogo.SetActive(false);
+        windowIconLarge.SetActive(false);
     }
 
     public void DisplayWindowContent()

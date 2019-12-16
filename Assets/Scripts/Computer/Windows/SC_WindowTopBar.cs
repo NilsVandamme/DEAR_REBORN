@@ -32,9 +32,9 @@ public class SC_WindowTopBar : MonoBehaviour, IDragHandler, IBeginDragHandler
         //Debug.Log("being moving " + gameObject.name);
         RT = transform.parent.GetComponent<RectTransform>();
         // position of the mouse
-        RectTransformUtility.ScreenPointToLocalPointInRectangle(RT, Input.mousePosition, Camera.main, out Vector2 localpoint);
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(RT.parent.GetComponent<RectTransform>(), Input.mousePosition, Camera.main, out Vector2 localpoint);
 
-        offset = new Vector2(transform.parent.localPosition.x, transform.parent.localPosition.y) - localpoint;
+        offset = new Vector2(transform.localPosition.x,transform.localPosition.y) - localpoint;
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -42,12 +42,14 @@ public class SC_WindowTopBar : MonoBehaviour, IDragHandler, IBeginDragHandler
         //Debug.Log("moving " + gameObject.name + " window");
 
         // position of the mouse
-        RectTransformUtility.ScreenPointToLocalPointInRectangle(RT, Input.mousePosition, Camera.main, out Vector2 localpoint2);
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(RT.parent.GetComponent<RectTransform>(), Input.mousePosition, Camera.main, out Vector2 localpoint2);
 
-        Debug.Log("Mouse coordinate on screen Canvas: " + localpoint2);
+        //Debug.Log("Mouse coordinate on screen Canvas: " + localpoint2);
+        //Debug.Log("Window coordinate on screen Canvas: " + transform.localPosition);
+
 
         // move the window on the x axis
-        if(localpoint2.x < RT.sizeDelta.x && localpoint2.x > -(RT.sizeDelta.x))
+        if(localpoint2.x < RT.sizeDelta.x/2 && localpoint2.x > -(RT.sizeDelta.x/2))
         {
             // Move the window
             if(SnapInterval>0)
@@ -57,12 +59,13 @@ public class SC_WindowTopBar : MonoBehaviour, IDragHandler, IBeginDragHandler
         }
 
         // move the window on the y axis
-        if (localpoint2.y < RT.sizeDelta.y && localpoint2.y > -(RT.sizeDelta.y))
+        if (localpoint2.y < RT.sizeDelta.y/2 && localpoint2.y > -(RT.sizeDelta.y/2))
         {
-            if(SnapInterval>0)
+            // Move the window
+            if (SnapInterval>0)
                 transform.localPosition = new Vector3(transform.localPosition.x, Mathf.Round((localpoint2.y + offset.y) / SnapInterval) * SnapInterval, transform.localPosition.z);
             else
-                transform.localPosition = new Vector3(transform.localPosition.x,localpoint2.y + offset.y, transform.localPosition.z);
+                transform.localPosition = new Vector3(transform.localPosition.x, localpoint2.y + offset.y, transform.localPosition.z);
         }
 
     }
