@@ -1,0 +1,115 @@
+﻿using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+
+public class SC_GM_Paper : MonoBehaviour
+{
+    [HideInInspector]
+    // Score de la scene
+    public int score = 0;
+
+    // Asset des mots
+    public bool paragraphsConfirmed;
+    public SC_PaperSnapGrid[] snapPositions;
+    public SC_DragDropControls[] ddcontrols;
+    [HideInInspector]
+    public List<SC_AutoComplete> acompletes;
+
+    public bool DebugMode;
+
+    private void Start()
+    {
+        snapPositions = FindObjectsOfType<SC_PaperSnapGrid>();
+        ddcontrols = FindObjectsOfType<SC_DragDropControls>();
+    }
+
+    public void OnClickSubmitButton()
+    {
+        if (paragraphsConfirmed == true)
+        {
+            if (!DebugMode)
+            {
+                foreach (string elem in SC_GM_Local.gm.choosenWordInLetter)
+                    foreach (SC_ChampLexical listCL in SC_GM_Master.gm.listChampsLexicaux.listChampLexical)
+                        foreach (Word word in listCL.listOfWords)
+                            foreach (string mot in word.grammarCritere)
+                                if (elem == mot)
+                                    score += word.scorePerso[SC_GM_Local.gm.peopleScore];
+            }
+
+            Debug.Log("Score = " + score);
+            if (score > SC_GM_Local.gm.firstPivotScene)
+            {
+                Debug.Log("Loaded first scene");
+                SceneManager.LoadScene(SC_GM_Local.gm.firstScene);
+            }
+            else if (SC_GM_Local.gm.numberOfScene == 2)
+            {
+                Debug.Log("Loaded second scene");
+                SceneManager.LoadScene(SC_GM_Local.gm.secondScene);
+            }
+
+            else if (score > SC_GM_Local.gm.secondPivotScene && SC_GM_Local.gm.numberOfScene == 3)
+            {
+                Debug.Log("Loaded second scene");
+                SceneManager.LoadScene(SC_GM_Local.gm.secondScene);
+            }
+            else
+            {
+                Debug.Log("Loaded third scene");
+                SceneManager.LoadScene(SC_GM_Local.gm.thirdScene);
+            }
+
+        }
+    }
+
+    public void OnClickConfirmButton()
+    {
+        //Debug.Log("Blocked paragraphs placement");
+
+        if (paragraphsConfirmed == false)
+        {
+            for (int i = 0; i < snapPositions.Length; i++)
+                if (snapPositions[i].currentSnappedObject != null && !acompletes.Contains(snapPositions[i].currentSnappedObject.GetComponentInChildren<SC_AutoComplete>()))
+                {
+                    acompletes.Add(snapPositions[i].currentSnappedObject.GetComponentInChildren<SC_AutoComplete>());
+
+                    for (int m = 0; m < acompletes.Count; m++)
+                    {
+                        //SC_ConfirmParagraphHighlight.instance.ChangeColor(true);
+                        acompletes[m].enabled = true;
+                    }
+
+                }
+
+            for (int k = 0; k < ddcontrols.Length; k++)
+                ddcontrols[k].enabled = false;
+
+            if (ddcontrols.Length != 0)
+                //Debug.Log("no paragraphs were placed");
+                paragraphsConfirmed = true;
+        }
+        else
+        {
+            //Debug.Log("Unblocked paragraphs placement");
+
+            for (int j = 0; j < acompletes.Count; j++)
+                acompletes[j].enabled = false;
+
+            for (int l = 0; l < ddcontrols.Length; l++)
+                ddcontrols[l].enabled = true;
+
+            acompletes.Clear();
+            paragraphsConfirmed = false;
+            //SC_ConfirmParagraphHighlight.instance.ChangeColor(false);
+        }
+    }
+
+    public void DebugSubmit(int testScore)
+    {
+        DebugMode = true;
+        paragraphsConfirmed = true;
+        score = testScore;
+        OnClickSubmitButton();
+    }
+}
