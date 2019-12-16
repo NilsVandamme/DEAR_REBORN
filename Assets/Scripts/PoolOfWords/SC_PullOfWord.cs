@@ -11,8 +11,7 @@ public class SC_PullOfWord : MonoBehaviour
     public GameObject critere;
     public GameObject perso;
     public GameObject wheel;
-    public GameObject cancelWheel;
-    public GameObject myButtons;
+    public GameObject champsLexicaux;
     public GameObject listParagrapheLettres;
 
     // Couleur des mots en fonction des points
@@ -54,7 +53,6 @@ public class SC_PullOfWord : MonoBehaviour
     // Liste des mots de la wheel
     private (bool, int)[] hasWordInWheel;
     private TextMeshProUGUI[] listOfWheel;
-    private TextMeshProUGUI[] listOfCancelWheel;
     private int currentChoosenCritere;
 
     private int[] valeurCritere = new int[] {1, 2, 3};
@@ -101,9 +99,8 @@ public class SC_PullOfWord : MonoBehaviour
      */
     private void InitWheel()
     {
-        listOfCancelWheel = cancelWheel.GetComponentsInChildren<TextMeshProUGUI>();
         listOfWheel = wheel.GetComponentsInChildren<TextMeshProUGUI>();
-        hasWordInWheel = new (bool, int)[listOfCancelWheel.Length];
+        hasWordInWheel = new (bool, int)[listOfWheel.Length];
 
         numberOfWordPerCritere = new int[] { SC_GM_Local.gm.numberOfWordForEachCritere.noun, SC_GM_Local.gm.numberOfWordForEachCritere.adjectif, SC_GM_Local.gm.numberOfWordForEachCritere.verb };
 
@@ -115,7 +112,7 @@ public class SC_PullOfWord : MonoBehaviour
      */
     private void InitCLAndWordInCL()
     {
-        allChampLexicaux = myButtons.GetComponentsInChildren<LayoutGroup>(true);
+        allChampLexicaux = champsLexicaux.GetComponentsInChildren<LayoutGroup>(true);
         champsLexicauxAndWords = new TextMeshProUGUI[allChampLexicaux.Length][];
         for (int i = 0; i < allChampLexicaux.Length; i++)
             champsLexicauxAndWords[i] = allChampLexicaux[i].GetComponentsInChildren<TextMeshProUGUI>(true);
@@ -175,7 +172,7 @@ public class SC_PullOfWord : MonoBehaviour
                 if (numberOfWordPerCritere[i] != 0)
                 {
                     numberOfWordPerCritere[i] -= val;
-                    chooseXWord.text = "Choose " + numberOfWordPerCritere[i] + " " + listOfCritere[i + 1].text;
+                    chooseXWord.text = "Choose " + numberOfWordPerCritere[i] + " " + listOfCritere[i].text;
                     currentChoosenCritere = valeurCritere[i];
                     if (numberOfWordPerCritere[i] != 0)
                         return;
@@ -279,36 +276,6 @@ public class SC_PullOfWord : MonoBehaviour
     //##############################################################################################################################################################
     //##############################################################################################################################################################
 
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    // ICI 
-
-
     /*
      * Récupère le click sur les perso et actualise en consequence
      */
@@ -345,7 +312,8 @@ public class SC_PullOfWord : MonoBehaviour
                         for (int l = 0; l < champsLexicauxAndWords[k].Length; l++)
                         {
                             SC_WordInPull mot = GetWordInPull(champsLexicauxAndWords[k][l].text);
-                            if (mot != null && mot.GetUsed()[i]) champsLexicauxAndWords[k][l].color = color[mot.GetWord().scorePerso[i]];
+                            if (mot != null && mot.GetUsed()[i])
+                                champsLexicauxAndWords[k][l].color = color[mot.GetWord().scorePerso[i]];
                         }
         }
     }
@@ -366,7 +334,6 @@ public class SC_PullOfWord : MonoBehaviour
         }
 
         return null;
-
     }
 
     //##############################################################################################################################################################
@@ -380,7 +347,6 @@ public class SC_PullOfWord : MonoBehaviour
      */
     public void AddWordInWheel(TextMeshProUGUI tmp)
     {
-        Debug.Log("AddWordInWheel running - " + SC_GM_Local.gm.wheelOfWords.Count);
         if (SC_GM_Local.gm.activeBonus && currentChoosenCritere != idCurrentCritere)
             return;
 
@@ -399,24 +365,17 @@ public class SC_PullOfWord : MonoBehaviour
                             return;
 
                         hasWordInWheel[k] = (true, idCurrentCritere);
-                        listOfCancelWheel[k].text = "X";
                         listOfWheel[k].text = mot.GetWord().titre;
                         SC_GM_Local.gm.wheelOfWords.Add(mot.GetWord());
 
                         Bonus(1);
 
-                        Debug.Log("enable test " + (SC_GM_Local.gm.wheelOfWords.Count > 0));
                         // Active le bouton startwritting
-                        if (SC_GM_Local.gm.wheelOfWords.Count > 0)
-                            Debug.Log("enable writting button");
                         startWrittingButton.interactable = true;
 
                         return;
                     }
-
                 }
-
-        
     }
 
     /*
@@ -424,7 +383,7 @@ public class SC_PullOfWord : MonoBehaviour
     */
     private int GetFirstMotInWheelLibre()
     {
-        for (int i = 0; i < listOfCancelWheel.Length; i++)
+        for (int i = 0; i < listOfWheel.Length; i++)
             if (!hasWordInWheel[i].Item1)
                 return i;
 
@@ -436,9 +395,8 @@ public class SC_PullOfWord : MonoBehaviour
      */
      public void OnClickRemoveWordInWheel(TextMeshProUGUI tmp)
     {
-        Debug.Log("remove word running - " + SC_GM_Local.gm.wheelOfWords.Count);
-        for (int i = 0; i < listOfCancelWheel.Length; i++)
-            if (listOfCancelWheel[i] == tmp)
+        for (int i = 0; i < listOfWheel.Length; i++)
+            if (listOfWheel[i] == tmp)
             {
                 numberOfWordPerCritere[Array.IndexOf(valeurCritere, hasWordInWheel[i].Item2)]++;
                 Bonus();
@@ -446,20 +404,12 @@ public class SC_PullOfWord : MonoBehaviour
                 hasWordInWheel[i] = (false, 0);
                 SC_GM_Local.gm.wheelOfWords.Remove(GetWordInPull(listOfWheel[i].text).GetWord());
                 listOfWheel[i].text = "";
-                listOfCancelWheel[i].text = "";
             }
 
-        Debug.Log("disable test " + (SC_GM_Local.gm.wheelOfWords.Count < 1));
         // Désactive le bouton startwritting
         if (SC_GM_Local.gm.wheelOfWords.Count < 1)
-        {
-            Debug.Log("disable writting button");
             startWrittingButton.interactable = false;
-        }
-        else
-        {
-            startWrittingButton.interactable = true;
-        }
+
     }
 
     //##############################################################################################################################################################
