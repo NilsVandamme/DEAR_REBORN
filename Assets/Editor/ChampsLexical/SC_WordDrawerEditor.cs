@@ -2,10 +2,11 @@
 using UnityEditor;
 using UnityEngine;
 
-[CustomPropertyDrawer(typeof(Word))]
+[CustomPropertyDrawer(typeof(SC_Word))]
 public class SC_WordDrawerEditor : PropertyDrawer
 {
     float lineHeight = EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing;
+    SC_Base baseInfo = (SC_Base)AssetDatabase.LoadAssetAtPath(AssetDatabase.GUIDToAssetPath(AssetDatabase.FindAssets("Base", new[] { "Assets/ScriptableObjects" })[0]), typeof(SC_Base));
 
     /*
      * Définie la taille alouer a chache objet de l'inspecteur
@@ -37,7 +38,6 @@ public class SC_WordDrawerEditor : PropertyDrawer
         float space = 10f;
         float rectWight = (position.width - space) * 0.6f;
 
-
         SerializedProperty grammarCritere = property.FindPropertyRelative("grammarCritere");
         grammarCritere.isExpanded = 
             EditorGUI.Foldout(new Rect(position.x, position.y + lineHeight * (i++) + EditorGUIUtility.standardVerticalSpacing, rectWight, lineHeight),
@@ -50,7 +50,7 @@ public class SC_WordDrawerEditor : PropertyDrawer
             for (j = 0; j < grammarCritere.arraySize; j++)
             {
                 EditorGUI.LabelField(new Rect(position.x, position.y + lineHeight * i + EditorGUIUtility.standardVerticalSpacing, rectWight, lineHeight),
-                                    new GUIContent(SC_GM_Master.gm.listChampsLexicaux.listOfGrammarCritere[j]));
+                                    new GUIContent(baseInfo.listOfGrammarCritere[j]));
 
                 EditorGUI.LabelField(new Rect(position.x + rectWight, position.y + lineHeight * (i++) + EditorGUIUtility.standardVerticalSpacing, rectWight, lineHeight),
                                     grammarCritere.GetArrayElementAtIndex(j).stringValue);
@@ -72,7 +72,7 @@ public class SC_WordDrawerEditor : PropertyDrawer
             for (j = 0; j < scorePerso.arraySize; j++)
             {
                 EditorGUI.LabelField(new Rect(position.x, position.y + lineHeight * i + EditorGUIUtility.standardVerticalSpacing, rectWight, lineHeight),
-                                    new GUIContent(SC_GM_Master.gm.listChampsLexicaux.listOfPerso[j]));
+                                    new GUIContent(baseInfo.listOfPerso[j]));
 
                 EditorGUI.LabelField(new Rect(position.x + rectWight, position.y + lineHeight * (i++) + EditorGUIUtility.standardVerticalSpacing, rectWight, lineHeight),
                                     (scorePerso.GetArrayElementAtIndex(j).intValue).ToString());

@@ -61,7 +61,7 @@ public class SC_AutoComplete : MonoBehaviour, IPointerClickHandler
 
     public void Init()
     {
-        foreach (Word elem in SC_GM_Local.gm.wheelOfWords)
+        foreach (SC_Word elem in SC_GM_Local.gm.wheelOfWords)
             for (int i = 0; i < elem.grammarCritere.Length; i++)
                 if (elem.grammarCritere[i] != "")
                     toStore.Add((elem.grammarCritere[i], SC_GM_Master.gm.listChampsLexicaux.listNameChampLexical[i]));
