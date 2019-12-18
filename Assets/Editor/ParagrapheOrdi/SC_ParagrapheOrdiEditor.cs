@@ -9,13 +9,12 @@ public class SC_ParagrapheOrdiEditor : Editor
     private SC_ParagrapheOrdi paragrapheOrdi;
     SerializedProperty listOfPartText;
     private bool[] foldoutList;
-    private bool init;
+    private bool init = true;
 
     private void OnEnable()
     {
         paragrapheOrdi = target as SC_ParagrapheOrdi;
         listOfPartText = serializedObject.FindProperty("texte");
-        init = true;
     }
 
     /*
@@ -31,12 +30,16 @@ public class SC_ParagrapheOrdiEditor : Editor
         if (init && paragrapheOrdi.fileCSVTextParagraph != null && paragrapheOrdi.listChampLexicaux != null)
         {
             init = false;
-
             int nbLink = GenerateParagraphe();
             foldoutList = new bool[nbLink];
-            paragrapheOrdi.champLexical = new int[nbLink];
-            paragrapheOrdi.motAccepterInCL = new bool[nbLink][];
+
+            if (paragrapheOrdi.champLexical == null)
+                paragrapheOrdi.champLexical = new int[nbLink];
+            if (paragrapheOrdi.motAccepterInCL == null)
+                paragrapheOrdi.motAccepterInCL = new bool[nbLink][];
+
         }
+
         if (!init)
         { 
             foreach (SerializedProperty text in listOfPartText)
@@ -75,12 +78,12 @@ public class SC_ParagrapheOrdiEditor : Editor
                     EditorGUI.indentLevel -= 1;
                 }
             }
-            
+
         }
 
-        serializedObject.ApplyModifiedProperties();
-
         EditorUtility.SetDirty(paragrapheOrdi);
+
+        serializedObject.ApplyModifiedProperties();
     }
 
     /*

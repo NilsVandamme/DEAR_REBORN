@@ -1,9 +1,8 @@
 ﻿using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.UI;
 
-public class SC_InfoParagrapheOrdi : MonoBehaviour
+public class SC_InfoParagrapheOrdi : MonoBehaviour, IPointerClickHandler
 {
     public SC_ParagrapheOrdi paragraphOrdi;
     public TextMeshProUGUI myText;
@@ -66,26 +65,34 @@ public class SC_InfoParagrapheOrdi : MonoBehaviour
                 bool[] tabBool = new bool[SC_GM_Master.gm.listChampsLexicaux.listOfPerso.Length];
                 for (int i = 0; i < paragraphOrdi.motAccepterInCL[id].Length; i++)
                     if (paragraphOrdi.motAccepterInCL[id][i])
-                        AddWordInPull(i, tabBool);
+                        AddWordInCollect(id, tabBool);
 
             }
         }
     }
 
-    private void AddWordInPull(int word, bool[] tabBool)
+    private void AddWordInCollect(int link, bool[] tabBool)
     {
-        string cl = paragraphOrdi.listChampLexicaux.listChampLexical[paragraphOrdi.champLexical[word]].fileCSVChampLexical.name;
+        Debug.Log(link);
 
-        foreach (SC_CLInPull elem in SC_GM_Master.gm.wordsInPull)
+        string cl = paragraphOrdi.listChampLexicaux.listChampLexical[paragraphOrdi.champLexical[link]].fileCSVChampLexical.name;
+
+        foreach (SC_CLInPull elem in SC_GM_Master.gm.wordsInCollect)
             if (elem.GetCL() == cl)
             {
-                SC_Word mot = paragraphOrdi.listChampLexicaux.listChampLexical[paragraphOrdi.champLexical[word]].listOfWords[word];
+                SC_Word mot = paragraphOrdi.listChampLexicaux.listChampLexical[paragraphOrdi.champLexical[link]].listOfWords[link];
+                Debug.Log(mot.titre);
+
+                foreach (SC_Word val in elem.GetListWord())
+                    if (val.titre == mot.titre)
+                        return;
+
                 elem.GetListWord().Add(mot);
                 elem.GetUsed().Add(mot.titre, tabBool);
                 return;
             }
 
-        SC_GM_Master.gm.wordsInPull.Add(new SC_CLInPull(cl, paragraphOrdi.listChampLexicaux.listChampLexical[paragraphOrdi.champLexical[word]].listOfWords[word], tabBool));
+        SC_GM_Master.gm.wordsInCollect.Add(new SC_CLInPull(cl, paragraphOrdi.listChampLexicaux.listChampLexical[paragraphOrdi.champLexical[link]].listOfWords[link], tabBool));
     }
 
     private void GetWordOfCLInPull ()

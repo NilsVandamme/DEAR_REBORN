@@ -1,5 +1,4 @@
 ﻿using UnityEditor;
-using UnityEngine;
 
 [CanEditMultipleObjects]
 [CustomEditor(typeof(SC_GM_Local))]

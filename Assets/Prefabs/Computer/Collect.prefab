@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 527369731660348799}
   - component: {fileID: 527369731660348798}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: CL2_Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -167,7 +167,7 @@ GameObject:
   - component: {fileID: 527369731842497996}
   - component: {fileID: 527369731842497995}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: CL4_Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -323,7 +323,7 @@ GameObject:
   - component: {fileID: 527369731957310991}
   - component: {fileID: 527369731957310990}
   m_Layer: 5
-  m_Name: Button (3)
+  m_Name: CL4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -439,6 +439,7 @@ GameObject:
   - component: {fileID: 527369732062055893}
   - component: {fileID: 527369732062055895}
   - component: {fileID: 527369732062055894}
+  - component: {fileID: 8742794503315192296}
   m_Layer: 5
   m_Name: Collect
   m_TagString: Untagged
@@ -505,6 +506,21 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &8742794503315192296
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 527369732062055892}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c13211d85a46324fac3665007830574, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ratioText: {fileID: 527369732364988451}
+  buttonCL: {fileID: 527369732219045931}
+  arboAnim: {fileID: 0}
 --- !u!1 &527369732077413424
 GameObject:
   m_ObjectHideFlags: 0
@@ -517,7 +533,7 @@ GameObject:
   - component: {fileID: 527369732077413427}
   - component: {fileID: 527369732077413426}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: CollectButton_Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -712,7 +728,6 @@ GameObject:
   - component: {fileID: 527369732364988450}
   - component: {fileID: 527369732364988452}
   - component: {fileID: 527369732364988451}
-  - component: {fileID: 527369732364988453}
   m_Layer: 5
   m_Name: RatioText
   m_TagString: Untagged
@@ -857,20 +872,6 @@ MonoBehaviour:
   - {fileID: 0}
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!114 &527369732364988453
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 527369732364988449}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 10b850dee730b514aa72c3c89aae8b21, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pullTextRatio: {fileID: 527369732364988451}
-  arboAnim: {fileID: 0}
 --- !u!1 &527369732859012134
 GameObject:
   m_ObjectHideFlags: 0
@@ -1075,7 +1076,7 @@ GameObject:
   - component: {fileID: 527369732983479836}
   - component: {fileID: 527369732983479835}
   m_Layer: 5
-  m_Name: Button
+  m_Name: CL1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1193,7 +1194,7 @@ GameObject:
   - component: {fileID: 527369733155556618}
   - component: {fileID: 527369733155556617}
   m_Layer: 5
-  m_Name: Button (2)
+  m_Name: CL3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1310,7 +1311,7 @@ GameObject:
   - component: {fileID: 527369733158444538}
   - component: {fileID: 527369733158444537}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: CL3_Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1466,7 +1467,7 @@ GameObject:
   - component: {fileID: 527369733224981008}
   - component: {fileID: 527369733224981023}
   m_Layer: 5
-  m_Name: Button (1)
+  m_Name: CL2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1583,7 +1584,7 @@ GameObject:
   - component: {fileID: 527369733417429388}
   - component: {fileID: 527369733417429387}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: CL1_Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
