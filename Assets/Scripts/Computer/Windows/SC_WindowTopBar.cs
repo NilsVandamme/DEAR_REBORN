@@ -24,7 +24,7 @@ public class SC_WindowTopBar : MonoBehaviour, IDragHandler, IBeginDragHandler
 
     public void SetWindowFirst()
     {
-        transform.parent.SetAsLastSibling();
+        transform.SetAsLastSibling();
     }
 
     public void OnBeginDrag(PointerEventData eventData)
