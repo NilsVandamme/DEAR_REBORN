@@ -75,7 +75,7 @@ public class SC_WindowTopBar : MonoBehaviour, IDragHandler, IBeginDragHandler
     // Close button
     public void CloseWindow()
     {
-        transform.parent.gameObject.SetActive(false);
+        transform.gameObject.SetActive(false);
     }
 
     // Maximize or minimize button

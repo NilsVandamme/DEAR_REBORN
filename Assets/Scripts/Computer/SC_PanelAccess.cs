@@ -4,28 +4,49 @@ using UnityEngine;
 
 public class SC_PanelAccess : MonoBehaviour
 {
-    public GameObject WindowClients;
-    public SC_WindowTopBar ClientsWtb;
+    public GameObject WindowClientsLetter;
+    public SC_WindowTopBar ClientsLetterWtb;
+    public GameObject WindowClientsInfos;
+    public SC_WindowTopBar ClientsInfosWtb;
     public GameObject WindowEmails;
     public SC_WindowTopBar EmailsWtb;
-    public GameObject WindowTreeview;
 
-    public void OpenWindowInfos()
+    public void OpenWindowLetter()
     {
-        if (WindowClients.activeSelf == false)
+        if (WindowClientsLetter.activeSelf == false)
         {
-            WindowClients.SetActive(true);
-            WindowClients.transform.SetAsLastSibling();
+            WindowClientsLetter.SetActive(true);
+            WindowClientsLetter.transform.SetAsLastSibling();
 
 
         }
         else
         {
-            WindowClients.transform.SetAsLastSibling();
+            WindowClientsLetter.transform.SetAsLastSibling();
 
-            if (ClientsWtb.IsOpen == false)
+            if (ClientsLetterWtb.IsOpen == false)
             {
-                ClientsWtb.MaximizeWindow();
+                ClientsLetterWtb.MaximizeWindow();
+            }
+        }
+    }
+
+    public void OpenWindowInfos()
+    {
+        if (WindowClientsInfos.activeSelf == false)
+        {
+            WindowClientsInfos.SetActive(true);
+            WindowClientsInfos.transform.SetAsLastSibling();
+
+
+        }
+        else
+        {
+            WindowClientsInfos.transform.SetAsLastSibling();
+
+            if (ClientsInfosWtb.IsOpen == false)
+            {
+                ClientsInfosWtb.MaximizeWindow();
             }
         }
     }
@@ -45,24 +66,8 @@ public class SC_PanelAccess : MonoBehaviour
 
             if (EmailsWtb.IsOpen == false)
             {
-                ClientsWtb.MaximizeWindow();
+                ClientsInfosWtb.MaximizeWindow();
             }
-        }
-    }
-
-    public void OpenWindowTreeview()
-    {
-        if (WindowTreeview.activeSelf == false)
-        {
-            WindowTreeview.SetActive(true);
-        }
-    }
-
-    public void CloseWindowTreeView()
-    {
-        if (WindowTreeview.activeSelf == true)
-        {
-            WindowTreeview.SetActive(false);
         }
     }
 }
