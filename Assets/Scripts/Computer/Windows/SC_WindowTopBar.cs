@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.EventSystems;
 
-// This script manage the function of the top bar of the cumputer windows
+// This script manage the function of the top bar of the computer windows
 
 public class SC_WindowTopBar : MonoBehaviour, IDragHandler, IBeginDragHandler
 {
