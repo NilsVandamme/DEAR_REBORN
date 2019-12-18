@@ -17,7 +17,7 @@ public class SC_PullRatio : MonoBehaviour
 
         if (SC_GM_Local.gm.numberOfCLRecover == SC_GM_Local.gm.numberOfCLRecoverable)
         {
-            arboAnim.SetTrigger("ArboIsFull");
+            //arboAnim.SetTrigger("ArboIsFull");
             //SC_BossHelp.instance.CloseBossHelp(2);
             //SC_BossHelp.instance.OpenBossBubble(2);
         }
