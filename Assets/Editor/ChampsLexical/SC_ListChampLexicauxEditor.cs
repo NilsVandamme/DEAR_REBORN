@@ -7,11 +7,12 @@ using UnityEngine;
 public class SC_ListChampLexicauxEditor : Editor
 {
     private SC_ListChampLexicaux listChampLexicaux;
+    SC_Base baseInfo;
 
     private void OnEnable()
     {
         listChampLexicaux = target as SC_ListChampLexicaux;
-
+        baseInfo = (SC_Base)AssetDatabase.LoadAssetAtPath(AssetDatabase.GUIDToAssetPath(AssetDatabase.FindAssets("Base", new[] { "Assets/ScriptableObjects" })[0]), typeof(SC_Base));
         loadInfo();
     }
 
@@ -42,10 +43,10 @@ public class SC_ListChampLexicauxEditor : Editor
 
     private void loadInfo()
     {
-        listChampLexicaux.titre = "Titre";
+        listChampLexicaux.titre = baseInfo.titre;
 
-        listChampLexicaux.listOfGrammarCritere = new string[] { "Present", "Passe", "Ing", "Noun", "Adjectif" };
+        listChampLexicaux.listOfGrammarCritere = baseInfo.listOfGrammarCritere;
 
-        listChampLexicaux.listOfPerso = new string[] { "Granny Donna", "Mr. S" };
-}
+        listChampLexicaux.listOfPerso = baseInfo.listOfPerso;
+    }
 }

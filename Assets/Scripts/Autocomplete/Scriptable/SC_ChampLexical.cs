@@ -2,16 +2,16 @@
 using UnityEngine;
 
 [System.Serializable]
-public struct Word
+public struct WordAndBase
 {
-    public int[] scorePerso;
-    public string titre;
-    public string[] grammarCritere;
+    public SC_Word word;
+    public ScriptableObject baseInfo;
 }
 
 [CreateAssetMenu(fileName = "ChampLexical.asset", menuName = "Custom/GenerateChampLexical", order = 1)]
 public class SC_ChampLexical : ScriptableObject
 {
     public TextAsset fileCSVChampLexical;
-    public List<Word> listOfWords;
+    public ScriptableObject fileBase;
+    public List<SC_Word> listOfWords;
 }

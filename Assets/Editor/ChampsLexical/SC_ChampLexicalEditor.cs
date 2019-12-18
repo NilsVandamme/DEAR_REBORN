@@ -7,7 +7,8 @@ using UnityEditor;
 public class SC_ChampLexicalEditor : Editor
 {
     private SC_ChampLexical champLexical;
-    SerializedProperty listOfWords;
+    private SerializedProperty listOfWords;
+    private bool foldoutListCL;
     private bool foldoutListOfWord;
     
     private void OnEnable()
@@ -30,8 +31,8 @@ public class SC_ChampLexicalEditor : Editor
             if (GUILayout.Button("Load Champ Lexical"))
                 GenerateCL();
 
-            foldoutListOfWord = EditorGUILayout.Foldout(foldoutListOfWord, "List for " + champLexical.fileCSVChampLexical.name, true);
-            if (foldoutListOfWord)
+            foldoutListCL = EditorGUILayout.Foldout(foldoutListCL, "List for " + champLexical.fileCSVChampLexical.name, true);
+            if (foldoutListCL)
             {
                 EditorGUI.indentLevel += 1;
 
@@ -68,25 +69,24 @@ public class SC_ChampLexicalEditor : Editor
         string[] separator = new string[] { "," };
         string[] cells;
 
-        List<Word> wordInfos = new List<Word>();
-        Word word;
+        List<SC_Word> wordInfos = new List<SC_Word>();
+        SC_Word word;
         
         for (int i = 1; i < lineList.Length; i++)
         {
             cells = lineList[i].Split(separator, System.StringSplitOptions.None);
-            word = new Word();
 
-            word.titre = cells[0];
+           string titre = cells[0];
 
-            word.grammarCritere = new string[numberOfCritere];
+            string[] critere = new string[numberOfCritere];
             for (int j = 0; j < numberOfCritere; j++)
-                word.grammarCritere[j] = cells[j + 1];
+                critere[j] = cells[j + 1];
 
-            word.scorePerso = new int[cells.Length - (numberOfCritere + 1)];
+            int[] score = new int[cells.Length - (numberOfCritere + 1)];
             for (int j = (numberOfCritere + 1); j < cells.Length; j++)
-                int.TryParse(cells[j], out word.scorePerso[j - (numberOfCritere + 1)]);
+                int.TryParse(cells[j], out score[j - (numberOfCritere + 1)]);
             
-            wordInfos.Add(word);
+            wordInfos.Add(new SC_Word(score, titre, critere));
         }
 
         champLexical.listOfWords = wordInfos;
