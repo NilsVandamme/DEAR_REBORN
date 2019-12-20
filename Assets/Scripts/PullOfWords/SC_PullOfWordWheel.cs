@@ -11,6 +11,9 @@ public class SC_PullOfWordWheel : MonoBehaviour
     public GameObject GO_listParagrapheLettres;
     public Button startWrittingButton;
 
+    // Images des buttons qui ne contiennent pas de mot
+    public Image hasNotWord;
+
     // Info sur le CL
     private int numberOfElemInCL = 9;
     private int posElemCl = 4;
@@ -18,6 +21,7 @@ public class SC_PullOfWordWheel : MonoBehaviour
     // Liste des CL et leurs Words
     private LayoutGroup[] champsLexicaux;
     private TextMeshProUGUI[][] champLexical;
+    private Image[][] champLexicalImage;
 
     // Liste des mots de la wheel
     private TextMeshProUGUI[] listOfWheel;
@@ -62,32 +66,43 @@ public class SC_PullOfWordWheel : MonoBehaviour
     private void InitChampsLexicauxWheel()
     {
         champsLexicaux = GO_champsLexicaux.GetComponentsInChildren<LayoutGroup>(true);
-        champLexical = new TextMeshProUGUI[champsLexicaux.Length][];
-        for (int i = 0; i < champsLexicaux.Length; i++)
-            champLexical[i] = champsLexicaux[i].GetComponentsInChildren<TextMeshProUGUI>(true);
 
-        WriteWordAndCLForWheel();
+        champLexical = new TextMeshProUGUI[champsLexicaux.Length][];
+        champLexicalImage = new Image[champsLexicaux.Length][];
+
+        for (int i = 0; i < champsLexicaux.Length; i++)
+        {
+            champLexical[i] = champsLexicaux[i].GetComponentsInChildren<TextMeshProUGUI>(true);
+            champLexicalImage[i] = champsLexicaux[i].GetComponentsInChildren<Image>(true);
+        }
+
+        WriteWordAndCL();
     }
 
     /*
      * Ecrit le nom des CL et des Words qu'ils contiennent
      */
-    private void WriteWordAndCLForWheel()
+    private void WriteWordAndCL()
     {
-        for (int i = 0; i < SC_GM_Master.gm.wordsInCollect.Count; i++)
+        for (int i = 0; i < SC_GM_Master.gm.wordsInPull.Count; i++)
         {
-            SC_CLInPull cl = SC_GM_Master.gm.wordsInCollect[i];
+            SC_CLInPull cl = SC_GM_Master.gm.wordsInPull[i];
             champLexical[i][posElemCl].text = cl.GetCL();
 
             foreach (SC_Word word in cl.GetListWord())
-                champLexical[i][GetFirstCLWordFreeForWheel(i)].text = word.titre;
+                champLexical[i][GetFirstCLWordFree(i)].text = word.titre;
+
+            int j = GetFirstCLWordFree(i);
+            if (j == -1) return;
+            for (; j < numberOfElemInCL; j++)
+                champLexicalImage[i][j] = hasNotWord;
         }
     }
 
     /*
     * Trouve le premier champ non utilisé du CL et retoune sa position
     */
-    private int GetFirstCLWordFreeForWheel(int index)
+    private int GetFirstCLWordFree(int index)
     {
         for (int i = 0; i < numberOfElemInCL; i++)
             if (i != posElemCl && champLexical[index][i].text == "")
@@ -132,7 +147,7 @@ public class SC_PullOfWordWheel : MonoBehaviour
      */
     private SC_Word GetWordInCollect(string mot)
     {
-        foreach (SC_CLInPull cl in SC_GM_Master.gm.wordsInCollect)
+        foreach (SC_CLInPull cl in SC_GM_Master.gm.wordsInPull)
             foreach (SC_Word word in cl.GetListWord())
                 if (mot == word.titre)
                     return word;

@@ -10,10 +10,9 @@ public class SC_PullOfWordPreparatory : MonoBehaviour
 
     // Liste des Images des buttons en fct de s'il contiennent ou non un mot
     public Image hasWord;
-    public Image notHasWord;
+    public Image hasNotWord;
 
     // Info sur le CL
-    private int numberOfElemInCL = 9;
     private int posElemCl = 4;
 
     // Liste des CL et leurs Words
@@ -151,7 +150,7 @@ public class SC_PullOfWordPreparatory : MonoBehaviour
                         champLexicalImage[i][j] = hasWord;
                     }
                     else
-                        champLexicalImage[i][j] = notHasWord;
+                        champLexicalImage[i][j] = hasNotWord;
         }
     }
 

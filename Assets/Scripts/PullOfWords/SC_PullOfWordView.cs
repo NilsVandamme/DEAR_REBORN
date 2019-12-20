@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -8,125 +6,98 @@ using UnityEngine.SceneManagement;
 public class SC_PullOfWordView : MonoBehaviour
 {
     // Object de la fenetre
-    public GameObject GO_wheelWord;
-    public GameObject GO_champsLexicauxWheel;
-    public GameObject GO_champsLexicauxCL;
-    public GameObject GO_listParagrapheLettres;
-    public Button startWrittingButton;
+    public GameObject GO_champsLexicaux;
+
+    // Images des buttons qui ne contiennent pas de mot
+    public Image hasNotWord;
 
     // Info sur le CL
     private int numberOfElemInCL = 9;
     private int posElemCl = 4;
 
     // Liste des CL et leurs Words
-    private LayoutGroup[] champsLexicauxCL;
-    private TextMeshProUGUI[][] champLexicalCL;
-    private LayoutGroup[] champsLexicauxWheel;
-    private TextMeshProUGUI[][] champLexicalWheel;
+    private LayoutGroup[] champsLexicaux;
+    private TextMeshProUGUI[][] champLexical;
+    private Image[][] champLexicalImage;
+    private bool[] isOpen;
 
-    // Liste des mots de la wheel
-    private TextMeshProUGUI[] listOfWheel;
-
-    // Paragraphe d'autoComplete
-    private SC_AutoComplete[] autoComplete;
-
-
-    //##############################################################################################################################################################
-    //##############################################################################################################################################################
-    //########################################################################          CL           ###############################################################
-    //##############################################################################################################################################################
-    //##############################################################################################################################################################
+    // Liste des superposition des CL
+    private int[][] superpositionCL;
 
     //##############################################################################################################################################################
     //########################################################################        INIT           ###############################################################
     //##############################################################################################################################################################
 
+    public void myStart()
+    {
+        InitCL();
+        WriteWordAndCL();
+        InitSuperposition();
+    }
+
     /*
-     * Init la partie du CL
+     * Init l'ensemble des CL
      */
     private void InitCL()
     {
-        champsLexicauxCL = GO_champsLexicauxCL.GetComponentsInChildren<LayoutGroup>(true);
-        champLexicalCL = new TextMeshProUGUI[champsLexicauxCL.Length][];
-        for (int i = 0; i < champsLexicauxCL.Length; i++)
-            champLexicalCL[i] = champsLexicauxCL[i].GetComponentsInChildren<TextMeshProUGUI>(true);
+        champsLexicaux = GO_champsLexicaux.GetComponentsInChildren<LayoutGroup>(true);
 
-    }
+        champLexical = new TextMeshProUGUI[champsLexicaux.Length][];
+        champLexicalImage = new Image[champsLexicaux.Length][];
+        isOpen = new bool[champsLexicaux.Length];
 
-    //##############################################################################################################################################################
-    //########################################################################        FONCTION         #############################################################
-    //##############################################################################################################################################################
-
-
-
-
-    //##############################################################################################################################################################
-    //##############################################################################################################################################################
-    //#######################################################################          WHEEL           #############################################################
-    //##############################################################################################################################################################
-    //##############################################################################################################################################################
-
-
-    //##############################################################################################################################################################
-    //########################################################################        INIT           ###############################################################
-    //##############################################################################################################################################################
-
-    /*
-     * Init la partie de la Wheel
-     */
-    private void InitWheel()
-    {
-        InitRightSide();
-        InitChampsLexicauxWheel();
-    }
-
-    /*
-     * Recupere la liste des critere et des perso. Met a jour les perso
-     */
-    private void InitRightSide()
-    {
-        listOfWheel = GO_wheelWord.GetComponentsInChildren<TextMeshProUGUI>(true);
-        BossHelp();
-    }
-
-    /*
-     * Récupère la liste des CL et la liste des Word de chaque CL
-     */
-    private void InitChampsLexicauxWheel()
-    {
-        champsLexicauxWheel = GO_champsLexicauxWheel.GetComponentsInChildren<LayoutGroup>(true);
-        champLexicalWheel = new TextMeshProUGUI[champsLexicauxWheel.Length][];
-        for (int i = 0; i < champsLexicauxWheel.Length; i++)
-            champLexicalWheel[i] = champsLexicauxWheel[i].GetComponentsInChildren<TextMeshProUGUI>(true);
-
-        WriteWordAndCLForWheel();
-    }
-
-    /*
-     * Ecrit le nom des CL et des Words qu'ils contiennent pour la choosen phase
-     */
-    private void WriteWordAndCLForWheel()
-    {
-        for (int i = 0; i < SC_GM_Master.gm.wordsInCollect.Count; i++)
+        for (int i = 0; i < champsLexicaux.Length; i++)
         {
-            SC_CLInPull cl = SC_GM_Master.gm.wordsInCollect[i];
-            champLexicalWheel[i][posElemCl].text = cl.GetCL();
+            champLexical[i] = champsLexicaux[i].GetComponentsInChildren<TextMeshProUGUI>(true);
+            champLexicalImage[i] = champsLexicaux[i].GetComponentsInChildren<Image>(true);
+        }
+    }
+
+    /*
+     * Ecrit le nom des CL et des Words qu'ils contiennent
+     */
+    private void WriteWordAndCL()
+    {
+        for (int i = 0; i < SC_GM_Master.gm.wordsInPull.Count; i++)
+        {
+            SC_CLInPull cl = SC_GM_Master.gm.wordsInPull[i];
+            champLexical[i][posElemCl].text = cl.GetCL();
 
             foreach (SC_Word word in cl.GetListWord())
-                champLexicalWheel[i][GetFirstCLWordFreeForWheel(i)].text = word.titre;
+                champLexical[i][GetFirstCLWordFree(i)].text = word.titre;
+
+            int j = GetFirstCLWordFree(i);
+            if (j == -1) return;
+            for (; j < numberOfElemInCL; j++)
+                champLexicalImage[i][j] = hasNotWord;
         }
     }
 
     /*
     * Trouve le premier champ non utilisé du CL et retoune sa position pour la choosen phase
     */
-    private int GetFirstCLWordFreeForWheel(int index)
+    private int GetFirstCLWordFree(int index)
     {
         for (int i = 0; i < numberOfElemInCL; i++)
-            if (i != posElemCl && champLexicalWheel[index][i].text == "")
+            if (i != posElemCl && champLexical[index][i].text == "")
                 return i;
 
         return -1;
+    }
+
+    private void InitSuperposition()
+    {
+        superpositionCL = new int[champsLexicaux.Length][];
+        superpositionCL[0] = new int[] { 1, 3 };
+        superpositionCL[1] = new int[] { 0, 2, 3, 4};
+        superpositionCL[2] = new int[] { 1, 4 };
+        superpositionCL[3] = new int[] { 0, 1, 5, 6 };
+        superpositionCL[4] = new int[] { 1, 2, 6, 7 };
+        superpositionCL[5] = new int[] { 3, 6, 8 };
+        superpositionCL[6] = new int[] { 3, 4, 5, 7, 8, 9 };
+        superpositionCL[7] = new int[] { 4, 6, 9 };
+        superpositionCL[8] = new int[] { 5, 6 };
+        superpositionCL[9] = new int[] { 6, 7 };
     }
 
     //##############################################################################################################################################################
@@ -134,115 +105,36 @@ public class SC_PullOfWordView : MonoBehaviour
     //##############################################################################################################################################################
 
     /*
-     * Ajoute le mot clicker dans la wheel
+     * Affiche ou désafiche le CL sur lequel on a clicker
      */
-    public void AddWordInWheel(TextMeshProUGUI tmp)
+    public void OnClickButtonCL(TextMeshProUGUI tmp)
     {
-        SC_Word word = GetWordInCollect(tmp.text);
-        if (word != null)
-        {
-            if (SC_GM_Local.gm.wheelOfWords.Contains(word))
-                return;
-
-            listOfWheel[GetFirstWordInWheelFree()].text = word.titre;
-            SC_GM_Local.gm.wheelOfWords.Add(word);
-
-            BossHelp(1);
-        }
-    }
-
-
-    /*
-     * Trouve le mot des collects correspondant au TMP_UGUI (mot)
-     */
-    private SC_Word GetWordInCollect(string mot)
-    {
-        foreach (SC_CLInPull cl in SC_GM_Master.gm.wordsInCollect)
-            foreach (SC_Word word in cl.GetListWord())
-                if (mot == word.titre)
-                    return word;
-
-        return null;
-    }
-
-    /*
-    * Trouve le premier mot de la wheel disponible et retoune sa position.
-    * Rend clickable le button start si l'on à remplie la Wheel
-    */
-    private int GetFirstWordInWheelFree()
-    {
-        for (int i = 0; i < listOfWheel.Length; i++)
-            if (listOfWheel[i].text == "")
+        for (int i = 0; i < champLexical.Length; i++)
+            if (champLexical[i][posElemCl] == tmp)
             {
-                if (i == listOfWheel.Length - 1)
-                    startWrittingButton.interactable = true;
-                return i;
+                isOpen[i] = !isOpen[i];
+                OpenClose(i, isOpen[i]);
+                CloseNeighbour(i);
             }
-
-        return -1;
     }
 
     /*
-     * Remove le mot de la wheel
+     * Affiche/Désafiche un CL
      */
-     public void OnClickRemoveWordInWheel(TextMeshProUGUI tmp)
+    private void OpenClose(int cl, bool openClose)
     {
-        for (int i = 0; i < listOfWheel.Length; i++)
-            if (listOfWheel[i] == tmp)
-            {
-                BossHelp();
-
-                SC_GM_Local.gm.wheelOfWords.Remove(GetWordInCollect(tmp.text));
-                listOfWheel[i].text = "";
-            }
-
-        startWrittingButton.interactable = false;
-    }
-
-    //##############################################################################################################################################################
-    //##############################################################################################################################################################
-    //#######################################################################          AUTRE           #############################################################
-    //##############################################################################################################################################################
-    //##############################################################################################################################################################
-
-    /*
-     * Init le CL, la Wheel et les paragraphes de la lettre
-     */
-    public void Collect()
-    {
-        InitCL();
-        InitWheel();
-        InitParagrapheLettre();
-    }
-
-    /*
-     * Récupère l'ensemble des paragraphes disponibles pour écrire la lettre.
-     */
-    private void InitParagrapheLettre()
-    {
-        autoComplete = GO_listParagrapheLettres.GetComponentsInChildren<SC_AutoComplete>(true);
-    }
-
-    /*
-     * Init les paragraphes de la lettre
-     */
-    public void StartWritting()
-    {
-        foreach (SC_AutoComplete elem in autoComplete)
-            elem.Init();
+        for (int i = 0; i < champLexical[cl].Length; i++)
+            if (i != posElemCl)
+                champLexical[cl][i].gameObject.SetActive(openClose);
 
     }
 
     /*
-     * Gère le tuto à la première scène
+     * Désafiche les CL avoisinant
      */
-    private void BossHelp(int val = 0)
+    private void CloseNeighbour(int cl)
     {
-        if (SC_GM_Local.gm.activeBonus)
-            if (SceneManager.GetActiveScene().name == "L_A1")
-            {
-                //SC_BossHelp.instance.CloseBossHelp(3);
-                //SC_BossHelp.instance.OpenBossBubble(3);
-            }
+        foreach (int elem in superpositionCL[cl])
+            OpenClose(elem, false);
     }
 }
