@@ -24,13 +24,10 @@ public class SC_Collect : MonoBehaviour
 
     void Update()
     {
+        ratioText.text = SC_GM_Local.gm.numberOfCLRecover.ToString() + "/" + SC_GM_Local.gm.numberOfCLRecoverable.ToString();
+
         for (int i = 0; i < SC_GM_Master.gm.wordsInCollect.Count; i++)
             listOfButtons[i].text = SC_GM_Master.gm.wordsInCollect[i].GetCL();
-
-        foreach (SC_CLInPull elem in SC_GM_Master.gm.wordsInCollect)
-            SC_GM_Master.gm.wordsInPull.Add(elem);
-
-        ratioText.text = SC_GM_Local.gm.numberOfCLRecover.ToString() + "/" + SC_GM_Local.gm.numberOfCLRecoverable.ToString();
 
         if (SC_GM_Local.gm.numberOfCLRecover == SC_GM_Local.gm.numberOfCLRecoverable)
         {
