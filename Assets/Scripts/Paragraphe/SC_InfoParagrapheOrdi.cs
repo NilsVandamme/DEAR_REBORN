@@ -22,20 +22,23 @@ public class SC_InfoParagrapheOrdi : MonoBehaviour, IPointerClickHandler
         foreach (TextPart elem in paragraphOrdi.texte)
             myText.text += elem.partText + " ";
     }
-
-    private IEnumerator Wait()
-    {
-        yield return new WaitForSeconds(wait);
-    }
-
+    
     /*
-     * Lors du click wait et regarde si le CL est ajoutable ou non
+     * Lors du click wait
      */
     public void OnPointerClick(PointerEventData eventData)
     {
         int linkIndex = TMP_TextUtilities.FindIntersectingLink(myText, Input.mousePosition, cam);
 
-        Wait();
+        StartCoroutine(Collect(linkIndex));
+    }
+
+    /*
+     * Regarde si le CL est ajoutable ou non
+     */
+    private IEnumerator Collect(int linkIndex)
+    {
+        yield return new WaitForSeconds(wait);
 
         if (linkIndex != -1) //Collectable
         {

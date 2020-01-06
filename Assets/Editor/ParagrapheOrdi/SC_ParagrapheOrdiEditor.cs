@@ -9,7 +9,6 @@ public class SC_ParagrapheOrdiEditor : Editor
     private SC_ParagrapheOrdi paragrapheOrdi;
     SerializedProperty listOfPartText;
     private bool[] foldoutList;
-    private bool init = true;
 
     private void OnEnable()
     {
@@ -27,33 +26,31 @@ public class SC_ParagrapheOrdiEditor : Editor
         paragrapheOrdi.fileCSVTextParagraph = EditorGUILayout.ObjectField("File Text : ", paragrapheOrdi.fileCSVTextParagraph, typeof(TextAsset), false) as TextAsset;
         paragrapheOrdi.listChampLexicaux = EditorGUILayout.ObjectField("File words : ", paragrapheOrdi.listChampLexicaux, typeof(SC_ListChampLexicaux), false) as SC_ListChampLexicaux;
 
-        if (init && paragrapheOrdi.fileCSVTextParagraph != null && paragrapheOrdi.listChampLexicaux != null)
+        if (paragrapheOrdi.fileCSVTextParagraph != null && paragrapheOrdi.listChampLexicaux != null)
         {
-            init = false;
             int nbLink = GenerateParagraphe();
-            foldoutList = new bool[nbLink];
 
+            if (foldoutList == null)
+                foldoutList = new bool[nbLink];
             if (paragrapheOrdi.champLexical == null)
                 paragrapheOrdi.champLexical = new int[nbLink];
             if (paragrapheOrdi.motAccepterInCL == null)
                 paragrapheOrdi.motAccepterInCL = new bool[nbLink][];
 
-        }
 
-        if (!init)
-        { 
             foreach (SerializedProperty text in listOfPartText)
                 EditorGUILayout.PropertyField(text);
-            
+
             for (int i = 0; i < foldoutList.Length; i++)
             {
                 int actualCL = paragrapheOrdi.champLexical[i];
-                List<SC_Word> listOfWordInActualCL = paragrapheOrdi.listChampLexicaux.listChampLexical[paragrapheOrdi.champLexical[i]].listOfWords;
 
                 EditorGUILayout.BeginHorizontal();
 
                 foldoutList[i] = EditorGUILayout.Foldout(foldoutList[i], "Champ Lexical", true);
-                paragrapheOrdi.champLexical[i] = EditorGUILayout.Popup(paragrapheOrdi.champLexical[i], paragrapheOrdi.listChampLexicaux.listNameChampLexical);
+
+                paragrapheOrdi.champLexical[i] = EditorGUILayout.Popup(actualCL, paragrapheOrdi.listChampLexicaux.listNameChampLexical);
+                List<SC_Word> listOfWordInActualCL = paragrapheOrdi.listChampLexicaux.listChampLexical[paragrapheOrdi.champLexical[i]].listOfWords;
 
                 EditorGUILayout.EndHorizontal();
 
@@ -63,7 +60,6 @@ public class SC_ParagrapheOrdiEditor : Editor
 
                     if (paragrapheOrdi.champLexical[i] != actualCL || paragrapheOrdi.motAccepterInCL[i] == null)
                         paragrapheOrdi.motAccepterInCL[i] = new bool[listOfWordInActualCL.Count];
-
 
                     for (int j = 0; j < listOfWordInActualCL.Count; j++)
                     {
@@ -77,8 +73,8 @@ public class SC_ParagrapheOrdiEditor : Editor
 
                     EditorGUI.indentLevel -= 1;
                 }
-            }
 
+            }
         }
 
         EditorUtility.SetDirty(paragrapheOrdi);
