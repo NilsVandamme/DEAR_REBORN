@@ -23,18 +23,23 @@ public class SC_GM_Paper : MonoBehaviour
         ddcontrols = FindObjectsOfType<SC_DragDropControls>();
     }
 
+    public void CalculateScore()
+    {
+        foreach (string elem in SC_GM_Local.gm.choosenWordInLetter)
+            foreach (SC_ChampLexical listCL in SC_GM_Master.gm.listChampsLexicaux.listChampLexical)
+                foreach (SC_Word word in listCL.listOfWords)
+                    foreach (string mot in word.grammarCritere)
+                        if (elem == mot)
+                            score += word.scorePerso[SC_GM_Local.gm.peopleScore];
+    }
+
     public void OnClickSubmitButton()
     {
         if (paragraphsConfirmed == true)
         {
             if (!DebugMode)
             {
-                foreach (string elem in SC_GM_Local.gm.choosenWordInLetter)
-                    foreach (SC_ChampLexical listCL in SC_GM_Master.gm.listChampsLexicaux.listChampLexical)
-                        foreach (SC_Word word in listCL.listOfWords)
-                            foreach (string mot in word.grammarCritere)
-                                if (elem == mot)
-                                    score += word.scorePerso[SC_GM_Local.gm.peopleScore];
+                CalculateScore();
             }
 
             Debug.Log("Score = " + score);
@@ -63,12 +68,11 @@ public class SC_GM_Paper : MonoBehaviour
         }
     }
 
-    public void OnClickConfirmButton()
+    public void OnClickLockButton()
     {
-        //Debug.Log("Blocked paragraphs placement");
-
         if (paragraphsConfirmed == false)
         {
+            Debug.Log("Blocked paragraphs placement");
             for (int i = 0; i < snapPositions.Length; i++)
                 if (snapPositions[i].currentSnappedObject != null && !acompletes.Contains(snapPositions[i].currentSnappedObject.GetComponentInChildren<SC_AutoComplete>()))
                 {
@@ -91,7 +95,7 @@ public class SC_GM_Paper : MonoBehaviour
         }
         else
         {
-            //Debug.Log("Unblocked paragraphs placement");
+            Debug.Log("Unblocked paragraphs placement");
 
             for (int j = 0; j < acompletes.Count; j++)
                 acompletes[j].enabled = false;
@@ -111,5 +115,11 @@ public class SC_GM_Paper : MonoBehaviour
         paragraphsConfirmed = true;
         score = testScore;
         OnClickSubmitButton();
+    }
+
+    public void DebugScore()
+    {
+        CalculateScore();
+        Debug.Log("Score: " + score);
     }
 }
