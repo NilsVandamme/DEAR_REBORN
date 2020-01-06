@@ -9,7 +9,7 @@ public class SC_PullOfWordView : MonoBehaviour
     public GameObject GO_champsLexicaux;
 
     // Images des buttons qui ne contiennent pas de mot
-    public Image hasNotWord;
+    public Sprite hasNotWord;
 
     // Info sur le CL
     private int numberOfElemInCL = 9;
@@ -69,7 +69,7 @@ public class SC_PullOfWordView : MonoBehaviour
             int j = GetFirstCLWordFree(i);
             if (j == -1) return;
             for (; j < numberOfElemInCL; j++)
-                champLexicalImage[i][j] = hasNotWord;
+                champLexicalImage[i][j].sprite = hasNotWord;
         }
     }
 
@@ -109,9 +109,11 @@ public class SC_PullOfWordView : MonoBehaviour
      */
     public void OnClickButtonCL(TextMeshProUGUI tmp)
     {
+        Debug.Log(champLexical.Length);
         for (int i = 0; i < champLexical.Length; i++)
             if (champLexical[i][posElemCl] == tmp)
             {
+                Debug.Log("cc");
                 isOpen[i] = !isOpen[i];
                 OpenClose(i, isOpen[i]);
                 CloseNeighbour(i);
@@ -123,9 +125,15 @@ public class SC_PullOfWordView : MonoBehaviour
      */
     private void OpenClose(int cl, bool openClose)
     {
+        Debug.Log("cl : " + cl);
         for (int i = 0; i < champLexical[cl].Length; i++)
             if (i != posElemCl)
+            {
+                Debug.Log(openClose);
+                Debug.Log(champLexical[cl][i].text);
                 champLexical[cl][i].gameObject.SetActive(openClose);
+
+            }
 
     }
 

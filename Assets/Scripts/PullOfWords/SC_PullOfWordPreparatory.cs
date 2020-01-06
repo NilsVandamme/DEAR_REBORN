@@ -8,9 +8,9 @@ public class SC_PullOfWordPreparatory : MonoBehaviour
     // Object de la fenetre
     public GameObject GO_champsLexicaux;
 
-    // Liste des Images des buttons en fct de s'il contiennent ou non un mot
-    public Image hasWord;
-    public Image hasNotWord;
+    // Liste des Sprites des buttons en fct de s'il contiennent ou non un mot
+    public Sprite hasWord;
+    public Sprite hasNotWord;
 
     // Info sur le CL
     private int posElemCl = 4;
@@ -54,6 +54,9 @@ public class SC_PullOfWordPreparatory : MonoBehaviour
         for (int i = 0; i < champsLexicaux.Length; i++)
         {
             champLexical[i] = champsLexicaux[i].GetComponentsInChildren<TextMeshProUGUI>(true);
+            foreach (TextMeshProUGUI elem in champLexical[i])
+                elem.text = "";
+
             champLexicalImage[i] = champsLexicaux[i].GetComponentsInChildren<Image>(true);
         }
 
@@ -147,10 +150,10 @@ public class SC_PullOfWordPreparatory : MonoBehaviour
                     if (nbMot > 0)
                     {
                         nbMot--;
-                        champLexicalImage[i][j] = hasWord;
+                        champLexicalImage[i][j].sprite = hasWord;
                     }
                     else
-                        champLexicalImage[i][j] = hasNotWord;
+                        champLexicalImage[i][j].sprite = hasNotWord;
         }
     }
 

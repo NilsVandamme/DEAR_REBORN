@@ -12,7 +12,7 @@ public class SC_PullOfWordWheel : MonoBehaviour
     public Button startWrittingButton;
 
     // Images des buttons qui ne contiennent pas de mot
-    public Image hasNotWord;
+    public Sprite hasNotWord;
 
     // Info sur le CL
     private int numberOfElemInCL = 9;
@@ -36,7 +36,7 @@ public class SC_PullOfWordWheel : MonoBehaviour
     /*
      * Init le CL, la Wheel et les paragraphes de la lettre
      */
-    public void Collect()
+    public void InitCollect()
     {
         InitWheel();
         InitParagrapheLettre();
@@ -95,7 +95,7 @@ public class SC_PullOfWordWheel : MonoBehaviour
             int j = GetFirstCLWordFree(i);
             if (j == -1) return;
             for (; j < numberOfElemInCL; j++)
-                champLexicalImage[i][j] = hasNotWord;
+                champLexicalImage[i][j].sprite = hasNotWord;
         }
     }
 
