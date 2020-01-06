@@ -1,15 +1,6 @@
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
-[System.Serializable]
-public struct WordForEachCritere
-{
-    public int verb;
-    public int noun;
-    public int adjectif;
-}
 
 public class SC_GM_Local : MonoBehaviour
 {
@@ -24,7 +15,6 @@ public class SC_GM_Local : MonoBehaviour
 
     // Choose X Word
     public int numberOfWordInWheel;
-    public WordForEachCritere numberOfWordForEachCritere;
     public bool activeBonus;
 
     // Prochaines Scenes

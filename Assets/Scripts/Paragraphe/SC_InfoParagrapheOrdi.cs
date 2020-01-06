@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -9,13 +10,10 @@ public class SC_InfoParagrapheOrdi : MonoBehaviour, IPointerClickHandler
     public Color takenColor;
     public Color highlightColor;
     public Camera cam;
+    public float wait;
 
     private int lenghtMark = 9;
-    private string saveHighlight = "A7DEFF00";
     private string highlight;
-    private int saveLinkIndex = -1;
-    private int lastIndexPart1;
-    private int lenghtPart2;
 
     private void Start()
     {
@@ -25,35 +23,21 @@ public class SC_InfoParagrapheOrdi : MonoBehaviour, IPointerClickHandler
             myText.text += elem.partText + " ";
     }
 
-    private void Update()
+    private IEnumerator Wait()
     {
-        int linkIndex = TMP_TextUtilities.FindIntersectingLink(myText, Input.mousePosition, cam);
-
-        if (linkIndex != -1)
-        {
-            TMP_LinkInfo linkInfo = myText.textInfo.linkInfo[linkIndex];
-
-            if (saveLinkIndex != linkIndex)
-            {
-                lastIndexPart1 = linkInfo.linkIdFirstCharacterIndex + linkInfo.linkIdLength + lenghtMark;
-                lenghtPart2 = myText.text.Length - (lastIndexPart1 + highlight.Length);
-                myText.text = myText.text.Substring(0, lastIndexPart1) + highlight + myText.text.Substring(lastIndexPart1 + highlight.Length, lenghtPart2);
-            }
-
-            saveLinkIndex = linkIndex;
-        }
-        else if (saveLinkIndex != -1)
-        {
-            myText.text = myText.text.Substring(0, lastIndexPart1) + saveHighlight + myText.text.Substring(lastIndexPart1 + highlight.Length, lenghtPart2);
-            saveLinkIndex = -1;
-        }
+        yield return new WaitForSeconds(wait);
     }
 
+    /*
+     * Lors du click wait et regarde si le CL est ajoutable ou non
+     */
     public void OnPointerClick(PointerEventData eventData)
     {
         int linkIndex = TMP_TextUtilities.FindIntersectingLink(myText, Input.mousePosition, cam);
 
-        if (linkIndex != -1)
+        Wait();
+
+        if (linkIndex != -1) //Collectable
         {
             TMP_LinkInfo linkInfo = myText.textInfo.linkInfo[linkIndex];
             int id = int.Parse(linkInfo.GetLinkID());
@@ -61,49 +45,50 @@ public class SC_InfoParagrapheOrdi : MonoBehaviour, IPointerClickHandler
             if (SC_GM_Local.gm.numberOfCLRecover < SC_GM_Local.gm.numberOfCLRecoverable)
             {
                 SC_GM_Local.gm.numberOfCLRecover++;
+                Highlight(linkInfo);
 
-                bool[] tabBool = new bool[SC_GM_Master.gm.listChampsLexicaux.listOfPerso.Length];
                 for (int i = 0; i < paragraphOrdi.motAccepterInCL[id].Length; i++)
                     if (paragraphOrdi.motAccepterInCL[id][i])
-                        AddWordInCollect(id, tabBool);
+                        AddWordInCollect(id, i);
 
             }
         }
+        else // Non collectable
+        {
+            //TO-DO --> feedback de refus de collect
+        }
     }
 
-    private void AddWordInCollect(int link, bool[] tabBool)
+    /*
+     * Ajoute le CL a la collect
+     */
+    private void AddWordInCollect(int link, int word)
     {
-        Debug.Log(link);
-
         string cl = paragraphOrdi.listChampLexicaux.listChampLexical[paragraphOrdi.champLexical[link]].fileCSVChampLexical.name;
 
         foreach (SC_CLInPull elem in SC_GM_Master.gm.wordsInCollect)
-            if (elem.GetCL() == cl)
+            if (elem.GetCL() == cl) // Si le CL est deja present dans la collect
             {
-                SC_Word mot = paragraphOrdi.listChampLexicaux.listChampLexical[paragraphOrdi.champLexical[link]].listOfWords[link];
-                Debug.Log(mot.titre);
+                SC_Word mot = paragraphOrdi.listChampLexicaux.listChampLexical[paragraphOrdi.champLexical[link]].listOfWords[word];
 
                 foreach (SC_Word val in elem.GetListWord())
                     if (val.titre == mot.titre)
                         return;
 
                 elem.GetListWord().Add(mot);
-                elem.GetUsed().Add(mot.titre, tabBool);
                 return;
             }
 
-        SC_GM_Master.gm.wordsInCollect.Add(new SC_CLInPull(cl, paragraphOrdi.listChampLexicaux.listChampLexical[paragraphOrdi.champLexical[link]].listOfWords[link], tabBool));
+        SC_GM_Master.gm.wordsInCollect.Add(new SC_CLInPull(cl, paragraphOrdi.listChampLexicaux.listChampLexical[paragraphOrdi.champLexical[link]].listOfWords[word]));
     }
 
-    private void GetWordOfCLInPull ()
+    /*
+     * Highlight la partie CL récupéré
+     */
+    private void Highlight(TMP_LinkInfo linkInfo)
     {
-        //pullTextRatio.text = SC_GM_Local.gm.numberOfCLRecover.ToString() + "/" + SC_GM_Local.gm.numberOfCLRecoverable.ToString();
-
-        if (SC_GM_Local.gm.numberOfCLRecover == SC_GM_Local.gm.numberOfCLRecoverable)
-        {
-            //arboAnim.SetTrigger("ArboIsFull");
-            //SC_BossHelp.instance.CloseBossHelp(2);
-            //SC_BossHelp.instance.OpenBossBubble(2);
-        }
+        int lastIndexPart1 = linkInfo.linkIdFirstCharacterIndex + linkInfo.linkIdLength + lenghtMark;
+        int lenghtPart2 = myText.text.Length - (lastIndexPart1 + highlight.Length);
+        myText.text = myText.text.Substring(0, lastIndexPart1) + highlight + myText.text.Substring(lastIndexPart1 + highlight.Length, lenghtPart2);
     }
 }

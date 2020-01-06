@@ -80,7 +80,7 @@ public class SC_ChampLexicalEditor : Editor
 
             string[] critere = new string[numberOfCritere];
             for (int j = 0; j < numberOfCritere; j++)
-                critere[j] = cells[j + 1];
+                critere[j] = cells[j + 1].ToLower();
 
             int[] score = new int[cells.Length - (numberOfCritere + 1)];
             for (int j = (numberOfCritere + 1); j < cells.Length; j++)
