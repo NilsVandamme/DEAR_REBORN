@@ -7,6 +7,7 @@ public class SC_PullOfWordPreparatory : MonoBehaviour
 {
     // Object de la fenetre
     public GameObject GO_champsLexicaux;
+    public GameObject next;
 
     // Liste des Sprites des buttons en fct de s'il contiennent ou non un mot
     public Sprite hasWord;
@@ -80,33 +81,39 @@ public class SC_PullOfWordPreparatory : MonoBehaviour
     */
     private void MakeVersus()
     {
-        int x = Random.Range(0, SC_GM_Master.gm.wordsInCollect.Count), y, z;
-
-        do
+        if (SC_GM_Master.gm.wordsInCollect.Count <= 0)
         {
-            y = Random.Range(0, SC_GM_Master.gm.wordsInCollect.Count);
+            next.gameObject.SetActive(true);
+
+            foreach (LayoutGroup elem in champsLexicaux)
+                elem.gameObject.SetActive(false);
         }
-        while (y == x);
-
-
-        if (versus2.Contains(SC_GM_Master.gm.wordsInCollect.Count))
+        else
         {
-            Swap(x, y);
-        }
-        else if (versus3.Contains(SC_GM_Master.gm.wordsInCollect.Count))
-        {
+            int x = Random.Range(0, SC_GM_Master.gm.wordsInCollect.Count), y, z;
+
             do
             {
-                z = Random.Range(0, SC_GM_Master.gm.wordsInCollect.Count);
+                y = Random.Range(0, SC_GM_Master.gm.wordsInCollect.Count);
             }
-            while (z == x || z == y);
+            while (y == x);
 
-            Swap(x, y, z);
+            if (versus2.Contains(SC_GM_Master.gm.wordsInCollect.Count))
+            {
+                Swap(x, y);
+            }
+            else if (versus3.Contains(SC_GM_Master.gm.wordsInCollect.Count))
+            {
+                do
+                {
+                    z = Random.Range(0, SC_GM_Master.gm.wordsInCollect.Count);
+                }
+                while (z == x || z == y);
+
+                Swap(x, y, z);
+            }
         }
-        else if (SC_GM_Master.gm.wordsInCollect.Count <= 0)
-        {
-            // TO-DO --> changement de scene vers Wheel
-        }
+
     }
 
     /*
@@ -128,7 +135,7 @@ public class SC_PullOfWordPreparatory : MonoBehaviour
             choixCLTemp.Add(temp);
         }
 
-        foreach( SC_CLInPull elem in choixCLTemp)
+        foreach(SC_CLInPull elem in choixCLTemp)
             SC_GM_Master.gm.wordsInCollect.Remove(elem);
 
         Affiche();

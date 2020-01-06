@@ -14,6 +14,7 @@ public class SC_InfoParagrapheOrdi : MonoBehaviour, IPointerClickHandler
 
     private int lenghtMark = 9;
     private string highlight;
+    private bool oneClick = false;
 
     private void Start()
     {
@@ -28,9 +29,14 @@ public class SC_InfoParagrapheOrdi : MonoBehaviour, IPointerClickHandler
      */
     public void OnPointerClick(PointerEventData eventData)
     {
-        int linkIndex = TMP_TextUtilities.FindIntersectingLink(myText, Input.mousePosition, cam);
+        if (!oneClick)
+        {
+            oneClick = true;
 
-        StartCoroutine(Collect(linkIndex));
+            int linkIndex = TMP_TextUtilities.FindIntersectingLink(myText, Input.mousePosition, cam);
+
+            StartCoroutine(Collect(linkIndex));
+        }
     }
 
     /*
@@ -38,6 +44,8 @@ public class SC_InfoParagrapheOrdi : MonoBehaviour, IPointerClickHandler
      */
     private IEnumerator Collect(int linkIndex)
     {
+        SC_GM_Cursor.gm.changeToLoadCursor();
+
         yield return new WaitForSeconds(wait);
 
         if (linkIndex != -1) //Collectable
@@ -60,6 +68,9 @@ public class SC_InfoParagrapheOrdi : MonoBehaviour, IPointerClickHandler
         {
             //TO-DO --> feedback de refus de collect
         }
+
+        SC_GM_Cursor.gm.changeToNormalCursor();
+        oneClick = false;
     }
 
     /*

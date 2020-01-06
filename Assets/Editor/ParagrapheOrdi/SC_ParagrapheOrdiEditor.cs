@@ -9,6 +9,7 @@ public class SC_ParagrapheOrdiEditor : Editor
     private SC_ParagrapheOrdi paragrapheOrdi;
     SerializedProperty listOfPartText;
     private bool[] foldoutList;
+    private TextAsset saveFileCSV;
 
     private void OnEnable()
     {
@@ -30,13 +31,13 @@ public class SC_ParagrapheOrdiEditor : Editor
         {
             int nbLink = GenerateParagraphe();
 
-            if (foldoutList == null)
+            if (paragrapheOrdi.fileCSVTextParagraph != saveFileCSV)
+            {
                 foldoutList = new bool[nbLink];
-            if (paragrapheOrdi.champLexical == null)
                 paragrapheOrdi.champLexical = new int[nbLink];
-            if (paragrapheOrdi.motAccepterInCL == null)
                 paragrapheOrdi.motAccepterInCL = new bool[nbLink][];
-
+            }
+            saveFileCSV = paragrapheOrdi.fileCSVTextParagraph;
 
             foreach (SerializedProperty text in listOfPartText)
                 EditorGUILayout.PropertyField(text);
