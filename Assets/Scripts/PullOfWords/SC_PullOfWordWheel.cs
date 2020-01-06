@@ -57,6 +57,9 @@ public class SC_PullOfWordWheel : MonoBehaviour
     private void InitRightSide()
     {
         listOfWheel = GO_wheelWord.GetComponentsInChildren<TextMeshProUGUI>(true);
+        foreach (TextMeshProUGUI elem in listOfWheel)
+            elem.text = "";
+
         BossHelp();
     }
 
@@ -73,6 +76,9 @@ public class SC_PullOfWordWheel : MonoBehaviour
         for (int i = 0; i < champsLexicaux.Length; i++)
         {
             champLexical[i] = champsLexicaux[i].GetComponentsInChildren<TextMeshProUGUI>(true);
+            foreach (TextMeshProUGUI elem in champLexical[i])
+                elem.text = "";
+
             champLexicalImage[i] = champsLexicaux[i].GetComponentsInChildren<Image>(true);
         }
 

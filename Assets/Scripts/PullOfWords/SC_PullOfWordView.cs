@@ -17,7 +17,8 @@ public class SC_PullOfWordView : MonoBehaviour
 
     // Liste des CL et leurs Words
     private LayoutGroup[] champsLexicaux;
-    private TextMeshProUGUI[][] champLexical;
+    private TextMeshProUGUI[][] champLexicalWord;
+    private Button[][] champLexicalButton;
     private Image[][] champLexicalImage;
     private bool[] isOpen;
 
@@ -42,13 +43,19 @@ public class SC_PullOfWordView : MonoBehaviour
     {
         champsLexicaux = GO_champsLexicaux.GetComponentsInChildren<LayoutGroup>(true);
 
-        champLexical = new TextMeshProUGUI[champsLexicaux.Length][];
+        champLexicalButton = new Button[champsLexicaux.Length][];
+        champLexicalWord = new TextMeshProUGUI[champsLexicaux.Length][];
         champLexicalImage = new Image[champsLexicaux.Length][];
         isOpen = new bool[champsLexicaux.Length];
 
         for (int i = 0; i < champsLexicaux.Length; i++)
         {
-            champLexical[i] = champsLexicaux[i].GetComponentsInChildren<TextMeshProUGUI>(true);
+            champLexicalButton[i] = champsLexicaux[i].GetComponentsInChildren<Button>(true);
+
+            champLexicalWord[i] = champsLexicaux[i].GetComponentsInChildren<TextMeshProUGUI>(true);
+            foreach (TextMeshProUGUI elem in champLexicalWord[i])
+                elem.text = "";
+
             champLexicalImage[i] = champsLexicaux[i].GetComponentsInChildren<Image>(true);
         }
     }
@@ -61,10 +68,10 @@ public class SC_PullOfWordView : MonoBehaviour
         for (int i = 0; i < SC_GM_Master.gm.wordsInPull.Count; i++)
         {
             SC_CLInPull cl = SC_GM_Master.gm.wordsInPull[i];
-            champLexical[i][posElemCl].text = cl.GetCL();
+            champLexicalWord[i][posElemCl].text = cl.GetCL();
 
             foreach (SC_Word word in cl.GetListWord())
-                champLexical[i][GetFirstCLWordFree(i)].text = word.titre;
+                champLexicalWord[i][GetFirstCLWordFree(i)].text = word.titre;
 
             int j = GetFirstCLWordFree(i);
             if (j == -1) return;
@@ -79,7 +86,7 @@ public class SC_PullOfWordView : MonoBehaviour
     private int GetFirstCLWordFree(int index)
     {
         for (int i = 0; i < numberOfElemInCL; i++)
-            if (i != posElemCl && champLexical[index][i].text == "")
+            if (i != posElemCl && champLexicalWord[index][i].text == "")
                 return i;
 
         return -1;
@@ -88,14 +95,14 @@ public class SC_PullOfWordView : MonoBehaviour
     private void InitSuperposition()
     {
         superpositionCL = new int[champsLexicaux.Length][];
-        superpositionCL[0] = new int[] { 1, 3 };
-        superpositionCL[1] = new int[] { 0, 2, 3, 4};
-        superpositionCL[2] = new int[] { 1, 4 };
-        superpositionCL[3] = new int[] { 0, 1, 5, 6 };
-        superpositionCL[4] = new int[] { 1, 2, 6, 7 };
-        superpositionCL[5] = new int[] { 3, 6, 8 };
-        superpositionCL[6] = new int[] { 3, 4, 5, 7, 8, 9 };
-        superpositionCL[7] = new int[] { 4, 6, 9 };
+        superpositionCL[0] = new int[] { 2, 3 };
+        superpositionCL[1] = new int[] { 3, 4 };
+        superpositionCL[2] = new int[] { 0, 3, 5, 6 };
+        superpositionCL[3] = new int[] { 0, 1, 2, 4, 5, 6, 7 };
+        superpositionCL[4] = new int[] { 1, 3, 6, 7 };
+        superpositionCL[5] = new int[] { 2, 3, 6, 8 };
+        superpositionCL[6] = new int[] { 2, 3, 4, 5, 7, 8, 9 };
+        superpositionCL[7] = new int[] { 3, 4, 6, 9 };
         superpositionCL[8] = new int[] { 5, 6 };
         superpositionCL[9] = new int[] { 6, 7 };
     }
@@ -107,13 +114,11 @@ public class SC_PullOfWordView : MonoBehaviour
     /*
      * Affiche ou désafiche le CL sur lequel on a clicker
      */
-    public void OnClickButtonCL(TextMeshProUGUI tmp)
+    public void OnClickButtonCL(Button but)
     {
-        Debug.Log(champLexical.Length);
-        for (int i = 0; i < champLexical.Length; i++)
-            if (champLexical[i][posElemCl] == tmp)
+        for (int i = 0; i < champLexicalButton.Length; i++)
+            if (champLexicalButton[i][posElemCl] == but)
             {
-                Debug.Log("cc");
                 isOpen[i] = !isOpen[i];
                 OpenClose(i, isOpen[i]);
                 CloseNeighbour(i);
@@ -125,15 +130,9 @@ public class SC_PullOfWordView : MonoBehaviour
      */
     private void OpenClose(int cl, bool openClose)
     {
-        Debug.Log("cl : " + cl);
-        for (int i = 0; i < champLexical[cl].Length; i++)
+        for (int i = 0; i < champLexicalButton[cl].Length; i++)
             if (i != posElemCl)
-            {
-                Debug.Log(openClose);
-                Debug.Log(champLexical[cl][i].text);
-                champLexical[cl][i].gameObject.SetActive(openClose);
-
-            }
+                champLexicalButton[cl][i].gameObject.SetActive(openClose);
 
     }
 
@@ -143,6 +142,9 @@ public class SC_PullOfWordView : MonoBehaviour
     private void CloseNeighbour(int cl)
     {
         foreach (int elem in superpositionCL[cl])
+        {
             OpenClose(elem, false);
+            isOpen[elem] = false;
+        }
     }
 }
