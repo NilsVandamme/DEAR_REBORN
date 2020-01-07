@@ -43,6 +43,7 @@ public class SC_DragDropControls : MonoBehaviour
     private Vector3 mouseOffset;
     private float mouseZCoord;
     private Rigidbody rig; // Object rigidbidy
+    public GameObject removeButton;
 
     //[Space]
     private float timer;
@@ -51,7 +52,7 @@ public class SC_DragDropControls : MonoBehaviour
     {
         OriginalPosition = transform.position;
         rig = GetComponent<Rigidbody>();
-
+        removeButton = transform.GetChild(0).GetChild(2).gameObject;
     }
 
     private void Update()
@@ -69,6 +70,7 @@ public class SC_DragDropControls : MonoBehaviour
                 timer = 0;
                 snapMovementActive = false;
                 rig.useGravity = true;
+                removeButton.SetActive(true);
             }
         }
         // Unsnap the object from it's target
@@ -77,6 +79,7 @@ public class SC_DragDropControls : MonoBehaviour
             timer = 0;
             snapMovementActive = false;
             rig.useGravity = true;
+            removeButton.SetActive(true);
         }
     }
 
@@ -337,9 +340,9 @@ public class SC_DragDropControls : MonoBehaviour
         else
         {
             //Debug.Log("paragraph removed");
-
-            transform.position = Vector3.zero;
+            transform.position = OriginalPosition;
         }
+        removeButton.SetActive(false);
         IsSnapped = false;
 
     }

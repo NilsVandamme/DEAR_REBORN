@@ -26,6 +26,13 @@ public class SC_ParagraphSorter : MonoBehaviour
     {
         instance = this;
         GetAllParagraphs();
+
+        // Spawn 3 random paragraphs
+        ParagraphsToSpawn.Add(OrientationParagraphs[0]);
+        ParagraphsToSpawn.Add(WakeupParagraphs[0]);
+        ParagraphsToSpawn.Add(MotivationParagraphs[0]);
+        SpawnParagraphs();
+        ParagraphsToSpawn.Clear();
     }
 
     public void GetOrientationParagraphs()

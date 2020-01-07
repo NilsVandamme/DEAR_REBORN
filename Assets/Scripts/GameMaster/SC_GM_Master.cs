@@ -5,11 +5,11 @@ public class SC_GM_Master : MonoBehaviour
 {
     // Ensemble des champs lexicaux
     public SC_ListChampLexicaux listChampsLexicaux;
+    public SC_PullBase pullBase;
 
     [HideInInspector]
-    // Liste des mots choisi par le joueur (CL, Word, Use)
+    // Liste des mots choisi par le joueur (CL, Word)
     public List<SC_CLInPull> wordsInPull = new List<SC_CLInPull>();
-    public List<SC_CLInPull> wordsInCollect = new List<SC_CLInPull>();
 
     public static SC_GM_Master gm = null;
 
@@ -19,5 +19,12 @@ public class SC_GM_Master : MonoBehaviour
             gm = this;
         else if (gm != null)
             Destroy(gameObject);
+    }
+
+    public void Test()
+    {
+        foreach (SC_CLInPull elem in pullBase.wordsInPull)
+            if (!wordsInPull.Contains(elem))
+                wordsInPull.Add(elem);
     }
 }

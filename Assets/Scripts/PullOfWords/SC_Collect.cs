@@ -26,8 +26,8 @@ public class SC_Collect : MonoBehaviour
     {
         ratioText.text = SC_GM_Local.gm.numberOfCLRecover.ToString() + "/" + SC_GM_Local.gm.numberOfCLRecoverable.ToString();
 
-        for (int i = 0; i < SC_GM_Master.gm.wordsInCollect.Count; i++)
-            listOfButtons[i].text = SC_GM_Master.gm.wordsInCollect[i].GetCL();
+        for (int i = 0; i < SC_GM_Local.gm.wordsInCollect.Count; i++)
+            listOfButtons[i].text = SC_GM_Local.gm.wordsInCollect[i].GetCL();
 
         if (SC_GM_Local.gm.numberOfCLRecover == SC_GM_Local.gm.numberOfCLRecoverable)
         {
