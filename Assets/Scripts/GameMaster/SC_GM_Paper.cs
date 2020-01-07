@@ -15,7 +15,7 @@ public class SC_GM_Paper : MonoBehaviour
     [HideInInspector]
     public List<SC_AutoComplete> acompletes;
 
-    public bool DebugMode;
+    private bool DebugMode;
 
     private void Start()
     {
@@ -46,23 +46,27 @@ public class SC_GM_Paper : MonoBehaviour
             if (score > SC_GM_Local.gm.firstPivotScene)
             {
                 Debug.Log("Loaded first scene");
-                SceneManager.LoadScene(SC_GM_Local.gm.firstScene);
+                if(!DebugMode)
+                    SceneManager.LoadScene(SC_GM_Local.gm.firstScene);
             }
             else if (SC_GM_Local.gm.numberOfScene == 2)
             {
                 Debug.Log("Loaded second scene");
-                SceneManager.LoadScene(SC_GM_Local.gm.secondScene);
+                if (!DebugMode)
+                    SceneManager.LoadScene(SC_GM_Local.gm.secondScene);
             }
 
             else if (score > SC_GM_Local.gm.secondPivotScene && SC_GM_Local.gm.numberOfScene == 3)
             {
                 Debug.Log("Loaded second scene");
-                SceneManager.LoadScene(SC_GM_Local.gm.secondScene);
+                if (!DebugMode)
+                    SceneManager.LoadScene(SC_GM_Local.gm.secondScene);
             }
             else
             {
                 Debug.Log("Loaded third scene");
-                SceneManager.LoadScene(SC_GM_Local.gm.thirdScene);
+                if (!DebugMode)
+                    SceneManager.LoadScene(SC_GM_Local.gm.thirdScene);
             }
 
         }
@@ -115,6 +119,7 @@ public class SC_GM_Paper : MonoBehaviour
         paragraphsConfirmed = true;
         score = testScore;
         OnClickSubmitButton();
+        DebugMode = false;
     }
 
     public void DebugScore()
