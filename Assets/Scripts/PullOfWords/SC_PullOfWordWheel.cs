@@ -90,9 +90,9 @@ public class SC_PullOfWordWheel : MonoBehaviour
      */
     private void WriteWordAndCL()
     {
-        for (int i = 0; i < SC_GM_Master.gm.wordsInPull.Count; i++)
+        for (int i = 0; i < SC_GM_Local.gm.wordsInPreparatory.Count; i++)
         {
-            SC_CLInPull cl = SC_GM_Master.gm.wordsInPull[i];
+            SC_CLInPull cl = SC_GM_Local.gm.wordsInPreparatory[i];
             champLexical[i][posElemCl].text = cl.GetCL();
 
             foreach (SC_Word word in cl.GetListWord())
@@ -153,7 +153,7 @@ public class SC_PullOfWordWheel : MonoBehaviour
      */
     private SC_Word GetWordInCollect(string mot)
     {
-        foreach (SC_CLInPull cl in SC_GM_Master.gm.wordsInPull)
+        foreach (SC_CLInPull cl in SC_GM_Local.gm.wordsInPreparatory)
             foreach (SC_Word word in cl.GetListWord())
                 if (mot == word.titre)
                     return word;

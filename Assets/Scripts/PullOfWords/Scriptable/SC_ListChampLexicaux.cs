@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-[CreateAssetMenu(fileName = "ListChampLexicaux.asset", menuName = "Custom/GenerateListChampLexicaux", order = 1)]
+[CreateAssetMenu(fileName = "ListChampLexicaux.asset", menuName = "Custom/ListChampLexicaux", order = 1)]
 public class SC_ListChampLexicaux : ScriptableObject
 {
     public SC_ChampLexical[] listChampLexical = null;

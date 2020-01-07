@@ -27,6 +27,7 @@ public class SC_PullOfWordPreparatory : MonoBehaviour
 
     // Liste des CL afficher pendant le choix
     private List<SC_CLInPull> choixCLTemp;
+    private List<SC_CLInPull> copieCLTemp;
     
 
     //##############################################################################################################################################################
@@ -38,8 +39,43 @@ public class SC_PullOfWordPreparatory : MonoBehaviour
      */
     public void InitPreparatory()
     {
+        SC_GM_Master.gm.Test();
+        ChangeOfListe();
         InitCL();
         InitView();
+    }
+
+    /*
+     * Pass les elem de la collect a la pull
+     */
+    private void ChangeOfListe()
+    {
+        bool find;
+        Debug.Log(SC_GM_Local.gm.wordsInCollect.Count);
+        Debug.Log(SC_GM_Master.gm.wordsInPull.Count);
+
+        foreach (SC_CLInPull elem in SC_GM_Local.gm.wordsInCollect)
+        {
+            find = false;
+
+            for (int i = 0; i < SC_GM_Master.gm.wordsInPull.Count; i++)
+                if (SC_GM_Master.gm.wordsInPull[i].GetCL() == elem.GetCL())
+                {
+                    find = true;
+
+                    foreach (SC_Word word in elem.GetListWord())
+                        if (!SC_GM_Master.gm.wordsInPull[i].GetListWord().Contains(word))
+                            SC_GM_Master.gm.wordsInPull[i].GetListWord().Add(word);
+
+                    break;
+                }
+
+            if (!find)
+                SC_GM_Master.gm.wordsInPull.Add(elem);
+        }
+
+        copieCLTemp = new List<SC_CLInPull>(SC_GM_Master.gm.wordsInPull);
+
     }
 
     /*
@@ -81,7 +117,9 @@ public class SC_PullOfWordPreparatory : MonoBehaviour
     */
     private void MakeVersus()
     {
-        if (SC_GM_Master.gm.wordsInCollect.Count <= 0)
+        int nbCLRestant = copieCLTemp.Count;
+        Debug.Log("nbCLRestant : " + nbCLRestant);
+        if (nbCLRestant <= 0)
         {
             next.gameObject.SetActive(true);
 
@@ -90,23 +128,23 @@ public class SC_PullOfWordPreparatory : MonoBehaviour
         }
         else
         {
-            int x = Random.Range(0, SC_GM_Master.gm.wordsInCollect.Count), y, z;
+            int x = Random.Range(0, nbCLRestant), y, z;
 
             do
             {
-                y = Random.Range(0, SC_GM_Master.gm.wordsInCollect.Count);
+                y = Random.Range(0, nbCLRestant);
             }
             while (y == x);
 
-            if (versus2.Contains(SC_GM_Master.gm.wordsInCollect.Count))
+            if (versus2.Contains(nbCLRestant))
             {
                 Swap(x, y);
             }
-            else if (versus3.Contains(SC_GM_Master.gm.wordsInCollect.Count))
+            else if (versus3.Contains(nbCLRestant))
             {
                 do
                 {
-                    z = Random.Range(0, SC_GM_Master.gm.wordsInCollect.Count);
+                    z = Random.Range(0, nbCLRestant);
                 }
                 while (z == x || z == y);
 
@@ -123,20 +161,20 @@ public class SC_PullOfWordPreparatory : MonoBehaviour
     {
         SC_CLInPull temp;
 
-        temp = SC_GM_Master.gm.wordsInCollect[x];
+        temp = copieCLTemp[x];
         choixCLTemp.Add(temp);
 
-        temp = SC_GM_Master.gm.wordsInCollect[y];
+        temp = copieCLTemp[y];
         choixCLTemp.Add(temp);
 
         if (z != -1)
         {
-            temp = SC_GM_Master.gm.wordsInCollect[z];
+            temp = copieCLTemp[z];
             choixCLTemp.Add(temp);
         }
 
         foreach(SC_CLInPull elem in choixCLTemp)
-            SC_GM_Master.gm.wordsInCollect.Remove(elem);
+            copieCLTemp.Remove(elem);
 
         Affiche();
     }
@@ -146,6 +184,7 @@ public class SC_PullOfWordPreparatory : MonoBehaviour
      */
     private void Affiche()
     {
+        Debug.Log("affiche : " + choixCLTemp.Count);
         for (int i = 0; i < choixCLTemp.Count; i++)
         {
             champsLexicaux[i].gameObject.SetActive(true);
@@ -165,25 +204,27 @@ public class SC_PullOfWordPreparatory : MonoBehaviour
     }
 
     /*
-     * Ajoute le Cl clicker dans le pull de Word et recommence le Versus
+     * Remet l'affichage à zéro
+     */
+    private void Clear()
+    {
+        for (int i = 0; i < choixCLTemp.Count; i++)
+            champsLexicaux[i].gameObject.SetActive(false);
+    }
+
+    /*
+     * Ajoute le Cl clicker dans la preparatory de Word et recommence le Versus
      */
     public void OnClickCL(TextMeshProUGUI tmp)
     {
         SC_CLInPull temp = GetCLInClicker(tmp);
+        Clear();
 
         choixCLTemp.Clear();
+        Debug.Log("click : " + choixCLTemp.Count);
 
-        foreach (SC_CLInPull elem in SC_GM_Master.gm.wordsInPull)
-            if (elem.GetCL() == temp.GetCL()) // Si le CL est deja present dans le pull
-            {
-                foreach (SC_Word word in temp.GetListWord())
-                    if (!elem.GetListWord().Contains(word))
-                        elem.GetListWord().Add(word);
+        SC_GM_Local.gm.wordsInPreparatory.Add(temp);
 
-                return;
-            }
-
-        SC_GM_Master.gm.wordsInPull.Add(temp);
 
         MakeVersus();
     }
