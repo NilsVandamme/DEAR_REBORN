@@ -37,6 +37,7 @@ public class SC_DragDropControls : MonoBehaviour
     private bool underDownSnapped;
 
     //[Space]
+    public bool IsSnapped; // Is the object snapped ?
     private bool snapMovementActive; // Is the object moving to it's snap ?
 
     private Vector3 mouseOffset;
@@ -82,7 +83,7 @@ public class SC_DragDropControls : MonoBehaviour
     // When the mouse is being pressed
     private void OnMouseDown()
     {
-        if (enabled)
+        if (enabled && IsSnapped == false)
         {
                 IsSelected = true;
                 //Debug.Log("MOUSE DOWN");
@@ -100,7 +101,7 @@ public class SC_DragDropControls : MonoBehaviour
     {
         timer = 0;
 
-        if (enabled)
+        if (enabled && IsSnapped == false)
         {
             if (IsSelected == true)
             {
@@ -117,27 +118,50 @@ public class SC_DragDropControls : MonoBehaviour
                     {
                         // Give the position to snap to
                         if (SnapPositionObjectTop != null)
+                        {
                             SnapPosition = SnapPositionObjectTop.transform.position;
+                            IsSnapped = true;
+                        }
                         else if (SnapPositionObjectDown != null)
+                        {
                             SnapPosition = SnapPositionObjectDown.transform.position;
+                            IsSnapped = true;
+                        }
                         else
+                        {
                             SnapPosition = OriginalPosition;
+                        }
                     }
                     else if (ParagraphSize == 2)
                     {
                         // Give the position to snap to
                         if (SnapPositionObjectTop != null && SnapPositionObjectDown != null) // Snap between the two spots
+                        {
                             SnapPosition = Vector3.Lerp(SnapPositionObjectTop.transform.position, SnapPositionObjectDown.transform.position, 0.5f);
-                        else if (topSnapped == true && SnapPositionObjectDown == null && overTopSnapped == true && SnapPositionObjectTop.tag != "FirstSnapPosition") // Snap on the upper part of the paper
+                            IsSnapped = true;
+                        }
+                        else if (topSnapped == true && SnapPositionObjectDown == null && overTopSnapped == true && SnapPositionObjectTop.tag != "FirstSnapPosition")
+                        { // Snap on the upper part of the paper
                             SnapPosition = SnapPositionObjectTop.transform.position + Vector3.forward * FirstLastSnapPositionOffset;
-                        else if (downSnapped == true && SnapPositionObjectTop == null && underDownSnapped == true && SnapPositionObjectDown.tag != "LastSnapPosition") // Snap on the lower part of the paper
+                            IsSnapped = true;
+                        }
+                        else if (downSnapped == true && SnapPositionObjectTop == null && underDownSnapped == true && SnapPositionObjectDown.tag != "LastSnapPosition")
+                        { // Snap on the lower part of the paper
                             SnapPosition = SnapPositionObjectDown.transform.position + Vector3.back * FirstLastSnapPositionOffset;
-                        else if (topSnapped == true && SnapPositionObjectDown == null && underDownSnapped == false && SnapPositionObjectTop.tag == "FirstSnapPosition") // Return to original position because there's not enough space
+                            IsSnapped = true;
+                        }
+                        else if (topSnapped == true && SnapPositionObjectDown == null && underDownSnapped == false && SnapPositionObjectTop.tag == "FirstSnapPosition")
+                        { // Return to original position because there's not enough space
                             SnapPosition = OriginalPosition;
-                        else if (downSnapped == true && SnapPositionObjectTop == null && overTopSnapped == false && SnapPositionObjectDown.tag == "LastSnapPosition") // Return to original position because there's not enough space
+                        }
+                        else if (downSnapped == true && SnapPositionObjectTop == null && overTopSnapped == false && SnapPositionObjectDown.tag == "LastSnapPosition")
+                        { // Return to original position because there's not enough space
                             SnapPosition = OriginalPosition;
+                        }
                         else
+                        {
                             SnapPosition = OriginalPosition;
+                        }
                     }
                 }
                 // If the object has no snap point
@@ -170,7 +194,7 @@ public class SC_DragDropControls : MonoBehaviour
     // When the mouse is kept being pressed
     private void OnMouseDrag()
     {
-        if (enabled)
+        if (enabled && IsSnapped == false)
         {
             if (IsSelected == true)
             {
@@ -295,6 +319,30 @@ public class SC_DragDropControls : MonoBehaviour
         }
     }
 
+    public void RemoveParagraph()
+    {
+        gameObject.SetActive(false);
+        SC_ParagraphSorter.instance.SnappedParagraphs.Remove(gameObject);
+
+        if (GetComponent<SC_ParagraphType>().Type.ToString() == SC_ParagraphSorter.instance.CurrentParagraphs)
+        {
+            //Debug.Log("paragraph sent back to selection");
+
+            // Put the paragraph in the selection
+            SC_ParagraphSorter.instance.ParagraphsToSpawn.Add(gameObject);
+            //SC_ParagraphSorter.instance.SpawnParagraphs();
+            transform.position = OriginalPosition;
+            gameObject.SetActive(true);
+        }
+        else
+        {
+            //Debug.Log("paragraph removed");
+
+            transform.position = Vector3.zero;
+        }
+        IsSnapped = false;
+
+    }
 
     public void GetOriginalSnapPosition() // Set the current position as the default snap position
     {
