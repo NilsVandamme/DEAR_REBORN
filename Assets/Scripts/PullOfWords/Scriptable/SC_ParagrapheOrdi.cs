@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "OrdiParagraphe.asset", menuName = "Custom/GenerateParagrapheOrdi", order = 1)]
+[CreateAssetMenu(fileName = "OrdiParagraphe.asset", menuName = "Custom/ParagrapheOrdi", order = 1)]
 public class SC_ParagrapheOrdi : ScriptableObject
 {
     public TextAsset fileCSVTextParagraph;

@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEditor;
+﻿using UnityEditor;
 using UnityEngine;
 
 [CanEditMultipleObjects]
@@ -25,7 +24,6 @@ public class SC_ListChampLexicauxEditor : Editor
             loadName();
 
         base.OnInspectorGUI();
-
     }
 
     /*

@@ -35,8 +35,11 @@ public class SC_GM_Local : MonoBehaviour
     // Liste des mots entre par le joueur
     public List<string> choosenWordInLetter;
     [HideInInspector]
-    // Liste des mots choisis par le joueur
     public List<SC_Word> wheelOfWords;
+    [HideInInspector]
+    public List<SC_CLInPull> wordsInCollect = new List<SC_CLInPull>();
+    [HideInInspector]
+    public List<SC_CLInPull> wordsInPreparatory = new List<SC_CLInPull>();
 
     public static SC_GM_Local gm = null;
 

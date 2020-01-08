@@ -89,7 +89,7 @@ public class SC_ParagrapheOrdiEditor : Editor
     private int GenerateParagraphe()
     {
         int cpt = 0;
-        string deb = "<link=\"", middle = "\"><mark=#A7DEFF00>", fin = "</mark></link>";
+        string deb = "<link=\"", middle = "\"><mark=#A7DEFF00><color=#7F4428ff>", fin = "</color></mark></link>";
 
         string rawContent = paragrapheOrdi.fileCSVTextParagraph.text;
         string[] lineList = rawContent.Split(new string[] { "\n" }, System.StringSplitOptions.None);
@@ -110,9 +110,9 @@ public class SC_ParagrapheOrdiEditor : Editor
 
 
             if (cells[1].Substring(0, cells[1].Length - 1) == "link" || cells[1] == "link")
-                text.partText = deb + (cpt++) + middle + cells[0] + fin;
+                text.partText = deb + 'B' + (cpt++) + middle + cells[0] + fin;
             else
-                text.partText = cells[0];
+                text.partText = deb + 'A' + middle + cells[0] + fin;
 
             textInfo.Add(text);
 
