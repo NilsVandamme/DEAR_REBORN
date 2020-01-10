@@ -8,8 +8,8 @@ public class SC_PullOfWordWheel : MonoBehaviour
     // Object de la fenetre
     public GameObject GO_wheelWord;
     public GameObject GO_champsLexicaux;
-    public GameObject GO_listParagrapheLettres;
     public Button startWrittingButton;
+    public GameObject GO_wheelToLetter;
 
     // Images des buttons qui ne contiennent pas de mot
     public Sprite hasNotWord;
@@ -25,30 +25,21 @@ public class SC_PullOfWordWheel : MonoBehaviour
 
     // Liste des mots de la wheel
     private TextMeshProUGUI[] listOfWheel;
-
-    // Paragraphe d'autoComplete
-    private SC_AutoComplete[] autoComplete;
+    public TextMeshProUGUI[] wheelToLetter;
 
     //##############################################################################################################################################################
     //########################################################################        INIT           ###############################################################
     //##############################################################################################################################################################
 
     /*
-     * Init le CL, la Wheel et les paragraphes de la lettre
+     * Init le CL, la Wheel et les Button de Word pour la phase d'ecriture de la lettre
      */
-    public void InitCollect()
-    {
-        InitWheel();
-        InitParagrapheLettre();
-    }
-
-    /*
-     * Init la partie de la Wheel
-     */
-    private void InitWheel()
+    public void InitWheel()
     {
         InitRightSide();
         InitChampsLexicauxWheel();
+
+        wheelToLetter = GO_wheelToLetter.GetComponentsInChildren<TextMeshProUGUI>(true);
     }
 
     /*
@@ -115,14 +106,6 @@ public class SC_PullOfWordWheel : MonoBehaviour
                 return i;
 
         return -1;
-    }
-
-    /*
-     * Récupère l'ensemble des paragraphes disponibles pour écrire la lettre.
-     */
-    private void InitParagrapheLettre()
-    {
-        autoComplete = GO_listParagrapheLettres.GetComponentsInChildren<SC_AutoComplete>(true);
     }
 
     //##############################################################################################################################################################
@@ -206,8 +189,9 @@ public class SC_PullOfWordWheel : MonoBehaviour
      */
     public void StartWritting()
     {
-        foreach (SC_AutoComplete elem in autoComplete)
-            elem.Init();
+        for (int i = 0; i < listOfWheel.Length; i++)
+            if (i < wheelToLetter.Length)
+                wheelToLetter[i].text = listOfWheel[i].text;
 
     }
 
