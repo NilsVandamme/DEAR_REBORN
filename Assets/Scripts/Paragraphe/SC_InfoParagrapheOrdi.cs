@@ -61,7 +61,6 @@ public class SC_InfoParagrapheOrdi : MonoBehaviour, IPointerClickHandler
             yield return new WaitForSeconds(wait);
             ChangeTextColor(linkInfo, textNormal);
 
-            Debug.Log(linkInfo.GetLinkID()[0]);
             if (linkInfo.GetLinkID()[0] == 'B')
             {
                 int id = int.Parse(linkInfo.GetLinkID().Substring(1));

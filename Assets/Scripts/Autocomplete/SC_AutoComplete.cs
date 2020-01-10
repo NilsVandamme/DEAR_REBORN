@@ -2,69 +2,28 @@
 using TMPro;
 using UnityEngine.EventSystems;
 using System.Collections.Generic;
-using System.Linq;
-using UnityEngine.UI;
-using System;
 
 public class SC_AutoComplete : MonoBehaviour, IPointerClickHandler
 {
-    // Nombre de button a display
-    public int numberOfButtonToDisplay = 12;
-
-    // Taille de la chaine de l'inputfield minimum pour afficher l'autocompletion
-    public int autoCompileLenght = 0;
-
-    // Liste des mots a stocker et a afficher
-    private List<(string, string)> toStore;
-    private List<(string, string)> toDisplay;
-
     // Camera de la scène
-    private Camera cam;
+    public Camera cam;
 
     // Elements récupérer dans le canvas
     public TextMeshProUGUI myText;
     public TMP_InputField myInputField;
-    public GameObject myButtons;
-    private Button[] listButtons;
-    private Tuple<Button, bool>[] tupleButtons;
-    private RectTransform rect;
+    public RectTransform rect;
 
     // Object regroupant les informations obtenue lors des clicks
     private SC_ClickObject currentClick;
     private Vector3 newPos;
-    private string currentId;
 
     /*
      * Récupère les objets nécessaires
      */
     void Start()
     {
-        // Initialise la caméra
-        cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
-
-        // Initialise les listes de mots
-        toDisplay = new List<(string, string)>();
-        toStore = new List<(string, string)>();
-
-        // Init des élements du canvas
-        listButtons = myButtons.GetComponentsInChildren<Button>(true);
-        rect = this.GetComponent<RectTransform>();
-
-        // Init le tab des buttons
-        tupleButtons = new Tuple<Button, bool>[numberOfButtonToDisplay];
-        for (int i = 0; i < listButtons.Length; i++)
-            tupleButtons[i] = new Tuple<Button, bool>(listButtons[i], false);
-
         // Init le tab des inputs sauvegardées
         SC_GM_Local.gm.choosenWordInLetter = new List<string>();
-    }
-
-    public void Init()
-    {
-        foreach (SC_Word elem in SC_GM_Local.gm.wheelOfWords)
-            for (int i = 0; i < elem.grammarCritere.Length; i++)
-                if (elem.grammarCritere[i] != "")
-                    toStore.Add((elem.grammarCritere[i], SC_GM_Master.gm.listChampsLexicaux.listNameChampLexical[i]));
     }
 
     /*
@@ -80,13 +39,9 @@ public class SC_AutoComplete : MonoBehaviour, IPointerClickHandler
         if (linkIndex != -1)
         {
             TMP_LinkInfo linkInfo = myText.textInfo.linkInfo[linkIndex];
-            currentId = linkInfo.GetLinkID();
 
             if (currentClick == null)
-            {
                 myInputField.gameObject.SetActive(true);
-                OnInputFieldValueChange();
-            }
             else
                 RewriteTextWithInputField();
 
@@ -141,87 +96,11 @@ public class SC_AutoComplete : MonoBehaviour, IPointerClickHandler
     }
 
     /*
-     * Change les liste a afficher et a stocker quand la valeur de l'inputfield change
-     */
-    public void OnInputFieldValueChange()
-    {
-        if (myInputField.text.Length >= autoCompileLenght)
-        {
-            // On ajoute une lettre donc on enlève les mots qui ne contiennent plus le text courant de l'inputfield
-            IEnumerable<(string, string)> toRemove = toDisplay.Where(x => !x.Item1.Contains(myInputField.text) || x.Item2 != currentId).ToArray();
-            foreach ((string, string) mot in toRemove)
-            {
-                toDisplay.Remove(mot);
-                toStore.Add(mot);
-            }
-            
-            // On supprime une lettre donc on ajoute les mots qui contiennent le text courant de l'inputfield
-            IEnumerable<(string, string)> toAddBack = toStore.Where(x => x.Item1.Contains(myInputField.text) && x.Item2 == currentId).ToArray();
-            foreach ((string, string) mot in toAddBack)
-            {
-                toStore.Remove(mot);
-                toDisplay.Add(mot);
-            }
-
-            AfficheButton();
-        }
-        else
-            for (int i = 0; i < tupleButtons.Length; i++)
-                CloseButton(i);
-    }
-
-    /*
-     * Calcul les mot d'autocompélation à afficher et a stocker et affiche les Button correspondant
-     */
-    private void AfficheButton()
-    {
-        bool find;
-
-        foreach ((string, string) mot in toStore)
-            for (int i = 0; i < tupleButtons.Length; i++)
-                if (tupleButtons[i].Item2 == true && tupleButtons[i].Item1.GetComponentInChildren<TextMeshProUGUI>().text == mot.Item1)
-                {
-                    CloseButton(i);
-                    break;
-                }
-        foreach ((string, string) mot in toDisplay)
-        {
-            find = false;
-            for (int i = 0; i < tupleButtons.Length; i++)
-                if (tupleButtons[i].Item2 == true && tupleButtons[i].Item1.GetComponentInChildren<TextMeshProUGUI>().text == mot.Item1)
-                {
-                    find = true;
-                    break;
-                }
-
-            if (!find)
-                for (int i = 0; i < tupleButtons.Length; i++)
-                    if (tupleButtons[i].Item2 == false)
-                    {
-                        tupleButtons[i].Item1.GetComponentInChildren<TextMeshProUGUI>().text = mot.Item1;
-                        tupleButtons[i] = new Tuple<Button, bool>(tupleButtons[i].Item1, true);
-                        tupleButtons[i].Item1.gameObject.SetActive(true);
-                        break;
-                    }
-        }
-    }
-
-    /*
-     * Réinit et ferme le Button i
-     */
-    private void CloseButton(int i)
-    {
-        tupleButtons[i].Item1.GetComponentInChildren<TextMeshProUGUI>().text = "";
-        tupleButtons[i] = new Tuple<Button, bool>(tupleButtons[i].Item1, false);
-        tupleButtons[i].Item1.gameObject.SetActive(false);
-    }
-
-    /*
      * Gère le click d'un Button
      */
-    public void OnClickButtonAutoComplete()
+    public void OnClickButtonAutoComplete(TextMeshProUGUI text)
     {
-        RewriteAndReinit(EventSystem.current.currentSelectedGameObject.GetComponentInChildren<TextMeshProUGUI>().text);
+        RewriteAndReinit(text.text);
     }
 
     /*
@@ -232,8 +111,5 @@ public class SC_AutoComplete : MonoBehaviour, IPointerClickHandler
         RewriteTextWithInputField(text);
         currentClick = null;
         myInputField.gameObject.SetActive(false);
-
-        for (int i = 0; i < tupleButtons.Length; i++)
-            CloseButton(i);
     }
 }

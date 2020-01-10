@@ -51,8 +51,6 @@ public class SC_PullOfWordPreparatory : MonoBehaviour
     private void ChangeOfListe()
     {
         bool find;
-        Debug.Log(SC_GM_Local.gm.wordsInCollect.Count);
-        Debug.Log(SC_GM_Master.gm.wordsInPull.Count);
 
         foreach (SC_CLInPull elem in SC_GM_Local.gm.wordsInCollect)
         {
@@ -118,7 +116,7 @@ public class SC_PullOfWordPreparatory : MonoBehaviour
     private void MakeVersus()
     {
         int nbCLRestant = copieCLTemp.Count;
-        Debug.Log("nbCLRestant : " + nbCLRestant);
+
         if (nbCLRestant <= 0)
         {
             next.gameObject.SetActive(true);
@@ -184,7 +182,6 @@ public class SC_PullOfWordPreparatory : MonoBehaviour
      */
     private void Affiche()
     {
-        Debug.Log("affiche : " + choixCLTemp.Count);
         for (int i = 0; i < choixCLTemp.Count; i++)
         {
             champsLexicaux[i].gameObject.SetActive(true);
@@ -221,7 +218,6 @@ public class SC_PullOfWordPreparatory : MonoBehaviour
         Clear();
 
         choixCLTemp.Clear();
-        Debug.Log("click : " + choixCLTemp.Count);
 
         SC_GM_Local.gm.wordsInPreparatory.Add(temp);
 
