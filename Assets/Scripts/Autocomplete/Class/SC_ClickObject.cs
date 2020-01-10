@@ -1,17 +1,18 @@
 ﻿public class SC_ClickObject
 {
-    private int posStart;
+    private string id;
+    private int posStartText;
     private string mot;
 
-    public SC_ClickObject(int pos, string val)
+    public SC_ClickObject(int pos, string mot, string id)
     {
-        this.posStart = pos;
-        this.mot = val;
+        this.posStartText = pos;
+        this.mot = mot;
     }
 
-    public int getPosStart()
+    public int getPosStartText()
     {
-        return this.posStart;
+        return this.posStartText;
     }
 
     public string getMot()
@@ -19,13 +20,23 @@
         return this.mot;
     }
 
-    public void setPosStart(int val)
+    public string getId()
     {
-        this.posStart = val;
+        return this.id;
+    }
+
+    public void setPosStartText(int val)
+    {
+        this.posStartText = val;
     }
 
     public void setMot(string val)
     {
         this.mot = val;
+    }
+
+    public void setId (string id)
+    {
+        this.id = id;
     }
 }

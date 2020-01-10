@@ -58,19 +58,19 @@ public class SC_AutoComplete : MonoBehaviour, IPointerClickHandler
     {
         if (myInputField.text != "" || newString != null)
         {
-            myText.text = myText.text.Remove((currentClick.getPosStart()), currentClick.getMot().Length);
+            myText.text = myText.text.Remove((currentClick.getPosStartText()), currentClick.getMot().Length);
             if (!SC_GM_Local.gm.choosenWordInLetter.Contains(currentClick.getMot()))
                 SC_GM_Local.gm.choosenWordInLetter.Remove(currentClick.getMot());
 
             if (newString == null)
             {
-                myText.text = myText.text.Insert(currentClick.getPosStart(), myInputField.text);
+                myText.text = myText.text.Insert(currentClick.getPosStartText(), myInputField.text);
                 if (!SC_GM_Local.gm.choosenWordInLetter.Contains(myInputField.text))
                     SC_GM_Local.gm.choosenWordInLetter.Add(myInputField.text);
             }
             else
             {
-                myText.text = myText.text.Insert(currentClick.getPosStart(), newString);
+                myText.text = myText.text.Insert(currentClick.getPosStartText(), newString);
                 if (!SC_GM_Local.gm.choosenWordInLetter.Contains(newString))
                     SC_GM_Local.gm.choosenWordInLetter.Add(newString);
             }
@@ -83,6 +83,7 @@ public class SC_AutoComplete : MonoBehaviour, IPointerClickHandler
     private void GetClickInfo(TMP_LinkInfo linkInfo)
     {
         int pos = 0;
+        string id;
 
         while ((++pos) < linkInfo.linkIdFirstCharacterIndex)
             pos = myText.text.IndexOf(linkInfo.GetLinkText(), pos);
@@ -92,7 +93,9 @@ public class SC_AutoComplete : MonoBehaviour, IPointerClickHandler
         else
             myInputField.text = linkInfo.GetLinkText();
 
-        currentClick = new SC_ClickObject(pos - 1, linkInfo.GetLinkText());
+        id = "";
+
+        currentClick = new SC_ClickObject(pos - 1, linkInfo.GetLinkText(), id);
     }
 
     /*
@@ -100,7 +103,13 @@ public class SC_AutoComplete : MonoBehaviour, IPointerClickHandler
      */
     public void OnClickButtonAutoComplete(TextMeshProUGUI text)
     {
-        RewriteAndReinit(text.text);
+        if (currentClick != null)
+        {
+            foreach (SC_Word word in SC_GM_Local.gm.wheelOfWords)
+                if (word.titre == text.text)
+
+            RewriteAndReinit(text.text);
+        }
     }
 
     /*
