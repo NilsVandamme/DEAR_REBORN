@@ -52,7 +52,6 @@ public class SC_DragDropControls : MonoBehaviour
     {
         OriginalPosition = transform.position;
         rig = GetComponent<Rigidbody>();
-        removeButton = transform.GetChild(0).GetChild(2).gameObject;
     }
 
     private void Update()

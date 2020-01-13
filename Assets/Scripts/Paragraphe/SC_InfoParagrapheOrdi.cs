@@ -36,6 +36,8 @@ public class SC_InfoParagrapheOrdi : MonoBehaviour, IPointerClickHandler
      */
     public void OnPointerClick(PointerEventData eventData)
     {
+        
+        Debug.Log("CLick on paragrhap");
         if (!oneClick)
         {
             oneClick = true;
@@ -45,6 +47,7 @@ public class SC_InfoParagrapheOrdi : MonoBehaviour, IPointerClickHandler
             StartCoroutine(Collect(linkIndex));
         }
     }
+
 
     /*
      * Regarde si le CL est ajoutable ou non
@@ -132,4 +135,5 @@ public class SC_InfoParagrapheOrdi : MonoBehaviour, IPointerClickHandler
         int lenghtPart2 = myText.text.Length - (lastIndexPart1 + color.Length);
         myText.text = myText.text.Substring(0, lastIndexPart1) + color + myText.text.Substring(lastIndexPart1 + color.Length, lenghtPart2);
     }
+
 }
