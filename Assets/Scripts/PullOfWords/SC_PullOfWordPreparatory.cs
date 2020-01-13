@@ -23,7 +23,7 @@ public class SC_PullOfWordPreparatory : MonoBehaviour
 
     // Liste des nombres d'elem possible pour les CL
     private List<int> versus2 = new List<int> { 2, 4, 6, 8 };
-    private List<int> versus3 = new List<int> { 7, 9, 10 };
+    private List<int> versus3 = new List<int> { 3, 5, 7, 9, 10 };
 
     // Liste des CL afficher pendant le choix
     private List<SC_CLInPull> choixCLTemp;
@@ -39,7 +39,9 @@ public class SC_PullOfWordPreparatory : MonoBehaviour
      */
     public void InitPreparatory()
     {
+        Debug.Log("cc");
         SC_GM_Master.gm.Test();
+        Debug.Log("pass");
         ChangeOfListe();
         InitCL();
         InitView();
@@ -116,6 +118,7 @@ public class SC_PullOfWordPreparatory : MonoBehaviour
     private void MakeVersus()
     {
         int nbCLRestant = copieCLTemp.Count;
+        Debug.Log(nbCLRestant);
 
         if (nbCLRestant <= 0)
         {

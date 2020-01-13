@@ -82,20 +82,14 @@ public class SC_AutoComplete : MonoBehaviour, IPointerClickHandler
      */
     private void GetClickInfo(TMP_LinkInfo linkInfo)
     {
-        int pos = 0;
-        string id;
-
-        while ((++pos) < linkInfo.linkIdFirstCharacterIndex)
-            pos = myText.text.IndexOf(linkInfo.GetLinkText(), pos);
-
         if (linkInfo.GetLinkText() == "_____")
             myInputField.text = "";
         else
             myInputField.text = linkInfo.GetLinkText();
 
-        id = "";
-
-        currentClick = new SC_ClickObject(pos - 1, linkInfo.GetLinkText(), id);
+        currentClick = new SC_ClickObject(myText.text.IndexOf(linkInfo.GetLinkText()),
+                                            linkInfo.GetLinkText(),
+                                            myText.text.Substring(linkInfo.linkIdFirstCharacterIndex, linkInfo.linkIdLength));
     }
 
     /*
@@ -107,8 +101,16 @@ public class SC_AutoComplete : MonoBehaviour, IPointerClickHandler
         {
             foreach (SC_Word word in SC_GM_Local.gm.wheelOfWords)
                 if (word.titre == text.text)
-
-            RewriteAndReinit(text.text);
+                    for (int i = 0; i < SC_GM_Master.gm.listChampsLexicaux.listOfGrammarCritere.Length; i++)
+                    {
+                        Debug.Log(SC_GM_Master.gm.listChampsLexicaux.listOfGrammarCritere[i]);
+                        Debug.Log(currentClick.getId());
+                        if (SC_GM_Master.gm.listChampsLexicaux.listOfGrammarCritere[i] == currentClick.getId())
+                        {
+                            RewriteAndReinit(word.grammarCritere[i]);
+                            return;
+                        }
+                    }
         }
     }
 
