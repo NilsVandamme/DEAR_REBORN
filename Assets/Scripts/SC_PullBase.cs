@@ -7,5 +7,5 @@ public class SC_PullBase : ScriptableObject
     public List<SC_CLInPull> wordsInPull;
     public SC_ListChampLexicaux listChampLexicaux;
     public bool[] foldoutList;
-    public bool[][] motAccepterInCL;
+    public bool[] motAccepterInCL;
 }
