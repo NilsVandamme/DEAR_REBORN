@@ -8,13 +8,12 @@ public class SC_ParagrapheOrdiEditor : Editor
 {
     private SC_ParagrapheOrdi paragrapheOrdi;
     SerializedProperty listOfPartText;
-    private bool[] foldoutList;
-    private TextAsset saveFileCSV;
 
     private void OnEnable()
     {
         paragrapheOrdi = target as SC_ParagrapheOrdi;
         listOfPartText = serializedObject.FindProperty("texte");
+
     }
 
     /*
@@ -29,45 +28,48 @@ public class SC_ParagrapheOrdiEditor : Editor
 
         if (paragrapheOrdi.fileCSVTextParagraph != null && paragrapheOrdi.listChampLexicaux != null)
         {
-            int nbLink = GenerateParagraphe();
-
-            if (paragrapheOrdi.fileCSVTextParagraph != saveFileCSV)
-            {
-                foldoutList = new bool[nbLink];
-                paragrapheOrdi.champLexical = new int[nbLink];
-                paragrapheOrdi.motAccepterInCL = new bool[nbLink][];
-            }
-            saveFileCSV = paragrapheOrdi.fileCSVTextParagraph;
+            if (!paragrapheOrdi.init)
+                Init();
 
             foreach (SerializedProperty text in listOfPartText)
                 EditorGUILayout.PropertyField(text);
 
-            for (int i = 0; i < foldoutList.Length; i++)
+            for (int i = 0; i < paragrapheOrdi.foldoutList.Length; i++)
             {
                 int actualCL = paragrapheOrdi.champLexical[i];
 
                 EditorGUILayout.BeginHorizontal();
 
-                foldoutList[i] = EditorGUILayout.Foldout(foldoutList[i], "Champ Lexical", true);
+                paragrapheOrdi.foldoutList[i] = EditorGUILayout.Foldout(paragrapheOrdi.foldoutList[i], "Champ Lexical", true);
 
                 paragrapheOrdi.champLexical[i] = EditorGUILayout.Popup(actualCL, paragrapheOrdi.listChampLexicaux.listNameChampLexical);
                 List<SC_Word> listOfWordInActualCL = paragrapheOrdi.listChampLexicaux.listChampLexical[paragrapheOrdi.champLexical[i]].listOfWords;
 
                 EditorGUILayout.EndHorizontal();
 
-                if (foldoutList[i])
+                if (paragrapheOrdi.foldoutList[i])
                 {
                     EditorGUI.indentLevel += 1;
+                    
+                    int pos = 0;
+                    for (int h = 0; h < i; h++)
+                        pos += paragrapheOrdi.listChampLexicaux.listChampLexical[paragrapheOrdi.champLexical[h]].listOfWords.Count;
 
-                    if (paragrapheOrdi.champLexical[i] != actualCL || paragrapheOrdi.motAccepterInCL[i] == null)
-                        paragrapheOrdi.motAccepterInCL[i] = new bool[listOfWordInActualCL.Count];
+
+                    if (paragrapheOrdi.motAccepterInCL == null)
+                        InitMotAccepter();
+                    
+
+                    if (paragrapheOrdi.champLexical[i] != actualCL)
+                        ReinitAfterChange(i, actualCL);
+
 
                     for (int j = 0; j < listOfWordInActualCL.Count; j++)
                     {
                         EditorGUILayout.BeginHorizontal();
 
                         EditorGUILayout.LabelField(listOfWordInActualCL[j].titre);
-                        paragrapheOrdi.motAccepterInCL[i][j] = EditorGUILayout.Toggle(paragrapheOrdi.motAccepterInCL[i][j]);
+                        paragrapheOrdi.motAccepterInCL[pos + j] = EditorGUILayout.Toggle(paragrapheOrdi.motAccepterInCL[pos + j]);
 
                         EditorGUILayout.EndHorizontal();
                     }
@@ -81,6 +83,57 @@ public class SC_ParagrapheOrdiEditor : Editor
         EditorUtility.SetDirty(paragrapheOrdi);
 
         serializedObject.ApplyModifiedProperties();
+    }
+
+    private void Init()
+    {
+        int nbLink = GenerateParagraphe();
+
+        paragrapheOrdi.foldoutList = new bool[nbLink];
+        paragrapheOrdi.champLexical = new int[nbLink];
+
+        paragrapheOrdi.init = true;
+
+    }
+
+    /*
+     * Init motAccepter a la longueur des CL selectionner
+     */
+    private void InitMotAccepter()
+    {
+        int lenght = 0;
+        for (int h = 0; h < paragrapheOrdi.champLexical.Length; h++)
+            lenght += paragrapheOrdi.listChampLexicaux.listChampLexical[paragrapheOrdi.champLexical[h]].listOfWords.Count;
+
+        paragrapheOrdi.motAccepterInCL = new bool[lenght];
+
+    }
+
+    /*
+     * Lors d'un change de CL, reinit le tab des motAccepter à la bonne taille, et lui remet les infos des autre CL non modifie
+     */
+    private void ReinitAfterChange(int newCL, int oldCL)
+    {
+        bool[] temp = new bool[paragrapheOrdi.motAccepterInCL.Length];
+
+        for (int i = 0; i < temp.Length; i++)
+            temp[i] = paragrapheOrdi.motAccepterInCL[i];
+
+        InitMotAccepter();
+
+        int posNew = 0, posOld = 0;
+        for (int i = 0; i < paragrapheOrdi.champLexical.Length; i++)
+            if (i != newCL)
+                for (int j = 0; j < paragrapheOrdi.listChampLexicaux.listChampLexical[paragrapheOrdi.champLexical[i]].listOfWords.Count; j++)
+                    paragrapheOrdi.motAccepterInCL[posNew++] = temp[posOld++];
+            else
+            {
+                for (int j = 0; j < paragrapheOrdi.listChampLexicaux.listChampLexical[paragrapheOrdi.champLexical[newCL]].listOfWords.Count; j++)
+                    paragrapheOrdi.motAccepterInCL[posNew++] = false;
+
+                for (int j = 0; j < paragrapheOrdi.listChampLexicaux.listChampLexical[oldCL].listOfWords.Count; j++)
+                    posOld++;
+            }
     }
 
     /*

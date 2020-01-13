@@ -92,7 +92,8 @@ public class SC_PullOfWordWheel : MonoBehaviour
             int j = GetFirstCLWordFree(i);
             if (j == -1) return;
             for (; j < numberOfElemInCL; j++)
-                champLexicalImage[i][j].sprite = hasNotWord;
+                if (j != posElemCl)
+                    champLexicalImage[i][j].sprite = hasNotWord;
         }
     }
 

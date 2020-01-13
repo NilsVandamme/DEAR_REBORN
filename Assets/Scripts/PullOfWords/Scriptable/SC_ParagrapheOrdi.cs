@@ -8,7 +8,8 @@ public class SC_ParagrapheOrdi : ScriptableObject
     public List<TextPart> texte;
 
     public SC_ListChampLexicaux listChampLexicaux;
+    public bool[] foldoutList;
     public int[] champLexical = null;
-    public bool[][] motAccepterInCL = null;
-
+    public bool[] motAccepterInCL = null;
+    public bool init = false;
 }

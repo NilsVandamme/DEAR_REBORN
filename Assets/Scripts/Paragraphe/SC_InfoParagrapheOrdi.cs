@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 
 public class SC_InfoParagrapheOrdi : MonoBehaviour, IPointerClickHandler
 {
-    public SC_ParagrapheOrdi paragraphOrdi;
+    public SC_ParagrapheOrdi paragrapheOrdi;
     public TextMeshProUGUI myText;
     public Color highlightColor;
     public Color textLoadingColor;
@@ -26,7 +26,7 @@ public class SC_InfoParagrapheOrdi : MonoBehaviour, IPointerClickHandler
         textNormal = ColorUtility.ToHtmlStringRGBA(myText.color);
         textLoading = ColorUtility.ToHtmlStringRGBA(textLoadingColor);
         
-        foreach (TextPart elem in paragraphOrdi.texte)
+        foreach (TextPart elem in paragrapheOrdi.texte)
             myText.text += elem.partText + " ";
 
     }
@@ -70,8 +70,12 @@ public class SC_InfoParagrapheOrdi : MonoBehaviour, IPointerClickHandler
                     SC_GM_Local.gm.numberOfCLRecover++;
                     Highlight(linkInfo);
 
-                    for (int i = 0; i < paragraphOrdi.motAccepterInCL[id].Length; i++)
-                        if (paragraphOrdi.motAccepterInCL[id][i])
+                    int pos = 0;
+                    for (int i = 0; i < id; i++)
+                        pos += paragrapheOrdi.listChampLexicaux.listChampLexical[paragrapheOrdi.champLexical[i]].listOfWords.Count;
+
+                    for (int i = 0; i < paragrapheOrdi.listChampLexicaux.listChampLexical[paragrapheOrdi.champLexical[id]].listOfWords.Count; i++, pos++)
+                        if (paragrapheOrdi.motAccepterInCL[pos])
                             AddWordInCollect(id, i);
 
                 }
@@ -91,12 +95,12 @@ public class SC_InfoParagrapheOrdi : MonoBehaviour, IPointerClickHandler
      */
     private void AddWordInCollect(int link, int word)
     {
-        string cl = paragraphOrdi.listChampLexicaux.listChampLexical[paragraphOrdi.champLexical[link]].fileCSVChampLexical.name;
+        string cl = paragrapheOrdi.listChampLexicaux.listChampLexical[paragrapheOrdi.champLexical[link]].fileCSVChampLexical.name;
 
         foreach (SC_CLInPull elem in SC_GM_Local.gm.wordsInCollect)
             if (elem.GetCL() == cl) // Si le CL est deja present dans la collect
             {
-                SC_Word mot = paragraphOrdi.listChampLexicaux.listChampLexical[paragraphOrdi.champLexical[link]].listOfWords[word];
+                SC_Word mot = paragrapheOrdi.listChampLexicaux.listChampLexical[paragrapheOrdi.champLexical[link]].listOfWords[word];
 
                 foreach (SC_Word val in elem.GetListWord())
                     if (val.titre == mot.titre)
@@ -106,7 +110,7 @@ public class SC_InfoParagrapheOrdi : MonoBehaviour, IPointerClickHandler
                 return;
             }
 
-        SC_GM_Local.gm.wordsInCollect.Add(new SC_CLInPull(cl, paragraphOrdi.listChampLexicaux.listChampLexical[paragraphOrdi.champLexical[link]].listOfWords[word]));
+        SC_GM_Local.gm.wordsInCollect.Add(new SC_CLInPull(cl, paragrapheOrdi.listChampLexicaux.listChampLexical[paragrapheOrdi.champLexical[link]].listOfWords[word]));
     }
 
     /*

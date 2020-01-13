@@ -39,9 +39,7 @@ public class SC_PullOfWordPreparatory : MonoBehaviour
      */
     public void InitPreparatory()
     {
-        Debug.Log("cc");
         SC_GM_Master.gm.Test();
-        Debug.Log("pass");
         ChangeOfListe();
         InitCL();
         InitView();
@@ -118,7 +116,6 @@ public class SC_PullOfWordPreparatory : MonoBehaviour
     private void MakeVersus()
     {
         int nbCLRestant = copieCLTemp.Count;
-        Debug.Log(nbCLRestant);
 
         if (nbCLRestant <= 0)
         {
@@ -191,8 +188,10 @@ public class SC_PullOfWordPreparatory : MonoBehaviour
             champLexical[i][posElemCl].text = choixCLTemp[i].GetCL();
 
             int nbMot = choixCLTemp[i].GetListWord().Count;
+
             for (int j = 0; j < champLexical[i].Length; j++)
                 if (j != posElemCl)
+                {
                     if (nbMot > 0)
                     {
                         nbMot--;
@@ -200,6 +199,7 @@ public class SC_PullOfWordPreparatory : MonoBehaviour
                     }
                     else
                         champLexicalImage[i][j].sprite = hasNotWord;
+                }
         }
     }
 
@@ -224,11 +224,8 @@ public class SC_PullOfWordPreparatory : MonoBehaviour
 
         SC_GM_Local.gm.wordsInPreparatory.Add(temp);
 
-
         MakeVersus();
     }
-
-
 
     /*
      * Recupère le SC_CLInPull du Versus sur lequel on a clicker

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 
+[System.Serializable]
 public class SC_CLInPull
 {
     private string champLexical;
