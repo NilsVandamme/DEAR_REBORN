@@ -8,6 +8,7 @@
     {
         this.posStartText = pos;
         this.mot = mot;
+        this.id = id;
     }
 
     public int getPosStartText()
