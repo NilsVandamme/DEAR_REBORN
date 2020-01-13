@@ -409,9 +409,6 @@ GameObject:
   - component: {fileID: 4185503001564203666}
   - component: {fileID: 6369399917001429164}
   - component: {fileID: 2243883849958430342}
-  - component: {fileID: 630863819564962760}
-  - component: {fileID: 2635658995062126110}
-  - component: {fileID: 4721483550080803006}
   - component: {fileID: 7276327704752006345}
   m_Layer: 5
   m_Name: SmallWindow
@@ -436,7 +433,6 @@ RectTransform:
   - {fileID: 6003656032205364778}
   - {fileID: 7405921928608957478}
   - {fileID: 7995094177617796924}
-  - {fileID: 1387731922021366190}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -496,59 +492,6 @@ MonoBehaviour:
   IsOpen: 1
   SnapInterval: 0
   btnImg: {fileID: 8238842396064256938}
---- !u!114 &630863819564962760
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2045892675166168188}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d21e5ced7f461da41884f31220c87dca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  windowName: {fileID: 7795255962174010896}
-  windowIconLarge: {fileID: 1960466514324540192}
-  windowContent: {fileID: 7560886360468226039}
---- !u!114 &2635658995062126110
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2045892675166168188}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b886c190e3e4b04897d573bc56fbbd4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Name: put the name here
-  Icon: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
-  contentPrefab: {fileID: 1469567538955554618, guid: 0877b520735fe1d4893d1d9ad8f34d82,
-    type: 3}
-  nameText: {fileID: 2132814126882954822}
-  IconImage: {fileID: 8740773748908142810}
-  contentEmplacement: {fileID: 7560886360468226039}
---- !u!95 &4721483550080803006
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2045892675166168188}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 6f8b0a592ab2bb848885e1057692b3d2, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &7276327704752006345
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1740,7 +1683,8 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 1387731922021366190}
   m_Father: {fileID: 6676730456149970091}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2013,9 +1957,9 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: -17, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &841035113915390725
 CanvasRenderer:
@@ -2474,7 +2418,7 @@ GameObject:
   - component: {fileID: 1387731922021366190}
   - component: {fileID: 6331878200691958814}
   - component: {fileID: 269871237546397541}
-  - component: {fileID: 6679808944772171012}
+  - component: {fileID: 4676139609630132348}
   m_Layer: 5
   m_Name: Scroll View
   m_TagString: Untagged
@@ -2489,18 +2433,18 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9013586986743809662}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4170667611097724229}
   - {fileID: 5220782621028361764}
-  m_Father: {fileID: 6676730456149970091}
-  m_RootOrder: 5
+  m_Father: {fileID: 7995094177617796924}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 121.9, y: -230.2}
+  m_AnchoredPosition: {x: 121.9, y: -37.699997}
   m_SizeDelta: {x: 589.2, y: 357.4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6331878200691958814
@@ -2518,7 +2462,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9013586986743809662}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -2539,7 +2483,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &6679808944772171012
+--- !u!114 &4676139609630132348
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2548,24 +2492,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 9013586986743809662}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1aa08ab6e0800fa44ae55d278d1423e3, type: 3}
+  m_Script: {fileID: 11500000, guid: 73c50ee33434dc146ad6c28d4ead025e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Content: {fileID: 6467245475824094514}
-  m_Horizontal: 1
+  m_Horizontal: 0
   m_Vertical: 1
-  m_MovementType: 1
+  m_MovementType: 2
   m_Elasticity: 0.1
   m_Inertia: 1
   m_DecelerationRate: 0.135
-  m_ScrollSensitivity: 1
+  m_ScrollSensitivity: 50
   m_Viewport: {fileID: 4170667611097724229}
   m_HorizontalScrollbar: {fileID: 0}
   m_VerticalScrollbar: {fileID: 2085955028466313856}
-  m_HorizontalScrollbarVisibility: 2
-  m_VerticalScrollbarVisibility: 2
-  m_HorizontalScrollbarSpacing: -3
-  m_VerticalScrollbarSpacing: -3
+  m_HorizontalScrollbarVisibility: 0
+  m_VerticalScrollbarVisibility: 0
+  m_HorizontalScrollbarSpacing: 0
+  m_VerticalScrollbarSpacing: 0
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []

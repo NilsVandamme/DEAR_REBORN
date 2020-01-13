@@ -61,11 +61,17 @@ public class SC_WindowTopBar : MonoBehaviour, IDragHandler, IBeginDragHandler
         // move the window on the y axis
         if (localpoint2.y < RT.sizeDelta.y/2 && localpoint2.y > -(RT.sizeDelta.y/2))
         {
+
             // Move the window
-            if (SnapInterval>0)
+            if (SnapInterval > 0)
+            {
                 transform.localPosition = new Vector3(transform.localPosition.x, Mathf.Round((localpoint2.y + offset.y) / SnapInterval) * SnapInterval, transform.localPosition.z);
+            }
             else
+            {
                 transform.localPosition = new Vector3(transform.localPosition.x, localpoint2.y + offset.y, transform.localPosition.z);
+                //Debug.Log("Moving " + gameObject.name + " on the Y axis");
+            }
         }
 
     }
