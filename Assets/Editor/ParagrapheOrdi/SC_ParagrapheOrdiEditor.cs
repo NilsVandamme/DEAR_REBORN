@@ -156,14 +156,17 @@ public class SC_ParagrapheOrdiEditor : Editor
         for (int i = 1; i < lineList.Length; i++)
         {
             int sep = lineList[i].LastIndexOf(",");
-            lineList[i] = lineList[i].Substring(0, sep) + "§" + lineList[i].Substring(sep + 1, lineList[i].Length - (sep + 1));
+            int sep2 = lineList[i].Substring(0, sep).LastIndexOf(",");
+            lineList[i] = lineList[i].Substring(0, sep2) + "§" + lineList[i].Substring(sep2 + 1, sep) + "§" + lineList[i].Substring(sep + 1, lineList[i].Length - (sep + 1));
             lineList[i] = lineList[i].Replace("\"", "");
 
             cells = lineList[i].Split(separator, System.StringSplitOptions.None);
 
 
-            if (cells[1].Substring(0, cells[1].Length - 1) == "link" || cells[1] == "link")
+            if (cells[2].Substring(0, cells[2].Length - 1) == "link" || cells[2] == "link")
                 text.partText = deb + 'B' + (cpt++) + middle + cells[0] + fin;
+            else if (cells[2].Substring(0, cells[2].Length - 1) == "timbre" || cells[2] == "timbre")
+                text.partText = deb + 'C' + cells[1] + middle + cells[0] + fin;
             else
                 text.partText = deb + 'A' + middle + cells[0] + fin;
 
