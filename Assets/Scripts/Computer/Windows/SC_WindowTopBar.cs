@@ -12,7 +12,7 @@ public class SC_WindowTopBar : MonoBehaviour, IDragHandler, IBeginDragHandler
     private Vector2 offset;
     public bool IsOpen;
     public float SnapInterval;
-    public Image btnImg;
+    //public Image btnImg;
     //public Text btnText;
     private Animator windowAnim;
     private RectTransform RT;
@@ -91,7 +91,7 @@ public class SC_WindowTopBar : MonoBehaviour, IDragHandler, IBeginDragHandler
         {
             //windowContent.SetActive(false);
 
-            btnImg.color = new Color(0.63f, 1f, 0.46f); // green
+            //btnImg.color = new Color(0.63f, 1f, 0.46f); // green
             //btnText.text = "+";
 
             windowAnim.SetTrigger("Min");
@@ -102,7 +102,7 @@ public class SC_WindowTopBar : MonoBehaviour, IDragHandler, IBeginDragHandler
         {
             //windowContent.SetActive(true);
 
-            btnImg.color = new Color(1f, 0.85f, 0.46f); // yellow
+            //btnImg.color = new Color(1f, 0.85f, 0.46f); // yellow
             //btnText.text = "-";
 
             windowAnim.SetTrigger("Max");
