@@ -39,8 +39,6 @@ public class SC_InfoParagrapheOrdi : MonoBehaviour, IPointerClickHandler
      */
     public void OnPointerClick(PointerEventData eventData)
     {
-        
-        Debug.Log("CLick on paragrhap");
         if (!oneClick)
         {
             oneClick = true;
@@ -141,7 +139,6 @@ public class SC_InfoParagrapheOrdi : MonoBehaviour, IPointerClickHandler
      */
     private void Highlight(TMP_LinkInfo linkInfo, string color)
     {
-        Debug.Log(color);
         int lastIndexPart1 = linkInfo.linkIdFirstCharacterIndex + linkInfo.linkIdLength + lenghtMark;
         int lenghtPart2 = myText.text.Length - (lastIndexPart1 + color.Length);
         myText.text = myText.text.Substring(0, lastIndexPart1) + color + myText.text.Substring(lastIndexPart1 + color.Length, lenghtPart2);
