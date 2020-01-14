@@ -69,7 +69,8 @@ public class SC_DragDropControls : MonoBehaviour
                 timer = 0;
                 snapMovementActive = false;
                 rig.useGravity = true;
-                removeButton.SetActive(true);
+                if(IsSnapped)
+                    removeButton.SetActive(true);
             }
         }
         // Unsnap the object from it's target
@@ -78,7 +79,8 @@ public class SC_DragDropControls : MonoBehaviour
             timer = 0;
             snapMovementActive = false;
             rig.useGravity = true;
-            removeButton.SetActive(true);
+            if(IsSnapped)
+                removeButton.SetActive(true);
         }
     }
 
