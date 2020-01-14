@@ -32,14 +32,14 @@ public class SC_ParagraphSorter : MonoBehaviour
         ParagraphsToSpawn.Add(WakeupParagraphs[0]);
         ParagraphsToSpawn.Add(MotivationParagraphs[0]);
         SpawnParagraphs();
-        ParagraphsToSpawn.Clear();
+        //ParagraphsToSpawn.Clear();
     }
 
     public void GetOrientationParagraphs()
     {
         if (CurrentParagraphs == "Orientation")
             return;
-
+        
         // Add paragrpahs to the list
         ClearSpawnList();
         ActivateSnappedParagraphs();
@@ -92,15 +92,7 @@ public class SC_ParagraphSorter : MonoBehaviour
         CurrentParagraphs = "Clash";
 
         // Move paragraphs to the spawn positions
-        for (int i = 0; i < ParagraphsToSpawn.Count; i++)
-        {
-            if (!SnappedParagraphs.Contains(ParagraphsToSpawn[i].gameObject))
-            {
-                ParagraphsToSpawn[i].transform.position = SpawnPositions[i].transform.position;
-                ParagraphsToSpawn[i].GetComponent<SC_DragDropControls>().GetOriginalSnapPosition();
-                ParagraphsToSpawn[i].gameObject.SetActive(true);
-            }
-        }
+        SpawnParagraphs();
     }
 
 
