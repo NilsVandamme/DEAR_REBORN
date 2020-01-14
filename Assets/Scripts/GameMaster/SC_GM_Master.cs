@@ -6,6 +6,7 @@ public class SC_GM_Master : MonoBehaviour
     // Ensemble des champs lexicaux
     public SC_ListChampLexicaux listChampsLexicaux;
     public SC_PullBase pullBase;
+    public List<SC_Timbres> timbres;
 
     [HideInInspector]
     // Liste des mots choisi par le joueur (CL, Word)
