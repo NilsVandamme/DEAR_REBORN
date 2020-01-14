@@ -11,7 +11,7 @@ public class SC_GM_Paper : MonoBehaviour
     // Asset des mots
     public bool paragraphsConfirmed;
     public SC_PaperSnapGrid[] snapPositions;
-    public SC_DragDropControls[] ddcontrols;
+    //public SC_DragDropControls[] ddcontrols;
     [HideInInspector]
     public List<SC_AutoComplete> acompletes;
 
@@ -20,7 +20,7 @@ public class SC_GM_Paper : MonoBehaviour
     private void Start()
     {
         snapPositions = FindObjectsOfType<SC_PaperSnapGrid>();
-        ddcontrols = FindObjectsOfType<SC_DragDropControls>();
+        //ddcontrols = FindObjectsOfType<SC_DragDropControls>();
     }
 
     public void CalculateScore()
@@ -35,8 +35,12 @@ public class SC_GM_Paper : MonoBehaviour
 
     public void OnClickSubmitButton()
     {
-        if (paragraphsConfirmed == true)
+        Debug.Log("sumbit button - clicked");
+       // Debug.Log("sumbit button - snapped paragrpahs = " + SC_ParagraphSorter.instance.SnappedParagraphs.Count);
+        //if (paragraphsConfirmed == true)
+        if(SC_ParagraphSorter.instance.SnappedParagraphs.Count >= 3)
         {
+            Debug.Log("sumbit button - 3 paragraphs snapped, calculating scores");
             if (!DebugMode)
             {
                 CalculateScore();
@@ -90,12 +94,14 @@ public class SC_GM_Paper : MonoBehaviour
 
                 }
 
+            /*
             for (int k = 0; k < ddcontrols.Length; k++)
                 ddcontrols[k].enabled = false;
 
             if (ddcontrols.Length != 0)
                 //Debug.Log("no paragraphs were placed");
                 paragraphsConfirmed = true;
+                */
         }
         else
         {
@@ -103,10 +109,10 @@ public class SC_GM_Paper : MonoBehaviour
 
             for (int j = 0; j < acompletes.Count; j++)
                 acompletes[j].enabled = false;
-
+            /*
             for (int l = 0; l < ddcontrols.Length; l++)
                 ddcontrols[l].enabled = true;
-
+                */
             acompletes.Clear();
             paragraphsConfirmed = false;
             //SC_ConfirmParagraphHighlight.instance.ChangeColor(false);
@@ -127,4 +133,7 @@ public class SC_GM_Paper : MonoBehaviour
         CalculateScore();
         Debug.Log("Score: " + score);
     }
+
+
+    // SYSTEM
 }
