@@ -1,21 +1,22 @@
 ﻿using UnityEngine;
 
+[System.Serializable]
 public class SC_Timbres
 {
-    private int id;
+    private string name;
     private Texture2D timbre;
     private bool visible;
 
-    public SC_Timbres(int id, Texture2D image, bool visible)
+    public SC_Timbres(string id, Texture2D image, bool visible)
     {
-        this.id = id;
+        this.name = id;
         this.timbre = image;
         this.visible = visible;
     }
 
-    public int getID()
+    public string getName()
     {
-        return this.id;
+        return this.name;
     }
 
     public Texture2D getImage()
@@ -28,9 +29,9 @@ public class SC_Timbres
         return this.visible;
     }
 
-    public void setID(int id)
+    public void setName(string id)
     {
-        this.id = id;
+        this.name = id;
     }
 
     public void setImage(Texture2D image)

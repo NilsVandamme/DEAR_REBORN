@@ -157,8 +157,18 @@ public class SC_ParagrapheOrdiEditor : Editor
         {
             int sep = lineList[i].LastIndexOf(",");
             int sep2 = lineList[i].Substring(0, sep).LastIndexOf(",");
-            lineList[i] = lineList[i].Substring(0, sep2) + "§" + lineList[i].Substring(sep2 + 1, sep) + "§" + lineList[i].Substring(sep + 1, lineList[i].Length - (sep + 1));
+
+
+            Debug.Log(lineList[i]);
+            Debug.Log(lineList[i].Length);
+            Debug.Log(sep);
+            Debug.Log(sep2);
+
+            lineList[i] = lineList[i].Substring(0, sep2) + "§" + lineList[i].Substring(sep2 + 1, sep - sep2 -1) + "§" + lineList[i].Substring(sep + 1, lineList[i].Length - (sep + 1));
             lineList[i] = lineList[i].Replace("\"", "");
+
+
+            Debug.Log(lineList[i]);
 
             cells = lineList[i].Split(separator, System.StringSplitOptions.None);
 

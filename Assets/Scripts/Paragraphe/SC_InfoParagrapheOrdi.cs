@@ -9,6 +9,7 @@ public class SC_InfoParagrapheOrdi : MonoBehaviour, IPointerClickHandler
     public SC_ParagrapheOrdi paragrapheOrdi;
     public TextMeshProUGUI myText;
     public Color highlightColor;
+    public Color highlightColorTimbres;
     public Color textLoadingColor;
     public Camera cam;
     public float wait;
@@ -16,6 +17,7 @@ public class SC_InfoParagrapheOrdi : MonoBehaviour, IPointerClickHandler
     private int lenghtMark = 9;
     private int lenghtColor = 9;
     private string highlight;
+    private string highlightTimbres;
     private string textNormal;
     private string textLoading;
     private bool oneClick = false;
@@ -25,6 +27,7 @@ public class SC_InfoParagrapheOrdi : MonoBehaviour, IPointerClickHandler
         highlight = ColorUtility.ToHtmlStringRGBA(highlightColor);
         textNormal = ColorUtility.ToHtmlStringRGBA(myText.color);
         textLoading = ColorUtility.ToHtmlStringRGBA(textLoadingColor);
+        highlightTimbres = ColorUtility.ToHtmlStringRGBA(highlightColorTimbres);
         
         foreach (TextPart elem in paragrapheOrdi.texte)
             myText.text += elem.partText + " ";
@@ -64,14 +67,13 @@ public class SC_InfoParagrapheOrdi : MonoBehaviour, IPointerClickHandler
             yield return new WaitForSeconds(wait);
             ChangeTextColor(linkInfo, textNormal);
 
-            if (linkInfo.GetLinkID()[0] == 'B')
+            if (linkInfo.GetLinkID()[0] == 'B') // CL
             {
                 int id = int.Parse(linkInfo.GetLinkID().Substring(1));
 
                 if (SC_GM_Local.gm.numberOfCLRecover < SC_GM_Local.gm.numberOfCLRecoverable)
                 {
-                    SC_GM_Local.gm.numberOfCLRecover++;
-                    Highlight(linkInfo);
+                    bool add = false;
 
                     int pos = 0;
                     for (int i = 0; i < id; i++)
@@ -79,9 +81,26 @@ public class SC_InfoParagrapheOrdi : MonoBehaviour, IPointerClickHandler
 
                     for (int i = 0; i < paragrapheOrdi.listChampLexicaux.listChampLexical[paragrapheOrdi.champLexical[id]].listOfWords.Count; i++, pos++)
                         if (paragrapheOrdi.motAccepterInCL[pos])
-                            AddWordInCollect(id, i);
+                            if (AddWordInCollect(id, i))
+                                add = true;
+
+                    if (add)
+                    {
+                        SC_GM_Local.gm.numberOfCLRecover++;
+                        Highlight(linkInfo, highlight);
+                    }
 
                 }
+            }
+            else if (linkInfo.GetLinkID()[0] == 'C') // Timbres
+            {
+                foreach (SC_Timbres timbres in SC_GM_Master.gm.timbres.timbres)
+                    if (timbres.getName() == linkInfo.GetLinkID().Substring(1, linkInfo.GetLinkID().Length - 1))
+                    {
+                        timbres.setVisible(true);
+                        SC_GM_Timbre.gm.Affiche(timbres);
+                        Highlight(linkInfo, highlightTimbres);
+                    }
             }
             else // Non collectable
             {
@@ -96,7 +115,7 @@ public class SC_InfoParagrapheOrdi : MonoBehaviour, IPointerClickHandler
     /*
      * Ajoute le CL a la collect
      */
-    private void AddWordInCollect(int link, int word)
+    private bool AddWordInCollect(int link, int word)
     {
         string cl = paragrapheOrdi.listChampLexicaux.listChampLexical[paragrapheOrdi.champLexical[link]].fileCSVChampLexical.name;
 
@@ -107,23 +126,25 @@ public class SC_InfoParagrapheOrdi : MonoBehaviour, IPointerClickHandler
 
                 foreach (SC_Word val in elem.GetListWord())
                     if (val.titre == mot.titre)
-                        return;
+                        return false;
 
                 elem.GetListWord().Add(mot);
-                return;
+                return true;
             }
 
         SC_GM_Local.gm.wordsInCollect.Add(new SC_CLInPull(cl, paragrapheOrdi.listChampLexicaux.listChampLexical[paragrapheOrdi.champLexical[link]].listOfWords[word]));
+        return true;
     }
 
     /*
      * Highlight la partie CL récupéré
      */
-    private void Highlight(TMP_LinkInfo linkInfo)
+    private void Highlight(TMP_LinkInfo linkInfo, string color)
     {
+        Debug.Log(color);
         int lastIndexPart1 = linkInfo.linkIdFirstCharacterIndex + linkInfo.linkIdLength + lenghtMark;
-        int lenghtPart2 = myText.text.Length - (lastIndexPart1 + highlight.Length);
-        myText.text = myText.text.Substring(0, lastIndexPart1) + highlight + myText.text.Substring(lastIndexPart1 + highlight.Length, lenghtPart2);
+        int lenghtPart2 = myText.text.Length - (lastIndexPart1 + color.Length);
+        myText.text = myText.text.Substring(0, lastIndexPart1) + color + myText.text.Substring(lastIndexPart1 + color.Length, lenghtPart2);
     }
 
     /*

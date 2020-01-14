@@ -21,6 +21,7 @@ public class SC_WindowTopBar : MonoBehaviour, IDragHandler, IBeginDragHandler
     {
         windowAnim = GetComponentInParent<Animator>();
     }
+    
 
     public void SetWindowFirst()
     {

@@ -38,7 +38,7 @@ public class SC_BaseTimbreEditor : Editor
 
         if (baseTimbre.fileCSVBaseTimbre != null && loadImage)
         {
-            if (GUILayout.Button("Load base Image"))
+            if (GUILayout.Button("Load Base Image"))
                 GenerateBaseImage();
 
         }
@@ -66,31 +66,22 @@ public class SC_BaseTimbreEditor : Editor
 
         for (int i = 1; i < lineList.Length; i++)
         {
-            Debug.Log(lineList[i]);
-
             int sep = lineList[i].LastIndexOf(",");
-            int sep2 = lineList[i].Substring(0, sep).LastIndexOf(",");
-            lineList[i] = lineList[i].Substring(0, sep2) + "§" + lineList[i].Substring(sep2 + 1, sep - 2) + "§" + lineList[i].Substring(sep + 1, lineList[i].Length - (sep + 1));
+            lineList[i] = lineList[i].Substring(0, sep) + "§" + lineList[i].Substring(sep + 1, lineList[i].Length - (sep + 1));
             lineList[i] = lineList[i].Replace("\"", "");
-
-            Debug.Log(lineList[i]);
-
+            
             cells = lineList[i].Split(separator, System.StringSplitOptions.None);
 
             int j;
             for (j = 0; j < images.arraySize; j++)
             {
-                Debug.Log(images.GetArrayElementAtIndex(j).objectReferenceValue.name);
-                Debug.Log(cells[1]);
-                if (images.GetArrayElementAtIndex(j).objectReferenceValue.name == cells[1])
+                if (images.GetArrayElementAtIndex(j).objectReferenceValue.name == cells[0])
                     break;
             }
 
             if (j < images.arraySize)
-                baseTimbre.timbres.Add(new SC_Timbres(int.Parse(cells[0]), (Texture2D)images.GetArrayElementAtIndex(j).objectReferenceValue, bool.Parse(cells[2])));
+                baseTimbre.timbres.Add(new SC_Timbres(cells[0], (Texture2D)images.GetArrayElementAtIndex(j).objectReferenceValue, bool.Parse(cells[1])));
 
         }
-
-        Debug.Log(baseTimbre.timbres.Count);
     }
 }
