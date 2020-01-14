@@ -14,7 +14,6 @@ public class SC_GM_Local : MonoBehaviour
     public int numberOfCLRecoverable;
 
     // Choose X Word
-    public int numberOfWordInWheel;
     public bool activeBonus;
 
     // Prochaines Scenes
