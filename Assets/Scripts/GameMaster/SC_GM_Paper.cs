@@ -25,12 +25,8 @@ public class SC_GM_Paper : MonoBehaviour
 
     public void CalculateScore()
     {
-        foreach (string elem in SC_GM_Local.gm.choosenWordInLetter)
-            foreach (SC_ChampLexical listCL in SC_GM_Master.gm.listChampsLexicaux.listChampLexical)
-                foreach (SC_Word word in listCL.listOfWords)
-                    foreach (string mot in word.grammarCritere)
-                        if (elem == mot)
-                            score += word.scorePerso[SC_GM_Local.gm.peopleScore];
+        foreach (SC_Word word in SC_GM_Local.gm.choosenWordInLetter)
+            score += word.scorePerso[SC_GM_Local.gm.peopleScore];
     }
 
     public void OnClickSubmitButton()

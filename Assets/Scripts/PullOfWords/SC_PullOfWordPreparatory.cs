@@ -39,7 +39,8 @@ public class SC_PullOfWordPreparatory : MonoBehaviour
      */
     public void InitPreparatory()
     {
-        SC_GM_Master.gm.Test();
+        
+
         ChangeOfListe();
         InitCL();
         InitView();
@@ -92,9 +93,27 @@ public class SC_PullOfWordPreparatory : MonoBehaviour
             foreach (TextMeshProUGUI elem in champLexical[i])
                 elem.text = "";
 
-            champLexicalImage[i] = champsLexicaux[i].GetComponentsInChildren<Image>(true);
+            champLexicalImage[i] = RemoveAT(champsLexicaux[i].GetComponentsInChildren<Image>(true), 0);
         }
 
+    }
+
+    /*
+     * Generique fct de removeAt pour des tab
+     */
+    private T[] RemoveAT<T>(T[] tab, int index)
+    {
+        if (index < 0 || tab.Length < 1)
+            return tab;
+
+        T[] newTab = new T[tab.Length - 1];
+        int pos = 0;
+
+        for (int i = 0; i < tab.Length; i++)
+            if (i != index)
+                newTab[pos++] = tab[i];
+
+        return newTab;
     }
 
     /*
@@ -123,6 +142,10 @@ public class SC_PullOfWordPreparatory : MonoBehaviour
 
             foreach (LayoutGroup elem in champsLexicaux)
                 elem.gameObject.SetActive(false);
+        }
+        else if (nbCLRestant == 1)
+        {
+            Debug.LogError("1 seul CL !!!");
         }
         else
         {

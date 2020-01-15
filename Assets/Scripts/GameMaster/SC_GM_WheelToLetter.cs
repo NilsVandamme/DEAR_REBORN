@@ -5,7 +5,7 @@ public class SC_GM_WheelToLetter : MonoBehaviour
 {
     public static SC_GM_WheelToLetter instance;
 
-    private SC_Word currentWord;
+    private SC_Word currentWord = null;
 
     private void Awake()
     {
@@ -27,5 +27,10 @@ public class SC_GM_WheelToLetter : MonoBehaviour
                 return;
             }
                 
+    }
+
+    public SC_Word getCurrentWord()
+    {
+        return currentWord;
     }
 }
