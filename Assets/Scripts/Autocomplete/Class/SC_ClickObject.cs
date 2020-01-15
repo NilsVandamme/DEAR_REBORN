@@ -1,14 +1,16 @@
 ﻿public class SC_ClickObject
 {
-    private int index;
     private int posStartText;
-    private SC_Word mot;
+    private int lenOldWorld;
+    private SC_Word oldWord;
+    private string newWord;
 
-    public SC_ClickObject(int pos, SC_Word mot, int id)
+    public SC_ClickObject(int pos, SC_Word oldWord, string newWord, int lenOldWorld)
     {
         this.posStartText = pos;
-        this.mot = mot;
-        this.index = id;
+        this.oldWord = oldWord;
+        this.newWord = newWord;
+        this.lenOldWorld = lenOldWorld;
     }
 
     public int getPosStartText()
@@ -16,13 +18,18 @@
         return this.posStartText;
     }
 
-    public SC_Word getMot()
+    public string getNewMot()
     {
-        return this.mot;
+        return this.newWord;
     }
 
-    public int getIndex()
+    public SC_Word getOldWord()
     {
-        return this.index;
+        return this.oldWord;
+    }
+
+    public int getLenOldWord()
+    {
+        return this.lenOldWorld;
     }
 }

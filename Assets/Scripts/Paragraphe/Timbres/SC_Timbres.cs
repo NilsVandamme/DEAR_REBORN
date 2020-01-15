@@ -6,12 +6,14 @@ public class SC_Timbres
     private string name;
     private Texture2D timbre;
     private bool visible;
+    private string text;
 
-    public SC_Timbres(string id, Texture2D image, bool visible)
+    public SC_Timbres(string id, Texture2D image, bool visible, string text)
     {
         this.name = id;
         this.timbre = image;
         this.visible = visible;
+        this.text = text;
     }
 
     public string getName()
@@ -19,24 +21,14 @@ public class SC_Timbres
         return this.name;
     }
 
-    public Texture2D getImage()
-    {
-        return this.timbre;
-    }
-
     public bool IsVisible()
     {
         return this.visible;
     }
 
-    public void setName(string id)
+    public string getText()
     {
-        this.name = id;
-    }
-
-    public void setImage(Texture2D image)
-    {
-        this.timbre = image;
+        return this.text;
     }
 
     public void setVisible(bool visible)

@@ -27,7 +27,7 @@ public class SC_AutoComplete : MonoBehaviour, IPointerClickHandler
     {
         int linkIndex = TMP_TextUtilities.FindIntersectingLink(myText, Input.mousePosition, cam);
 
-        if (linkIndex != -1)
+        if (linkIndex != -1 && SC_GM_WheelToLetter.instance.getCurrentWord() != null)
         {
             GetClickInfo(myText.textInfo.linkInfo[linkIndex]);
 
@@ -41,19 +41,25 @@ public class SC_AutoComplete : MonoBehaviour, IPointerClickHandler
     private void GetClickInfo(TMP_LinkInfo linkInfo)
     {
         int lenght = -1;
-        SC_Word word = null;
-        string grammar = myText.text.Substring(linkInfo.linkIdFirstCharacterIndex, linkInfo.linkIdLength);
+        SC_Word oldWorld = null;
+        string newWord = "", grammar = myText.text.Substring(linkInfo.linkIdFirstCharacterIndex, linkInfo.linkIdLength);
 
         foreach (SC_Word elem in SC_GM_Local.gm.wheelOfWords)
             foreach (string mot in elem.grammarCritere)
                 if (mot.Equals(linkInfo.GetLinkText()))
-                    word = elem;
+                    oldWorld = elem;
 
         for (int i = 0; i < SC_GM_Master.gm.listChampsLexicaux.listOfGrammarCritere.Length; i++)
-            if (SC_GM_Master.gm.listChampsLexicaux.listOfGrammarCritere[i] == grammar)
-                lenght = i;
+            if (SC_GM_Master.gm.listChampsLexicaux.listOfGrammarCritere[i].Equals(grammar))
+            {
+                newWord = SC_GM_WheelToLetter.instance.getCurrentWord().grammarCritere[i];
+                if (oldWorld != null)
+                    lenght = oldWorld.grammarCritere[i].Length;
+                else
+                    lenght = linkInfo.linkTextLength;
+            }
 
-        currentClick = new SC_ClickObject(myText.text.IndexOf(linkInfo.GetLinkText()), word, lenght);
+        currentClick = new SC_ClickObject(linkInfo.linkIdFirstCharacterIndex + linkInfo.linkIdLength + 2, oldWorld, newWord, lenght);
     }
 
     /*
@@ -61,11 +67,11 @@ public class SC_AutoComplete : MonoBehaviour, IPointerClickHandler
      */
     private void RewriteTextWithInputField()
     {
-        myText.text = myText.text.Remove((currentClick.getPosStartText()), currentClick.getMot().grammarCritere[currentClick.getIndex()].Length);
-        myText.text = myText.text.Insert(currentClick.getPosStartText(), SC_GM_WheelToLetter.instance.getCurrentWord().grammarCritere[currentClick.getIndex()]);
+        myText.text = myText.text.Remove(currentClick.getPosStartText(), currentClick.getLenOldWord());
+        myText.text = myText.text.Insert(currentClick.getPosStartText(), currentClick.getNewMot());
 
-        if (!SC_GM_Local.gm.choosenWordInLetter.Contains(currentClick.getMot()))
-            SC_GM_Local.gm.choosenWordInLetter.Remove(currentClick.getMot());
+        if (!SC_GM_Local.gm.choosenWordInLetter.Contains(currentClick.getOldWord()))
+            SC_GM_Local.gm.choosenWordInLetter.Remove(currentClick.getOldWord());
 
         if (!SC_GM_Local.gm.choosenWordInLetter.Contains(SC_GM_WheelToLetter.instance.getCurrentWord()))
             SC_GM_Local.gm.choosenWordInLetter.Add(SC_GM_WheelToLetter.instance.getCurrentWord());
