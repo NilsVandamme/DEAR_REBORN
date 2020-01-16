@@ -13,6 +13,8 @@ public class SC_Collect : MonoBehaviour
     private Button[] buttons;
     private TextMeshProUGUI[] listOfButtons;
 
+    private bool isHighlighted;
+
     void Start()
     {
         ratioText.text = SC_GM_Local.gm.numberOfCLRecover.ToString() + "/" + SC_GM_Local.gm.numberOfCLRecoverable.ToString();
@@ -41,9 +43,13 @@ public class SC_Collect : MonoBehaviour
                 buttons[i].gameObject.SetActive(true);
             }
 
-            //arboAnim.SetTrigger("ArboIsFull");
-            //SC_BossHelp.instance.CloseBossHelp(2);
-            //SC_BossHelp.instance.OpenBossBubble(2);
+            if (!isHighlighted)
+            {
+                arboAnim.SetTrigger("Highlight");
+                isHighlighted = true;
+            }
+
+
         }
     }
 }
