@@ -232,7 +232,10 @@ public class SC_PullOfWordPreparatory : MonoBehaviour
     private void Clear()
     {
         for (int i = 0; i < choixCLTemp.Count; i++)
+        {
             champsLexicaux[i].gameObject.SetActive(false);
+            Debug.Log(i);
+        }
     }
 
     /*
@@ -246,7 +249,7 @@ public class SC_PullOfWordPreparatory : MonoBehaviour
         choixCLTemp.Clear();
 
         SC_GM_Local.gm.wordsInPreparatory.Add(temp);
-
+        
         MakeVersus();
     }
 

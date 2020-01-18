@@ -5,10 +5,12 @@
 public class SC_GMLocalEditor : Editor
 {
     private SC_GM_Local gmLocal;
+    SC_Base baseInfo;
 
     private void OnEnable()
     {
         gmLocal = target as SC_GM_Local;
+        baseInfo = (SC_Base)AssetDatabase.LoadAssetAtPath(AssetDatabase.GUIDToAssetPath(AssetDatabase.FindAssets("Base", new[] { "Assets/ScriptableObjects" })[0]), typeof(SC_Base));
     }
 
     /*
@@ -16,15 +18,12 @@ public class SC_GMLocalEditor : Editor
      */
     public override void OnInspectorGUI()
     {
-        if (SC_GM_Master.gm != null)
-        {
-            EditorGUILayout.BeginHorizontal();
+        EditorGUILayout.BeginHorizontal();
 
-            EditorGUILayout.LabelField("Perso de la scene");
-            gmLocal.peopleScore = EditorGUILayout.Popup(gmLocal.peopleScore, SC_GM_Master.gm.listChampsLexicaux.listOfPerso);
+        EditorGUILayout.LabelField("Perso de la scene");
+        gmLocal.peopleScore = EditorGUILayout.Popup(gmLocal.peopleScore, baseInfo.listOfPerso);
 
-            EditorGUILayout.EndHorizontal();
-        }
+        EditorGUILayout.EndHorizontal();
 
 
 
