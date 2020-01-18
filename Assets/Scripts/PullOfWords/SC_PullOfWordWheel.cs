@@ -52,6 +52,8 @@ public class SC_PullOfWordWheel : MonoBehaviour
             elem.text = "";
 
         BossHelp();
+
+        startWrittingButton.interactable = false;
     }
 
     /*
@@ -207,9 +209,10 @@ public class SC_PullOfWordWheel : MonoBehaviour
      */
     public void StartWritting()
     {
-        for (int i = 0; i < listOfWheel.Length; i++)
-            if (i < wheelToLetter.Length)
-                wheelToLetter[i].text = listOfWheel[i].text;
+        if (SC_GM_Local.gm.wheelOfWords.Count >= 6)
+            for (int i = 0; i < listOfWheel.Length; i++)
+                if (i < wheelToLetter.Length)
+                    wheelToLetter[i].text = listOfWheel[i].text;
 
     }
 

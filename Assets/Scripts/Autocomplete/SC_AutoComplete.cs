@@ -1,7 +1,7 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
 using TMPro;
+using UnityEngine;
 using UnityEngine.EventSystems;
-using System.Collections.Generic;
 
 public class SC_AutoComplete : MonoBehaviour, IPointerClickHandler
 {
@@ -76,5 +76,46 @@ public class SC_AutoComplete : MonoBehaviour, IPointerClickHandler
         if (!SC_GM_Local.gm.choosenWordInLetter.Contains(SC_GM_WheelToLetter.instance.getCurrentWord()))
             SC_GM_Local.gm.choosenWordInLetter.Add(SC_GM_WheelToLetter.instance.getCurrentWord());
 
+    }
+
+    /*
+     * Supprime les mots intégrer aux paragraphes quant il est supprimer
+     */
+    public void DeleteParagraphe()
+    {
+        string banniereEnd = "</link>", banniereStart = "<link=", banniereStartWord = ">";
+        int indexEnd = -1, indexStart = -1, indexWord, lenght;
+
+        while (true) 
+        {
+            indexStart++;
+            indexEnd++;
+
+            indexStart = myText.text.IndexOf(banniereStart, indexStart);
+            if (indexStart != -1)
+            {
+                indexWord = myText.text.IndexOf(banniereStartWord, indexStart) + 1;
+                indexEnd = myText.text.IndexOf(banniereEnd, indexEnd);
+
+                lenght = indexEnd - indexWord;
+
+                DeleteWordInWheel(myText.text.Substring(indexWord, lenght));
+            }
+            else
+                return;
+        }
+        
+    }
+
+    private void DeleteWordInWheel (string mot)
+    {
+        foreach (SC_Word word in SC_GM_Local.gm.wheelOfWords)
+            foreach (string critere in word.grammarCritere)
+                if (mot.Equals(critere))
+                    if (SC_GM_Local.gm.choosenWordInLetter.Contains(word))
+                    {
+                        SC_GM_Local.gm.choosenWordInLetter.Remove(word);
+                        return;
+                    }
     }
 }
