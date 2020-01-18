@@ -7,6 +7,7 @@ public class SC_TimbreChooser : MonoBehaviour
 
     public List<GameObject> stamps;
     public GameObject selectedStamp;
+    public GameObject StoryArbo;
     public bool StampAlreadySelected;
     private Animator anim;
 
@@ -36,6 +37,7 @@ public class SC_TimbreChooser : MonoBehaviour
             }
             selectedStamp.SetActive(true);
 
+            StoryArbo.SetActive(true);
             // Play anim
             //anim.SetTrigger();
 

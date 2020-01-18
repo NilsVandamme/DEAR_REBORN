@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class SC_GM_Paper : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class SC_GM_Paper : MonoBehaviour
     // Asset des mots
     public bool paragraphsConfirmed;
     public SC_PaperSnapGrid[] snapPositions;
+    public Button SendButton;
     //public SC_DragDropControls[] ddcontrols;
     [HideInInspector]
     public List<SC_AutoComplete> acompletes;
@@ -21,6 +23,19 @@ public class SC_GM_Paper : MonoBehaviour
     {
         snapPositions = FindObjectsOfType<SC_PaperSnapGrid>();
         //ddcontrols = FindObjectsOfType<SC_DragDropControls>();
+    }
+
+    public void Update()
+    {
+        // Activate the send letter button
+        if(SC_ParagraphSorter.instance.SnappedParagraphs.Count >= 3)
+        {
+            SendButton.interactable = true;
+        }
+        else
+        {
+            SendButton.interactable = false;
+        }
     }
 
     public void CalculateScore()
