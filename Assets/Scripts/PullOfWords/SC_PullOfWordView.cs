@@ -76,7 +76,8 @@ public class SC_PullOfWordView : MonoBehaviour
             int j = GetFirstCLWordFree(i);
             if (j == -1) return;
             for (; j < numberOfElemInCL; j++)
-                champLexicalImage[i][j].sprite = hasNotWord;
+                if (j != posElemCl)
+                    champLexicalImage[i][j].sprite = hasNotWord;
         }
     }
 
@@ -119,7 +120,7 @@ public class SC_PullOfWordView : MonoBehaviour
         for (int i = 0; i < champLexicalButton.Length; i++)
             if (champLexicalButton[i][posElemCl] == but)
             {
-                isOpen[i] = !isOpen[i];
+                isOpen[i] = !champLexicalButton[i][0].IsActive();
                 OpenClose(i, isOpen[i]);
                 CloseNeighbour(i);
             }

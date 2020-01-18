@@ -12,7 +12,7 @@ public class SC_AnimCollect : MonoBehaviour
     {
         OpenOrClosed = true;
         CanBeOpenned = true;
-        SetCollectAnimBool();
+        //SetCollectAnimBool();
         CanBeOpenned = false;
     }
 

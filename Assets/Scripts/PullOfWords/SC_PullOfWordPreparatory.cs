@@ -8,6 +8,7 @@ public class SC_PullOfWordPreparatory : MonoBehaviour
     // Object de la fenetre
     public GameObject GO_champsLexicaux;
     public GameObject next;
+    public TextMeshProUGUI vs;
 
     // Liste des Sprites des buttons en fct de s'il contiennent ou non un mot
     public Sprite hasWord;
@@ -139,6 +140,7 @@ public class SC_PullOfWordPreparatory : MonoBehaviour
         if (nbCLRestant <= 0)
         {
             next.gameObject.SetActive(true);
+            vs.gameObject.SetActive(false);
 
             foreach (LayoutGroup elem in champsLexicaux)
                 elem.gameObject.SetActive(false);
@@ -232,10 +234,7 @@ public class SC_PullOfWordPreparatory : MonoBehaviour
     private void Clear()
     {
         for (int i = 0; i < choixCLTemp.Count; i++)
-        {
             champsLexicaux[i].gameObject.SetActive(false);
-            Debug.Log(i);
-        }
     }
 
     /*

@@ -12,7 +12,7 @@ public class SC_PullOfWordWheel : MonoBehaviour
     public GameObject GO_wheelToLetter;
 
     // Images des buttons qui ne contiennent pas de mot
-    public Sprite hasNotWord;
+    public Sprite hasNoWord;
 
     // Info sur le CL
     private int numberOfElemInCL = 9;
@@ -98,7 +98,7 @@ public class SC_PullOfWordWheel : MonoBehaviour
                         while (pos < champLexicalImage[i].Length)
                         { 
                             if (pos != posElemCl)
-                                champLexicalImage[i][pos].sprite = hasNotWord;
+                                champLexicalImage[i][pos].sprite = hasNoWord;
 
                             pos++;
                         }
