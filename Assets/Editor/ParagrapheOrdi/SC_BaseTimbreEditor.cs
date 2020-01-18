@@ -75,11 +75,11 @@ public class SC_BaseTimbreEditor : Editor
 
             int j;
             for (j = 0; j < images.arraySize; j++)
-                if (images.GetArrayElementAtIndex(j).objectReferenceValue.name == cells[0])
+                if (images.GetArrayElementAtIndex(j).objectReferenceValue.name == cells[1])
                     break;
 
             if (j < images.arraySize)
-                baseTimbre.timbres.Add(new SC_Timbres(cells[0], (Texture2D)images.GetArrayElementAtIndex(j).objectReferenceValue, bool.Parse(cells[2]), cells[1]));
+                baseTimbre.timbres.Add(new SC_Timbres(cells[1], (Texture2D)images.GetArrayElementAtIndex(j).objectReferenceValue, bool.Parse(cells[2]), cells[0]));
 
         }
     }
