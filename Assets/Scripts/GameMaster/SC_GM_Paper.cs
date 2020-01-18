@@ -36,7 +36,7 @@ public class SC_GM_Paper : MonoBehaviour
         //if (paragraphsConfirmed == true)
         if(SC_ParagraphSorter.instance.SnappedParagraphs.Count >= 3)
         {
-            Debug.Log("sumbit button - 3 paragraphs snapped, calculating scores");
+            //Debug.Log("sumbit button - 3 paragraphs snapped, calculating scores");
             if (!DebugMode)
             {
                 CalculateScore();
@@ -129,5 +129,4 @@ public class SC_GM_Paper : MonoBehaviour
         CalculateScore();
         Debug.Log("Score: " + score);
     }
-    // SYSTEM
 }
