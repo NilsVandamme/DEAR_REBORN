@@ -30,6 +30,12 @@ public class SC_TimbreChooser : MonoBehaviour
         {
             StampAlreadySelected = true;
 
+            for(int i=0; i<stamps.Count; i++)
+            {
+                stamps[i].SetActive(false);
+            }
+            selectedStamp.SetActive(true);
+
             // Play anim
             //anim.SetTrigger();
 
