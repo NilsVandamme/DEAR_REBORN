@@ -29,7 +29,7 @@ public class SC_GM_Paper : MonoBehaviour
             score += word.scorePerso[SC_GM_Local.gm.peopleScore];
     }
 
-    public void OnClickSubmitButton()
+    public void CalculateScoresAndLoadNextScene()
     {
         Debug.Log("sumbit button - clicked");
        // Debug.Log("sumbit button - snapped paragrpahs = " + SC_ParagraphSorter.instance.SnappedParagraphs.Count);
@@ -120,7 +120,7 @@ public class SC_GM_Paper : MonoBehaviour
         DebugMode = true;
         paragraphsConfirmed = true;
         score = testScore;
-        OnClickSubmitButton();
+        CalculateScoresAndLoadNextScene();
         DebugMode = false;
     }
 
@@ -129,7 +129,5 @@ public class SC_GM_Paper : MonoBehaviour
         CalculateScore();
         Debug.Log("Score: " + score);
     }
-
-
     // SYSTEM
 }

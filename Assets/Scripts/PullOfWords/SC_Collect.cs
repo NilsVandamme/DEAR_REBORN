@@ -45,7 +45,7 @@ public class SC_Collect : MonoBehaviour
 
             if (!isHighlighted)
             {
-                arboAnim.SetTrigger("Highlight");
+                arboAnim.SetTrigger("Open");
                 isHighlighted = true;
             }
 

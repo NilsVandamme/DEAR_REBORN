@@ -170,4 +170,12 @@ public class SC_ParagraphSorter : MonoBehaviour
             SnappedParagraphs[i].gameObject.SetActive(true);
         }
     }
+
+    public void DisableSnappedParagraphs()
+    {
+        for (int i = 0; i < SnappedParagraphs.Count; i++)
+        {
+            SnappedParagraphs[i].gameObject.SetActive(false);
+        }
+    }
 }
