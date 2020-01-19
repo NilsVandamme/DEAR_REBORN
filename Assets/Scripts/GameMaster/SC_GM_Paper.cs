@@ -62,26 +62,26 @@ public class SC_GM_Paper : MonoBehaviour
             {
                 Debug.Log("Loaded first scene");
                 if(!DebugMode)
-                    SceneManager.LoadScene(SC_GM_Local.gm.firstScene);
+                    SC_LoadingScreen.Instance.LoadThisScene(SC_GM_Local.gm.firstScene);
             }
             else if (SC_GM_Local.gm.numberOfScene == 2)
             {
                 Debug.Log("Loaded second scene");
                 if (!DebugMode)
-                    SceneManager.LoadScene(SC_GM_Local.gm.secondScene);
+                    SC_LoadingScreen.Instance.LoadThisScene(SC_GM_Local.gm.secondScene);
             }
 
             else if (score > SC_GM_Local.gm.secondPivotScene && SC_GM_Local.gm.numberOfScene == 3)
             {
                 Debug.Log("Loaded second scene");
                 if (!DebugMode)
-                    SceneManager.LoadScene(SC_GM_Local.gm.secondScene);
+                    SC_LoadingScreen.Instance.LoadThisScene(SC_GM_Local.gm.secondScene);
             }
             else
             {
                 Debug.Log("Loaded third scene");
                 if (!DebugMode)
-                    SceneManager.LoadScene(SC_GM_Local.gm.thirdScene);
+                    SC_LoadingScreen.Instance.LoadThisScene(SC_GM_Local.gm.thirdScene);
             }
 
         }

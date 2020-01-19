@@ -37,11 +37,9 @@ public class SC_GM_SoundManager : MonoBehaviour
 
         if (PlayerPrefs.HasKey("SoundVolume"))
         {
-            Debug.Log("sound volume = " + PlayerPrefs.GetFloat("SoundVolume"));
             ASourceSound.volume = PlayerPrefs.GetFloat("SoundVolume");
             if (SceneManager.GetActiveScene().name == "L_00Menu")
                 soundSlider.value = PlayerPrefs.GetFloat("SoundVolume");
-            Debug.Log("slider sound volume = " + soundSlider.value);
         }
         else
         {
@@ -51,19 +49,16 @@ public class SC_GM_SoundManager : MonoBehaviour
 
         if (PlayerPrefs.HasKey("MusicVolume"))
         {
-            Debug.Log("music volume = " + PlayerPrefs.GetFloat("MusicVolume"));
             
             ASourceMusic.volume = PlayerPrefs.GetFloat("MusicVolume");
             if (SceneManager.GetActiveScene().name == "L_00Menu")
                 musicSlider.value = PlayerPrefs.GetFloat("MusicVolume");
-            Debug.Log("slider music volume = " + musicSlider.value);
         }
         else
         {
             PlayerPrefs.SetFloat("MusicVolume", 1);
             ASourceSound.volume = 1;
         }
-        
     }
 
     public void PlaySound(string name)
@@ -76,20 +71,17 @@ public class SC_GM_SoundManager : MonoBehaviour
                 //Debug.Log(audio.name + " sound played");
             }
         }
-
     }
 
     public void ChangeSoundVolume(float SliderValue)
     {
         ASourceSound.volume = SliderValue;
         PlayerPrefs.SetFloat("SoundVolume", SliderValue);
-        Debug.Log("sound volume = " + PlayerPrefs.GetFloat("SoundVolume"));
     }
 
     public void ChangeMusicVolume(float SliderValue)
     {
         ASourceMusic.volume = SliderValue;
         PlayerPrefs.SetFloat("MusicVolume", SliderValue);
-        Debug.Log("music volume = " + PlayerPrefs.GetFloat("MusicVolume"));
     }
 }
