@@ -23,6 +23,11 @@ public class SC_TimbreChooser : MonoBehaviour
             stamps.Add(transform.GetChild(2).GetChild(i).gameObject);
         }
 
+        for (int i=0; i < SC_GM_Master.gm.timbres.timbres.Count; i++)
+        {
+
+        }
+
     }
 
     public void ChooseStamp()

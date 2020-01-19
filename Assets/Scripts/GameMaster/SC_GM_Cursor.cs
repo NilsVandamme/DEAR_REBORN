@@ -23,6 +23,11 @@ public class SC_GM_Cursor : MonoBehaviour
         Cursor.SetCursor(normalCursor, Vector2.zero, CursorMode.Auto);
     }
 
+    private void Update()
+    {
+        
+    }
+
     public void changeToNormalCursor()
     {
         Cursor.SetCursor(normalCursor, Vector2.zero, CursorMode.Auto);
