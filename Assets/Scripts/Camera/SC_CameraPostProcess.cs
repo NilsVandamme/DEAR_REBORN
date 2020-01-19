@@ -33,6 +33,11 @@ public class SC_CameraPostProcess : MonoBehaviour
                 if (SceneManager.GetActiveScene().name == "L_00Menu")
                     tog.isOn = true;
             }
+
+            if (retroMode)
+                pplist[0].enabled = true;
+            else
+                pplist[0].enabled = false;
         }
         else
         {
