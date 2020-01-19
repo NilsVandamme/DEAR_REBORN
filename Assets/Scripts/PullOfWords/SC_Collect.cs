@@ -24,6 +24,11 @@ public class SC_Collect : MonoBehaviour
         for (int i = 0; i < buttons.Length; i++)
             listOfButtons[i] = buttons[i].GetComponentInChildren<TextMeshProUGUI>(true);
 
+        for (int i = 0; i < buttons.Length; i++)
+        {
+            buttons[i].gameObject.SetActive(false);
+        }
+
     }
 
     void Update()

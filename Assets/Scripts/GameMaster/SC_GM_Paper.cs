@@ -40,6 +40,7 @@ public class SC_GM_Paper : MonoBehaviour
 
     public void CalculateScore()
     {
+        score = 0;
         foreach (SC_Word word in SC_GM_Local.gm.choosenWordInLetter)
             score += word.scorePerso[SC_GM_Local.gm.peopleScore];
     }
