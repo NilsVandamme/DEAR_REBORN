@@ -66,7 +66,6 @@ public class SC_LoadingScreen : MonoBehaviour
         loadImage.enabled = true;
         anim.SetTrigger("Show");
         Cursor.lockState = CursorLockMode.Locked;
-        //SC_GM_Cursor.gm.changeToInvisibleCursor();
     }
 
     // Hide the load screen
@@ -74,7 +73,6 @@ public class SC_LoadingScreen : MonoBehaviour
     {
         loadImage.enabled = false;
         Cursor.lockState = CursorLockMode.None;
-        //SC_GM_Cursor.gm.changeToNormalCursor();
     }
 
     // Make sure there's a minimum loading time
