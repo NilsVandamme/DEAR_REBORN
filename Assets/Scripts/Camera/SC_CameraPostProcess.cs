@@ -18,7 +18,7 @@ public class SC_CameraPostProcess : MonoBehaviour
 
         if (PlayerPrefs.HasKey("retroMode"))
         {
-            Debug.Log("key");
+            //Debug.Log("key");
             int intvalue = PlayerPrefs.GetInt("retroMode");
 
             if (intvalue == 0)
@@ -36,7 +36,7 @@ public class SC_CameraPostProcess : MonoBehaviour
         }
         else
         {
-            Debug.Log("nokey");
+            //Debug.Log("nokey");
             PlayerPrefs.SetInt("retroMode", 0);
             retroMode = false;
             tog.isOn = false;
