@@ -51,8 +51,6 @@ public class SC_PullOfWordWheel : MonoBehaviour
         foreach (TextMeshProUGUI elem in listOfWheel)
             elem.text = "";
 
-        BossHelp();
-
         startWrittingButton.interactable = false;
     }
 
@@ -145,8 +143,6 @@ public class SC_PullOfWordWheel : MonoBehaviour
                 listOfWheel[pos].text = word.titre;
                 SC_GM_Local.gm.wheelOfWords.Add(word);
             }
-
-            BossHelp(1);
         }
     }
 
@@ -189,8 +185,6 @@ public class SC_PullOfWordWheel : MonoBehaviour
         for (int i = 0; i < listOfWheel.Length; i++)
             if (listOfWheel[i] == tmp)
             {
-                BossHelp();
-
                 SC_GM_Local.gm.wheelOfWords.Remove(GetWordInCollect(tmp.text));
                 listOfWheel[i].text = "";
             }
@@ -214,18 +208,7 @@ public class SC_PullOfWordWheel : MonoBehaviour
                 if (i < wheelToLetter.Length)
                     wheelToLetter[i].text = listOfWheel[i].text;
 
-    }
+        SC_GM_Timbre.gm.LoadTimbreEnvelope();
 
-    /*
-     * Gère le tuto à la première scène
-     */
-    private void BossHelp(int val = 0)
-    {
-        if (SC_GM_Local.gm.activeBonus)
-            if (SceneManager.GetActiveScene().name == "L_A1")
-            {
-                //SC_BossHelp.instance.CloseBossHelp(3);
-                //SC_BossHelp.instance.OpenBossBubble(3);
-            }
     }
 }

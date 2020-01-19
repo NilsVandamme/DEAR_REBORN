@@ -7,6 +7,7 @@ public class SC_GM_Timbre : MonoBehaviour
 {
     public List<GameObject> timbreText;
     public List<Image> timbre;
+    public List<SpriteRenderer> timbreEnvelope;
 
     private List<TextMeshProUGUI> texte;
 
@@ -45,5 +46,13 @@ public class SC_GM_Timbre : MonoBehaviour
                 texte[i].gameObject.SetActive(true);
                 texte[i].text = timbres.getText();
             }
+    }
+
+    public void LoadTimbreEnvelope ()
+    {
+        foreach (SC_Timbres timbres in SC_GM_Master.gm.timbres.timbres)
+            for (int i = 0; i < timbreEnvelope.Count; i++)
+                if (timbres.getName() == timbreEnvelope[i].sprite.name && timbres.IsVisible())
+                    timbreEnvelope[i].enabled = true;
     }
 }
