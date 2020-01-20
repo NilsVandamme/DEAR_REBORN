@@ -44,7 +44,8 @@ public class SC_CameraPostProcess : MonoBehaviour
             //Debug.Log("nokey");
             PlayerPrefs.SetInt("retroMode", 0);
             retroMode = false;
-            tog.isOn = false;
+            if (SceneManager.GetActiveScene().name == "L_00Menu")
+                tog.isOn = false;
         }
     }
 

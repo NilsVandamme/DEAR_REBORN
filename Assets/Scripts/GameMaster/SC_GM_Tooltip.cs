@@ -38,7 +38,8 @@ public class SC_GM_Tooltip : MonoBehaviour
             //Debug.Log("nokey");
             PlayerPrefs.SetInt("tooltip", 0);
             tooltipActive = false;
-            tog.isOn = false;
+            if (SceneManager.GetActiveScene().name == "L_00Menu")
+                tog.isOn = false;
         }
 
         if (tooltipActive)
