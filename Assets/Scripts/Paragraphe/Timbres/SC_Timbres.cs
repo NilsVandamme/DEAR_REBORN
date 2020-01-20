@@ -4,14 +4,12 @@
 public class SC_Timbres
 {
     private string name;
-    private Texture2D timbre;
     private bool visible;
     private string text;
 
-    public SC_Timbres(string id, Texture2D image, bool visible, string text)
+    public SC_Timbres(string id, bool visible, string text)
     {
         this.name = id;
-        this.timbre = image;
         this.visible = visible;
         this.text = text;
     }
