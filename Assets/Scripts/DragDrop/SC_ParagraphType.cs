@@ -32,4 +32,9 @@ public class SC_ParagraphType : MonoBehaviour
             TypeIcon.color = Color.red;
         }
     }
+
+    public void HighlightSorterOnRemove()
+    {
+
+    }
 }

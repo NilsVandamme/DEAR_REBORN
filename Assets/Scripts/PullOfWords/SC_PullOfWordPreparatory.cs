@@ -8,6 +8,7 @@ public class SC_PullOfWordPreparatory : MonoBehaviour
     // Object de la fenetre
     public GameObject GO_champsLexicaux;
     public GameObject next;
+    public TextMeshProUGUI vs;
 
     // Liste des Sprites des buttons en fct de s'il contiennent ou non un mot
     public Sprite hasWord;
@@ -39,7 +40,8 @@ public class SC_PullOfWordPreparatory : MonoBehaviour
      */
     public void InitPreparatory()
     {
-        SC_GM_Master.gm.Test();
+        
+
         ChangeOfListe();
         InitCL();
         InitView();
@@ -92,9 +94,27 @@ public class SC_PullOfWordPreparatory : MonoBehaviour
             foreach (TextMeshProUGUI elem in champLexical[i])
                 elem.text = "";
 
-            champLexicalImage[i] = champsLexicaux[i].GetComponentsInChildren<Image>(true);
+            champLexicalImage[i] = RemoveAT(champsLexicaux[i].GetComponentsInChildren<Image>(true), 0);
         }
 
+    }
+
+    /*
+     * Generique fct de removeAt pour des tab
+     */
+    private T[] RemoveAT<T>(T[] tab, int index)
+    {
+        if (index < 0 || tab.Length < 1)
+            return tab;
+
+        T[] newTab = new T[tab.Length - 1];
+        int pos = 0;
+
+        for (int i = 0; i < tab.Length; i++)
+            if (i != index)
+                newTab[pos++] = tab[i];
+
+        return newTab;
     }
 
     /*
@@ -120,9 +140,14 @@ public class SC_PullOfWordPreparatory : MonoBehaviour
         if (nbCLRestant <= 0)
         {
             next.gameObject.SetActive(true);
+            vs.gameObject.SetActive(false);
 
             foreach (LayoutGroup elem in champsLexicaux)
                 elem.gameObject.SetActive(false);
+        }
+        else if (nbCLRestant == 1)
+        {
+            Debug.LogError("1 seul CL !!!");
         }
         else
         {
@@ -223,7 +248,7 @@ public class SC_PullOfWordPreparatory : MonoBehaviour
         choixCLTemp.Clear();
 
         SC_GM_Local.gm.wordsInPreparatory.Add(temp);
-
+        
         MakeVersus();
     }
 

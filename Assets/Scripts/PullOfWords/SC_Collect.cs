@@ -1,4 +1,6 @@
-﻿using TMPro;
+﻿using System.Collections;
+using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,14 +13,21 @@ public class SC_Collect : MonoBehaviour
     private Button[] buttons;
     private TextMeshProUGUI[] listOfButtons;
 
+    private bool isHighlighted;
+
     void Start()
     {
         ratioText.text = SC_GM_Local.gm.numberOfCLRecover.ToString() + "/" + SC_GM_Local.gm.numberOfCLRecoverable.ToString();
 
-        buttons = buttonCL.GetComponentsInChildren<Button>();
+        buttons = buttonCL.GetComponentsInChildren<Button>(true);
         listOfButtons = new TextMeshProUGUI[buttons.Length];
         for (int i = 0; i < buttons.Length; i++)
-            listOfButtons[i] = buttons[i].GetComponentInChildren<TextMeshProUGUI>();
+            listOfButtons[i] = buttons[i].GetComponentInChildren<TextMeshProUGUI>(true);
+
+        for (int i = 0; i < buttons.Length; i++)
+        {
+            buttons[i].gameObject.SetActive(false);
+        }
 
     }
 
@@ -31,9 +40,21 @@ public class SC_Collect : MonoBehaviour
 
         if (SC_GM_Local.gm.numberOfCLRecover == SC_GM_Local.gm.numberOfCLRecoverable)
         {
-            //arboAnim.SetTrigger("ArboIsFull");
-            //SC_BossHelp.instance.CloseBossHelp(2);
-            //SC_BossHelp.instance.OpenBossBubble(2);
+            transform.GetChild(2).GetComponent<Button>().interactable = true;
+
+            // Activate the used buttons only
+            for(int i =0; i< SC_GM_Local.gm.numberOfCLRecoverable; i++)
+            {
+                buttons[i].gameObject.SetActive(true);
+            }
+
+            if (!isHighlighted)
+            {
+                arboAnim.SetTrigger("Open");
+                isHighlighted = true;
+            }
+
+
         }
     }
 }

@@ -12,7 +12,7 @@ public class SC_PullOfWordWheel : MonoBehaviour
     public GameObject GO_wheelToLetter;
 
     // Images des buttons qui ne contiennent pas de mot
-    public Sprite hasNotWord;
+    public Sprite hasNoWord;
 
     // Info sur le CL
     private int numberOfElemInCL = 9;
@@ -25,7 +25,7 @@ public class SC_PullOfWordWheel : MonoBehaviour
 
     // Liste des mots de la wheel
     private TextMeshProUGUI[] listOfWheel;
-    public TextMeshProUGUI[] wheelToLetter;
+    private TextMeshProUGUI[] wheelToLetter;
 
     //##############################################################################################################################################################
     //########################################################################        INIT           ###############################################################
@@ -51,7 +51,7 @@ public class SC_PullOfWordWheel : MonoBehaviour
         foreach (TextMeshProUGUI elem in listOfWheel)
             elem.text = "";
 
-        BossHelp();
+        startWrittingButton.interactable = false;
     }
 
     /*
@@ -81,19 +81,32 @@ public class SC_PullOfWordWheel : MonoBehaviour
      */
     private void WriteWordAndCL()
     {
+        int pos;
         for (int i = 0; i < SC_GM_Local.gm.wordsInPreparatory.Count; i++)
         {
             SC_CLInPull cl = SC_GM_Local.gm.wordsInPreparatory[i];
             champLexical[i][posElemCl].text = cl.GetCL();
 
-            foreach (SC_Word word in cl.GetListWord())
-                champLexical[i][GetFirstCLWordFree(i)].text = word.titre;
+            for (int j = 0; j < numberOfElemInCL; j++)
+            {
+                pos = GetFirstCLWordFree(i);
+                if (pos != -1)
+                    if (j < cl.GetListWord().Count)
+                        champLexical[i][pos].text = cl.GetListWord()[j].titre;
+                    else
+                    {
+                        while (pos < champLexicalImage[i].Length)
+                        { 
+                            if (pos != posElemCl)
+                                champLexicalImage[i][pos].sprite = hasNoWord;
 
-            int j = GetFirstCLWordFree(i);
-            if (j == -1) return;
-            for (; j < numberOfElemInCL; j++)
-                if (j != posElemCl)
-                    champLexicalImage[i][j].sprite = hasNotWord;
+                            pos++;
+                        }
+
+                        break;
+                    }
+            }
+                    
         }
     }
 
@@ -124,10 +137,12 @@ public class SC_PullOfWordWheel : MonoBehaviour
             if (SC_GM_Local.gm.wheelOfWords.Contains(word))
                 return;
 
-            listOfWheel[GetFirstWordInWheelFree()].text = word.titre;
-            SC_GM_Local.gm.wheelOfWords.Add(word);
-
-            BossHelp(1);
+            int pos = GetFirstWordInWheelFree();
+            if (pos != -1)
+            {
+                listOfWheel[pos].text = word.titre;
+                SC_GM_Local.gm.wheelOfWords.Add(word);
+            }
         }
     }
 
@@ -170,8 +185,6 @@ public class SC_PullOfWordWheel : MonoBehaviour
         for (int i = 0; i < listOfWheel.Length; i++)
             if (listOfWheel[i] == tmp)
             {
-                BossHelp();
-
                 SC_GM_Local.gm.wheelOfWords.Remove(GetWordInCollect(tmp.text));
                 listOfWheel[i].text = "";
             }
@@ -190,22 +203,12 @@ public class SC_PullOfWordWheel : MonoBehaviour
      */
     public void StartWritting()
     {
-        for (int i = 0; i < listOfWheel.Length; i++)
-            if (i < wheelToLetter.Length)
-                wheelToLetter[i].text = listOfWheel[i].text;
+        if (SC_GM_Local.gm.wheelOfWords.Count >= 6)
+            for (int i = 0; i < listOfWheel.Length; i++)
+                if (i < wheelToLetter.Length)
+                    wheelToLetter[i].text = listOfWheel[i].text;
 
-    }
+        SC_GM_Timbre.gm.LoadTimbreEnvelope();
 
-    /*
-     * Gère le tuto à la première scène
-     */
-    private void BossHelp(int val = 0)
-    {
-        if (SC_GM_Local.gm.activeBonus)
-            if (SceneManager.GetActiveScene().name == "L_A1")
-            {
-                //SC_BossHelp.instance.CloseBossHelp(3);
-                //SC_BossHelp.instance.OpenBossBubble(3);
-            }
     }
 }

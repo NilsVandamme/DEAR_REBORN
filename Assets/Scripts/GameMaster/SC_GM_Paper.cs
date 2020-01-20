@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class SC_GM_Paper : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class SC_GM_Paper : MonoBehaviour
     // Asset des mots
     public bool paragraphsConfirmed;
     public SC_PaperSnapGrid[] snapPositions;
+    public Button SendButton;
     //public SC_DragDropControls[] ddcontrols;
     [HideInInspector]
     public List<SC_AutoComplete> acompletes;
@@ -23,24 +25,34 @@ public class SC_GM_Paper : MonoBehaviour
         //ddcontrols = FindObjectsOfType<SC_DragDropControls>();
     }
 
-    public void CalculateScore()
+    public void Update()
     {
-        foreach (string elem in SC_GM_Local.gm.choosenWordInLetter)
-            foreach (SC_ChampLexical listCL in SC_GM_Master.gm.listChampsLexicaux.listChampLexical)
-                foreach (SC_Word word in listCL.listOfWords)
-                    foreach (string mot in word.grammarCritere)
-                        if (elem == mot)
-                            score += word.scorePerso[SC_GM_Local.gm.peopleScore];
+        // Activate the send letter button
+        if(SC_ParagraphSorter.instance.SnappedParagraphs.Count >= 3)
+        {
+            SendButton.interactable = true;
+        }
+        else
+        {
+            SendButton.interactable = false;
+        }
     }
 
-    public void OnClickSubmitButton()
+    public void CalculateScore()
+    {
+        score = 0;
+        foreach (SC_Word word in SC_GM_Local.gm.choosenWordInLetter)
+            score += word.scorePerso[SC_GM_Local.gm.peopleScore];
+    }
+
+    public void CalculateScoresAndLoadNextScene()
     {
         Debug.Log("sumbit button - clicked");
        // Debug.Log("sumbit button - snapped paragrpahs = " + SC_ParagraphSorter.instance.SnappedParagraphs.Count);
         //if (paragraphsConfirmed == true)
         if(SC_ParagraphSorter.instance.SnappedParagraphs.Count >= 3)
         {
-            Debug.Log("sumbit button - 3 paragraphs snapped, calculating scores");
+            //Debug.Log("sumbit button - 3 paragraphs snapped, calculating scores");
             if (!DebugMode)
             {
                 CalculateScore();
@@ -51,26 +63,26 @@ public class SC_GM_Paper : MonoBehaviour
             {
                 Debug.Log("Loaded first scene");
                 if(!DebugMode)
-                    SceneManager.LoadScene(SC_GM_Local.gm.firstScene);
+                    SC_LoadingScreen.Instance.LoadThisScene(SC_GM_Local.gm.firstScene);
             }
             else if (SC_GM_Local.gm.numberOfScene == 2)
             {
                 Debug.Log("Loaded second scene");
                 if (!DebugMode)
-                    SceneManager.LoadScene(SC_GM_Local.gm.secondScene);
+                    SC_LoadingScreen.Instance.LoadThisScene(SC_GM_Local.gm.secondScene);
             }
 
             else if (score > SC_GM_Local.gm.secondPivotScene && SC_GM_Local.gm.numberOfScene == 3)
             {
                 Debug.Log("Loaded second scene");
                 if (!DebugMode)
-                    SceneManager.LoadScene(SC_GM_Local.gm.secondScene);
+                    SC_LoadingScreen.Instance.LoadThisScene(SC_GM_Local.gm.secondScene);
             }
             else
             {
                 Debug.Log("Loaded third scene");
                 if (!DebugMode)
-                    SceneManager.LoadScene(SC_GM_Local.gm.thirdScene);
+                    SC_LoadingScreen.Instance.LoadThisScene(SC_GM_Local.gm.thirdScene);
             }
 
         }
@@ -124,7 +136,7 @@ public class SC_GM_Paper : MonoBehaviour
         DebugMode = true;
         paragraphsConfirmed = true;
         score = testScore;
-        OnClickSubmitButton();
+        CalculateScoresAndLoadNextScene();
         DebugMode = false;
     }
 
@@ -133,7 +145,4 @@ public class SC_GM_Paper : MonoBehaviour
         CalculateScore();
         Debug.Log("Score: " + score);
     }
-
-
-    // SYSTEM
 }

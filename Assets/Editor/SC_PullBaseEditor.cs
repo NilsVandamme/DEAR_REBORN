@@ -26,6 +26,9 @@ public class SC_PullBaseEditor : Editor
         {
             Init();
 
+            if (GUILayout.Button("Load Base Pull"))
+                GeneratePullBase();
+
             for (int i = 0; i < pullBase.foldoutList.Length; i++)
             {
                 EditorGUILayout.BeginHorizontal();
@@ -50,8 +53,6 @@ public class SC_PullBaseEditor : Editor
                         EditorGUILayout.LabelField(listOfWordInActualCL[j].titre);
                         pullBase.motAccepterInCL[pos + j] = EditorGUILayout.Toggle(pullBase.motAccepterInCL[pos + j]);
 
-                        GeneratePullBase(i, j, pos);
-
                         EditorGUILayout.EndHorizontal();
                     }
 
@@ -67,9 +68,9 @@ public class SC_PullBaseEditor : Editor
 
     private void Init()
     {
-        if (pullBase.wordsInPull == null)
+        if (pullBase.wordsInBasePull == null)
         {
-            pullBase.wordsInPull = new List<SC_CLInPull>();
+            pullBase.wordsInBasePull = new List<SC_CLInPull>();
 
             pullBase.foldoutList = new bool[pullBase.listChampLexicaux.listChampLexical.Length];
 
@@ -81,46 +82,55 @@ public class SC_PullBaseEditor : Editor
         }
     }
 
-    private void GeneratePullBase(int i, int j, int pos)
+    private void GeneratePullBase()
     {
-        string cl = pullBase.listChampLexicaux.listNameChampLexical[i];
-        SC_Word word = pullBase.listChampLexicaux.listChampLexical[i].listOfWords[j];
+        string cl;
+        SC_Word word;
+        int h, pos = -1;
 
-        
+        pullBase.wordsInBasePull = new List<SC_CLInPull>();
 
-        if (pullBase.motAccepterInCL[pos + j])
-        {
-            for (i = 0; i < pullBase.wordsInPull.Count; i++)
-                if (pullBase.wordsInPull[i].GetCL() == cl)
-                {
-                    if (!pullBase.wordsInPull[i].GetListWord().Contains(word))
-                    {
-                        pullBase.wordsInPull[i].GetListWord().Add(word);
-                    }
-
-                    break;
-                }
-
-            if (i >= pullBase.wordsInPull.Count)
+        for (int i = 0; i < pullBase.listChampLexicaux.listChampLexical.Length; i++)
+            for (int j = 0; j < pullBase.listChampLexicaux.listChampLexical[i].listOfWords.Count; j++)
             {
-                pullBase.wordsInPull.Add(new SC_CLInPull(cl, word));
-            }
-        }
-        else
-        {
-            for (i = 0; i < pullBase.wordsInPull.Count; i++)
-                if (pullBase.wordsInPull[i].GetCL() == cl)
-                {
-                    if (pullBase.wordsInPull[i].GetListWord().Contains(word))
-                    {
-                        pullBase.wordsInPull[i].GetListWord().Remove(word);
-                    }
+                cl = pullBase.listChampLexicaux.listNameChampLexical[i];
+                word = pullBase.listChampLexicaux.listChampLexical[i].listOfWords[j];
+                pos++;
 
-                    if (pullBase.wordsInPull[i].GetListWord().Count <= 0)
+                if (pullBase.motAccepterInCL[pos]) // Si le mot à ete coche accepter
+                {
+                    for (h = 0; h < pullBase.wordsInBasePull.Count; h++)
+                        if (pullBase.wordsInBasePull[h].GetCL() == cl) // Si le CL existe deja
+                        {
+                            if (!pullBase.wordsInBasePull[h].GetListWord().Contains(word)) // Si le mot n'est pas encore dans le CL
+                            {
+                                pullBase.wordsInBasePull[h].GetListWord().Add(word); // On l'ajoute
+                            }
+
+                            break; // Sinon on fait rien
+                        }
+
+                    if (h >= pullBase.wordsInBasePull.Count) // Si le CL n'a pas été trouvé : il n'existe pas
                     {
-                        pullBase.wordsInPull.RemoveAt(i);
+                        pullBase.wordsInBasePull.Add(new SC_CLInPull(cl, word)); // On ajoute le CL et son mot
                     }
                 }
-        }  
+                else // Si le mot a ete cocher non accepter
+                {
+                    for (h = 0; h < pullBase.wordsInBasePull.Count; h++)
+                        if (pullBase.wordsInBasePull[h].GetCL() == cl) // Si le CL existe deja
+                        {
+                            if (pullBase.wordsInBasePull[h].GetListWord().Contains(word)) // Si le mot est dans le CL
+                            {
+                                pullBase.wordsInBasePull[h].GetListWord().Remove(word); // On l'enleve
+                            }
+
+                            if (pullBase.wordsInBasePull[h].GetListWord().Count <= 0) // Si le CL n'a plus de mot
+                            {
+                                pullBase.wordsInBasePull.RemoveAt(h); // On supprime le CL
+                            }
+                        }
+                }
+            }
     }
 }
