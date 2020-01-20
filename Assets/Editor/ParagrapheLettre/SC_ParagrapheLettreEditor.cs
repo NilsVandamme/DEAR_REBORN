@@ -61,6 +61,7 @@ public class SC_ParagrapheLettreEditor : Editor
             int sep = lineList[i].LastIndexOf(",");
             lineList[i] = lineList[i].Substring(0, sep) + "§" + lineList[i].Substring(sep + 1, lineList[i].Length - (sep + 1));
             lineList[i] = lineList[i].Replace("\"", "");
+            lineList[i] = lineList[i].Replace("£", "\n");
 
             cells = lineList[i].Split(separator, System.StringSplitOptions.None);
             
