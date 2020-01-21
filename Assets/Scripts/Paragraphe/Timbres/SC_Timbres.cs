@@ -3,9 +3,9 @@
 [System.Serializable]
 public class SC_Timbres
 {
-    private string name;
-    private bool visible;
-    private string text;
+    public string name;
+    public bool visible;
+    public string text;
 
     public SC_Timbres(string id, bool visible, string text)
     {

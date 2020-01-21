@@ -3,6 +3,10 @@ using UnityEngine;
 
 public class SC_GM_Master : MonoBehaviour
 {
+    [HideInInspector]
+    // Chemin des sauvegardes
+    public string path = System.IO.Directory.GetCurrentDirectory() + "/Assets/Save/";
+
     // Ensemble des champs lexicaux
     public SC_ListChampLexicaux listChampsLexicaux;
     public SC_PullBase pullBase;
@@ -21,10 +25,12 @@ public class SC_GM_Master : MonoBehaviour
         else if (gm != null)
             Destroy(gameObject);
 
-        gm.wordsInPull = new List<SC_CLInPull>();
+        if (gm.wordsInPull.Count == 0)
+        {
+            gm.wordsInPull = new List<SC_CLInPull>();
 
-        foreach (SC_CLInPull elem in pullBase.wordsInBasePull)
-            gm.wordsInPull.Add(elem);
-
+            foreach (SC_CLInPull elem in pullBase.wordsInBasePull)
+                gm.wordsInPull.Add(elem);
+        }
     }
 }

@@ -40,8 +40,6 @@ public class SC_PullOfWordPreparatory : MonoBehaviour
      */
     public void InitPreparatory()
     {
-        
-
         ChangeOfListe();
         InitCL();
         InitView();
@@ -52,8 +50,7 @@ public class SC_PullOfWordPreparatory : MonoBehaviour
      */
     private void ChangeOfListe()
     {
-        bool find;
-
+        bool find, contain;
         foreach (SC_CLInPull elem in SC_GM_Local.gm.wordsInCollect)
         {
             find = false;
@@ -64,8 +61,19 @@ public class SC_PullOfWordPreparatory : MonoBehaviour
                     find = true;
 
                     foreach (SC_Word word in elem.GetListWord())
-                        if (!SC_GM_Master.gm.wordsInPull[i].GetListWord().Contains(word))
+                    {
+                        contain = false;
+
+                        foreach (SC_Word word2 in SC_GM_Master.gm.wordsInPull[i].GetListWord())
+                            if (word.titre.Equals(word2.titre))
+                            {
+                                contain = true;
+                                break;
+                            }
+
+                        if (!contain)
                             SC_GM_Master.gm.wordsInPull[i].GetListWord().Add(word);
+                    }
 
                     break;
                 }

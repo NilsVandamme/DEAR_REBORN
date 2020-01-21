@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class SC_GM_Paper : MonoBehaviour
@@ -18,6 +18,17 @@ public class SC_GM_Paper : MonoBehaviour
     public List<SC_AutoComplete> acompletes;
 
     private bool DebugMode;
+
+    public static SC_GM_Paper instance;
+
+    private void Awake()
+    {
+        if (instance == null)
+            instance = this;
+        else if (instance != null)
+            Destroy(gameObject);
+
+    }
 
     private void Start()
     {

@@ -9,7 +9,7 @@ public class SC_LoadingScreen : MonoBehaviour
 {
     public static SC_LoadingScreen Instance; // Instance of this script
 
-    private string LoadedScene; // Name of the scene which will be loaded
+    private string LoadedScene = null; // Name of the scene which will be loaded
     public Animator anim; // Animator of the load screen
     public Image loadImage; // Image of the load screen
 
@@ -50,10 +50,10 @@ public class SC_LoadingScreen : MonoBehaviour
     */
 
     // Load the scene indicated by LoadedScene and trigger the loadscreen animation
-    public void LoadThisScene( string sceneToLoad)
+    public void LoadThisScene(string sceneToLoad)
     {
-        loadImage.enabled = true;
         LoadedScene = sceneToLoad;
+        loadImage.enabled = true;
         anim.SetTrigger("Show");
         StartCoroutine("MinimumLoadTime");
         //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
