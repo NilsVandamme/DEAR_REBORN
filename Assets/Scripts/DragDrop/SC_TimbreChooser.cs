@@ -1,19 +1,21 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
+// Manage the choice of the stamp on the envelope 
+
 public class SC_TimbreChooser : MonoBehaviour
 {
-    public static SC_TimbreChooser instance;
+    public static SC_TimbreChooser instance; // singleton instance
 
-    public List<GameObject> stamps;
-    public GameObject selectedStamp;
-    public GameObject StoryArbo;
-    public bool StampAlreadySelected;
-    private Animator anim;
+    public List<GameObject> stamps; // all stamps
+    public GameObject selectedStamp; // The stamp the player selected
+    public GameObject StoryArbo; // Story treeview screen
+    public bool StampAlreadySelected; // Has a stamp been selected ?
+    private Animator anim; // Animator
 
-    // Start is called before the first frame update
     void Start()
     {
+        // Singleton
         instance = this;
         //anim = GetComponent<Animator>();
 
@@ -24,6 +26,7 @@ public class SC_TimbreChooser : MonoBehaviour
         }
     }
 
+    // Get the stamp the player choosed
     public void ChooseStamp()
     {
         if (!StampAlreadySelected)
@@ -39,8 +42,6 @@ public class SC_TimbreChooser : MonoBehaviour
             StoryArbo.SetActive(true);
             // Play anim
             //anim.SetTrigger();
-
-            Debug.Log(selectedStamp.name + " has been snapped to the letter");
         }
     }
 }

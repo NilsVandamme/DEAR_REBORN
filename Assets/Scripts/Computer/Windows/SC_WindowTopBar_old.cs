@@ -5,19 +5,16 @@ using UnityEngine.EventSystems;
 
 public class SC_WindowTopBar_old : MonoBehaviour, IDragHandler, IBeginDragHandler
 {
-    private Vector2 offset;
-    //public bool IsOpen;
-    public float SnapInterval;
-    //public Image btnImg;
-    //public Text btnText;
-    private Animator windowAnim;
-    private RectTransform RT;
+    private Vector2 offset; // Offset of the mouse comapred to the window center
+    public float SnapInterval; // Make the window snap every x units
+    private RectTransform RT; // RectTransform of the computer
 
     private void Start()
     {
-        windowAnim = GetComponentInParent<Animator>();
+
     }
 
+    // Put the window in front of all others
     public void SetWindowFirst()
     {
         transform.parent.SetAsLastSibling();
@@ -25,7 +22,6 @@ public class SC_WindowTopBar_old : MonoBehaviour, IDragHandler, IBeginDragHandle
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        //Debug.Log("being moving " + gameObject.name);
         RT = transform.parent.parent.GetComponent<RectTransform>();
         // position of the mouse
         RectTransformUtility.ScreenPointToLocalPointInRectangle(transform.parent.parent.GetComponent<RectTransform>(), Input.mousePosition, Camera.main, out Vector2 localpoint);
@@ -35,8 +31,6 @@ public class SC_WindowTopBar_old : MonoBehaviour, IDragHandler, IBeginDragHandle
 
     public void OnDrag(PointerEventData eventData)
     {
-        //Debug.Log("moving " + gameObject.name + " window");
-
         // position of the mouse
         RectTransformUtility.ScreenPointToLocalPointInRectangle(transform.parent.parent.GetComponent<RectTransform>(), Input.mousePosition, Camera.main, out Vector2 localpoint);
 
@@ -59,42 +53,5 @@ public class SC_WindowTopBar_old : MonoBehaviour, IDragHandler, IBeginDragHandle
                 transform.parent.localPosition = new Vector3(transform.parent.localPosition.x, localpoint.y + offset.y, transform.parent.localPosition.z);
         }
 
-    }
-
-    // Top bar buttons functions
-
-    // Close button
-    public void CloseWindow()
-    {
-        transform.parent.gameObject.SetActive(false);
-    }
-
-    // Maximize or minimize button
-    public void MaximizeWindow()
-    {
-        /*
-        if(IsOpen == true) // Minimize
-        {
-            //windowContent.SetActive(false);
-
-            //btnImg.color = new Color(0.63f, 1f, 0.46f); // green
-            //btnText.text = "+";
-
-            windowAnim.SetTrigger("Min");
-
-            IsOpen = false;
-        }
-        else // Maximize
-        {
-            //windowContent.SetActive(true);
-
-            //btnImg.color = new Color(1f, 0.85f, 0.46f); // yellow
-            //btnText.text = "-";
-
-            windowAnim.SetTrigger("Max");
-
-            IsOpen = true;
-        }
-        */
     }
 }

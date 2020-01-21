@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// Game manager local, save important variables for this scene
 
 public class SC_GM_Local : MonoBehaviour
 {
@@ -12,9 +13,6 @@ public class SC_GM_Local : MonoBehaviour
     [HideInInspector]
     public int numberOfCLRecover = 0;
     public int numberOfCLRecoverable;
-
-    // Choose X Word
-    public bool activeBonus;
 
     // Prochaines Scenes
     [HideInInspector]

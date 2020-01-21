@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
+// Game manager master, save important variables between scenes 
+
 public class SC_GM_Master : MonoBehaviour
 {
     [HideInInspector]

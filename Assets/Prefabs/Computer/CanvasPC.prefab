@@ -595,7 +595,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3707478949355189541}
+      - m_Target: {fileID: 0}
         m_MethodName: OpenWindowInfos
         m_Mode: 1
         m_Arguments:
@@ -997,7 +997,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3707478949355189541}
+      - m_Target: {fileID: 0}
         m_MethodName: OpenWindowEmails
         m_Mode: 1
         m_Arguments:
@@ -1172,7 +1172,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6198430286584190173}
-  - component: {fileID: 3707478949355189541}
   - component: {fileID: 6468858278719967035}
   m_Layer: 5
   m_Name: ToolsAndWindowsPanel
@@ -1205,24 +1204,6 @@ RectTransform:
   m_AnchoredPosition: {x: -25, y: -25}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 1, y: 1}
---- !u!114 &3707478949355189541
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4013411957191101540}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1eb0481f2e69e1b40a4af1a4ff7e01ca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  WindowClientsLetter: {fileID: 5887523941180413371}
-  ClientsLetterWtb: {fileID: 0}
-  WindowClientsInfos: {fileID: 8157704551322967315}
-  ClientsInfosWtb: {fileID: 0}
-  WindowEmails: {fileID: 8639825158703603861}
-  EmailsWtb: {fileID: 0}
 --- !u!95 &6468858278719967035
 Animator:
   serializedVersion: 3
@@ -1962,12 +1943,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f6b683a720cf13b4695d077120303a47, type: 3}
---- !u!1 &5887523941180413371 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6144588909019586767, guid: f6b683a720cf13b4695d077120303a47,
-    type: 3}
-  m_PrefabInstance: {fileID: 356163540681258356}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &6649164768652223468 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6392803573223036568, guid: f6b683a720cf13b4695d077120303a47,
@@ -2521,12 +2496,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b2b50791f449cc64584deb5a9974b807, type: 3}
---- !u!1 &8157704551322967315 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6041180621214347225, guid: b2b50791f449cc64584deb5a9974b807,
-    type: 3}
-  m_PrefabInstance: {fileID: 2513968281497711306}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &8991373869865839428 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6783738461775993230, guid: b2b50791f449cc64584deb5a9974b807,
@@ -4945,12 +4914,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 52229c9d87a77a54a8b7e2a6d4e243ff, type: 3}
---- !u!1 &8639825158703603861 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4179741813264399848, guid: 52229c9d87a77a54a8b7e2a6d4e243ff,
-    type: 3}
-  m_PrefabInstance: {fileID: 5613664627368549757}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &8796911887152748226 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4031661734583126975, guid: 52229c9d87a77a54a8b7e2a6d4e243ff,
@@ -4964,11 +4927,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2615145673933777691}
     m_Modifications:
-    - target: {fileID: 527369732062055892, guid: e13273b91d4ead044b433f156bc2cf93,
-        type: 3}
-      propertyPath: m_Name
-      value: Collect
-      objectReference: {fileID: 0}
     - target: {fileID: 527369732062055893, guid: e13273b91d4ead044b433f156bc2cf93,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5049,6 +5007,11 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 527369732062055892, guid: e13273b91d4ead044b433f156bc2cf93,
+        type: 3}
+      propertyPath: m_Name
+      value: Collect
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e13273b91d4ead044b433f156bc2cf93, type: 3}
 --- !u!224 &5209010499938188646 stripped
@@ -5064,16 +5027,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2615145673933777691}
     m_Modifications:
-    - target: {fileID: 5219523072852952159, guid: 45d0a46e16b944fa0b7fdebdbd238e5c,
-        type: 3}
-      propertyPath: m_Name
-      value: BossCallWindow
-      objectReference: {fileID: 0}
-    - target: {fileID: 5219523072852952159, guid: 45d0a46e16b944fa0b7fdebdbd238e5c,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2671221931552483115, guid: 45d0a46e16b944fa0b7fdebdbd238e5c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5178,6 +5131,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5219523072852952159, guid: 45d0a46e16b944fa0b7fdebdbd238e5c,
+        type: 3}
+      propertyPath: m_Name
+      value: BossCallWindow
+      objectReference: {fileID: 0}
+    - target: {fileID: 5219523072852952159, guid: 45d0a46e16b944fa0b7fdebdbd238e5c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6415606491489320830, guid: 45d0a46e16b944fa0b7fdebdbd238e5c,
         type: 3}

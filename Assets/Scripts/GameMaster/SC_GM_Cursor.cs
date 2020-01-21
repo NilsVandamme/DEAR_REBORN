@@ -1,6 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+
+// Manage the cursor and its image
 
 public class SC_GM_Cursor : MonoBehaviour
 {
@@ -21,11 +21,6 @@ public class SC_GM_Cursor : MonoBehaviour
     void Start()
     {
         Cursor.SetCursor(normalCursor, Vector2.zero, CursorMode.Auto);
-    }
-
-    private void Update()
-    {
-        
     }
 
     public void changeToNormalCursor()
