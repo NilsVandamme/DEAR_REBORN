@@ -27,6 +27,7 @@ public class SC_SceneLockAndLoad : MonoBehaviour
             string save = File.ReadAllText(SC_GM_Master.gm.path + sceneToLoad + ".txt");
             SC_PlayerData saveObject = JsonUtility.FromJson<SC_PlayerData>(save);
 
+            SC_GM_Master.gm.namePlayer = saveObject.namePlayer;
             SC_GM_Master.gm.wordsInPull = saveObject.wordsInPull;
             SC_GM_Master.gm.timbres.timbres = saveObject.timbre;
 

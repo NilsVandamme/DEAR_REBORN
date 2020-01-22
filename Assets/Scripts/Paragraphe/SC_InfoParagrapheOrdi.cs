@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -30,7 +29,10 @@ public class SC_InfoParagrapheOrdi : MonoBehaviour, IPointerClickHandler
         highlightTimbres = ColorUtility.ToHtmlStringRGBA(highlightColorTimbres);
         
         foreach (TextPart elem in paragrapheOrdi.texte)
-            myText.text += elem.partText + " ";
+            if (elem.partText.Substring(7, 1).Equals("D"))
+                myText.text += SC_GM_Master.gm.namePlayer;
+            else
+                myText.text += elem.partText;
 
     }
 

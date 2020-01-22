@@ -13,6 +13,10 @@ public class SC_GM_Master : MonoBehaviour
     public SC_BaseTimbre timbres;
 
     [HideInInspector]
+    // Name Player
+    public string namePlayer;
+
+    [HideInInspector]
     // Liste des mots choisi par le joueur (CL, Word)
     public List<SC_CLInPull> wordsInPull;
 
