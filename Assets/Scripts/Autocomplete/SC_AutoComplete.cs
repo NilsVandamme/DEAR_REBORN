@@ -11,13 +11,19 @@ public class SC_AutoComplete : MonoBehaviour, IPointerClickHandler
     // Elements récupérer dans le canvas
     public TextMeshProUGUI myText;
 
+    private SC_ParagraphType typeParagraphe;
+    private float coef;
+
     // Object regroupant les informations obtenue lors des clicks
     private SC_ClickObject currentClick;
 
     void Start()
     {
         // Init le tab des inputs sauvegardées
-        SC_GM_Local.gm.choosenWordInLetter = new List<SC_Word>();
+        SC_GM_Local.gm.choosenWordInLetter = new List<(SC_Word, float)>();
+
+        typeParagraphe = this.gameObject.GetComponentInParent<SC_ParagraphType>();
+        coef = typeParagraphe.multiplicativeScore;
     }
 
     /*
@@ -67,15 +73,26 @@ public class SC_AutoComplete : MonoBehaviour, IPointerClickHandler
      */
     private void RewriteTextWithInputField()
     {
-        myText.text = myText.text.Remove(currentClick.getPosStartText(), currentClick.getLenOldWord());
-        myText.text = myText.text.Insert(currentClick.getPosStartText(), currentClick.getNewMot());
+        bool add = true;
 
-        if (!SC_GM_Local.gm.choosenWordInLetter.Contains(currentClick.getOldWord()))
-            SC_GM_Local.gm.choosenWordInLetter.Remove(currentClick.getOldWord());
+        for (int i = 0; i < SC_GM_Local.gm.choosenWordInLetter.Count; i++)
+            if (currentClick.getOldWord() != null && SC_GM_Local.gm.choosenWordInLetter[i].Item1.titre.Equals(currentClick.getOldWord().titre))
+            {
+                SC_GM_Local.gm.choosenWordInLetter.Remove(SC_GM_Local.gm.choosenWordInLetter[i]);
+                i--;
+            }
+            else if (SC_GM_Local.gm.choosenWordInLetter[i].Item1.titre.Equals(SC_GM_WheelToLetter.instance.getCurrentWord().titre))
+                add = false;
 
-        if (!SC_GM_Local.gm.choosenWordInLetter.Contains(SC_GM_WheelToLetter.instance.getCurrentWord()))
-            SC_GM_Local.gm.choosenWordInLetter.Add(SC_GM_WheelToLetter.instance.getCurrentWord());
+        if (add)
+        {
+            SC_GM_Local.gm.choosenWordInLetter.Add((SC_GM_WheelToLetter.instance.getCurrentWord(), coef));
 
+            myText.text = myText.text.Remove(currentClick.getPosStartText(), currentClick.getLenOldWord());
+            myText.text = myText.text.Insert(currentClick.getPosStartText(), currentClick.getNewMot());
+        }
+
+        Debug.Log(SC_GM_Local.gm.choosenWordInLetter.Count);
     }
 
     /*
@@ -107,15 +124,14 @@ public class SC_AutoComplete : MonoBehaviour, IPointerClickHandler
         
     }
 
-    private void DeleteWordInWheel (string mot)
+    private void DeleteWordInWheel(string mot)
     {
         foreach (SC_Word word in SC_GM_Local.gm.wheelOfWords)
             foreach (string critere in word.grammarCritere)
                 if (mot.Equals(critere))
-                    if (SC_GM_Local.gm.choosenWordInLetter.Contains(word))
-                    {
-                        SC_GM_Local.gm.choosenWordInLetter.Remove(word);
-                        return;
-                    }
+                    foreach ((SC_Word, float) elem in SC_GM_Local.gm.choosenWordInLetter)
+                        if (elem.Item1.titre.Equals(word.titre))
+                            SC_GM_Local.gm.choosenWordInLetter.Remove(elem);
+
     }
 }

@@ -8,6 +8,8 @@ public class SC_ParagraphType : MonoBehaviour
     public enum ParagraphType { Motivation, Clash, Orientation, WakeUp };
     public ParagraphType Type;
 
+    public float multiplicativeScore;
+
     private Image TypeIcon;
 
     // Start is called before the first frame update

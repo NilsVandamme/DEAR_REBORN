@@ -30,7 +30,7 @@ public class SC_GM_Local : MonoBehaviour
 
     [HideInInspector]
     // Liste des mots entre par le joueur
-    public List<SC_Word> choosenWordInLetter;
+    public List<(SC_Word, float)> choosenWordInLetter;
     [HideInInspector]
     public List<SC_Word> wheelOfWords;
     [HideInInspector]
