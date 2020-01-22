@@ -43,7 +43,7 @@ public class SC_ParagrapheLettreEditor : Editor
     /*
      * Lis le csv du paragraphe
      */
-    private void GenerateParagraphe()
+    public void GenerateParagraphe()
     {
         string deb = "<link=\"", middle = "\">", fin = "</link>";
 
