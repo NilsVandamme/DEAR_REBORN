@@ -19,9 +19,6 @@ public class SC_AutoComplete : MonoBehaviour, IPointerClickHandler
 
     void Start()
     {
-        // Init le tab des inputs sauvegardées
-        SC_GM_Local.gm.choosenWordInLetter = new List<(SC_Word, float)>();
-
         typeParagraphe = this.gameObject.GetComponentInParent<SC_ParagraphType>();
         coef = typeParagraphe.multiplicativeScore;
     }
@@ -75,24 +72,22 @@ public class SC_AutoComplete : MonoBehaviour, IPointerClickHandler
     {
         bool add = true;
 
-        for (int i = 0; i < SC_GM_Local.gm.choosenWordInLetter.Count; i++)
-            if (currentClick.getOldWord() != null && SC_GM_Local.gm.choosenWordInLetter[i].Item1.titre.Equals(currentClick.getOldWord().titre))
+        for (int i = 0; i < SC_GM_Master.gm.choosenWordInLetter.Count; i++)
+            if (currentClick.getOldWord() != null && SC_GM_Master.gm.choosenWordInLetter[i].Item1.titre.Equals(currentClick.getOldWord().titre))
             {
-                SC_GM_Local.gm.choosenWordInLetter.Remove(SC_GM_Local.gm.choosenWordInLetter[i]);
+                SC_GM_Master.gm.choosenWordInLetter.Remove(SC_GM_Master.gm.choosenWordInLetter[i]);
                 i--;
             }
-            else if (SC_GM_Local.gm.choosenWordInLetter[i].Item1.titre.Equals(SC_GM_WheelToLetter.instance.getCurrentWord().titre))
+            else if (SC_GM_Master.gm.choosenWordInLetter[i].Item1.titre.Equals(SC_GM_WheelToLetter.instance.getCurrentWord().titre))
                 add = false;
 
         if (add)
         {
-            SC_GM_Local.gm.choosenWordInLetter.Add((SC_GM_WheelToLetter.instance.getCurrentWord(), coef));
+            SC_GM_Master.gm.choosenWordInLetter.Add((SC_GM_WheelToLetter.instance.getCurrentWord(), coef));
 
             myText.text = myText.text.Remove(currentClick.getPosStartText(), currentClick.getLenOldWord());
             myText.text = myText.text.Insert(currentClick.getPosStartText(), currentClick.getNewMot());
         }
-
-        Debug.Log(SC_GM_Local.gm.choosenWordInLetter.Count);
     }
 
     /*
@@ -129,9 +124,9 @@ public class SC_AutoComplete : MonoBehaviour, IPointerClickHandler
         foreach (SC_Word word in SC_GM_Local.gm.wheelOfWords)
             foreach (string critere in word.grammarCritere)
                 if (mot.Equals(critere))
-                    foreach ((SC_Word, float) elem in SC_GM_Local.gm.choosenWordInLetter)
+                    foreach ((SC_Word, float) elem in SC_GM_Master.gm.choosenWordInLetter)
                         if (elem.Item1.titre.Equals(word.titre))
-                            SC_GM_Local.gm.choosenWordInLetter.Remove(elem);
+                            SC_GM_Master.gm.choosenWordInLetter.Remove(elem);
 
     }
 }

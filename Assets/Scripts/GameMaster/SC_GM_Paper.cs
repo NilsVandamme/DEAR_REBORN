@@ -34,7 +34,7 @@ public class SC_GM_Paper : MonoBehaviour
     public void Update()
     {
         // Activate the send letter button
-        if(SC_ParagraphSorter.instance.SnappedParagraphs.Count >= 3 && SC_GM_Local.gm.choosenWordInLetter.Count > 0)
+        if(SC_ParagraphSorter.instance.SnappedParagraphs.Count >= 3 && SC_GM_Master.gm.choosenWordInLetter.Count > 0)
         {
             SendButton.interactable = true;
         }
@@ -48,7 +48,7 @@ public class SC_GM_Paper : MonoBehaviour
     public void CalculateScore()
     {
         score = 0;
-        foreach ((SC_Word, float) elem in SC_GM_Local.gm.choosenWordInLetter)
+        foreach ((SC_Word, float) elem in SC_GM_Master.gm.choosenWordInLetter)
             score += (elem.Item1.scorePerso[SC_GM_Local.gm.peopleScore] * elem.Item2);
     }
 
