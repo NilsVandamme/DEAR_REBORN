@@ -41,7 +41,7 @@ public class SC_GM_Master : MonoBehaviour
             foreach (SC_CLInPull elem in pullBase.wordsInBasePull)
                 gm.wordsInPull.Add(elem);
 
-            SC_GM_Master.gm.choosenWordInLetter = new List<(SC_Word, float)>();
+           choosenWordInLetter = new List<(SC_Word, float)>();
         }
     }
 }

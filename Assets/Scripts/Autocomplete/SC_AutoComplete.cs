@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -10,6 +9,8 @@ public class SC_AutoComplete : MonoBehaviour, IPointerClickHandler
 
     // Elements récupérer dans le canvas
     public TextMeshProUGUI myText;
+    private string myTextSave;
+    private bool first;
 
     private SC_ParagraphType typeParagraphe;
     private float coef;
@@ -21,6 +22,7 @@ public class SC_AutoComplete : MonoBehaviour, IPointerClickHandler
     {
         typeParagraphe = this.gameObject.GetComponentInParent<SC_ParagraphType>();
         coef = typeParagraphe.multiplicativeScore;
+        first = true;
     }
 
     /*
@@ -28,6 +30,12 @@ public class SC_AutoComplete : MonoBehaviour, IPointerClickHandler
      */
     public void OnPointerClick(PointerEventData eventData)
     {
+        if (first)
+        {
+            myTextSave = myText.text;
+            first = false;
+        }
+
         int linkIndex = TMP_TextUtilities.FindIntersectingLink(myText, Input.mousePosition, cam);
 
         if (linkIndex != -1 && SC_GM_WheelToLetter.instance.getCurrentWord() != null)
@@ -114,7 +122,10 @@ public class SC_AutoComplete : MonoBehaviour, IPointerClickHandler
                 DeleteWordInWheel(myText.text.Substring(indexWord, lenght));
             }
             else
+            {
+                myText.text = myTextSave;
                 return;
+            }
         }
         
     }
@@ -124,9 +135,13 @@ public class SC_AutoComplete : MonoBehaviour, IPointerClickHandler
         foreach (SC_Word word in SC_GM_Local.gm.wheelOfWords)
             foreach (string critere in word.grammarCritere)
                 if (mot.Equals(critere))
-                    foreach ((SC_Word, float) elem in SC_GM_Master.gm.choosenWordInLetter)
-                        if (elem.Item1.titre.Equals(word.titre))
-                            SC_GM_Master.gm.choosenWordInLetter.Remove(elem);
+                    for (int i = 0; i < SC_GM_Master.gm.choosenWordInLetter.Count; i++)
+                        if (SC_GM_Master.gm.choosenWordInLetter[i].Item1.titre.Equals(word.titre))
+                        {
+                            SC_GM_Master.gm.choosenWordInLetter.RemoveAt(i);
+                            i--;
+                        }
+
 
     }
 }
