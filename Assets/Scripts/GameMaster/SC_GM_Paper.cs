@@ -1,26 +1,20 @@
-﻿using System.Collections.Generic;
-using System.IO;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
+
+// Calculate and store the score values, control the activation of the send button
 
 public class SC_GM_Paper : MonoBehaviour
 {
-    [HideInInspector]
-    // Score de la scene
-    public int score = 0;
-
-    // Asset des mots
-    public bool paragraphsConfirmed;
-    public SC_PaperSnapGrid[] snapPositions;
-    public Button SendButton;
-    //public SC_DragDropControls[] ddcontrols;
-    [HideInInspector]
-    public List<SC_AutoComplete> acompletes;
-
-    private bool DebugMode;
-
     public static SC_GM_Paper instance;
 
+    [HideInInspector]
+    public int score = 0; // Score result
+
+    // Asset des mots
+    public SC_PaperSnapGrid[] snapPositions; // All snap positions on the paper
+    public Button SendButton; // The send button on the paper
+
+    // Singleton
     private void Awake()
     {
         if (instance == null)
@@ -30,16 +24,17 @@ public class SC_GM_Paper : MonoBehaviour
 
     }
 
+    // Get all snap positions
     private void Start()
     {
         snapPositions = FindObjectsOfType<SC_PaperSnapGrid>();
-        //ddcontrols = FindObjectsOfType<SC_DragDropControls>();
     }
 
+    // Activate/Disable the send button
     public void Update()
     {
         // Activate the send letter button
-        if(SC_ParagraphSorter.instance.SnappedParagraphs.Count >= 3)
+        if(SC_ParagraphSorter.instance.SnappedParagraphs.Count >= 3 && SC_GM_Local.gm.choosenWordInLetter.Count > 0)
         {
             SendButton.interactable = true;
         }
@@ -49,6 +44,7 @@ public class SC_GM_Paper : MonoBehaviour
         }
     }
 
+    // Calculate and store the score value
     public void CalculateScore()
     {
         score = 0;
@@ -56,101 +52,11 @@ public class SC_GM_Paper : MonoBehaviour
             score += word.scorePerso[SC_GM_Local.gm.peopleScore];
     }
 
-    public void CalculateScoresAndLoadNextScene()
-    {
-        Debug.Log("sumbit button - clicked");
-       // Debug.Log("sumbit button - snapped paragrpahs = " + SC_ParagraphSorter.instance.SnappedParagraphs.Count);
-        //if (paragraphsConfirmed == true)
-        if(SC_ParagraphSorter.instance.SnappedParagraphs.Count >= 3)
-        {
-            //Debug.Log("sumbit button - 3 paragraphs snapped, calculating scores");
-            if (!DebugMode)
-            {
-                CalculateScore();
-            }
+    //******************************************************
+    //********************  DEBUG  ***************************
+    //******************************************************
 
-            Debug.Log("Score = " + score);
-            if (score > SC_GM_Local.gm.firstPivotScene)
-            {
-                Debug.Log("Loaded first scene");
-                if(!DebugMode)
-                    SC_LoadingScreen.Instance.LoadThisScene(SC_GM_Local.gm.firstScene);
-            }
-            else if (SC_GM_Local.gm.numberOfScene == 2)
-            {
-                Debug.Log("Loaded second scene");
-                if (!DebugMode)
-                    SC_LoadingScreen.Instance.LoadThisScene(SC_GM_Local.gm.secondScene);
-            }
-
-            else if (score > SC_GM_Local.gm.secondPivotScene && SC_GM_Local.gm.numberOfScene == 3)
-            {
-                Debug.Log("Loaded second scene");
-                if (!DebugMode)
-                    SC_LoadingScreen.Instance.LoadThisScene(SC_GM_Local.gm.secondScene);
-            }
-            else
-            {
-                Debug.Log("Loaded third scene");
-                if (!DebugMode)
-                    SC_LoadingScreen.Instance.LoadThisScene(SC_GM_Local.gm.thirdScene);
-            }
-
-        }
-    }
-
-    public void OnClickLockButton()
-    {
-        if (paragraphsConfirmed == false)
-        {
-            Debug.Log("Blocked paragraphs placement");
-            for (int i = 0; i < snapPositions.Length; i++)
-                if (snapPositions[i].currentSnappedObject != null && !acompletes.Contains(snapPositions[i].currentSnappedObject.GetComponentInChildren<SC_AutoComplete>()))
-                {
-                    acompletes.Add(snapPositions[i].currentSnappedObject.GetComponentInChildren<SC_AutoComplete>());
-
-                    for (int m = 0; m < acompletes.Count; m++)
-                    {
-                        //SC_ConfirmParagraphHighlight.instance.ChangeColor(true);
-                        acompletes[m].enabled = true;
-                    }
-
-                }
-
-            /*
-            for (int k = 0; k < ddcontrols.Length; k++)
-                ddcontrols[k].enabled = false;
-
-            if (ddcontrols.Length != 0)
-                //Debug.Log("no paragraphs were placed");
-                paragraphsConfirmed = true;
-                */
-        }
-        else
-        {
-            Debug.Log("Unblocked paragraphs placement");
-
-            for (int j = 0; j < acompletes.Count; j++)
-                acompletes[j].enabled = false;
-            /*
-            for (int l = 0; l < ddcontrols.Length; l++)
-                ddcontrols[l].enabled = true;
-                */
-            acompletes.Clear();
-            paragraphsConfirmed = false;
-            //SC_ConfirmParagraphHighlight.instance.ChangeColor(false);
-        }
-    }
-
-    public void DebugSubmit(int testScore)
-    {
-        DebugMode = true;
-        paragraphsConfirmed = true;
-        score = testScore;
-        CalculateScoresAndLoadNextScene();
-        DebugMode = false;
-    }
-
+    // Get and return the score
     public void DebugScore()
     {
         CalculateScore();

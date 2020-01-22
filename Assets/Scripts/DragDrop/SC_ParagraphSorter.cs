@@ -1,6 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
+
+// Manage the stock of all paragraphs and their display
 
 public class SC_ParagraphSorter : MonoBehaviour
 {
@@ -12,7 +13,7 @@ public class SC_ParagraphSorter : MonoBehaviour
     public List<GameObject> SnappedParagraphs;
 
 
-    [Header("All paragraphs types")]
+    //[Header("All paragraphs types")]
 
     public List<GameObject> OrientationParagraphs;
     public List<GameObject> WakeupParagraphs;

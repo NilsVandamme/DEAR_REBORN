@@ -3,18 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
+// Manage the speech of the boss window
+
 public class SC_BossSpeech : MonoBehaviour
 {
-    public TMP_Text BossText;
+    public TMP_Text BossText; // Text where the boss make his speech
 
     [TextArea(5,5)]
-    public List<string> Sentences;
+    public List<string> Sentences; // All sentences said by the boss
 
-    private int currentIndex;
-    private bool sentenceFinished;
+    private int currentIndex; // Current sentence
+    private bool sentenceFinished; // Has the sentence finished from printing ?
 
     private void Start()
     {
+        // Init variables
         BossText.text = "";
         sentenceFinished = true;
     }
@@ -37,6 +40,7 @@ public class SC_BossSpeech : MonoBehaviour
         }
     }
 
+    // Print the text with a typewritter effect
     IEnumerator PlayText()
     {
         sentenceFinished = false;

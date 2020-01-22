@@ -6,8 +6,6 @@ using UnityEngine;
 
 public class SC_DragDropControls : MonoBehaviour
 {
-    
-
     [Header("System values")]
 
     public float HoveringHeight = -5.25f; // Height at which the object will hover while being dragged

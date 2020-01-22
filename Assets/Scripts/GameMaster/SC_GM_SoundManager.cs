@@ -1,20 +1,22 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+
+// Manage the audio of the game
+
 public class SC_GM_SoundManager : MonoBehaviour
 {
-    public static SC_GM_SoundManager instance;
+    public static SC_GM_SoundManager instance; // singleton instance
 
-    private AudioSource ASourceSound;
-    private AudioSource ASourceMusic;
+    private AudioSource ASourceSound; // Audiosource for the sounds
+    private AudioSource ASourceMusic; // Audiosource for the music
 
-    public Slider soundSlider;
-    public Slider musicSlider;
+    public Slider soundSlider; // Slider from the main menu (no refs needed in other scenes)
+    public Slider musicSlider; // Slider from the main menu (no refs needed in other scenes)
 
-    public List<AudioClip> audioclips;
-        
+    public List<AudioClip> audioclips; // All audioclips which can be played
+    
 
     private void Awake()
     {
@@ -31,10 +33,11 @@ public class SC_GM_SoundManager : MonoBehaviour
 
     private void Start()
     {
+        // Get audiosources from childs
         ASourceSound = transform.GetChild(0).GetComponent<AudioSource>();
         ASourceMusic = transform.GetChild(1).GetComponent<AudioSource>();
 
-
+        // Get the saved setting from the playerprefs
         if (PlayerPrefs.HasKey("SoundVolume"))
         {
             ASourceSound.volume = PlayerPrefs.GetFloat("SoundVolume");
@@ -47,6 +50,7 @@ public class SC_GM_SoundManager : MonoBehaviour
             ASourceSound.volume = 1;
         }
 
+        // Get the saved setting from the playerprefs
         if (PlayerPrefs.HasKey("MusicVolume"))
         {
             
@@ -61,6 +65,7 @@ public class SC_GM_SoundManager : MonoBehaviour
         }
     }
 
+    // Play the specified sound from audioclips list
     public void PlaySound(string name)
     {
         foreach (AudioClip audio in audioclips)
@@ -68,17 +73,18 @@ public class SC_GM_SoundManager : MonoBehaviour
             if (audio.name == name)
             {
                 ASourceSound.PlayOneShot(audio);
-                //Debug.Log(audio.name + " sound played");
             }
         }
     }
 
+    // Change the volume in main menu
     public void ChangeSoundVolume(float SliderValue)
     {
         ASourceSound.volume = SliderValue;
         PlayerPrefs.SetFloat("SoundVolume", SliderValue);
     }
 
+    // Change the volume in main menu
     public void ChangeMusicVolume(float SliderValue)
     {
         ASourceMusic.volume = SliderValue;

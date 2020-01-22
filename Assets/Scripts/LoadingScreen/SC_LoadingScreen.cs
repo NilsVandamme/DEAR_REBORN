@@ -19,7 +19,6 @@ public class SC_LoadingScreen : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            // Don't destroy the loading screen while switching scenes:
         }
         else
         {
@@ -33,21 +32,7 @@ public class SC_LoadingScreen : MonoBehaviour
         anim = GetComponent<Animator>();
         loadImage = GetComponentInChildren<Image>();
         loadImage.enabled = false;
-
-        //anim.SetTrigger("Hide");
     }
-
-
-    // Debug only
-    /*
-    private void Update()
-    {
-        if (Input.GetMouseButtonDown(0))
-        {
-            LoadThisScene();
-        }
-    }
-    */
 
     // Load the scene indicated by LoadedScene and trigger the loadscreen animation
     public void LoadThisScene(string sceneToLoad)
@@ -56,8 +41,6 @@ public class SC_LoadingScreen : MonoBehaviour
         loadImage.enabled = true;
         anim.SetTrigger("Show");
         StartCoroutine("MinimumLoadTime");
-        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-
     }
 
     // Display the load screen
