@@ -17,6 +17,9 @@ public class SC_GM_Master : MonoBehaviour
     [HideInInspector]
     // Name Player
     public string namePlayer;
+    [HideInInspector]
+    // Liste des mots entre par le joueur
+    public List<(SC_Word, float)> choosenWordInLetter;
 
     [HideInInspector]
     // Liste des mots choisi par le joueur (CL, Word)
@@ -37,6 +40,8 @@ public class SC_GM_Master : MonoBehaviour
 
             foreach (SC_CLInPull elem in pullBase.wordsInBasePull)
                 gm.wordsInPull.Add(elem);
+
+            SC_GM_Master.gm.choosenWordInLetter = new List<(SC_Word, float)>();
         }
     }
 }

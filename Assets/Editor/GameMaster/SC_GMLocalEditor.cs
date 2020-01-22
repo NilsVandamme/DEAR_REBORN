@@ -1,4 +1,5 @@
-﻿using UnityEditor;
+﻿using System.Collections.Generic;
+using UnityEditor;
 
 [CanEditMultipleObjects]
 [CustomEditor(typeof(SC_GM_Local))]
@@ -6,6 +7,7 @@ public class SC_GMLocalEditor : Editor
 {
     private SC_GM_Local gmLocal;
     SC_Base baseInfo;
+    SC_ListChampLexicaux listCL;
 
     private void OnEnable()
     {
@@ -75,8 +77,6 @@ public class SC_GMLocalEditor : Editor
 
             EditorGUILayout.EndHorizontal();
         }
-
-
 
         EditorGUILayout.Space();
         EditorUtility.SetDirty(gmLocal);

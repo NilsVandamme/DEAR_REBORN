@@ -8,7 +8,7 @@ public class SC_GM_Paper : MonoBehaviour
     public static SC_GM_Paper instance;
 
     [HideInInspector]
-    public int score = 0; // Score result
+    public float score = 0; // Score result
 
     // Asset des mots
     public SC_PaperSnapGrid[] snapPositions; // All snap positions on the paper
@@ -34,7 +34,7 @@ public class SC_GM_Paper : MonoBehaviour
     public void Update()
     {
         // Activate the send letter button
-        if(SC_ParagraphSorter.instance.SnappedParagraphs.Count >= 3 && SC_GM_Local.gm.choosenWordInLetter.Count > 0)
+        if(SC_ParagraphSorter.instance.SnappedParagraphs.Count >= 3 && SC_GM_Master.gm.choosenWordInLetter.Count > 0)
         {
             SendButton.interactable = true;
         }
@@ -48,8 +48,8 @@ public class SC_GM_Paper : MonoBehaviour
     public void CalculateScore()
     {
         score = 0;
-        foreach (SC_Word word in SC_GM_Local.gm.choosenWordInLetter)
-            score += word.scorePerso[SC_GM_Local.gm.peopleScore];
+        foreach ((SC_Word, float) elem in SC_GM_Master.gm.choosenWordInLetter)
+            score += (elem.Item1.scorePerso[SC_GM_Local.gm.peopleScore] * elem.Item2);
     }
 
     //******************************************************
