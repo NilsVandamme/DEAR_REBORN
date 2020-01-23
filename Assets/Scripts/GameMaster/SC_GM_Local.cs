@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// Game manager local, save important variables for this scene
 
 public class SC_GM_Local : MonoBehaviour
 {
@@ -13,8 +14,9 @@ public class SC_GM_Local : MonoBehaviour
     public int numberOfCLRecover = 0;
     public int numberOfCLRecoverable;
 
-    // Choose X Word
-    public bool activeBonus;
+    // Mail a afficher avec les mots de la scene precedente
+    public GameObject paragrapheMailCache;
+    public List<string> wordsNeedsForPrintMailParagraphes = new List<string>();
 
     // Prochaines Scenes
     [HideInInspector]
@@ -31,14 +33,12 @@ public class SC_GM_Local : MonoBehaviour
     public string thirdScene;
 
     [HideInInspector]
-    // Liste des mots entre par le joueur
-    public List<SC_Word> choosenWordInLetter;
-    [HideInInspector]
     public List<SC_Word> wheelOfWords;
     [HideInInspector]
     public List<SC_CLInPull> wordsInCollect = new List<SC_CLInPull>();
     [HideInInspector]
     public List<SC_CLInPull> wordsInPreparatory = new List<SC_CLInPull>();
+
 
     public static SC_GM_Local gm = null;
 
@@ -49,6 +49,16 @@ public class SC_GM_Local : MonoBehaviour
         else if (gm != null)
             Destroy(gameObject);
 
+    }
+
+    private void Start()
+    {
+        foreach ((SC_Word, float) elem in SC_GM_Master.gm.choosenWordInLetter)
+            foreach (string mot in wordsNeedsForPrintMailParagraphes)
+                if (elem.Item1.titre.Equals(mot))
+                    paragrapheMailCache.SetActive(true);
+
+        SC_GM_Master.gm.choosenWordInLetter = new List<(SC_Word, float)>();
     }
 
 }

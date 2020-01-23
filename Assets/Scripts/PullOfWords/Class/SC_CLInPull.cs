@@ -3,8 +3,8 @@
 [System.Serializable]
 public class SC_CLInPull
 {
-    private string champLexical;
-    private List<SC_Word> word;
+    public string champLexical;
+    public List<SC_Word> word;
 
     public SC_CLInPull(string cl, SC_Word word)
     {

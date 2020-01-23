@@ -79,7 +79,7 @@ public class SC_BaseTimbreEditor : Editor
                     break;
 
             if (j < images.arraySize)
-                baseTimbre.timbres.Add(new SC_Timbres(cells[1], (Texture2D)images.GetArrayElementAtIndex(j).objectReferenceValue, bool.Parse(cells[2]), cells[0]));
+                baseTimbre.timbres.Add(new SC_Timbres(cells[1], bool.Parse(cells[2]), cells[0]));
 
         }
     }

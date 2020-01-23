@@ -1,43 +1,56 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+// Manage the collect panel on the computer
+
 public class SC_Collect : MonoBehaviour
 {
-    public TextMeshProUGUI ratioText;
-    public GameObject buttonCL;
-    public Animator arboAnim;
+    public TextMeshProUGUI ratioText; // Text of showing how many CL have been collected on the buttonCL (X/Y)
+    public GameObject buttonCL; // Button openning or closing the panel
+    public Animator arboAnim; // Animator
+ 
 
-    private Button[] buttons;
-    private TextMeshProUGUI[] listOfButtons;
+    private Button[] buttons; // All buttons showing collected CLs
+    private TextMeshProUGUI[] listOfButtons; // Text of the buttons showing CLs
 
-    private bool isHighlighted;
+    private bool isHighlighted; // Is currently highlighted ?
 
     void Start()
     {
-        ratioText.text = SC_GM_Local.gm.numberOfCLRecover.ToString() + "/" + SC_GM_Local.gm.numberOfCLRecoverable.ToString();
+        // Print the first value of ratioText
+        ratioText.text = 0 + "/" + SC_GM_Local.gm.numberOfCLRecoverable.ToString();
 
+        // Get the lists
         buttons = buttonCL.GetComponentsInChildren<Button>(true);
         listOfButtons = new TextMeshProUGUI[buttons.Length];
         for (int i = 0; i < buttons.Length; i++)
             listOfButtons[i] = buttons[i].GetComponentInChildren<TextMeshProUGUI>(true);
 
+        // Activate the buttons according to the number of CLs to collect
         for (int i = 0; i < buttons.Length; i++)
         {
             buttons[i].gameObject.SetActive(false);
         }
-
     }
 
     void Update()
     {
-        ratioText.text = SC_GM_Local.gm.numberOfCLRecover.ToString() + "/" + SC_GM_Local.gm.numberOfCLRecoverable.ToString();
 
+        if (ratioText.text != SC_GM_Local.gm.numberOfCLRecover.ToString() + "/" + SC_GM_Local.gm.numberOfCLRecoverable.ToString())
+        {
+            // Uodate the ratioText according to the recovered CLs
+            arboAnim.SetTrigger("Highlight");
+            ratioText.text = SC_GM_Local.gm.numberOfCLRecover.ToString() + "/" + SC_GM_Local.gm.numberOfCLRecoverable.ToString();
+        }
+        
+
+        // Update the listOfButtons texts to the collected CLs
+      
         for (int i = 0; i < SC_GM_Local.gm.wordsInCollect.Count; i++)
             listOfButtons[i].text = SC_GM_Local.gm.wordsInCollect[i].GetCL();
 
+        // Open the panel if all CLs have been collected
         if (SC_GM_Local.gm.numberOfCLRecover == SC_GM_Local.gm.numberOfCLRecoverable)
         {
             transform.GetChild(2).GetComponent<Button>().interactable = true;
@@ -53,7 +66,6 @@ public class SC_Collect : MonoBehaviour
                 arboAnim.SetTrigger("Open");
                 isHighlighted = true;
             }
-
 
         }
     }

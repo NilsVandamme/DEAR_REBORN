@@ -1,12 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
+
+// Gives the theme of the paragraph
 
 public class SC_ParagraphType : MonoBehaviour
 {
     public enum ParagraphType { Motivation, Clash, Orientation, WakeUp };
     public ParagraphType Type;
+
+    public float multiplicativeScore;
 
     private Image TypeIcon;
 
@@ -31,10 +33,5 @@ public class SC_ParagraphType : MonoBehaviour
         {
             TypeIcon.color = Color.red;
         }
-    }
-
-    public void HighlightSorterOnRemove()
-    {
-
     }
 }

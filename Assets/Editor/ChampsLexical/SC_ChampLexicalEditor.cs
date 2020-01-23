@@ -70,7 +70,6 @@ public class SC_ChampLexicalEditor : Editor
         string[] cells;
 
         List<SC_Word> wordInfos = new List<SC_Word>();
-        SC_Word word;
         
         for (int i = 1; i < lineList.Length; i++)
         {

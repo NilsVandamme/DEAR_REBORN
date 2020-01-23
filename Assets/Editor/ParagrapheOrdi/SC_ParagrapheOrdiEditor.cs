@@ -169,6 +169,8 @@ public class SC_ParagrapheOrdiEditor : Editor
                 text.partText = deb + 'B' + (cpt++) + middle + cells[0] + fin;
             else if (cells[2].Substring(0, cells[2].Length - 1) == "timbre" || cells[2] == "timbre")
                 text.partText = deb + 'C' + cells[1] + middle + cells[0] + fin;
+            else if (cells[2].Substring(0, cells[2].Length - 1) == "name" || cells[2] == "name")
+                text.partText = deb + 'D' + middle + fin;
             else
                 text.partText = deb + 'A' + middle + cells[0] + fin;
 

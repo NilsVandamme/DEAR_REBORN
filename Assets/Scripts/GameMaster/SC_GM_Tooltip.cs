@@ -4,20 +4,23 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
+// Manage the tooltips
+
 public class SC_GM_Tooltip : MonoBehaviour
 {
-    public SimpleTooltip[] ttips;
-    public bool tooltipActive;
-    public Toggle tog;
+    public SimpleTooltip[] ttips; // All tooltips elements
+    public bool tooltipActive; // Are the tooltips active ?
+    public Toggle tog; // Toggle from the main menu (no ref needed in game scenes)
 
-    // Start is called before the first frame update
+
     void Start()
     {
+        // Get all tooltip components
         ttips = Resources.FindObjectsOfTypeAll<SimpleTooltip>();
 
+        // Find in the playerprefs wether tooltips are turned on or off
         if (PlayerPrefs.HasKey("tooltip"))
         {
-            //Debug.Log("key");
             int intvalue = PlayerPrefs.GetInt("tooltip");
 
             if (intvalue == 0)
@@ -35,12 +38,35 @@ public class SC_GM_Tooltip : MonoBehaviour
         }
         else
         {
-            //Debug.Log("nokey");
             PlayerPrefs.SetInt("tooltip", 0);
             tooltipActive = false;
-            tog.isOn = false;
+            if (SceneManager.GetActiveScene().name == "L_00Menu")
+                tog.isOn = false;
         }
 
+        TurnOn();
+    }
+
+    // Change the state of the tooltips option in the playerprefs
+    public void ActivateToolTip(bool value)
+    {
+        if (value)
+        {
+            PlayerPrefs.SetInt("tooltip", 1);
+            tooltipActive = true;
+        }
+        else
+        {
+            PlayerPrefs.SetInt("tooltip", 0);
+            tooltipActive = false;
+        }
+
+        TurnOn();
+    }
+
+    // Turn or off on all tooltips
+    public void TurnOn()
+    {
         if (tooltipActive)
         {
             for (int i = 0; i < ttips.Length; i++)
@@ -51,14 +77,5 @@ public class SC_GM_Tooltip : MonoBehaviour
             for (int i = 0; i < ttips.Length; i++)
                 ttips[i].enabled = false;
         }
-    }
-
-
-    public void ActivateToolTip(bool value)
-    {
-        if (value)
-            PlayerPrefs.SetInt("tooltip", 1);
-        else
-            PlayerPrefs.SetInt("tooltip", 0);
     }
 }

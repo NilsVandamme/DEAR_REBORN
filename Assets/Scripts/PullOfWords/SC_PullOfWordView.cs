@@ -18,7 +18,7 @@ public class SC_PullOfWordView : MonoBehaviour
     // Liste des CL et leurs Words
     private LayoutGroup[] champsLexicaux;
     private TextMeshProUGUI[][] champLexicalWord;
-    private Button[][] champLexicalButton;
+    private Button[] champLexicalButton;
     private Image[][] champLexicalImage;
     private bool[] isOpen;
 
@@ -42,16 +42,14 @@ public class SC_PullOfWordView : MonoBehaviour
     private void InitCL()
     {
         champsLexicaux = GO_champsLexicaux.GetComponentsInChildren<LayoutGroup>(true);
+        champLexicalButton = GO_champsLexicaux.GetComponentsInChildren<Button>(true);
 
-        champLexicalButton = new Button[champsLexicaux.Length][];
         champLexicalWord = new TextMeshProUGUI[champsLexicaux.Length][];
         champLexicalImage = new Image[champsLexicaux.Length][];
         isOpen = new bool[champsLexicaux.Length];
 
         for (int i = 0; i < champsLexicaux.Length; i++)
         {
-            champLexicalButton[i] = champsLexicaux[i].GetComponentsInChildren<Button>(true);
-
             champLexicalWord[i] = champsLexicaux[i].GetComponentsInChildren<TextMeshProUGUI>(true);
             foreach (TextMeshProUGUI elem in champLexicalWord[i])
                 elem.text = "";
@@ -118,9 +116,9 @@ public class SC_PullOfWordView : MonoBehaviour
     public void OnClickButtonCL(Button but)
     {
         for (int i = 0; i < champLexicalButton.Length; i++)
-            if (champLexicalButton[i][posElemCl] == but)
+            if (champLexicalButton[i] == but)
             {
-                isOpen[i] = !champLexicalButton[i][0].IsActive();
+                isOpen[i] = !champLexicalImage[i][0].gameObject.activeSelf;
                 OpenClose(i, isOpen[i]);
                 CloseNeighbour(i);
             }
@@ -131,9 +129,9 @@ public class SC_PullOfWordView : MonoBehaviour
      */
     private void OpenClose(int cl, bool openClose)
     {
-        for (int i = 0; i < champLexicalButton[cl].Length; i++)
+        for (int i = 0; i < champLexicalImage[cl].Length; i++)
             if (i != posElemCl)
-                champLexicalButton[cl][i].gameObject.SetActive(openClose);
+                champLexicalImage[cl][i].gameObject.SetActive(openClose);
 
     }
 

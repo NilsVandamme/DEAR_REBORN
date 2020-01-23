@@ -3,6 +3,8 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+// Manage the timbres window & enveloppes
+
 public class SC_GM_Timbre : MonoBehaviour
 {
     public List<GameObject> timbreText;

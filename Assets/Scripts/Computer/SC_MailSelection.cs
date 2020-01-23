@@ -3,17 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+// Manage the mails in the mail window
+
 public class SC_MailSelection : MonoBehaviour
 {
-    public Color SelectedColor;
-    public GameObject mailTextsListParent;
-    public GameObject mailButtonsListParent;
-    public List<GameObject> mailTextsList;
-    public List<Image> mailButtonsList;
+    public GameObject mailTextsListParent; // Parent of the texts content
+    public GameObject mailButtonsListParent; // Parent of the buttons content
+    public List<GameObject> mailTextsList; // List of texts content
+    public List<Image> mailButtonsList; // List of buttons content
 
-    // Start is called before the first frame update
     void Start()
     {
+        // Init the lists
         foreach (Transform child in mailTextsListParent.transform)
         {
                 mailTextsList.Add(child.gameObject);
@@ -25,6 +26,7 @@ public class SC_MailSelection : MonoBehaviour
         }
     }
 
+    // Open the specified mail and disable all others
     public void OpenMailText(int index)
     {
         for (int i = 0; i < mailTextsList.Count; i++)
@@ -38,7 +40,5 @@ public class SC_MailSelection : MonoBehaviour
         {
             mailButtonsList[j].color = Color.white;
         }
-
-        mailButtonsList[index].color = SelectedColor;
     }
 }
