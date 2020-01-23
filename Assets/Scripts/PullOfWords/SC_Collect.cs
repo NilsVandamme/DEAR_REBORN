@@ -36,17 +36,21 @@ public class SC_Collect : MonoBehaviour
 
     void Update()
     {
+        // Uodate the ratioText according to the recovered CLs
+        ratioText.text = SC_GM_Local.gm.numberOfCLRecover.ToString() + "/" + SC_GM_Local.gm.numberOfCLRecoverable.ToString();
 
-        if (ratioText.text != SC_GM_Local.gm.numberOfCLRecover.ToString() + "/" + SC_GM_Local.gm.numberOfCLRecoverable.ToString())
+        if (isHighlighted)
         {
-            // Uodate the ratioText according to the recovered CLs
+            Debug.Log("reeee");
             arboAnim.SetTrigger("Highlight");
-            ratioText.text = SC_GM_Local.gm.numberOfCLRecover.ToString() + "/" + SC_GM_Local.gm.numberOfCLRecoverable.ToString();
         }
-        
 
-        // Update the listOfButtons texts to the collected CLs
-      
+        if(SC_GM_Local.gm.numberOfCLRecover < SC_GM_Local.gm.numberOfCLRecoverable && SC_GM_Local.gm.numberOfCLRecover > 0)
+        {
+            isHighlighted = true;
+        }
+
+        // Update the listOfButtons texts to the collected CLs      
         for (int i = 0; i < SC_GM_Local.gm.wordsInCollect.Count; i++)
             listOfButtons[i].text = SC_GM_Local.gm.wordsInCollect[i].GetCL();
 
@@ -61,10 +65,10 @@ public class SC_Collect : MonoBehaviour
                 buttons[i].gameObject.SetActive(true);
             }
 
+            isHighlighted = false;
             if (!isHighlighted)
             {
                 arboAnim.SetTrigger("Open");
-                isHighlighted = true;
             }
 
         }

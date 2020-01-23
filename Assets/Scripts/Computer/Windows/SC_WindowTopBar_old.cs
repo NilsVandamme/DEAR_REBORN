@@ -14,6 +14,11 @@ public class SC_WindowTopBar_old : MonoBehaviour, IDragHandler, IBeginDragHandle
 
     }
 
+    public void test()
+    {
+        Debug.Log(gameObject.name + " got clicked");
+    }
+
     // Put the window in front of all others
     public void SetWindowFirst()
     {
