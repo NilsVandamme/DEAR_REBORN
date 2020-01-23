@@ -13,6 +13,8 @@ public class SC_InfoParagrapheOrdi : MonoBehaviour, IPointerClickHandler
     public Camera cam;
     public float wait;
 
+    private int lengthLink = 10;
+    private int lengthLinkEnd = 7;
     private int lenghtMark = 9;
     private int lenghtColor = 9;
     private string highlight;
@@ -67,7 +69,11 @@ public class SC_InfoParagrapheOrdi : MonoBehaviour, IPointerClickHandler
             yield return new WaitForSeconds(wait);
             ChangeTextColor(linkInfo, textNormal);
 
-            if (linkInfo.GetLinkID()[0] == 'B') // CL
+            if (linkInfo.GetLinkID()[0] == 'A') // Texte
+            {
+                Barre(linkInfo);
+            }
+            else if (linkInfo.GetLinkID()[0] == 'B') // CL
             {
                 int id = int.Parse(linkInfo.GetLinkID().Substring(1));
 
@@ -156,4 +162,17 @@ public class SC_InfoParagrapheOrdi : MonoBehaviour, IPointerClickHandler
         myText.text = myText.text.Substring(0, lastIndexPart1) + color + myText.text.Substring(lastIndexPart1 + color.Length, lenghtPart2);
     }
 
+    /*
+     * Barre le texte sur lequel on a clicker
+     */
+    private void Barre(TMP_LinkInfo linkInfo)
+    {
+        int startMiddle = (linkInfo.linkIdFirstCharacterIndex - lengthLinkEnd) + lengthLink;
+        int startMiddleLenght = myText.text.IndexOf("</link>", linkInfo.linkIdFirstCharacterIndex) - startMiddle;
+        int startEnd = myText.text.IndexOf("</link>", linkInfo.linkIdFirstCharacterIndex);
+
+        myText.text = myText.text.Substring(0, startMiddle) + "<s>" +
+                        myText.text.Substring(startMiddle, startMiddleLenght) + "</s>" +
+                        myText.text.Substring(startEnd, myText.text.Length - startEnd);
+    }
 }
