@@ -36,7 +36,7 @@ public class SC_Collect : MonoBehaviour
 
     void Update()
     {
-        // Uodate the ratioText according to the recovered CLs
+        // Update the ratioText according to the recovered CLs
         ratioText.text = SC_GM_Local.gm.numberOfCLRecover.ToString() + "/" + SC_GM_Local.gm.numberOfCLRecoverable.ToString();
 
         if (isHighlighted)
