@@ -14,7 +14,7 @@ public class SC_Collect : MonoBehaviour
     private Button[] buttons; // All buttons showing collected CLs
     private TextMeshProUGUI[] listOfButtons; // Text of the buttons showing CLs
 
-    private bool isHighlighted; // Is currently highlighted ?
+    public bool isHighlighted; // Is currently highlighted ?
 
     void Start()
     {
@@ -39,16 +39,7 @@ public class SC_Collect : MonoBehaviour
         // Update the ratioText according to the recovered CLs
         ratioText.text = SC_GM_Local.gm.numberOfCLRecover.ToString() + "/" + SC_GM_Local.gm.numberOfCLRecoverable.ToString();
 
-        if (isHighlighted)
-        {
-            Debug.Log("reeee");
-            arboAnim.SetTrigger("Highlight");
-        }
 
-        if(SC_GM_Local.gm.numberOfCLRecover < SC_GM_Local.gm.numberOfCLRecoverable && SC_GM_Local.gm.numberOfCLRecover > 0)
-        {
-            isHighlighted = true;
-        }
 
         // Update the listOfButtons texts to the collected CLs      
         for (int i = 0; i < SC_GM_Local.gm.wordsInCollect.Count; i++)
@@ -64,13 +55,18 @@ public class SC_Collect : MonoBehaviour
             {
                 buttons[i].gameObject.SetActive(true);
             }
+        }
 
-            isHighlighted = false;
-            if (!isHighlighted)
-            {
-                arboAnim.SetTrigger("Open");
-            }
-
+        if (SC_GM_Local.gm.numberOfCLRecover < SC_GM_Local.gm.numberOfCLRecoverable && SC_GM_Local.gm.numberOfCLRecover > 0 && isHighlighted == false)
+        {
+            Debug.Log("yare yare daze");
+            arboAnim.SetTrigger("Highlight");
+        }
+        if(SC_GM_Local.gm.numberOfCLRecover == SC_GM_Local.gm.numberOfCLRecoverable && isHighlighted == false)
+        {
+            Debug.Log("reeee");
+            arboAnim.SetTrigger("Open");
+            isHighlighted = true;
         }
     }
 }
