@@ -22,14 +22,22 @@ public class SC_InfoParagrapheOrdi : MonoBehaviour, IPointerClickHandler
     private int lenghtBaliseColorVerification = 8;
 
     private bool oneClick = false;
+    private int elemCliquable;
+    private bool hover;
 
     private void Start()
     {
+        elemCliquable = 0;
+        hover = false;
+
         foreach (TextPart elem in paragrapheOrdi.texte)
             if (elem.partText.Substring(7, 1).Equals("D"))
                 myText.text += SC_GM_Master.gm.namePlayer;
             else
+            {
                 myText.text += elem.partText;
+                elemCliquable++;
+            }
 
         normalTextColor = myText.color;
 
@@ -37,19 +45,27 @@ public class SC_InfoParagrapheOrdi : MonoBehaviour, IPointerClickHandler
 
     private void Update()
     {
-        if (listeTexteChangeColor != null && listeTexteChangeColor.lerp < 1)
-        {
-            Color temp = Color.Lerp(normalTextColor, listeTexteChangeColor.color, listeTexteChangeColor.lerp);
-            listeTexteChangeColor.lerp += Time.deltaTime / wait;
-            string textColor = ColorUtility.ToHtmlStringRGBA(temp);
-            myText.text = listeTexteChangeColor.start + textColor + listeTexteChangeColor.end;
-        }
-        else
-        {
-            listeTexteChangeColor = null;
-            oneClick = false;
-            SC_GM_Cursor.gm.changeToNormalCursor();
-        }
+        if (listeTexteChangeColor != null)
+            if (listeTexteChangeColor.lerp < 1)
+            {
+                Color temp = Color.Lerp(normalTextColor, listeTexteChangeColor.color, listeTexteChangeColor.lerp);
+                listeTexteChangeColor.lerp += Time.deltaTime / wait;
+                string textColor = ColorUtility.ToHtmlStringRGBA(temp);
+                myText.text = listeTexteChangeColor.start + textColor + listeTexteChangeColor.end;
+            }
+            else
+            {
+                listeTexteChangeColor = null;
+                elemCliquable--;
+
+                if (elemCliquable > 0) 
+                    oneClick = false;
+
+                if (hover)
+                    SC_GM_Cursor.gm.changeToHoverCursor();
+                else
+                    SC_GM_Cursor.gm.changeToNormalCursor();
+            }
     }
 
     /*
@@ -174,42 +190,20 @@ public class SC_InfoParagrapheOrdi : MonoBehaviour, IPointerClickHandler
 
     }
 
+    public void TextHover()
+    {
+        if (elemCliquable > 0)
+        {
+            SC_GM_Cursor.gm.changeToHoverCursor();
+            hover = true;
+        }
 
+    }
 
+    public void TextHoverExit()
+    {
+        hover = false;
+        SC_GM_Cursor.gm.changeToNormalCursor();
+    }
 
-
-
-
-
-
-
-    //########################################################################################################################################################################
-    //########################################################################################################################################################################
-    //#################################################################################  PLUS UTILE  #########################################################################
-    //########################################################################################################################################################################
-    //########################################################################################################################################################################
-
-    ///*
-    // * Highlight la partie CL récupéré
-    // */
-    //private void Highlight(TMP_LinkInfo linkInfo, string color)
-    //{
-    //    int lastIndexPart1 = linkInfo.linkIdFirstCharacterIndex + linkInfo.linkIdLength + lenghtMark;
-    //    int lenghtPart2 = myText.text.Length - (lastIndexPart1 + color.Length);
-    //    myText.text = myText.text.Substring(0, lastIndexPart1) + color + myText.text.Substring(lastIndexPart1 + color.Length, lenghtPart2);
-    //}
-
-    ///*
-    // * Barre le texte sur lequel on a clicker
-    // */
-    //private void Barre(TMP_LinkInfo linkInfo)
-    //{
-    //    int startMiddle = (linkInfo.linkIdFirstCharacterIndex - lengthLinkEnd) + lengthLink;
-    //    int startMiddleLenght = myText.text.IndexOf("</link>", linkInfo.linkIdFirstCharacterIndex) - startMiddle;
-    //    int startEnd = myText.text.IndexOf("</link>", linkInfo.linkIdFirstCharacterIndex);
-
-    //    myText.text = myText.text.Substring(0, startMiddle) + "<s>" +
-    //                    myText.text.Substring(startMiddle, startMiddleLenght) + "</s>" +
-    //                    myText.text.Substring(startEnd, myText.text.Length - startEnd);
-    //}
 }
