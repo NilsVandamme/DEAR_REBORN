@@ -42,7 +42,7 @@ public class SC_CollectedCLFeedback : MonoBehaviour
             timer += Time.deltaTime;
             if (timer > WaitTime)
             {
-                transform.position = Vector3.Lerp(new Vector3(transform.position.x, transform.position.y, -0.5f), CollectPosition.position, 0.01f);
+                transform.position = Vector3.Lerp(new Vector3(transform.position.x, transform.position.y, -0.5f), CollectPosition.position, 0.03f);
 
 
                 if (Vector2.Distance(transform.position, CollectPosition.position) < StartAnimDistance && Vector2.Distance(transform.position, CollectPosition.position) >= StartAnimDistance - 1)
