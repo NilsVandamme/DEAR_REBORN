@@ -61,7 +61,7 @@ public class SC_InfoParagrapheOrdi : MonoBehaviour, IPointerClickHandler
                 if (elemCliquable > 0) 
                     oneClick = false;
 
-                if (hover)
+                if (hover && elemCliquable > 0)
                     SC_GM_Cursor.gm.changeToHoverCursor();
                 else
                     SC_GM_Cursor.gm.changeToNormalCursor();
@@ -121,6 +121,9 @@ public class SC_InfoParagrapheOrdi : MonoBehaviour, IPointerClickHandler
                         SC_GM_Local.gm.numberOfCLRecover++;
                         ChangeTextColor(linkInfo, CLRecoltColor);
                     }
+
+                    SC_CollectedCLFeedback.instance.text.text = paragrapheOrdi.listChampLexicaux.listNameChampLexical[paragrapheOrdi.champLexical[id]];
+                    SC_CollectedCLFeedback.instance.StartFeedback(SC_CollectedCLFeedback.instance.GetMouseWorldPos());
 
                 }
             }
