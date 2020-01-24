@@ -8,18 +8,20 @@ using TMPro;
 public class SC_BossSpeech : MonoBehaviour
 {
     public TMP_Text BossText; // Text where the boss make his speech
-
+    public GameObject button;
     [TextArea(5,5)]
     public List<string> Sentences; // All sentences said by the boss
 
     private int currentIndex; // Current sentence
     private bool sentenceFinished; // Has the sentence finished from printing ?
 
+
     private void Start()
     {
         // Init variables
         BossText.text = "";
         sentenceFinished = true;
+        DisplayNextSentence();
     }
 
     // Display next sentence
@@ -33,9 +35,9 @@ public class SC_BossSpeech : MonoBehaviour
                 StartCoroutine("PlayText");
                 currentIndex++;
             }
-            else
+            if(currentIndex >= Sentences.Count)
             {
-                // Play whatever
+                button.SetActive(false);
             }
         }
     }
