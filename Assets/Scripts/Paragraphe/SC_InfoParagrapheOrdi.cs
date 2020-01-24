@@ -136,6 +136,9 @@ public class SC_InfoParagrapheOrdi : MonoBehaviour, IPointerClickHandler
                         SC_GM_Timbre.gm.Affiche(timbres);
                         ChangeTextColor(linkInfo, timbresRecoltColor);
                     }
+
+                //SC_CollectedTimbresFeedback.instance.image.sprite =  // CHANGER IMAGE TIMBRE
+                SC_CollectedTimbresFeedback.instance.StartFeedback(SC_CollectedTimbresFeedback.instance.GetMouseWorldPos());
             }
             else // Non collectable
             {
