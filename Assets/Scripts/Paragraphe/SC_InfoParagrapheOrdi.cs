@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -7,35 +8,64 @@ public class SC_InfoParagrapheOrdi : MonoBehaviour, IPointerClickHandler
 {
     public SC_ParagrapheOrdi paragrapheOrdi;
     public TextMeshProUGUI myText;
-    public Color highlightColor;
-    public Color highlightColorTimbres;
-    public Color textLoadingColor;
+    public Color CLRecoltColor;
+    public Color timbresRecoltColor;
+    public Color textNonRecoltableColor;
     public Camera cam;
     public float wait;
 
-    private int lengthLink = 10;
-    private int lengthLinkEnd = 7;
-    private int lenghtMark = 9;
-    private int lenghtColor = 9;
-    private string highlight;
-    private string highlightTimbres;
-    private string textNormal;
-    private string textLoading;
+    private Color normalTextColor;
+    private SC_ChangeColorText listeTexteChangeColor;
+
+    // Lenght des composants des balises
+    private int lenghtBaliseColor = 10;
+    private int lenghtBaliseColorVerification = 8;
+
     private bool oneClick = false;
+    private int elemCliquable;
+    private bool hover;
 
     private void Start()
     {
-        highlight = ColorUtility.ToHtmlStringRGBA(highlightColor);
-        textNormal = ColorUtility.ToHtmlStringRGBA(myText.color);
-        textLoading = ColorUtility.ToHtmlStringRGBA(textLoadingColor);
-        highlightTimbres = ColorUtility.ToHtmlStringRGBA(highlightColorTimbres);
-        
+        elemCliquable = 0;
+        hover = false;
+
         foreach (TextPart elem in paragrapheOrdi.texte)
             if (elem.partText.Substring(7, 1).Equals("D"))
                 myText.text += SC_GM_Master.gm.namePlayer;
             else
+            {
                 myText.text += elem.partText;
+                elemCliquable++;
+            }
 
+        normalTextColor = myText.color;
+
+    }
+
+    private void Update()
+    {
+        if (listeTexteChangeColor != null)
+            if (listeTexteChangeColor.lerp < 1)
+            {
+                Color temp = Color.Lerp(normalTextColor, listeTexteChangeColor.color, listeTexteChangeColor.lerp);
+                listeTexteChangeColor.lerp += Time.deltaTime / wait;
+                string textColor = ColorUtility.ToHtmlStringRGBA(temp);
+                myText.text = listeTexteChangeColor.start + textColor + listeTexteChangeColor.end;
+            }
+            else
+            {
+                listeTexteChangeColor = null;
+                elemCliquable--;
+
+                if (elemCliquable > 0) 
+                    oneClick = false;
+
+                if (hover)
+                    SC_GM_Cursor.gm.changeToHoverCursor();
+                else
+                    SC_GM_Cursor.gm.changeToNormalCursor();
+            }
     }
 
     /*
@@ -49,7 +79,7 @@ public class SC_InfoParagrapheOrdi : MonoBehaviour, IPointerClickHandler
 
             int linkIndex = TMP_TextUtilities.FindIntersectingLink(myText, Input.mousePosition, cam);
 
-            StartCoroutine(Collect(linkIndex));
+            Collect(linkIndex);
         }
     }
 
@@ -57,7 +87,7 @@ public class SC_InfoParagrapheOrdi : MonoBehaviour, IPointerClickHandler
     /*
      * Regarde si le CL est ajoutable ou non
      */
-    private IEnumerator Collect(int linkIndex)
+    private void Collect(int linkIndex)
     {
         if (linkIndex != -1) //Collectable
         {
@@ -65,13 +95,9 @@ public class SC_InfoParagrapheOrdi : MonoBehaviour, IPointerClickHandler
 
             SC_GM_Cursor.gm.changeToLoadCursor();
 
-            ChangeTextColor(linkInfo, textLoading);
-            yield return new WaitForSeconds(wait);
-            ChangeTextColor(linkInfo, textNormal);
-
             if (linkInfo.GetLinkID()[0] == 'A') // Texte
             {
-                Barre(linkInfo);
+                ChangeTextColor(linkInfo, textNonRecoltableColor);
             }
             else if (linkInfo.GetLinkID()[0] == 'B') // CL
             {
@@ -93,7 +119,7 @@ public class SC_InfoParagrapheOrdi : MonoBehaviour, IPointerClickHandler
                     if (add)
                     {
                         SC_GM_Local.gm.numberOfCLRecover++;
-                        Highlight(linkInfo, highlight);
+                        ChangeTextColor(linkInfo, CLRecoltColor);
                     }
 
                 }
@@ -105,7 +131,7 @@ public class SC_InfoParagrapheOrdi : MonoBehaviour, IPointerClickHandler
                     {
                         timbres.setVisible(true);
                         SC_GM_Timbre.gm.Affiche(timbres);
-                        Highlight(linkInfo, highlightTimbres);
+                        ChangeTextColor(linkInfo, timbresRecoltColor);
                     }
             }
             else // Non collectable
@@ -114,8 +140,6 @@ public class SC_InfoParagrapheOrdi : MonoBehaviour, IPointerClickHandler
             }
         }
 
-        SC_GM_Cursor.gm.changeToNormalCursor();
-        oneClick = false;
     }
 
     /*
@@ -143,36 +167,43 @@ public class SC_InfoParagrapheOrdi : MonoBehaviour, IPointerClickHandler
     }
 
     /*
-     * Highlight la partie CL récupéré
-     */
-    private void Highlight(TMP_LinkInfo linkInfo, string color)
-    {
-        int lastIndexPart1 = linkInfo.linkIdFirstCharacterIndex + linkInfo.linkIdLength + lenghtMark;
-        int lenghtPart2 = myText.text.Length - (lastIndexPart1 + color.Length);
-        myText.text = myText.text.Substring(0, lastIndexPart1) + color + myText.text.Substring(lastIndexPart1 + color.Length, lenghtPart2);
-    }
-
-    /*
      * Change le couleur du texte
      */
-    private void ChangeTextColor(TMP_LinkInfo linkInfo, string color)
+    private void ChangeTextColor(TMP_LinkInfo linkInfo, Color color)
     {
-        int lastIndexPart1 = linkInfo.linkIdFirstCharacterIndex + linkInfo.linkIdLength + lenghtMark + lenghtColor + highlight.Length;
-        int lenghtPart2 = myText.text.Length - (lastIndexPart1 + color.Length);
-        myText.text = myText.text.Substring(0, lastIndexPart1) + color + myText.text.Substring(lastIndexPart1 + color.Length, lenghtPart2);
+        Color actualColor;
+        string textColor = ColorUtility.ToHtmlStringRGBA(color);
+
+        int lastIndexPart1 = linkInfo.linkIdFirstCharacterIndex + linkInfo.linkIdLength + lenghtBaliseColor;
+        int lenghtPart2 = myText.text.Length - (lastIndexPart1 + textColor.Length);
+
+        string start = myText.text.Substring(0, lastIndexPart1);
+        string actualColorString = myText.text.Substring(lastIndexPart1, textColor.Length);
+        string end = myText.text.Substring(lastIndexPart1 + textColor.Length, lenghtPart2);
+
+        if (ColorUtility.TryParseHtmlString("#" + actualColorString, out actualColor))
+            if (!actualColor.Equals(normalTextColor))
+                return;
+
+        if (start.Substring(start.Length - lenghtBaliseColorVerification, lenghtBaliseColorVerification).Equals("<color=#") && end[0].Equals('>'))
+            listeTexteChangeColor = new SC_ChangeColorText(start, end, 0, color);
+
     }
 
-    /*
-     * Barre le texte sur lequel on a clicker
-     */
-    private void Barre(TMP_LinkInfo linkInfo)
+    public void TextHover()
     {
-        int startMiddle = (linkInfo.linkIdFirstCharacterIndex - lengthLinkEnd) + lengthLink;
-        int startMiddleLenght = myText.text.IndexOf("</link>", linkInfo.linkIdFirstCharacterIndex) - startMiddle;
-        int startEnd = myText.text.IndexOf("</link>", linkInfo.linkIdFirstCharacterIndex);
+        if (elemCliquable > 0)
+        {
+            SC_GM_Cursor.gm.changeToHoverCursor();
+            hover = true;
+        }
 
-        myText.text = myText.text.Substring(0, startMiddle) + "<s>" +
-                        myText.text.Substring(startMiddle, startMiddleLenght) + "</s>" +
-                        myText.text.Substring(startEnd, myText.text.Length - startEnd);
     }
+
+    public void TextHoverExit()
+    {
+        hover = false;
+        SC_GM_Cursor.gm.changeToNormalCursor();
+    }
+
 }

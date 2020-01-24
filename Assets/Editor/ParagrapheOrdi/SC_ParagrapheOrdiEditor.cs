@@ -142,7 +142,7 @@ public class SC_ParagrapheOrdiEditor : Editor
     private int GenerateParagraphe()
     {
         int cpt = 0;
-        string deb = "<link=\"", middle = "\"><mark=#A7DEFF00><color=#7F4428ff>", fin = "</color></mark></link>";
+        string deb = "<link=\"", middle = "\"><color=#7F4428ff>", fin = "</color></link>";
 
         string rawContent = paragrapheOrdi.fileCSVTextParagraph.text;
         string[] lineList = rawContent.Split(new string[] { "\n" }, System.StringSplitOptions.None);
