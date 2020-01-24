@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class SC_CollectedCLFeedback : MonoBehaviour
+public class SC_CollectedTimbresFeedback : MonoBehaviour
 {
-    public static SC_CollectedCLFeedback instance;
+    public static SC_CollectedTimbresFeedback instance;
 
     public Transform CollectPosition;
     public float StartAnimDistance;
@@ -14,8 +14,7 @@ public class SC_CollectedCLFeedback : MonoBehaviour
     private bool animPlaying;
     private float timer;
     public float WaitTime;
-
-    public TMP_Text text;
+    public SpriteRenderer image;
 
     // Start is called before the first frame update
     void Start()
@@ -26,16 +25,21 @@ public class SC_CollectedCLFeedback : MonoBehaviour
 
     public void StartFeedback(Vector2 vect)
     {
-        transform.position = new Vector3(vect.x, vect.y, transform.position.z) ;
+        transform.position = new Vector3(vect.x, vect.y, transform.position.z);
         Moving = true;
         timer = 0;
 
         transform.GetChild(0).gameObject.SetActive(true);
-        transform.GetChild(1).gameObject.SetActive(true);
     }
 
     private void Update()
     {
+        if (Input.GetMouseButtonDown(2))
+        {
+            Debug.Log(GetMouseWorldPos());
+            StartFeedback(GetMouseWorldPos());
+        }
+
         if (Moving)
         {
             timer += Time.deltaTime;
@@ -61,7 +65,7 @@ public class SC_CollectedCLFeedback : MonoBehaviour
                 }
             }
         }
-           
+
     }
 
     public Vector3 GetMouseWorldPos()
@@ -70,6 +74,6 @@ public class SC_CollectedCLFeedback : MonoBehaviour
 
         mousePoint.z = transform.position.z;
 
-        return Camera.main.ScreenToWorldPoint(mousePoint)*-16;
+        return Camera.main.ScreenToWorldPoint(mousePoint) * -16;
     }
 }
