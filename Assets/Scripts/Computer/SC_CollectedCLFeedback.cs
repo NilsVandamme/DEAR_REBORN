@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class SC_CollectedCLFeedback : MonoBehaviour
 {
+    public static SC_CollectedCLFeedback instance;
+
     public Transform CollectPosition;
     public float StartAnimDistance;
     private Animator anim;
@@ -16,6 +18,7 @@ public class SC_CollectedCLFeedback : MonoBehaviour
     void Start()
     {
         //anim = GetComponent<Animator>();
+        instance = this;
     }
 
     public void StartFeedback(Vector2 vect)
