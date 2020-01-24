@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class SC_CollectedCLFeedback : MonoBehaviour
 {
@@ -13,6 +14,8 @@ public class SC_CollectedCLFeedback : MonoBehaviour
     private bool animPlaying;
     private float timer;
     public float WaitTime;
+
+    public TMP_Text text;
 
     // Start is called before the first frame update
     void Start()
@@ -68,7 +71,7 @@ public class SC_CollectedCLFeedback : MonoBehaviour
            
     }
 
-    private Vector3 GetMouseWorldPos()
+    public Vector3 GetMouseWorldPos()
     {
         Vector3 mousePoint = Input.mousePosition;
 
