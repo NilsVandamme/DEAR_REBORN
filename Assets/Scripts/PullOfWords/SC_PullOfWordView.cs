@@ -1,7 +1,6 @@
 ﻿using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 public class SC_PullOfWordView : MonoBehaviour
 {
@@ -21,6 +20,7 @@ public class SC_PullOfWordView : MonoBehaviour
     private Button[] champLexicalButton;
     private Image[][] champLexicalImage;
     private bool[] isOpen;
+    private bool[] isClick;
 
     // Liste des superposition des CL
     private int[][] superpositionCL;
@@ -47,6 +47,7 @@ public class SC_PullOfWordView : MonoBehaviour
         champLexicalWord = new TextMeshProUGUI[champsLexicaux.Length][];
         champLexicalImage = new Image[champsLexicaux.Length][];
         isOpen = new bool[champsLexicaux.Length];
+        isClick = new bool[champsLexicaux.Length];
 
         for (int i = 0; i < champsLexicaux.Length; i++)
         {
@@ -118,9 +119,25 @@ public class SC_PullOfWordView : MonoBehaviour
         for (int i = 0; i < champLexicalButton.Length; i++)
             if (champLexicalButton[i] == but)
             {
-                isOpen[i] = !champLexicalImage[i][0].gameObject.activeSelf;
+                isClick[i] = !isClick[i];
+                //isOpen[i] = !champLexicalImage[i][0].gameObject.activeSelf;
                 OpenClose(i, isOpen[i]);
                 CloseNeighbour(i);
+            }
+    }
+
+
+    public void OnHoverButtonCL(Button but)
+    {
+        for (int i = 0; i < champLexicalButton.Length; i++)
+            if (champLexicalButton[i] == but)
+            {
+                if (!isClick[i])
+                {
+                    isOpen[i] = !champLexicalImage[i][0].gameObject.activeSelf;
+                    OpenClose(i, isOpen[i]);
+                    CloseNeighbour(i);
+                }
             }
     }
 
@@ -144,6 +161,7 @@ public class SC_PullOfWordView : MonoBehaviour
         {
             OpenClose(elem, false);
             isOpen[elem] = false;
+            isClick[elem] = false;
         }
     }
 }
