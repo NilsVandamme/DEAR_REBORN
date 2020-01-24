@@ -62,9 +62,11 @@ public class SC_Collect : MonoBehaviour
             Debug.Log("yare yare daze");
             arboAnim.SetTrigger("Highlight");
         }
+
         if(SC_GM_Local.gm.numberOfCLRecover == SC_GM_Local.gm.numberOfCLRecoverable && isHighlighted == false)
         {
             Debug.Log("reeee");
+            arboAnim.ResetTrigger("Highlight");
             arboAnim.SetTrigger("Open");
             isHighlighted = true;
         }
