@@ -6,8 +6,7 @@ public class SC_GM_Cursor : MonoBehaviour
 {
     public Texture2D normalCursor;
     public Texture2D loadCursor;
-
-    private SpriteRenderer rend;
+    public Texture2D hoverCursor;
 
     public static SC_GM_Cursor gm = null;
 
@@ -31,5 +30,10 @@ public class SC_GM_Cursor : MonoBehaviour
     public void changeToLoadCursor()
     {
         Cursor.SetCursor(loadCursor, Vector2.zero, CursorMode.Auto);
+    }
+
+    public void changeToHoverCursor()
+    {
+        Cursor.SetCursor(hoverCursor, Vector2.zero, CursorMode.Auto);
     }
 }
