@@ -11,7 +11,7 @@ public class SC_Collect : MonoBehaviour
     public Animator arboAnim; // Animator
  
 
-    private Button[] buttons; // All buttons showing collected CLs
+    private Image[] images; // All buttons showing collected CLs
     private TextMeshProUGUI[] listOfButtons; // Text of the buttons showing CLs
 
     public bool isHighlighted; // Is currently highlighted ?
@@ -22,15 +22,15 @@ public class SC_Collect : MonoBehaviour
         ratioText.text = 0 + "/" + SC_GM_Local.gm.numberOfCLRecoverable.ToString();
 
         // Get the lists
-        buttons = buttonCL.GetComponentsInChildren<Button>(true);
-        listOfButtons = new TextMeshProUGUI[buttons.Length];
-        for (int i = 0; i < buttons.Length; i++)
-            listOfButtons[i] = buttons[i].GetComponentInChildren<TextMeshProUGUI>(true);
+        images = buttonCL.GetComponentsInChildren<Image>(true);
+        listOfButtons = new TextMeshProUGUI[images.Length];
+        for (int i = 0; i < images.Length; i++)
+            listOfButtons[i] = images[i].GetComponentInChildren<TextMeshProUGUI>(true);
 
         // Activate the buttons according to the number of CLs to collect
-        for (int i = 0; i < buttons.Length; i++)
+        for (int i = 0; i < images.Length; i++)
         {
-            buttons[i].gameObject.SetActive(false);
+            images[i].gameObject.SetActive(false);
         }
     }
 
@@ -53,7 +53,7 @@ public class SC_Collect : MonoBehaviour
             // Activate the used buttons only
             for(int i =0; i< SC_GM_Local.gm.numberOfCLRecoverable; i++)
             {
-                buttons[i].gameObject.SetActive(true);
+                images[i].gameObject.SetActive(true);
             }
         }
 
