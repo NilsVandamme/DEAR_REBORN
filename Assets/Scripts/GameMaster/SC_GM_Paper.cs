@@ -42,6 +42,16 @@ public class SC_GM_Paper : MonoBehaviour
         {
             SendButton.interactable = false;
         }
+
+        if(SC_ParagraphSorter.instance.SnappedParagraphs.Count >= 3)
+        {
+            SC_StagesAnim.instance.anim.SetTrigger("Paragraphs");
+        }
+
+        if(SC_GM_Master.gm.choosenWordInLetter.Count > 0)
+        {
+            SC_StagesAnim.instance.anim.SetTrigger("Words");
+        }
     }
 
     // Calculate and store the score value
