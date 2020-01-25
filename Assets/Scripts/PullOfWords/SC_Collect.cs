@@ -48,7 +48,6 @@ public class SC_Collect : MonoBehaviour
         // Open the panel if all CLs have been collected
         if (SC_GM_Local.gm.numberOfCLRecover == SC_GM_Local.gm.numberOfCLRecoverable)
         {
-            transform.GetChild(2).GetComponent<Button>().interactable = true;
 
             // Activate the used buttons only
             for(int i =0; i< SC_GM_Local.gm.numberOfCLRecoverable; i++)
@@ -63,8 +62,8 @@ public class SC_Collect : MonoBehaviour
         }
         if(SC_GM_Local.gm.numberOfCLRecover == SC_GM_Local.gm.numberOfCLRecoverable && isHighlighted == false)
         {
-            arboAnim.ResetTrigger("Highlight");
-            arboAnim.SetTrigger("Open");
+            //arboAnim.ResetTrigger("Highlight");
+            GetComponentInChildren<SC_AnimCollect>().SetCollectAnimBool();
             isHighlighted = true;
         }
     }
