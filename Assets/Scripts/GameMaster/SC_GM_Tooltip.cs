@@ -1,8 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 // Manage the tooltips
 
@@ -26,22 +23,19 @@ public class SC_GM_Tooltip : MonoBehaviour
             if (intvalue == 0)
             {
                 tooltipActive = false;
-                if (SceneManager.GetActiveScene().name == "L_00Menu")
-                    tog.isOn = false;
+                tog.isOn = false;
             }
             else
             {
                 tooltipActive = true;
-                if (SceneManager.GetActiveScene().name == "L_00Menu")
-                    tog.isOn = true;
+                tog.isOn = true;
             }
         }
         else
         {
             PlayerPrefs.SetInt("tooltip", 0);
             tooltipActive = false;
-            if (SceneManager.GetActiveScene().name == "L_00Menu")
-                tog.isOn = false;
+            tog.isOn = false;
         }
 
         TurnOn();

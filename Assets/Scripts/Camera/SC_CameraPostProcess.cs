@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.Rendering.PostProcessing;
 
@@ -25,14 +24,12 @@ public class SC_CameraPostProcess : MonoBehaviour
             if (intvalue == 0)
             {
                 retroMode = false;
-                if (SceneManager.GetActiveScene().name == "L_00Menu")
-                    tog.isOn = false;
+                tog.isOn = false;
             }
             else
             {
                 retroMode = true;
-                if (SceneManager.GetActiveScene().name == "L_00Menu")
-                    tog.isOn = true;
+                tog.isOn = true;
             }
 
             ActivateRetroMode();
@@ -42,8 +39,7 @@ public class SC_CameraPostProcess : MonoBehaviour
             //Debug.Log("nokey");
             PlayerPrefs.SetInt("retroMode", 0);
             retroMode = false;
-            if (SceneManager.GetActiveScene().name == "L_00Menu")
-                tog.isOn = false;
+            tog.isOn = false;
         }
     }
 

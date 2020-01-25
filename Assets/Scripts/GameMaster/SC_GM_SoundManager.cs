@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 // Manage the audio of the game
 
@@ -42,8 +41,7 @@ public class SC_GM_SoundManager : MonoBehaviour
         if (PlayerPrefs.HasKey("SoundVolume"))
         {
             ASourceSound.volume = PlayerPrefs.GetFloat("SoundVolume");
-            if (SceneManager.GetActiveScene().name == "L_00Menu")
-                soundSlider.value = PlayerPrefs.GetFloat("SoundVolume");
+            soundSlider.value = PlayerPrefs.GetFloat("SoundVolume");
         }
         else
         {
@@ -56,8 +54,7 @@ public class SC_GM_SoundManager : MonoBehaviour
         {
             
             ASourceMusic.volume = PlayerPrefs.GetFloat("MusicVolume");
-            if (SceneManager.GetActiveScene().name == "L_00Menu")
-                musicSlider.value = PlayerPrefs.GetFloat("MusicVolume");
+            musicSlider.value = PlayerPrefs.GetFloat("MusicVolume");
         }
         else
         {
