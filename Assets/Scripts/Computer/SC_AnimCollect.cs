@@ -18,15 +18,24 @@ public class SC_AnimCollect : MonoBehaviour
 
     public void SetCollectAnimBool()
     {
-        if (OpenOrClosed == true)
+        anim.ResetTrigger("Shake");
+
+        if (SC_GM_Local.gm.numberOfCLRecover == SC_GM_Local.gm.numberOfCLRecoverable)
         {
-            anim.SetTrigger("Close");
-            OpenOrClosed = false;
+            if (OpenOrClosed == true)
+            {
+                anim.SetTrigger("Close");
+                OpenOrClosed = false;
+            }
+            else
+            {
+                anim.SetTrigger("Open");
+                OpenOrClosed = true;
+            }
         }
         else
         {
-            anim.SetTrigger("Open");
-            OpenOrClosed = true;
+            anim.SetTrigger("Shake");
         }
     }
 }
