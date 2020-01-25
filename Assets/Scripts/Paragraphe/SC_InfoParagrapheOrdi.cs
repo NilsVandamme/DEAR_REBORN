@@ -122,6 +122,7 @@ public class SC_InfoParagrapheOrdi : MonoBehaviour, IPointerClickHandler
                         ChangeTextColor(linkInfo, CLRecoltColor);
                     }
 
+                    SC_GM_SoundManager.instance.PlaySound("ClickWin", false);
                     SC_CollectedCLFeedback.instance.text.text = paragrapheOrdi.listChampLexicaux.listNameChampLexical[paragrapheOrdi.champLexical[id]];
                     SC_CollectedCLFeedback.instance.StartFeedback(SC_CollectedCLFeedback.instance.GetMouseWorldPos());
 
@@ -137,11 +138,13 @@ public class SC_InfoParagrapheOrdi : MonoBehaviour, IPointerClickHandler
                         ChangeTextColor(linkInfo, timbresRecoltColor);
                     }
 
+                SC_GM_SoundManager.instance.PlaySound("ClickWin", false);
                 //SC_CollectedTimbresFeedback.instance.image.sprite =  // CHANGER IMAGE TIMBRE
                 SC_CollectedTimbresFeedback.instance.StartFeedback(SC_CollectedTimbresFeedback.instance.GetMouseWorldPos());
             }
             else // Non collectable
             {
+                SC_GM_SoundManager.instance.PlaySound("ClickFail", false);
                 //TO-DO --> feedback de refus de collect
             }
         }

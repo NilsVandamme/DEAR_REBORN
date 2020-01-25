@@ -16,7 +16,8 @@ public class SC_GM_SoundManager : MonoBehaviour
     public Slider musicSlider; // Slider from the main menu (no refs needed in other scenes)
 
     public List<AudioClip> audioclips; // All audioclips which can be played
-    
+
+    private bool showPosition = true;
 
     private void Awake()
     {
@@ -66,15 +67,24 @@ public class SC_GM_SoundManager : MonoBehaviour
     }
 
     // Play the specified sound from audioclips list
-    public void PlaySound(string name)
+    public void PlaySound(string name, bool RandomPitch)
     {
-        foreach (AudioClip audio in audioclips)
-        {
-            if (audio.name == name)
+            foreach(AudioClip clip in audioclips)
             {
-                ASourceSound.PlayOneShot(audio);
+                if (clip.name == name)
+                {
+                    if (RandomPitch)
+                    {
+                        ASourceSound.pitch = Random.Range(0.95f, 1.05f);
+                    }
+                    else
+                    {
+                        ASourceSound.pitch = 1;
+                    }
+
+                    ASourceSound.PlayOneShot(clip);
+                }
             }
-        }
     }
 
     // Change the volume in main menu
