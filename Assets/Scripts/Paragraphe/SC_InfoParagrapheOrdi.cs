@@ -132,14 +132,16 @@ public class SC_InfoParagrapheOrdi : MonoBehaviour, IPointerClickHandler
             {
                 foreach (SC_Timbres timbres in SC_GM_Master.gm.timbres.timbres)
                     if (timbres.getName() == linkInfo.GetLinkID().Substring(1, linkInfo.GetLinkID().Length - 1))
-                    {
+                    {  
                         timbres.setVisible(true);
                         SC_GM_Timbre.gm.Affiche(timbres);
                         ChangeTextColor(linkInfo, timbresRecoltColor);
+
+                        //SC_CollectedTimbresFeedback.instance.image.sprite = 
                     }
 
                 SC_GM_SoundManager.instance.PlaySound("ClickWin", false);
-                //SC_CollectedTimbresFeedback.instance.image.sprite =  // CHANGER IMAGE TIMBRE
+                //  // CHANGER IMAGE TIMBRE
                 SC_CollectedTimbresFeedback.instance.StartFeedback(SC_CollectedTimbresFeedback.instance.GetMouseWorldPos());
             }
             else // Non collectable
