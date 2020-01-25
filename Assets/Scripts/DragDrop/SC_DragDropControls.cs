@@ -85,6 +85,8 @@ public class SC_DragDropControls : MonoBehaviour
     // When the mouse is being pressed
     private void OnMouseDown()
     {
+        SC_StagesAnim.instance.anim.SetTrigger("StartWriting");
+
         if (enabled && IsSnapped == false)
         {
                 IsSelected = true;
