@@ -15,6 +15,7 @@ public class SC_GM_SoundManager : MonoBehaviour
 
     [Header("AudioSources")]
     private AudioSource ASourceSound; // Audiosource for the sounds
+    private AudioSource ASourceRandomSounds;
     private AudioSource ASourceMusic; // Audiosource for the music
     private AudioSource ASourceOffice, ASourceComputer;
 
@@ -42,6 +43,16 @@ public class SC_GM_SoundManager : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+
+            ASourceRandomSounds.clip = AC_Click[Random.Range(0, AC_Click.Length)];
+            ASourceRandomSounds.pitch = Random.Range(0.9f, 1f);
+            ASourceRandomSounds.Play();
+        }
+    }
     private void Start()
     {
         // Get audiosources from childs
@@ -49,13 +60,14 @@ public class SC_GM_SoundManager : MonoBehaviour
         ASourceMusic = transform.GetChild(1).GetComponent<AudioSource>();
         ASourceOffice = transform.GetChild(2).GetComponent<AudioSource>();
         ASourceComputer = transform.GetChild(3).GetComponent<AudioSource>();
+        ASourceRandomSounds = transform.GetChild(4).GetComponent<AudioSource>();
 
         // Get the saved setting from the playerprefs
         if (PlayerPrefs.HasKey("SoundVolume"))
         {
             ASourceSound.volume = PlayerPrefs.GetFloat("SoundVolume");
             soundSlider.value = PlayerPrefs.GetFloat("SoundVolume");
-            ASourceOffice.volume = PlayerPrefs.GetFloat("SoundVolume");
+            
         }
         else
         {
@@ -102,17 +114,17 @@ public class SC_GM_SoundManager : MonoBehaviour
 
   
 
-    public void FadeAmbiance(string name)
+    public void FadeAmbiance()
     {
       if(ASourceOffice.volume > ASourceComputer.volume)
         {
-            ASourceOffice.volume -= 0.4f;
-            ASourceComputer.volume += 0.4f;
+            ASourceOffice.volume -= 0.2f;
+            ASourceComputer.volume += 0.2f;
         }
         if (ASourceComputer.volume > ASourceOffice.volume)
         {
-            ASourceOffice.volume += 0.4f;
-            ASourceComputer.volume -= 0.4f;
+            ASourceOffice.volume += 0.2f;
+            ASourceComputer.volume -= 0.2f;
         }
 
     }
