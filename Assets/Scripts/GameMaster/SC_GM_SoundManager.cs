@@ -8,12 +8,23 @@ public class SC_GM_SoundManager : MonoBehaviour
 {
     public static SC_GM_SoundManager instance; // singleton instance
 
+    [Header("Audioclips pour Random")]
+    public AudioClip[] AC_Click;
+    public AudioClip[] AC_Radio;
+
+
+    [Header("AudioSources")]
     private AudioSource ASourceSound; // Audiosource for the sounds
     private AudioSource ASourceMusic; // Audiosource for the music
+    private AudioSource ASourceOffice, ASourceComputer;
 
+
+
+    [Header("Liens UI")]
     public Slider soundSlider; // Slider from the main menu (no refs needed in other scenes)
     public Slider musicSlider; // Slider from the main menu (no refs needed in other scenes)
 
+    [Header("Audioclips PlayOnce")]
     public List<AudioClip> audioclips; // All audioclips which can be played
 
     private bool showPosition = true;
@@ -36,17 +47,21 @@ public class SC_GM_SoundManager : MonoBehaviour
         // Get audiosources from childs
         ASourceSound = transform.GetChild(0).GetComponent<AudioSource>();
         ASourceMusic = transform.GetChild(1).GetComponent<AudioSource>();
+        ASourceOffice = transform.GetChild(2).GetComponent<AudioSource>();
+        ASourceComputer = transform.GetChild(3).GetComponent<AudioSource>();
 
         // Get the saved setting from the playerprefs
         if (PlayerPrefs.HasKey("SoundVolume"))
         {
             ASourceSound.volume = PlayerPrefs.GetFloat("SoundVolume");
             soundSlider.value = PlayerPrefs.GetFloat("SoundVolume");
+            ASourceOffice.volume = PlayerPrefs.GetFloat("SoundVolume");
         }
         else
         {
             PlayerPrefs.SetFloat("SoundVolume", 1) ;
             ASourceSound.volume = 1;
+
         }
 
         // Get the saved setting from the playerprefs
@@ -72,17 +87,37 @@ public class SC_GM_SoundManager : MonoBehaviour
                 {
                     if (RandomPitch)
                     {
-                        ASourceSound.pitch = Random.Range(0.95f, 1.05f);
+                        ASourceSound.pitch = Random.Range(0.9f, 1.1f);
                     }
                     else
                     {
                         ASourceSound.pitch = 1;
+                        
                     }
-
+                                            
                     ASourceSound.PlayOneShot(clip);
                 }
             }
     }
+
+  
+
+    public void FadeAmbiance(string name)
+    {
+      if(ASourceOffice.volume > ASourceComputer.volume)
+        {
+            ASourceOffice.volume -= 0.4f;
+            ASourceComputer.volume += 0.4f;
+        }
+        if (ASourceComputer.volume > ASourceOffice.volume)
+        {
+            ASourceOffice.volume += 0.4f;
+            ASourceComputer.volume -= 0.4f;
+        }
+
+    }
+
+
 
     // Change the volume in main menu
     public void ChangeSoundVolume(float SliderValue)
