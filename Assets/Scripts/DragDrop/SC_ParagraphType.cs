@@ -15,6 +15,7 @@ public class SC_ParagraphType : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
         TypeIcon = GetComponentInChildren<Image>();
 
         if (Type == ParagraphType.Orientation)
