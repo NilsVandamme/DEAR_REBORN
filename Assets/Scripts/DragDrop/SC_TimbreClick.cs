@@ -12,9 +12,13 @@ public class SC_TimbreClick : MonoBehaviour
     // Tell the main script this stamp was chosen
     private void OnMouseUp()
     {
-        Debug.Log(gameObject.name + " has been clicked");
-        SC_TimbreChooser.instance.selectedStamp = this.gameObject;
-        SC_TimbreChooser.instance.ChooseStamp();
+        if (!SC_TimbreChooser.instance.StampAlreadySelected)
+        {
+            Debug.Log(gameObject.name + " has been clicked");
+            SC_TimbreChooser.instance.selectedStamp = this.gameObject;
+            SC_TimbreChooser.instance.ChooseStamp();
+            SC_TimbreChooser.instance.anim.SetTrigger(triggerName);
+        }
     }
 
 
