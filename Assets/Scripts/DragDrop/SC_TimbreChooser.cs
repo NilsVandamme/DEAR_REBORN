@@ -39,9 +39,13 @@ public class SC_TimbreChooser : MonoBehaviour
             }
             selectedStamp.SetActive(true);
 
-            StoryArbo.SetActive(true);
             // Play anim
             //anim.SetTrigger();
         }
+    }
+
+    public void OpenStoryArbo()
+    {
+        StoryArbo.SetActive(true);
     }
 }

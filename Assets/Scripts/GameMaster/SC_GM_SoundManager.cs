@@ -28,7 +28,10 @@ public class SC_GM_SoundManager : MonoBehaviour
     [Header("Audioclips PlayOnce")]
     public List<AudioClip> audioclips; // All audioclips which can be played
 
+    [Header("Piano Launch Game")]
+    public List<AudioClip> pianoSounds;
     private bool showPosition = true;
+    
 
     private void Awake()
     {
@@ -41,7 +44,15 @@ public class SC_GM_SoundManager : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+        
     }
+    public void PlayPiano(int pianoNumber)
+    {
+        ASourceSound.clip = pianoSounds[pianoNumber];
+        ASourceSound.Play();
+       
+    }
+
 
     private void Update()
     {
@@ -52,6 +63,8 @@ public class SC_GM_SoundManager : MonoBehaviour
             ASourceRandomSounds.pitch = Random.Range(0.9f, 1f);
             ASourceRandomSounds.Play();
         }
+
+       
     }
     private void Start()
     {

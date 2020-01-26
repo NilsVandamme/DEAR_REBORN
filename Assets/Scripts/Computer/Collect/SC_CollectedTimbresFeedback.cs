@@ -59,7 +59,7 @@ public class SC_CollectedTimbresFeedback : MonoBehaviour
                 if (Vector2.Distance(transform.position, CollectPosition.position) < 0.5f)
                 {
                     transform.GetChild(0).gameObject.SetActive(false);
-                    transform.GetChild(1).gameObject.SetActive(false);
+                    //transform.GetChild(1).gameObject.SetActive(false);
                     timer = 0;
                     Moving = false;
                 }
