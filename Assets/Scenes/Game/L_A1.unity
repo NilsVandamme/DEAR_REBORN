@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -1627,7 +1627,47 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5897560074020337974, guid: c7bbc6db7493f8e47a0ef41968a4892e,
         type: 3}
-      propertyPath: m_textInfo.characterCount
+      propertyPath: m_text
+      value: Excited abo..
+      objectReference: {fileID: 0}
+    - target: {fileID: 7001081022200270851, guid: c7bbc6db7493f8e47a0ef41968a4892e,
+        type: 3}
+      propertyPath: m_textInfo.spaceCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5097548495171114470, guid: c7bbc6db7493f8e47a0ef41968a4892e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3355632723813145080, guid: c7bbc6db7493f8e47a0ef41968a4892e,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 576207709752351249, guid: c7bbc6db7493f8e47a0ef41968a4892e,
+        type: 3}
+      propertyPath: firstScene
+      value: L_C1
+      objectReference: {fileID: 0}
+    - target: {fileID: 576207709752351249, guid: c7bbc6db7493f8e47a0ef41968a4892e,
+        type: 3}
+      propertyPath: secondScene
+      value: L_C2
+      objectReference: {fileID: 0}
+    - target: {fileID: 576207709752351249, guid: c7bbc6db7493f8e47a0ef41968a4892e,
+        type: 3}
+      propertyPath: peopleScore
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3462843288897218396, guid: c7bbc6db7493f8e47a0ef41968a4892e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4833545816339776693, guid: c7bbc6db7493f8e47a0ef41968a4892e,
+        type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5897560074020337974, guid: c7bbc6db7493f8e47a0ef41968a4892e,
@@ -1662,7 +1702,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6962048466786330427, guid: c7bbc6db7493f8e47a0ef41968a4892e,
         type: 3}
-      propertyPath: m_textInfo.lineCount
+      propertyPath: textParagraphe
+      value: 
+      objectReference: {fileID: 11400000, guid: 2672304723f938d429eed858667be454,
+        type: 2}
+    - target: {fileID: 8772974581351539676, guid: c7bbc6db7493f8e47a0ef41968a4892e,
+        type: 3}
+      propertyPath: m_text
+      value: 'To : Donna Graham
+
+        FROM : Dear Incorporated.'
+      objectReference: {fileID: 0}
+    - target: {fileID: 943164890571324750, guid: c7bbc6db7493f8e47a0ef41968a4892e,
+        type: 3}
+      propertyPath: Type
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6560119164260803183, guid: c7bbc6db7493f8e47a0ef41968a4892e,
+        type: 3}
+      propertyPath: textParagraphe
+      value: 
+      objectReference: {fileID: 11400000, guid: b6e2135531f5d34458f34665a49cfb8e,
+        type: 2}
+    - target: {fileID: 943164890835701951, guid: c7bbc6db7493f8e47a0ef41968a4892e,
+        type: 3}
+      propertyPath: Type
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6962048466786330427, guid: c7bbc6db7493f8e47a0ef41968a4892e,
@@ -1677,8 +1741,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5074017465985674426, guid: c7bbc6db7493f8e47a0ef41968a4892e,
         type: 3}
-      propertyPath: m_textInfo.wordCount
-      value: 0
+      propertyPath: textParagraphe
+      value: 
+      objectReference: {fileID: 11400000, guid: 46adf76fdf9df3f4797bc93cd6f2f841,
+        type: 2}
+    - target: {fileID: 2466946161584564023, guid: c7bbc6db7493f8e47a0ef41968a4892e,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -531
+      objectReference: {fileID: 0}
+    - target: {fileID: 1358340914146836994, guid: c7bbc6db7493f8e47a0ef41968a4892e,
+        type: 3}
+      propertyPath: m_text
+      value: "\u201CLife in the Wide Sky Retirement Home isn\u2019t funny everyday.
+        To be frank, it\u2019s in fact extremly boring.\u201D\r\n"
       objectReference: {fileID: 0}
     - target: {fileID: 5074017465985674426, guid: c7bbc6db7493f8e47a0ef41968a4892e,
         type: 3}
@@ -1835,7 +1911,12 @@ PrefabInstance:
       propertyPath: m_textInfo.pageCount
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 7001081022200270851, guid: c7bbc6db7493f8e47a0ef41968a4892e,
+    - target: {fileID: 4226739397168609202, guid: c7bbc6db7493f8e47a0ef41968a4892e,
+        type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4289515260
+      objectReference: {fileID: 0}
+    - target: {fileID: 3420680931272547509, guid: c7bbc6db7493f8e47a0ef41968a4892e,
         type: 3}
       propertyPath: m_textInfo.characterCount
       value: 13
@@ -1877,15 +1958,5 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: e751b4790cb72154f98d4a1f4edbec0d,
         type: 2}
-    - target: {fileID: 4226739397168609202, guid: c7bbc6db7493f8e47a0ef41968a4892e,
-        type: 3}
-      propertyPath: m_fontColor32.rgba
-      value: 4289515260
-      objectReference: {fileID: 0}
-    - target: {fileID: 2466946161584564023, guid: c7bbc6db7493f8e47a0ef41968a4892e,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -531
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c7bbc6db7493f8e47a0ef41968a4892e, type: 3}
