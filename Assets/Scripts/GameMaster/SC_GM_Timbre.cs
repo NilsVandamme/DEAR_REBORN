@@ -7,8 +7,9 @@ using UnityEngine.UI;
 
 public class SC_GM_Timbre : MonoBehaviour
 {
-    public List<GameObject> timbreText;
-    public List<Image> timbre;
+    public List<GameObject> stampDecs;
+    public List<Image> timbreButton;
+    public List<Image> stampImage;
     public List<SpriteRenderer> timbreEnvelope;
 
     private List<TextMeshProUGUI> texte;
@@ -26,26 +27,30 @@ public class SC_GM_Timbre : MonoBehaviour
     private void Start()
     {
         texte = new List<TextMeshProUGUI>();
-        foreach (GameObject elem in timbreText)
+        foreach (GameObject elem in stampDecs)
             texte.Add(elem.GetComponent<TextMeshProUGUI>());
 
         foreach (SC_Timbres timbres in SC_GM_Master.gm.timbres.timbres)
-            for (int i = 0; i < timbre.Count; i++)
-                if (timbres.getName() == timbre[i].sprite.name && timbres.IsVisible())
+            for (int i = 0; i < stampImage.Count; i++)
+            {
+                Debug.Log(timbres.getName());
+                Debug.Log(stampImage[i].sprite.name);
+                Debug.Log(timbres.IsVisible());
+
+                if (timbres.getName() == stampImage[i].sprite.name && timbres.IsVisible())
                 {
-                    timbre[i].gameObject.SetActive(true);
-                    texte[i].gameObject.SetActive(true);
+                    timbreButton[i].gameObject.SetActive(true);
                     texte[i].text = timbres.getText();
                 }
+            }
     }
 
     public void Affiche(SC_Timbres timbres)
     {
-        for (int i = 0; i < timbre.Count; i++)
-            if (timbres.getName() == timbre[i].sprite.name)
+        for (int i = 0; i < stampImage.Count; i++)
+            if (timbres.getName() == stampImage[i].sprite.name)
             {
-                timbre[i].gameObject.SetActive(true);
-                texte[i].gameObject.SetActive(true);
+                timbreButton[i].gameObject.SetActive(true);
                 texte[i].text = timbres.getText();
             }
     }
