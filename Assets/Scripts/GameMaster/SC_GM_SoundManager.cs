@@ -31,7 +31,7 @@ public class SC_GM_SoundManager : MonoBehaviour
     [Header("Piano Launch Game")]
     public List<AudioClip> pianoSounds;
     private bool showPosition = true;
-    
+    public bool clickSoundEnabled = true;
 
     private void Awake()
     {
@@ -58,10 +58,14 @@ public class SC_GM_SoundManager : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
+            if(clickSoundEnabled == true)
+            {
+                ASourceRandomSounds.clip = AC_Click[Random.Range(0, AC_Click.Length)];
+                ASourceRandomSounds.pitch = Random.Range(0.9f, 1f);
+                ASourceRandomSounds.Play();
 
-            ASourceRandomSounds.clip = AC_Click[Random.Range(0, AC_Click.Length)];
-            ASourceRandomSounds.pitch = Random.Range(0.9f, 1f);
-            ASourceRandomSounds.Play();
+            }
+           
         }
 
        
