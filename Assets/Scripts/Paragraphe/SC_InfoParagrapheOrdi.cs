@@ -134,14 +134,13 @@ public class SC_InfoParagrapheOrdi : MonoBehaviour, IPointerClickHandler
             }
             else if (linkInfo.GetLinkID()[0] == 'C') // Timbres
             {
-                foreach (SC_Timbres timbres in SC_GM_Master.gm.timbres.timbres)
-                    if (timbres.getName() == linkInfo.GetLinkID().Substring(1, linkInfo.GetLinkID().Length - 1))
-                    {  
-                        timbres.setVisible(true);
-                        SC_GM_Timbre.gm.Affiche(timbres);
+                for (int i = 0; i < SC_GM_Master.gm.timbres.timbres.Count; i++)
+                    if (SC_GM_Master.gm.timbres.timbres[i].getName() == linkInfo.GetLinkID().Substring(1, linkInfo.GetLinkID().Length - 1))
+                    {
+                        SC_GM_Master.gm.timbres.timbres[i].setVisible(true);
                         ChangeTextColor(linkInfo, timbresRecoltColor);
 
-                        //SC_CollectedTimbresFeedback.instance.image.sprite = 
+                        SC_CollectedTimbresFeedback.instance.image.sprite = SC_GM_Master.gm.timbres.images[i];
                     }
 
                 SC_GM_SoundManager.instance.PlaySound("ClickWin", false);

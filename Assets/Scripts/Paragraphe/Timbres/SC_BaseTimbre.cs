@@ -6,5 +6,5 @@ public class SC_BaseTimbre : ScriptableObject
 {
     public TextAsset fileCSVBaseTimbre;
     public List<SC_Timbres> timbres;
-    public List<Texture2D> images;
+    public List<Sprite> images;
 }
