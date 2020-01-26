@@ -12,6 +12,7 @@ public class SC_GM_Local : MonoBehaviour
     // Nombre de CL récupérables
     [HideInInspector]
     public int numberOfCLRecover = 0;
+    [HideInInspector]
     public int numberOfCLRecoverable;
 
     // Mail a afficher avec les mots de la scene precedente
@@ -44,6 +45,8 @@ public class SC_GM_Local : MonoBehaviour
 
     private void Awake()
     {
+        numberOfCLRecoverable = 3;
+
         if (gm == null)
             gm = this;
         else if (gm != null)
