@@ -118,8 +118,9 @@ public class SC_InfoParagrapheOrdi : MonoBehaviour, IPointerClickHandler
                         SC_GM_Local.gm.numberOfCLRecover++;
                         if (ChangeTextColor(linkInfo, CLRecoltColor))
                         {
-                            Instantiate(fxGood, new Vector3(GetMouseWorldPos().x, GetMouseWorldPos().y, -1.35f), Quaternion.identity);
-                            SC_GM_SoundManager.instance.PlaySound("ClickWin", false);
+                            // RECUPERER CL
+                            Instantiate(fxGood, new Vector3(GetMouseWorldPos().x, GetMouseWorldPos().y, -2f), Quaternion.identity);
+                            SC_GM_SoundManager.instance.PlaySound("WordGet", false);
                             SC_CollectedCLFeedback.instance.text.text = paragrapheOrdi.listChampLexicaux.listNameChampLexical[paragrapheOrdi.champLexical[id]];
                             SC_CollectedCLFeedback.instance.StartFeedback(SC_CollectedCLFeedback.instance.GetMouseWorldPos());
                         }
@@ -136,9 +137,10 @@ public class SC_InfoParagrapheOrdi : MonoBehaviour, IPointerClickHandler
                         SC_GM_Master.gm.timbres.timbres[i].setVisible(true);
                         if (ChangeTextColor(linkInfo, timbresRecoltColor))
                         {
+                            // RECUPERER TIMBRE
                             SC_CollectedTimbresFeedback.instance.image.sprite = SC_GM_Master.gm.timbres.images[i];
-                            SC_GM_SoundManager.instance.PlaySound("ClickWin", false);
-                            Instantiate(fxGood, new Vector3(GetMouseWorldPos().x, GetMouseWorldPos().y, -1.35f), Quaternion.identity);
+                            SC_GM_SoundManager.instance.PlaySound("TimbreGet", false);
+                            Instantiate(fxGood, new Vector3(GetMouseWorldPos().x, GetMouseWorldPos().y, -2f), Quaternion.identity);
                             //  // CHANGER IMAGE TIMBRE
                             SC_CollectedTimbresFeedback.instance.StartFeedback(SC_CollectedTimbresFeedback.instance.GetMouseWorldPos());
                         }
@@ -148,8 +150,8 @@ public class SC_InfoParagrapheOrdi : MonoBehaviour, IPointerClickHandler
             }
             else // Non collectable
             {
-                Instantiate(fxbad, new Vector3(GetMouseWorldPos().x, GetMouseWorldPos().y, -1.35f), Quaternion.identity);
-                SC_GM_SoundManager.instance.PlaySound("ClickFail", false);
+                Instantiate(fxbad, new Vector3(GetMouseWorldPos().x, GetMouseWorldPos().y, -2f), Quaternion.identity);
+                SC_GM_SoundManager.instance.PlaySound("ClickPhraseFail_SoftLow", false);
                 //TO-DO --> feedback de refus de collect
             }
         }
