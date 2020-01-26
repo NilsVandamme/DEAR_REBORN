@@ -25,6 +25,9 @@ public class SC_InfoParagrapheOrdi : MonoBehaviour, IPointerClickHandler
     private int elemCliquable;
     private bool hover;
 
+    public GameObject fxGood;
+    public GameObject fxbad;
+
     private void Start()
     {
         elemCliquable = 0;
@@ -122,6 +125,7 @@ public class SC_InfoParagrapheOrdi : MonoBehaviour, IPointerClickHandler
                         ChangeTextColor(linkInfo, CLRecoltColor);
                     }
 
+                    Instantiate(fxGood, new Vector3(GetMouseWorldPos().x, GetMouseWorldPos().y, -1.35f), Quaternion.identity);
                     SC_GM_SoundManager.instance.PlaySound("ClickWin", false);
                     SC_CollectedCLFeedback.instance.text.text = paragrapheOrdi.listChampLexicaux.listNameChampLexical[paragrapheOrdi.champLexical[id]];
                     SC_CollectedCLFeedback.instance.StartFeedback(SC_CollectedCLFeedback.instance.GetMouseWorldPos());
@@ -130,22 +134,23 @@ public class SC_InfoParagrapheOrdi : MonoBehaviour, IPointerClickHandler
             }
             else if (linkInfo.GetLinkID()[0] == 'C') // Timbres
             {
-                foreach (SC_Timbres timbres in SC_GM_Master.gm.timbres.timbres)
-                    if (timbres.getName() == linkInfo.GetLinkID().Substring(1, linkInfo.GetLinkID().Length - 1))
-                    {  
-                        timbres.setVisible(true);
-                        SC_GM_Timbre.gm.Affiche(timbres);
+                for (int i = 0; i < SC_GM_Master.gm.timbres.timbres.Count; i++)
+                    if (SC_GM_Master.gm.timbres.timbres[i].getName() == linkInfo.GetLinkID().Substring(1, linkInfo.GetLinkID().Length - 1))
+                    {
+                        SC_GM_Master.gm.timbres.timbres[i].setVisible(true);
                         ChangeTextColor(linkInfo, timbresRecoltColor);
 
-                        //SC_CollectedTimbresFeedback.instance.image.sprite = 
+                        SC_CollectedTimbresFeedback.instance.image.sprite = SC_GM_Master.gm.timbres.images[i];
                     }
 
                 SC_GM_SoundManager.instance.PlaySound("ClickWin", false);
+                Instantiate(fxGood, new Vector3(GetMouseWorldPos().x, GetMouseWorldPos().y, -1.35f), Quaternion.identity);
                 //  // CHANGER IMAGE TIMBRE
                 SC_CollectedTimbresFeedback.instance.StartFeedback(SC_CollectedTimbresFeedback.instance.GetMouseWorldPos());
             }
             else // Non collectable
             {
+                Instantiate(fxbad, new Vector3(GetMouseWorldPos().x, GetMouseWorldPos().y, -1.35f), Quaternion.identity);
                 SC_GM_SoundManager.instance.PlaySound("ClickFail", false);
                 //TO-DO --> feedback de refus de collect
             }
@@ -217,4 +222,13 @@ public class SC_InfoParagrapheOrdi : MonoBehaviour, IPointerClickHandler
         SC_GM_Cursor.gm.changeToNormalCursor();
     }
 
+
+    public Vector3 GetMouseWorldPos()
+    {
+        Vector3 mousePoint = Input.mousePosition;
+
+        mousePoint.z = transform.position.z;
+
+        return Camera.main.ScreenToWorldPoint(mousePoint) * -16;
+    }
 }
