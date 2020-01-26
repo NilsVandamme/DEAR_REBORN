@@ -36,7 +36,7 @@ public class SC_GM_SoundManager : MonoBehaviour
 
     [Header("Liste musiques")]
     public AudioClip[] radioMusics;
-    private int currentTrack;
+    private int currentTrack = 0;
 
     private void Awake()
     {
@@ -220,6 +220,7 @@ public class SC_GM_SoundManager : MonoBehaviour
         }
         else
         {
+            ASourceMusic.clip= radioMusics[currentTrack];
             ASourceMusic.Play();
         }
        
