@@ -11,13 +11,14 @@ public class SC_TimbreChooser : MonoBehaviour
     public GameObject selectedStamp; // The stamp the player selected
     public GameObject StoryArbo; // Story treeview screen
     public bool StampAlreadySelected; // Has a stamp been selected ?
-    private Animator anim; // Animator
+    [HideInInspector]
+    public Animator anim; // Animator
 
     void Start()
     {
         // Singleton
         instance = this;
-        //anim = GetComponent<Animator>();
+        anim = GetComponent<Animator>();
 
         // Add all stamps to the list
         for(int i=0;i< transform.GetChild(2).childCount; i++)
@@ -38,9 +39,6 @@ public class SC_TimbreChooser : MonoBehaviour
                 stamps[i].SetActive(false);
             }
             selectedStamp.SetActive(true);
-
-            // Play anim
-            //anim.SetTrigger();
         }
     }
 
