@@ -70,7 +70,7 @@ public class SC_CollectedCLFeedback : MonoBehaviour
         transform.GetChild(1).gameObject.SetActive(false);
         timer = 0;
         Moving = false;
-
+        anim.Play("FeedbackSpriteAnimEmpty");
     }
     public Vector3 GetMouseWorldPos()
     {
