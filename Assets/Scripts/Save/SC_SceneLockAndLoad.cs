@@ -22,11 +22,14 @@ public class SC_SceneLockAndLoad : MonoBehaviour
 
     private void Load()
     {
+        Debug.Log(sceneToLoad);
         // Load scene B1 and B2
         if (sceneToLoad.Equals("L_B1"))
-            if(SC_GM_Local.gm.peopleScore <= SC_GM_Local.gm.firstPivotScene)
+            if(SC_GM_Local.gm.peopleScore >= SC_GM_Local.gm.firstPivotScene)
                 sceneToLoad = "L_B2";
 
+
+        Debug.Log(sceneToLoad);
         if (File.Exists(SC_GM_Master.gm.path + sceneToLoad + ".txt"))
         {
             string save = File.ReadAllText(SC_GM_Master.gm.path + sceneToLoad + ".txt");
