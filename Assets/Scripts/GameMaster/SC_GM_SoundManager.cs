@@ -36,7 +36,7 @@ public class SC_GM_SoundManager : MonoBehaviour
 
     [Header("Liste musiques")]
     public AudioClip[] radioMusics;
-    private int currentTrack;
+    private int currentTrack = 0;
 
     private void Awake()
     {
@@ -170,6 +170,8 @@ public class SC_GM_SoundManager : MonoBehaviour
  
     public void SkipMusicRadio()
     {
+
+
         if (currentTrack > radioMusics.Length)
         {
             currentTrack = 0;
@@ -214,12 +216,21 @@ public class SC_GM_SoundManager : MonoBehaviour
 
     public void PlayMusic()
     {
+        if (currentTrack > radioMusics.Length)
+        {
+            currentTrack = 0;
+        }
+        if (currentTrack < radioMusics.Length)
+        {
+            currentTrack = 0;
+        }
         if (ASourceMusic.isPlaying)
         {
             return;
         }
         else
         {
+            ASourceMusic.clip= radioMusics[currentTrack];
             ASourceMusic.Play();
         }
        
