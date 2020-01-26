@@ -25,6 +25,9 @@ public class SC_InfoParagrapheOrdi : MonoBehaviour, IPointerClickHandler
     private int elemCliquable;
     private bool hover;
 
+    public GameObject fxGood;
+    public GameObject fxbad;
+
     private void Start()
     {
         elemCliquable = 0;
@@ -122,6 +125,7 @@ public class SC_InfoParagrapheOrdi : MonoBehaviour, IPointerClickHandler
                         ChangeTextColor(linkInfo, CLRecoltColor);
                     }
 
+                    Instantiate(fxGood, new Vector3(GetMouseWorldPos().x, GetMouseWorldPos().y, -1.35f), Quaternion.identity);
                     SC_GM_SoundManager.instance.PlaySound("ClickWin", false);
                     SC_CollectedCLFeedback.instance.text.text = paragrapheOrdi.listChampLexicaux.listNameChampLexical[paragrapheOrdi.champLexical[id]];
                     SC_CollectedCLFeedback.instance.StartFeedback(SC_CollectedCLFeedback.instance.GetMouseWorldPos());
@@ -141,11 +145,13 @@ public class SC_InfoParagrapheOrdi : MonoBehaviour, IPointerClickHandler
                     }
 
                 SC_GM_SoundManager.instance.PlaySound("ClickWin", false);
+                Instantiate(fxGood, new Vector3(GetMouseWorldPos().x, GetMouseWorldPos().y, -1.35f), Quaternion.identity);
                 //  // CHANGER IMAGE TIMBRE
                 SC_CollectedTimbresFeedback.instance.StartFeedback(SC_CollectedTimbresFeedback.instance.GetMouseWorldPos());
             }
             else // Non collectable
             {
+                Instantiate(fxbad, new Vector3(GetMouseWorldPos().x, GetMouseWorldPos().y, -1.35f), Quaternion.identity);
                 SC_GM_SoundManager.instance.PlaySound("ClickFail", false);
                 //TO-DO --> feedback de refus de collect
             }
@@ -217,4 +223,13 @@ public class SC_InfoParagrapheOrdi : MonoBehaviour, IPointerClickHandler
         SC_GM_Cursor.gm.changeToNormalCursor();
     }
 
+
+    public Vector3 GetMouseWorldPos()
+    {
+        Vector3 mousePoint = Input.mousePosition;
+
+        mousePoint.z = transform.position.z;
+
+        return Camera.main.ScreenToWorldPoint(mousePoint) * -16;
+    }
 }
