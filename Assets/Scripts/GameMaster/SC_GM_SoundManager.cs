@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
 
 // Manage the audio of the game
 
@@ -32,6 +33,10 @@ public class SC_GM_SoundManager : MonoBehaviour
     public List<AudioClip> pianoSounds;
     private bool showPosition = true;
     public bool clickSoundEnabled = true;
+
+    [Header("Liste musiques")]
+    public AudioClip[] radioMusics;
+    private int currentTrack;
 
     private void Awake()
     {
@@ -161,4 +166,72 @@ public class SC_GM_SoundManager : MonoBehaviour
         ASourceMusic.volume = SliderValue;
         PlayerPrefs.SetFloat("MusicVolume", SliderValue);
     }
+
+ 
+    public void SkipMusicRadio()
+    {
+        if (currentTrack > radioMusics.Length)
+        {
+            currentTrack = 0;
+        }
+        StartCoroutine(SkipEffect());
+       
+        
+    }
+
+
+    public void PreviousMusicRadio()
+    {
+        if (currentTrack <0 )
+        {
+            currentTrack = radioMusics.Length;
+        }
+
+    }
+    IEnumerator SkipEffect()
+    {
+        ASourceMusic.Stop();
+        currentTrack++;
+        ASourceRandomSounds.clip = AC_Radio[Random.Range(0, AC_Radio.Length)];
+        ASourceRandomSounds.pitch = Random.Range(0.9f, 1f);
+        ASourceRandomSounds.Play();
+        yield return new WaitWhile(() => ASourceRandomSounds.isPlaying);
+        ASourceMusic.clip = radioMusics[currentTrack];
+        ASourceMusic.Play();
+    }
+
+    IEnumerator PreviousEffect()
+    {
+        ASourceMusic.Stop();
+        currentTrack--;
+        ASourceRandomSounds.clip = AC_Radio[Random.Range(0, AC_Radio.Length)];
+        ASourceRandomSounds.pitch = Random.Range(0.9f, 1f);
+        ASourceRandomSounds.Play();
+        yield return new WaitWhile(() => ASourceRandomSounds.isPlaying);
+        ASourceMusic.clip = radioMusics[currentTrack];
+        ASourceMusic.Play();
+    }
+
+    public void PlayMusic()
+    {
+        if (ASourceMusic.isPlaying)
+        {
+            return;
+        }
+        else
+        {
+            ASourceMusic.Play();
+        }
+       
+
+       
+    }
+    public void StopMusic()
+    {
+    
+        ASourceMusic.Stop();
+
+    }
+
+
 }
