@@ -29,6 +29,8 @@ public class SC_GM_Master : MonoBehaviour
 
     private void Awake()
     {
+        Debug.Log("save path = " + path);
+
         if (gm == null)
             gm = this;
         else if (gm != null)
