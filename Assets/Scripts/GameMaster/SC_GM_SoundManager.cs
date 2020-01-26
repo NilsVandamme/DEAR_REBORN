@@ -61,6 +61,16 @@ public class SC_GM_SoundManager : MonoBehaviour
 
     private void Update()
     {
+        if (currentTrack < 0)
+        {
+            currentTrack = 1;
+        }
+
+        if (currentTrack > radioMusics.Length)
+        {
+            currentTrack = 0;
+        }
+
         if (Input.GetMouseButtonDown(0))
         {
             if(clickSoundEnabled == true)
@@ -170,12 +180,8 @@ public class SC_GM_SoundManager : MonoBehaviour
  
     public void SkipMusicRadio()
     {
+       
 
-
-        if (currentTrack > radioMusics.Length)
-        {
-            currentTrack = 0;
-        }
         StartCoroutine(SkipEffect());
        
         
@@ -184,11 +190,8 @@ public class SC_GM_SoundManager : MonoBehaviour
 
     public void PreviousMusicRadio()
     {
-        if (currentTrack <0 )
-        {
-            currentTrack = radioMusics.Length;
-        }
-
+        
+        StartCoroutine(PreviousEffect());
     }
     IEnumerator SkipEffect()
     {
@@ -197,9 +200,12 @@ public class SC_GM_SoundManager : MonoBehaviour
         ASourceRandomSounds.clip = AC_Radio[Random.Range(0, AC_Radio.Length)];
         ASourceRandomSounds.pitch = Random.Range(0.9f, 1f);
         ASourceRandomSounds.Play();
-        yield return new WaitWhile(() => ASourceRandomSounds.isPlaying);
+        yield return new WaitWhile(() => ASourceRandomSounds.isPlaying); 
+        
         ASourceMusic.clip = radioMusics[currentTrack];
         ASourceMusic.Play();
+
+       
     }
 
     IEnumerator PreviousEffect()
@@ -212,18 +218,12 @@ public class SC_GM_SoundManager : MonoBehaviour
         yield return new WaitWhile(() => ASourceRandomSounds.isPlaying);
         ASourceMusic.clip = radioMusics[currentTrack];
         ASourceMusic.Play();
+
+       
     }
 
     public void PlayMusic()
     {
-        if (currentTrack > radioMusics.Length)
-        {
-            currentTrack = 0;
-        }
-        if (currentTrack < radioMusics.Length)
-        {
-            currentTrack = 0;
-        }
         if (ASourceMusic.isPlaying)
         {
             return;
