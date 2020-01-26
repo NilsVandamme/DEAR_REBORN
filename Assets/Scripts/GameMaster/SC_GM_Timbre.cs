@@ -32,17 +32,11 @@ public class SC_GM_Timbre : MonoBehaviour
 
         foreach (SC_Timbres timbres in SC_GM_Master.gm.timbres.timbres)
             for (int i = 0; i < stampImage.Count; i++)
-            {
-                Debug.Log(timbres.getName());
-                Debug.Log(stampImage[i].sprite.name);
-                Debug.Log(timbres.IsVisible());
-
                 if (timbres.getName() == stampImage[i].sprite.name && timbres.IsVisible())
                 {
                     timbreButton[i].gameObject.SetActive(true);
                     texte[i].text = timbres.getText();
                 }
-            }
     }
 
     public void Affiche(SC_Timbres timbres)

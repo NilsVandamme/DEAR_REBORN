@@ -16,6 +16,7 @@ public class SC_InfoParagrapheOrdi : MonoBehaviour, IPointerClickHandler
 
     private Color normalTextColor;
     private SC_ChangeColorText listeTexteChangeColor;
+    private bool first;
 
     // Lenght des composants des balises
     private int lenghtBaliseColor = 10;
@@ -42,8 +43,7 @@ public class SC_InfoParagrapheOrdi : MonoBehaviour, IPointerClickHandler
                 elemCliquable++;
             }
 
-        normalTextColor = myText.color;
-
+        first = true;
     }
 
     private void Update()
@@ -61,13 +61,7 @@ public class SC_InfoParagrapheOrdi : MonoBehaviour, IPointerClickHandler
                 listeTexteChangeColor = null;
                 elemCliquable--;
 
-                if (elemCliquable > 0) 
-                    oneClick = false;
-
-                if (hover && elemCliquable > 0)
-                    SC_GM_Cursor.gm.changeToHoverCursor();
-                else
-                    SC_GM_Cursor.gm.changeToNormalCursor();
+                NotPossible();
             }
     }
 
@@ -122,14 +116,16 @@ public class SC_InfoParagrapheOrdi : MonoBehaviour, IPointerClickHandler
                     if (add)
                     {
                         SC_GM_Local.gm.numberOfCLRecover++;
-                        ChangeTextColor(linkInfo, CLRecoltColor);
+                        if (ChangeTextColor(linkInfo, CLRecoltColor))
+                        {
+                            Instantiate(fxGood, new Vector3(GetMouseWorldPos().x, GetMouseWorldPos().y, -1.35f), Quaternion.identity);
+                            SC_GM_SoundManager.instance.PlaySound("ClickWin", false);
+                            SC_CollectedCLFeedback.instance.text.text = paragrapheOrdi.listChampLexicaux.listNameChampLexical[paragrapheOrdi.champLexical[id]];
+                            SC_CollectedCLFeedback.instance.StartFeedback(SC_CollectedCLFeedback.instance.GetMouseWorldPos());
+                        }
                     }
-
-                    Instantiate(fxGood, new Vector3(GetMouseWorldPos().x, GetMouseWorldPos().y, -1.35f), Quaternion.identity);
-                    SC_GM_SoundManager.instance.PlaySound("ClickWin", false);
-                    SC_CollectedCLFeedback.instance.text.text = paragrapheOrdi.listChampLexicaux.listNameChampLexical[paragrapheOrdi.champLexical[id]];
-                    SC_CollectedCLFeedback.instance.StartFeedback(SC_CollectedCLFeedback.instance.GetMouseWorldPos());
-
+                    else
+                        NotPossible();
                 }
             }
             else if (linkInfo.GetLinkID()[0] == 'C') // Timbres
@@ -138,15 +134,17 @@ public class SC_InfoParagrapheOrdi : MonoBehaviour, IPointerClickHandler
                     if (SC_GM_Master.gm.timbres.timbres[i].getName() == linkInfo.GetLinkID().Substring(1, linkInfo.GetLinkID().Length - 1))
                     {
                         SC_GM_Master.gm.timbres.timbres[i].setVisible(true);
-                        ChangeTextColor(linkInfo, timbresRecoltColor);
-
-                        SC_CollectedTimbresFeedback.instance.image.sprite = SC_GM_Master.gm.timbres.images[i];
+                        if (ChangeTextColor(linkInfo, timbresRecoltColor))
+                        {
+                            SC_CollectedTimbresFeedback.instance.image.sprite = SC_GM_Master.gm.timbres.images[i];
+                            SC_GM_SoundManager.instance.PlaySound("ClickWin", false);
+                            Instantiate(fxGood, new Vector3(GetMouseWorldPos().x, GetMouseWorldPos().y, -1.35f), Quaternion.identity);
+                            //  // CHANGER IMAGE TIMBRE
+                            SC_CollectedTimbresFeedback.instance.StartFeedback(SC_CollectedTimbresFeedback.instance.GetMouseWorldPos());
+                        }
                     }
 
-                SC_GM_SoundManager.instance.PlaySound("ClickWin", false);
-                Instantiate(fxGood, new Vector3(GetMouseWorldPos().x, GetMouseWorldPos().y, -1.35f), Quaternion.identity);
-                //  // CHANGER IMAGE TIMBRE
-                SC_CollectedTimbresFeedback.instance.StartFeedback(SC_CollectedTimbresFeedback.instance.GetMouseWorldPos());
+                
             }
             else // Non collectable
             {
@@ -185,7 +183,7 @@ public class SC_InfoParagrapheOrdi : MonoBehaviour, IPointerClickHandler
     /*
      * Change le couleur du texte
      */
-    private void ChangeTextColor(TMP_LinkInfo linkInfo, Color color)
+    private bool ChangeTextColor(TMP_LinkInfo linkInfo, Color color)
     {
         Color actualColor;
         string textColor = ColorUtility.ToHtmlStringRGBA(color);
@@ -198,11 +196,24 @@ public class SC_InfoParagrapheOrdi : MonoBehaviour, IPointerClickHandler
         string end = myText.text.Substring(lastIndexPart1 + textColor.Length, lenghtPart2);
 
         if (ColorUtility.TryParseHtmlString("#" + actualColorString, out actualColor))
+        {
+            if (first)
+            {
+                normalTextColor = actualColor;
+                first = false;
+            }
+            
             if (!actualColor.Equals(normalTextColor))
-                return;
+            {
+                NotPossible();
+                return false;
+            }
+        }
 
         if (start.Substring(start.Length - lenghtBaliseColorVerification, lenghtBaliseColorVerification).Equals("<color=#") && end[0].Equals('>'))
             listeTexteChangeColor = new SC_ChangeColorText(start, end, 0, color);
+
+        return true;
 
     }
 
@@ -230,5 +241,17 @@ public class SC_InfoParagrapheOrdi : MonoBehaviour, IPointerClickHandler
         mousePoint.z = transform.position.z;
 
         return Camera.main.ScreenToWorldPoint(mousePoint) * -16;
+    }
+
+    private void NotPossible()
+    {
+        if (elemCliquable > 0)
+            oneClick = false;
+
+        if (hover && elemCliquable > 0)
+            SC_GM_Cursor.gm.changeToHoverCursor();
+        else
+            SC_GM_Cursor.gm.changeToNormalCursor();
+
     }
 }
