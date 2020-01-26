@@ -170,6 +170,8 @@ public class SC_GM_SoundManager : MonoBehaviour
  
     public void SkipMusicRadio()
     {
+
+
         if (currentTrack > radioMusics.Length)
         {
             currentTrack = 0;
@@ -214,6 +216,14 @@ public class SC_GM_SoundManager : MonoBehaviour
 
     public void PlayMusic()
     {
+        if (currentTrack > radioMusics.Length)
+        {
+            currentTrack = 0;
+        }
+        if (currentTrack < radioMusics.Length)
+        {
+            currentTrack = 0;
+        }
         if (ASourceMusic.isPlaying)
         {
             return;
