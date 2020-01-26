@@ -19,19 +19,19 @@ public class SC_ParagraphType : MonoBehaviour
 
         if (Type == ParagraphType.Orientation)
         {
-            TypeIcon.color = Color.blue;
+            TypeIcon.color = new Color(0.1135636f, 0.6407289f, 0.8301887f,1);
         }
         else if (Type == ParagraphType.WakeUp)
         {
-            TypeIcon.color = Color.yellow;
+            TypeIcon.color = new Color(0.9245283f, 0.7347588f, 0.1962442f, 1);
         }
         else if (Type == ParagraphType.Motivation)
         {
-            TypeIcon.color = Color.green;
+            TypeIcon.color = new Color(0.9622642f, 0.4685875f, 0.2133321f, 1);
         }
         else if (Type == ParagraphType.Clash)
         {
-            TypeIcon.color = Color.red;
+            TypeIcon.color = new Color(0.8584906f, 0.2634961f, 0.1903257f, 1);
         }
     }
 }
