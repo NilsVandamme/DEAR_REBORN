@@ -7,7 +7,7 @@ public class SC_GM_Master : MonoBehaviour
 {
     [HideInInspector]
     // Chemin des sauvegardes
-    public string path = System.IO.Directory.GetCurrentDirectory() + "/Assets/Save/";
+    public string path;
 
     // Ensemble des champs lexicaux
     public SC_ListChampLexicaux listChampsLexicaux;
@@ -29,6 +29,7 @@ public class SC_GM_Master : MonoBehaviour
 
     private void Awake()
     {
+        path = System.IO.Directory.GetCurrentDirectory() + "/Assets/Save/";
         Debug.Log("save path = " + path);
 
         if (gm == null)
