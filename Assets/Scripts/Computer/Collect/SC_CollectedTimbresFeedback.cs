@@ -19,12 +19,13 @@ public class SC_CollectedTimbresFeedback : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //anim = GetComponent<Animator>();
+        anim = GetComponent<Animator>();
         instance = this;
     }
 
     public void StartFeedback(Vector2 vect)
     {
+        anim.Play("FbTimbreAppear");
         transform.position = new Vector3(vect.x, vect.y, transform.position.z);
         Moving = true;
         timer = 0;
@@ -58,18 +59,25 @@ public class SC_CollectedTimbresFeedback : MonoBehaviour
 
                 if (Vector2.Distance(transform.position, CollectPosition.position) < 0.5f)
                 {
-                    transform.GetChild(0).gameObject.SetActive(false);
-                    //transform.GetChild(1).gameObject.SetActive(false);
-                    timer = 0;
-                    Moving = false;
-
-                    SC_GM_Timbre.gm.Affiche(SC_GM_Master.gm.timbres.timbres[2]);
+                    anim.Play("FbTimbreDisappear");
+                    CollectPosition.gameObject.transform.parent.gameObject.SetActive(true);
                 }
             }
         }
 
     }
 
+    public void Disappear()
+    {
+
+        transform.GetChild(0).gameObject.SetActive(false);
+        //transform.GetChild(1).gameObject.SetActive(false);
+        timer = 0;
+        Moving = false;
+
+        SC_GM_Timbre.gm.Affiche(SC_GM_Master.gm.timbres.timbres[2]);
+        anim.Play("FbTimbreIdle");
+    }
     public Vector3 GetMouseWorldPos()
     {
         Vector3 mousePoint = Input.mousePosition;

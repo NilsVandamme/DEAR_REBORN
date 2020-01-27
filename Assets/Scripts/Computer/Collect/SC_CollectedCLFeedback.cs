@@ -22,10 +22,12 @@ public class SC_CollectedCLFeedback : MonoBehaviour
     {
         //anim = GetComponent<Animator>();
         instance = this;
+        anim = gameObject.GetComponent<Animator>();
     }
 
     public void StartFeedback(Vector2 vect)
     {
+        anim.Play("AppearFeedbackSprite");
         transform.position = new Vector3(vect.x, vect.y, transform.position.z) ;
         Moving = true;
         timer = 0;
@@ -54,16 +56,22 @@ public class SC_CollectedCLFeedback : MonoBehaviour
 
                 if (Vector2.Distance(transform.position, CollectPosition.position) < 0.5f)
                 {
-                    transform.GetChild(0).gameObject.SetActive(false);
-                    transform.GetChild(1).gameObject.SetActive(false);
-                    timer = 0;
-                    Moving = false;
+                    anim.Play("DisappearFeedbackSprite");
+                
                 }
             }
         }
            
     }
 
+    public void Disappear()
+    {
+        transform.GetChild(0).gameObject.SetActive(false);
+        transform.GetChild(1).gameObject.SetActive(false);
+        timer = 0;
+        Moving = false;
+        anim.Play("FeedbackSpriteAnimEmpty");
+    }
     public Vector3 GetMouseWorldPos()
     {
         Vector3 mousePoint = Input.mousePosition;
