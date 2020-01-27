@@ -94,7 +94,6 @@ public class SC_InfoParagrapheOrdi : MonoBehaviour, IPointerClickHandler
 
             if (linkInfo.GetLinkID()[0] == 'A') // Texte
             {
-                Debug.Log("pte");
                 Instantiate(fxbad, new Vector3(GetMouseWorldPos().x, GetMouseWorldPos().y, -4f), Quaternion.identity);
                 SC_GM_SoundManager.instance.PlaySound("ClickPhraseFail_2");
                 //TO-DO --> feedback de refus de collect
@@ -138,6 +137,7 @@ public class SC_InfoParagrapheOrdi : MonoBehaviour, IPointerClickHandler
                 for (int i = 0; i < SC_GM_Master.gm.timbres.timbres.Count; i++)
                     if (SC_GM_Master.gm.timbres.timbres[i].getName() == linkInfo.GetLinkID().Substring(1, linkInfo.GetLinkID().Length - 1))
                     {
+                        Debug.Log("aaaaahhhhh");
                         SC_GM_Master.gm.timbres.timbres[i].setVisible(true);
                         if (ChangeTextColor(linkInfo, timbresRecoltColor))
                         {

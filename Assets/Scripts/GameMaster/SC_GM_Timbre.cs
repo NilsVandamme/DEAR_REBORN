@@ -34,6 +34,8 @@ public class SC_GM_Timbre : MonoBehaviour
             for (int i = 0; i < stampImage.Count; i++)
                 if (timbres.getName() == stampImage[i].sprite.name && timbres.IsVisible())
                 {
+                    Debug.Log(timbres.getName());
+                    Debug.Log(i);
                     timbreButton[i].gameObject.SetActive(true);
                     texte[i].text = timbres.getText();
                 }
@@ -41,6 +43,7 @@ public class SC_GM_Timbre : MonoBehaviour
 
     public void Affiche(SC_Timbres timbres)
     {
+        Debug.Log(timbres.getName());
         for (int i = 0; i < stampImage.Count; i++)
             if (timbres.getName() == stampImage[i].sprite.name)
             {
