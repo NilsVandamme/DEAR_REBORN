@@ -74,7 +74,7 @@ public class SC_CollectedTimbresFeedback : MonoBehaviour
         //transform.GetChild(1).gameObject.SetActive(false);
         timer = 0;
         Moving = false;
-
+        Debug.Log("aaaaaaahhhhhhhhhhhh");
         SC_GM_Timbre.gm.Affiche(SC_GM_Master.gm.timbres.timbres[2]);
         anim.Play("FbTimbreIdle");
     }
