@@ -17,6 +17,7 @@ public class SC_PauseMenu : MonoBehaviour
             }
             else
             {
+                Debug.Log("Canvas appear");
                 transform.GetChild(0).gameObject.SetActive(true);
             }
 
