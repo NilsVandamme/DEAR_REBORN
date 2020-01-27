@@ -60,7 +60,7 @@ public class SC_CollectedTimbresFeedback : MonoBehaviour
                 if (Vector2.Distance(transform.position, CollectPosition.position) < 0.5f)
                 {
                     anim.Play("FbTimbreDisappear");
-                    CollectPosition.gameObject.SetActive(true);
+                    CollectPosition.gameObject.transform.parent.gameObject.SetActive(true);
                 }
             }
         }
