@@ -165,19 +165,6 @@ public class SC_InfoParagrapheOrdi : MonoBehaviour, IPointerClickHandler
     {
         string cl = paragrapheOrdi.listChampLexicaux.listChampLexical[paragrapheOrdi.champLexical[link]].fileCSVChampLexical.name;
 
-        foreach (SC_CLInPull elem in SC_GM_Local.gm.wordsInCollect)
-            if (elem.GetCL() == cl) // Si le CL est deja present dans la collect
-            {
-                SC_Word mot = paragrapheOrdi.listChampLexicaux.listChampLexical[paragrapheOrdi.champLexical[link]].listOfWords[word];
-
-                foreach (SC_Word val in elem.GetListWord())
-                    if (val.titre == mot.titre)
-                        return false;
-
-                elem.GetListWord().Add(mot);
-                return true;
-            }
-
         SC_GM_Local.gm.wordsInCollect.Add(new SC_CLInPull(cl, paragrapheOrdi.listChampLexicaux.listChampLexical[paragrapheOrdi.champLexical[link]].listOfWords[word]));
         return true;
     }
