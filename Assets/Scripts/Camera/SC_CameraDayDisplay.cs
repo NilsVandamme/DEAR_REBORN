@@ -10,11 +10,25 @@ public class SC_CameraDayDisplay : MonoBehaviour
     
     public TMP_Text DayText, DayNameText, IncidentText;
     private SC_GM_SoundManager GM_Audio;
+    private Animator anim;
+    private int AnimInt;
     void Start()
     {
        GM_Audio = transform.GetChild(1).GetComponent<SC_GM_SoundManager>();
+        anim = gameObject.GetComponent<Animator>();
+        AnimInt = 0;
     }
 
+    public void AnimIntIncr()
+    {
+        AnimInt++;
+        anim.SetInteger("AnimInt", AnimInt);
+    }
+
+    public void AnimIntReset()
+    {
+
+    }
     public void DisplayDayText()
     {
         Scene scene = SceneManager.GetActiveScene();
@@ -25,6 +39,7 @@ public class SC_CameraDayDisplay : MonoBehaviour
             DayNameText.text = "First day at work";
             IncidentText.text = "37 days before the Incident";
             GM_Audio.PlayPiano(0);
+            anim.SetBool("tuto", true);
         }
 
         if (scene.name == "L_B1")
