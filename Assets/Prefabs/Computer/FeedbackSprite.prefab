@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 306911508233241080}
   - component: {fileID: 306911508233241062}
+  - component: {fileID: 4000005214659990253}
   m_Layer: 0
   m_Name: FeedbackSprite
   m_TagString: Untagged
@@ -49,6 +50,25 @@ MonoBehaviour:
   StartAnimDistance: 2
   WaitTime: 0.4
   text: {fileID: 306911510264785188}
+--- !u!95 &4000005214659990253
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 306911508233241061}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 63fcbe97a8f07a94fa9a3dfb01c3ac7f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &306911508934013620
 GameObject:
   m_ObjectHideFlags: 0
@@ -74,8 +94,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 306911508934013620}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0.022, y: 0.0242, z: 0}
+  m_LocalScale: {x: 3.7925317, y: 1.8519876, z: 1}
   m_Children: []
   m_Father: {fileID: 306911508233241080}
   m_RootOrder: 1
@@ -118,7 +138,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 0359939816958e34c947b499065d6e72, type: 3}
+  m_Sprite: {fileID: 21300000, guid: de1d5a4c5743ce04e9f6b0888ebdfebe, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -165,7 +185,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.034, y: 0.03}
+  m_AnchoredPosition: {x: -0.02, y: -0}
   m_SizeDelta: {x: 30, y: 10}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &306911510264785191
@@ -185,7 +205,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  - {fileID: -3721205779382033071, guid: 578e7d704097bb442b9262c35f0b8912, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -242,15 +262,16 @@ MonoBehaviour:
       m_Calls: []
   m_text: CL name
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 578e7d704097bb442b9262c35f0b8912, type: 2}
+  m_sharedMaterial: {fileID: -3721205779382033071, guid: 578e7d704097bb442b9262c35f0b8912,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4279638397
-  m_fontColor: {r: 0.4901961, g: 0.098039225, b: 0.08627451, a: 1}
+    rgba: 4281083547
+  m_fontColor: {r: 0.60784316, g: 0.14901961, b: 0.17254902, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -268,8 +289,8 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 38
-  m_fontSizeBase: 38
+  m_fontSize: 32.17
+  m_fontSizeBase: 32.17
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

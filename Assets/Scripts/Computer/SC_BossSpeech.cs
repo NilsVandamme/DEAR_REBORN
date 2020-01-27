@@ -49,7 +49,7 @@ public class SC_BossSpeech : MonoBehaviour
         foreach (char c in Sentences[currentIndex])
         {
             BossText.text += c;
-            yield return new WaitForSeconds(0.02f);
+            yield return new WaitForSeconds(0.000001f);
         }
 
         BossText.text += "\n";

@@ -123,21 +123,15 @@ public class SC_GM_SoundManager : MonoBehaviour
     }
 
     // Play the specified sound from audioclips list
-    public void PlaySound(string name, bool RandomPitch)
+    public void PlaySound(string name)
     {
             foreach(AudioClip clip in audioclips)
             {
                 if (clip.name == name)
                 {
-                    if (RandomPitch)
-                    {
-                        ASourceSound.pitch = Random.Range(0.9f, 1.1f);
-                    }
-                    else
-                    {
-                        ASourceSound.pitch = 1;
-                        
-                    }
+                     ASourceSound.pitch = Random.Range(0.9f, 1.1f);
+                    
+                    
                                             
                     ASourceSound.PlayOneShot(clip);
                 }
@@ -200,9 +194,9 @@ public class SC_GM_SoundManager : MonoBehaviour
         ASourceRandomSounds.clip = AC_Radio[Random.Range(0, AC_Radio.Length)];
         ASourceRandomSounds.pitch = Random.Range(0.9f, 1f);
         ASourceRandomSounds.Play();
-        yield return new WaitWhile(() => ASourceRandomSounds.isPlaying); 
-        
-        ASourceMusic.clip = radioMusics[currentTrack];
+        yield return new WaitWhile(() => ASourceRandomSounds.isPlaying);
+
+        ASourceMusic.clip = radioMusics[Random.Range(0, radioMusics.Length)];
         ASourceMusic.Play();
 
        
@@ -216,7 +210,7 @@ public class SC_GM_SoundManager : MonoBehaviour
         ASourceRandomSounds.pitch = Random.Range(0.9f, 1f);
         ASourceRandomSounds.Play();
         yield return new WaitWhile(() => ASourceRandomSounds.isPlaying);
-        ASourceMusic.clip = radioMusics[currentTrack];
+        ASourceMusic.clip = radioMusics[Random.Range(0, radioMusics.Length)];
         ASourceMusic.Play();
 
        
@@ -230,7 +224,7 @@ public class SC_GM_SoundManager : MonoBehaviour
         }
         else
         {
-            ASourceMusic.clip= radioMusics[currentTrack];
+            ASourceMusic.clip= radioMusics[0];
             ASourceMusic.Play();
         }
        

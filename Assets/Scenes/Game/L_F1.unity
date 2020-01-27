@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -235,27 +235,32 @@ PrefabInstance:
     - target: {fileID: 576207709906949749, guid: c7bbc6db7493f8e47a0ef41968a4892e,
         type: 3}
       propertyPath: m_textInfo.characterCount
-      value: 0
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 576207709906949749, guid: c7bbc6db7493f8e47a0ef41968a4892e,
         type: 3}
       propertyPath: m_textInfo.spaceCount
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 576207709906949749, guid: c7bbc6db7493f8e47a0ef41968a4892e,
         type: 3}
       propertyPath: m_textInfo.wordCount
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 576207709906949749, guid: c7bbc6db7493f8e47a0ef41968a4892e,
         type: 3}
       propertyPath: m_textInfo.lineCount
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 576207709906949749, guid: c7bbc6db7493f8e47a0ef41968a4892e,
         type: 3}
       propertyPath: m_textInfo.pageCount
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 576207709906949749, guid: c7bbc6db7493f8e47a0ef41968a4892e,
+        type: 3}
+      propertyPath: m_text
+      value: Dear Lyle
       objectReference: {fileID: 0}
     - target: {fileID: 7704757195652437011, guid: c7bbc6db7493f8e47a0ef41968a4892e,
         type: 3}
@@ -880,27 +885,38 @@ PrefabInstance:
     - target: {fileID: 6412554452119059127, guid: c7bbc6db7493f8e47a0ef41968a4892e,
         type: 3}
       propertyPath: m_textInfo.characterCount
-      value: 0
+      value: 80
       objectReference: {fileID: 0}
     - target: {fileID: 6412554452119059127, guid: c7bbc6db7493f8e47a0ef41968a4892e,
         type: 3}
       propertyPath: m_textInfo.spaceCount
-      value: 0
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 6412554452119059127, guid: c7bbc6db7493f8e47a0ef41968a4892e,
         type: 3}
       propertyPath: m_textInfo.wordCount
-      value: 0
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 6412554452119059127, guid: c7bbc6db7493f8e47a0ef41968a4892e,
         type: 3}
       propertyPath: m_textInfo.lineCount
-      value: 0
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 6412554452119059127, guid: c7bbc6db7493f8e47a0ef41968a4892e,
         type: 3}
       propertyPath: m_textInfo.pageCount
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6412554452119059127, guid: c7bbc6db7493f8e47a0ef41968a4892e,
+        type: 3}
+      propertyPath: m_text
+      value: "Surname : Jones\r\nName : Lyle\r\nAge : 20\r\nSex : M\r\nBlood Type
+        : A+\r\nPhototype : 3\r"
+      objectReference: {fileID: 0}
+    - target: {fileID: 6412554452119059127, guid: c7bbc6db7493f8e47a0ef41968a4892e,
+        type: 3}
+      propertyPath: m_firstOverflowCharacterIndex
+      value: 66
       objectReference: {fileID: 0}
     - target: {fileID: 4163483764603146932, guid: c7bbc6db7493f8e47a0ef41968a4892e,
         type: 3}
@@ -1185,22 +1201,32 @@ PrefabInstance:
     - target: {fileID: 8181746441857717330, guid: c7bbc6db7493f8e47a0ef41968a4892e,
         type: 3}
       propertyPath: m_textInfo.characterCount
-      value: 0
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 8181746441857717330, guid: c7bbc6db7493f8e47a0ef41968a4892e,
         type: 3}
       propertyPath: m_textInfo.wordCount
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8181746441857717330, guid: c7bbc6db7493f8e47a0ef41968a4892e,
         type: 3}
       propertyPath: m_textInfo.lineCount
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8181746441857717330, guid: c7bbc6db7493f8e47a0ef41968a4892e,
         type: 3}
       propertyPath: m_textInfo.pageCount
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8181746441857717330, guid: c7bbc6db7493f8e47a0ef41968a4892e,
+        type: 3}
+      propertyPath: m_text
+      value: About...
+      objectReference: {fileID: 0}
+    - target: {fileID: 8181746441857717330, guid: c7bbc6db7493f8e47a0ef41968a4892e,
+        type: 3}
+      propertyPath: m_textInfo.spaceCount
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6893337542138662594, guid: c7bbc6db7493f8e47a0ef41968a4892e,
         type: 3}
@@ -1246,6 +1272,326 @@ PrefabInstance:
         type: 3}
       propertyPath: m_textInfo.pageCount
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 576207709752351249, guid: c7bbc6db7493f8e47a0ef41968a4892e,
+        type: 3}
+      propertyPath: peopleScore
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 576207709752351249, guid: c7bbc6db7493f8e47a0ef41968a4892e,
+        type: 3}
+      propertyPath: firstScene
+      value: L_G1
+      objectReference: {fileID: 0}
+    - target: {fileID: 576207709752351249, guid: c7bbc6db7493f8e47a0ef41968a4892e,
+        type: 3}
+      propertyPath: secondScene
+      value: L_G2
+      objectReference: {fileID: 0}
+    - target: {fileID: 576207709752351249, guid: c7bbc6db7493f8e47a0ef41968a4892e,
+        type: 3}
+      propertyPath: firstPivotScene
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 6920804164098788640, guid: c7bbc6db7493f8e47a0ef41968a4892e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6717311908572543233, guid: c7bbc6db7493f8e47a0ef41968a4892e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1969915510386653309, guid: c7bbc6db7493f8e47a0ef41968a4892e,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: b4dc6a3f65e5eb64899192740d518985,
+        type: 3}
+    - target: {fileID: 8371617993627588744, guid: c7bbc6db7493f8e47a0ef41968a4892e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2409075683005049885, guid: c7bbc6db7493f8e47a0ef41968a4892e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4122848699984116752, guid: c7bbc6db7493f8e47a0ef41968a4892e,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: b4dc6a3f65e5eb64899192740d518985,
+        type: 3}
+    - target: {fileID: 3420680931272547509, guid: c7bbc6db7493f8e47a0ef41968a4892e,
+        type: 3}
+      propertyPath: paragrapheOrdi
+      value: 
+      objectReference: {fileID: 11400000, guid: 426ebf88ce1814549a500b4f19553687,
+        type: 2}
+    - target: {fileID: 5696891921172591621, guid: c7bbc6db7493f8e47a0ef41968a4892e,
+        type: 3}
+      propertyPath: paragrapheOrdi
+      value: 
+      objectReference: {fileID: 11400000, guid: ca7eea0eaab311a4ab4ee469e47938aa,
+        type: 2}
+    - target: {fileID: 3355632723813145080, guid: c7bbc6db7493f8e47a0ef41968a4892e,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4833545816339776693, guid: c7bbc6db7493f8e47a0ef41968a4892e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4833545816494313456, guid: c7bbc6db7493f8e47a0ef41968a4892e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4833545816648090957, guid: c7bbc6db7493f8e47a0ef41968a4892e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4833545817990216341, guid: c7bbc6db7493f8e47a0ef41968a4892e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4833545818049508324, guid: c7bbc6db7493f8e47a0ef41968a4892e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4833545818148212599, guid: c7bbc6db7493f8e47a0ef41968a4892e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5331671438140297395, guid: c7bbc6db7493f8e47a0ef41968a4892e,
+        type: 3}
+      propertyPath: Type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2297139323747831698, guid: c7bbc6db7493f8e47a0ef41968a4892e,
+        type: 3}
+      propertyPath: textParagraphe
+      value: 
+      objectReference: {fileID: 11400000, guid: 76e6a73583bfcb1448fd8a736104a926,
+        type: 2}
+    - target: {fileID: 5097548495171114470, guid: c7bbc6db7493f8e47a0ef41968a4892e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8772974581351539676, guid: c7bbc6db7493f8e47a0ef41968a4892e,
+        type: 3}
+      propertyPath: m_text
+      value: 'To : Lyle
+
+        from Dear Incorporate '
+      objectReference: {fileID: 0}
+    - target: {fileID: 943164890571324750, guid: c7bbc6db7493f8e47a0ef41968a4892e,
+        type: 3}
+      propertyPath: Type
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6560119164260803183, guid: c7bbc6db7493f8e47a0ef41968a4892e,
+        type: 3}
+      propertyPath: textParagraphe
+      value: 
+      objectReference: {fileID: 11400000, guid: adf0b98ad0cd49348b9f8842df6d7424,
+        type: 2}
+    - target: {fileID: 943164890835701951, guid: c7bbc6db7493f8e47a0ef41968a4892e,
+        type: 3}
+      propertyPath: Type
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6560119163958923166, guid: c7bbc6db7493f8e47a0ef41968a4892e,
+        type: 3}
+      propertyPath: textParagraphe
+      value: 
+      objectReference: {fileID: 11400000, guid: 698fd82bdeb20474bb4fb0ff32f79c20,
+        type: 2}
+    - target: {fileID: 943164892303578145, guid: c7bbc6db7493f8e47a0ef41968a4892e,
+        type: 3}
+      propertyPath: Type
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6560119162494978816, guid: c7bbc6db7493f8e47a0ef41968a4892e,
+        type: 3}
+      propertyPath: textParagraphe
+      value: 
+      objectReference: {fileID: 11400000, guid: 4ed955c0afe58994e9d76100f852d0ce,
+        type: 2}
+    - target: {fileID: 943164891972849106, guid: c7bbc6db7493f8e47a0ef41968a4892e,
+        type: 3}
+      propertyPath: Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6560119162822824691, guid: c7bbc6db7493f8e47a0ef41968a4892e,
+        type: 3}
+      propertyPath: textParagraphe
+      value: 
+      objectReference: {fileID: 11400000, guid: c2e280ddbcf34264bb8522d633a0c437,
+        type: 2}
+    - target: {fileID: 943164891961387655, guid: c7bbc6db7493f8e47a0ef41968a4892e,
+        type: 3}
+      propertyPath: Type
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6560119162870085030, guid: c7bbc6db7493f8e47a0ef41968a4892e,
+        type: 3}
+      propertyPath: textParagraphe
+      value: 
+      objectReference: {fileID: 11400000, guid: 87a5affcd47abb54dbcac884d61e9a2d,
+        type: 2}
+    - target: {fileID: 2137864978872100927, guid: c7bbc6db7493f8e47a0ef41968a4892e,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: eceda47dd3a165845a38243c5cd4666a,
+        type: 3}
+    - target: {fileID: 3609745080945020483, guid: c7bbc6db7493f8e47a0ef41968a4892e,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: eceda47dd3a165845a38243c5cd4666a,
+        type: 3}
+    - target: {fileID: 4580001495255413720, guid: c7bbc6db7493f8e47a0ef41968a4892e,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: eceda47dd3a165845a38243c5cd4666a,
+        type: 3}
+    - target: {fileID: 4425515631361620207, guid: c7bbc6db7493f8e47a0ef41968a4892e,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: eceda47dd3a165845a38243c5cd4666a,
+        type: 3}
+    - target: {fileID: 1358340914810265235, guid: c7bbc6db7493f8e47a0ef41968a4892e,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: eceda47dd3a165845a38243c5cd4666a,
+        type: 3}
+    - target: {fileID: 2255952411189371656, guid: c7bbc6db7493f8e47a0ef41968a4892e,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: eceda47dd3a165845a38243c5cd4666a,
+        type: 3}
+    - target: {fileID: 1358340914146836994, guid: c7bbc6db7493f8e47a0ef41968a4892e,
+        type: 3}
+      propertyPath: m_text
+      value: "Lyle was young when The Big Hack occurred. \n\nHe never really cared
+        that older people used to have full net access or stuff."
+      objectReference: {fileID: 0}
+    - target: {fileID: 5696398362423140198, guid: c7bbc6db7493f8e47a0ef41968a4892e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2255952410795048857, guid: c7bbc6db7493f8e47a0ef41968a4892e,
+        type: 3}
+      propertyPath: m_text
+      value: "One of Lyle\u2019s school speakers is in fact Samwell Lowcey, a.k.a
+        Mr.S. \n\nHe\u2019s very popular among students"
+      objectReference: {fileID: 0}
+    - target: {fileID: 6971274224233314586, guid: c7bbc6db7493f8e47a0ef41968a4892e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4425515630963221630, guid: c7bbc6db7493f8e47a0ef41968a4892e,
+        type: 3}
+      propertyPath: m_text
+      value: "Deepest thought Lyle ever had : School be tellin\u2019 us that getting
+        the diploma is essential. \n\nBut they ain\u2019t saying much about what this
+        diploma\u2019s for"
+      objectReference: {fileID: 0}
+    - target: {fileID: 9146046162347816983, guid: c7bbc6db7493f8e47a0ef41968a4892e,
+        type: 3}
+      propertyPath: Sentences.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 9146046162347816983, guid: c7bbc6db7493f8e47a0ef41968a4892e,
+        type: 3}
+      propertyPath: Sentences.Array.data[0]
+      value: "How\u2019s my fa-vou-rite rookie doing ? Knowing that he won\u2019t
+        be a rookie for much longer\u2026"
+      objectReference: {fileID: 0}
+    - target: {fileID: 9146046162347816983, guid: c7bbc6db7493f8e47a0ef41968a4892e,
+        type: 3}
+      propertyPath: Sentences.Array.data[1]
+      value: "You\u2019re not fired (yet), don\u2019t worry. It\u2019s just that it\u2019s
+        already been more than a month since you\u2019ve joined  for us. It\u2019s
+        great. And your clients rated you well.\r\nAs people seems more eager than
+        ever to show their\u2026 Displeasure about how bad their life is (you know
+        what I think about complaining wankers) , we should probably get a lot of
+        hot brand new cases from angry kids and frightened elders. Or the opposite.\r\n"
+      objectReference: {fileID: 0}
+    - target: {fileID: 9146046162347816983, guid: c7bbc6db7493f8e47a0ef41968a4892e,
+        type: 3}
+      propertyPath: Sentences.Array.data[2]
+      value: "It\u2019s been a while since I\u2019ve been working in this system,
+        and something I know for sure is that you can\u2019t get easily away with
+        breaking the rules. I\u2019m pretty sure that a miracle would be needed, or
+        at least a very major event should occur  for anyone at the top of the hierarchy
+        to even raise an eyebrow at this.\r\n"
+      objectReference: {fileID: 0}
+    - target: {fileID: 9146046162347816983, guid: c7bbc6db7493f8e47a0ef41968a4892e,
+        type: 3}
+      propertyPath: Sentences.Array.data[3]
+      value: "Little tip : Don\u2019t try to play it tough neither, rookie. The best
+        advice I could give you, is that when you blend in with the crowd, nobody
+        with bad intentions gets to you. And that\u2019s the best way to have  a good
+        life, no matter the context.\r\n\r\nSee ya.\r\n"
+      objectReference: {fileID: 0}
+    - target: {fileID: 6330242284028849863, guid: c7bbc6db7493f8e47a0ef41968a4892e,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 27
+      objectReference: {fileID: 0}
+    - target: {fileID: 6330242284028849863, guid: c7bbc6db7493f8e47a0ef41968a4892e,
+        type: 3}
+      propertyPath: m_fontSizeBase
+      value: 27
+      objectReference: {fileID: 0}
+    - target: {fileID: 2255952409439874496, guid: c7bbc6db7493f8e47a0ef41968a4892e,
+        type: 3}
+      propertyPath: m_text
+      value: Lyle
+      objectReference: {fileID: 0}
+    - target: {fileID: 2255952410211930912, guid: c7bbc6db7493f8e47a0ef41968a4892e,
+        type: 3}
+      propertyPath: m_text
+      value: 'STAMP #15 : IDOL'
+      objectReference: {fileID: 0}
+    - target: {fileID: 1358340912792227931, guid: c7bbc6db7493f8e47a0ef41968a4892e,
+        type: 3}
+      propertyPath: m_text
+      value: Lyle
+      objectReference: {fileID: 0}
+    - target: {fileID: 1358340913563938491, guid: c7bbc6db7493f8e47a0ef41968a4892e,
+        type: 3}
+      propertyPath: m_text
+      value: 'STAMP #14 : YOUNG'
+      objectReference: {fileID: 0}
+    - target: {fileID: 4425515629608842791, guid: c7bbc6db7493f8e47a0ef41968a4892e,
+        type: 3}
+      propertyPath: m_text
+      value: Lyle
+      objectReference: {fileID: 0}
+    - target: {fileID: 4425515630380304583, guid: c7bbc6db7493f8e47a0ef41968a4892e,
+        type: 3}
+      propertyPath: m_text
+      value: 'STAMP #13 : FUTURE'
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c7bbc6db7493f8e47a0ef41968a4892e, type: 3}
