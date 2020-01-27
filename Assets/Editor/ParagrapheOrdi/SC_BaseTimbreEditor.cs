@@ -34,7 +34,6 @@ public class SC_BaseTimbreEditor : Editor
                 loadImage = false;
                 break;
             }
-        
 
         if (baseTimbre.fileCSVBaseTimbre != null && loadImage)
         {
