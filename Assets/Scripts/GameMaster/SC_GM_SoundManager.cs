@@ -200,9 +200,9 @@ public class SC_GM_SoundManager : MonoBehaviour
         ASourceRandomSounds.clip = AC_Radio[Random.Range(0, AC_Radio.Length)];
         ASourceRandomSounds.pitch = Random.Range(0.9f, 1f);
         ASourceRandomSounds.Play();
-        yield return new WaitWhile(() => ASourceRandomSounds.isPlaying); 
-        
-        ASourceMusic.clip = radioMusics[currentTrack];
+        yield return new WaitWhile(() => ASourceRandomSounds.isPlaying);
+
+        ASourceMusic.clip = radioMusics[Random.Range(0, radioMusics.Length)];
         ASourceMusic.Play();
 
        
@@ -216,7 +216,7 @@ public class SC_GM_SoundManager : MonoBehaviour
         ASourceRandomSounds.pitch = Random.Range(0.9f, 1f);
         ASourceRandomSounds.Play();
         yield return new WaitWhile(() => ASourceRandomSounds.isPlaying);
-        ASourceMusic.clip = radioMusics[currentTrack];
+        ASourceMusic.clip = radioMusics[Random.Range(0, radioMusics.Length)];
         ASourceMusic.Play();
 
        
