@@ -7,27 +7,40 @@ using TMPro;
 public class SC_CameraDayDisplay : MonoBehaviour
 {
 
-    
+
     public TMP_Text DayText, DayNameText, IncidentText;
     private SC_GM_SoundManager GM_Audio;
     private Animator anim;
     private int AnimInt;
+    public GameObject stampy;
+
     void Start()
     {
-       GM_Audio = transform.GetChild(1).GetComponent<SC_GM_SoundManager>();
+        GM_Audio = transform.GetChild(1).GetComponent<SC_GM_SoundManager>();
         anim = gameObject.GetComponent<Animator>();
         AnimInt = 0;
+        anim.SetBool("tuto", false);
+        stampy.SetActive(false);
     }
+    public void appearStampy(){
 
+        stampy.SetActive(true);
+        }
     public void AnimIntIncr()
     {
         AnimInt++;
         anim.SetInteger("AnimInt", AnimInt);
     }
 
+    public void tutoTrue()
+    {
+        anim.SetBool("tuto", true);
+    }
+
+
     public void AnimIntReset()
     {
-
+        anim.SetInteger("AnimInt", 0);
     }
     public void DisplayDayText()
     {
@@ -39,7 +52,7 @@ public class SC_CameraDayDisplay : MonoBehaviour
             DayNameText.text = "First day at work";
             IncidentText.text = "37 days before the Incident";
             GM_Audio.PlayPiano(0);
-            anim.SetBool("tuto", true);
+           
         }
 
         if (scene.name == "L_B1")
