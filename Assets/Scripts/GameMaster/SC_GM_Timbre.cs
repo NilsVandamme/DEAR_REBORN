@@ -53,14 +53,7 @@ public class SC_GM_Timbre : MonoBehaviour
     {
         foreach (SC_Timbres timbres in SC_GM_Master.gm.timbres.timbres)
             for (int i = 0; i < timbreEnvelope.Count; i++)
-            {
-                Debug.Log(timbres.getName());
-                Debug.Log(timbres.IsVisible());
                 if (timbres.getName() == timbreEnvelope[i].sprite.name && timbres.IsVisible())
-                {
                     timbreEnvelope[i].enabled = true;
-                    Debug.Log(i);
-                }
-            }
     }
 }
