@@ -56,7 +56,7 @@ public class SC_CollectedCLFeedback : MonoBehaviour
 
                 if (Vector2.Distance(transform.position, CollectPosition.position) < 0.5f)
                 {
-                    anim.Play("AppearFeedbackSprite");
+                    anim.Play("DisappearFeedbackSprite");
                 
                 }
             }

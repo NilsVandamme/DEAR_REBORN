@@ -123,21 +123,15 @@ public class SC_GM_SoundManager : MonoBehaviour
     }
 
     // Play the specified sound from audioclips list
-    public void PlaySound(string name, bool RandomPitch)
+    public void PlaySound(string name)
     {
             foreach(AudioClip clip in audioclips)
             {
                 if (clip.name == name)
                 {
-                    if (RandomPitch)
-                    {
-                        ASourceSound.pitch = Random.Range(0.9f, 1.1f);
-                    }
-                    else
-                    {
-                        ASourceSound.pitch = 1;
-                        
-                    }
+                     ASourceSound.pitch = Random.Range(0.9f, 1.1f);
+                    
+                    
                                             
                     ASourceSound.PlayOneShot(clip);
                 }
