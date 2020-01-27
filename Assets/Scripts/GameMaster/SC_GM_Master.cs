@@ -30,7 +30,6 @@ public class SC_GM_Master : MonoBehaviour
     private void Awake()
     {
         path = System.IO.Directory.GetCurrentDirectory() + "/Assets/Save/";
-        Debug.Log("save path = " + path);
 
         if (gm == null)
             gm = this;

@@ -137,7 +137,6 @@ public class SC_InfoParagrapheOrdi : MonoBehaviour, IPointerClickHandler
                 for (int i = 0; i < SC_GM_Master.gm.timbres.timbres.Count; i++)
                     if (SC_GM_Master.gm.timbres.timbres[i].getName() == linkInfo.GetLinkID().Substring(1, linkInfo.GetLinkID().Length - 1))
                     {
-                        Debug.Log("erreur");
                         SC_GM_Master.gm.timbres.timbres[i].setVisible(true);
                         if (ChangeTextColor(linkInfo, timbresRecoltColor))
                         {
