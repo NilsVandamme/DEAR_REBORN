@@ -73,7 +73,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 16777215
+    rgba: 4294967295
   m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -501,6 +501,7 @@ MonoBehaviour:
   DayText: {fileID: 5991312978033210753}
   DayNameText: {fileID: 4477688448264655388}
   IncidentText: {fileID: 9127820339957749240}
+  stampy: {fileID: 0}
 --- !u!1 &3234915222936187199
 GameObject:
   m_ObjectHideFlags: 0
@@ -574,7 +575,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 16777215
+    rgba: 4294967295
   m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -730,7 +731,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 16777215
+    rgba: 4294967295
   m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -896,11 +897,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2415093599387375446}
     m_Modifications:
-    - target: {fileID: 2964603906790181810, guid: 9b88f1ca55f364b47b929ee4123a77aa,
-        type: 3}
-      propertyPath: m_PlayOnAwake
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8695859202731957377, guid: 9b88f1ca55f364b47b929ee4123a77aa,
         type: 3}
       propertyPath: m_Name
@@ -963,99 +959,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8695859202731957439, guid: 9b88f1ca55f364b47b929ee4123a77aa,
         type: 3}
-      propertyPath: pianoSounds.Array.size
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 8695859202731957439, guid: 9b88f1ca55f364b47b929ee4123a77aa,
-        type: 3}
-      propertyPath: radioMusics.Array.size
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 8695859202731957439, guid: 9b88f1ca55f364b47b929ee4123a77aa,
-        type: 3}
-      propertyPath: audioclips.Array.data[0]
-      value: 
-      objectReference: {fileID: 8300000, guid: 8e29c29102f6e5645af2509fc9e25de2, type: 3}
-    - target: {fileID: 8695859202731957439, guid: 9b88f1ca55f364b47b929ee4123a77aa,
-        type: 3}
-      propertyPath: audioclips.Array.data[1]
-      value: 
-      objectReference: {fileID: 8300000, guid: 6e96677be7da74d409e7835e2036e773, type: 3}
-    - target: {fileID: 8695859202731957439, guid: 9b88f1ca55f364b47b929ee4123a77aa,
-        type: 3}
-      propertyPath: audioclips.Array.data[2]
-      value: 
-      objectReference: {fileID: 8300000, guid: 4dc4711b265915d4ea6ce9539d2bf146, type: 3}
-    - target: {fileID: 8695859202731957439, guid: 9b88f1ca55f364b47b929ee4123a77aa,
-        type: 3}
-      propertyPath: audioclips.Array.data[3]
-      value: 
-      objectReference: {fileID: 8300000, guid: 2a1b88715dcb1354d98132edc879577e, type: 3}
-    - target: {fileID: 8695859202731957439, guid: 9b88f1ca55f364b47b929ee4123a77aa,
-        type: 3}
-      propertyPath: audioclips.Array.data[4]
-      value: 
-      objectReference: {fileID: 8300000, guid: 3a15203a7d379a144b7f067453adf02f, type: 3}
-    - target: {fileID: 8695859202731957439, guid: 9b88f1ca55f364b47b929ee4123a77aa,
-        type: 3}
-      propertyPath: audioclips.Array.data[5]
-      value: 
-      objectReference: {fileID: 8300000, guid: c573fae6c9530c542a54840c05dc24b4, type: 3}
-    - target: {fileID: 8695859202731957439, guid: 9b88f1ca55f364b47b929ee4123a77aa,
-        type: 3}
-      propertyPath: audioclips.Array.data[6]
-      value: 
-      objectReference: {fileID: 8300000, guid: 182913edfbffe6c42818616c887f0b77, type: 3}
-    - target: {fileID: 8695859202731957439, guid: 9b88f1ca55f364b47b929ee4123a77aa,
-        type: 3}
-      propertyPath: audioclips.Array.data[7]
-      value: 
-      objectReference: {fileID: 8300000, guid: 75a3a8b5dfbba4a49a057925e8379697, type: 3}
-    - target: {fileID: 8695859202731957439, guid: 9b88f1ca55f364b47b929ee4123a77aa,
-        type: 3}
-      propertyPath: audioclips.Array.data[8]
-      value: 
-      objectReference: {fileID: 8300000, guid: 381bf4c2bdaefbd4c8d9888a8d4b48c3, type: 3}
-    - target: {fileID: 8695859202731957439, guid: 9b88f1ca55f364b47b929ee4123a77aa,
-        type: 3}
-      propertyPath: audioclips.Array.data[9]
-      value: 
-      objectReference: {fileID: 8300000, guid: 5b62708753352694f866a7970b3d6352, type: 3}
-    - target: {fileID: 8695859202731957439, guid: 9b88f1ca55f364b47b929ee4123a77aa,
-        type: 3}
-      propertyPath: audioclips.Array.data[10]
-      value: 
-      objectReference: {fileID: 8300000, guid: e1d925e9faa179d42997be197b4a7efe, type: 3}
-    - target: {fileID: 8695859202731957439, guid: 9b88f1ca55f364b47b929ee4123a77aa,
-        type: 3}
-      propertyPath: audioclips.Array.data[11]
-      value: 
-      objectReference: {fileID: 8300000, guid: 7231ab26758bfab45b1523e6cc6bd838, type: 3}
-    - target: {fileID: 8695859202731957439, guid: 9b88f1ca55f364b47b929ee4123a77aa,
-        type: 3}
-      propertyPath: audioclips.Array.data[12]
-      value: 
-      objectReference: {fileID: 8300000, guid: fbac64930954af94597aceaca284610f, type: 3}
-    - target: {fileID: 8695859202731957439, guid: 9b88f1ca55f364b47b929ee4123a77aa,
-        type: 3}
       propertyPath: ASourceRandomizedSound
       value: 
       objectReference: {fileID: 0}
-    - target: {fileID: 8695859202731957439, guid: 9b88f1ca55f364b47b929ee4123a77aa,
-        type: 3}
-      propertyPath: audioclips.Array.data[13]
-      value: 
-      objectReference: {fileID: 8300000, guid: a017ffbe39db32c408499425f1f373e1, type: 3}
-    - target: {fileID: 8695859202731957439, guid: 9b88f1ca55f364b47b929ee4123a77aa,
-        type: 3}
-      propertyPath: audioclips.Array.data[14]
-      value: 
-      objectReference: {fileID: 8300000, guid: 46c1653e92253b045a55f4376208f059, type: 3}
-    - target: {fileID: 8695859202731957439, guid: 9b88f1ca55f364b47b929ee4123a77aa,
-        type: 3}
-      propertyPath: audioclips.Array.data[15]
-      value: 
-      objectReference: {fileID: 8300000, guid: 39e31d218f22dbe4c8c61c7220153ad0, type: 3}
     - target: {fileID: 8695859202731957439, guid: 9b88f1ca55f364b47b929ee4123a77aa,
         type: 3}
       propertyPath: soundSlider
@@ -1066,151 +972,6 @@ PrefabInstance:
       propertyPath: musicSlider
       value: 
       objectReference: {fileID: 9110969958755203684}
-    - target: {fileID: 8695859202731957439, guid: 9b88f1ca55f364b47b929ee4123a77aa,
-        type: 3}
-      propertyPath: pianoSounds.Array.data[0]
-      value: 
-      objectReference: {fileID: 8300000, guid: fc20fd452d663cf489b4a73006f79a45, type: 3}
-    - target: {fileID: 8695859202731957439, guid: 9b88f1ca55f364b47b929ee4123a77aa,
-        type: 3}
-      propertyPath: pianoSounds.Array.data[1]
-      value: 
-      objectReference: {fileID: 8300000, guid: 418d2c74377bbcb4691d96cd5d56e041, type: 3}
-    - target: {fileID: 8695859202731957439, guid: 9b88f1ca55f364b47b929ee4123a77aa,
-        type: 3}
-      propertyPath: pianoSounds.Array.data[2]
-      value: 
-      objectReference: {fileID: 8300000, guid: 418d2c74377bbcb4691d96cd5d56e041, type: 3}
-    - target: {fileID: 8695859202731957439, guid: 9b88f1ca55f364b47b929ee4123a77aa,
-        type: 3}
-      propertyPath: pianoSounds.Array.data[3]
-      value: 
-      objectReference: {fileID: 8300000, guid: 5c41506db4bb7cf4886af2bc919d70fc, type: 3}
-    - target: {fileID: 8695859202731957439, guid: 9b88f1ca55f364b47b929ee4123a77aa,
-        type: 3}
-      propertyPath: pianoSounds.Array.data[4]
-      value: 
-      objectReference: {fileID: 8300000, guid: 465b2e8db5e3dfa47b164a4a2a981340, type: 3}
-    - target: {fileID: 8695859202731957439, guid: 9b88f1ca55f364b47b929ee4123a77aa,
-        type: 3}
-      propertyPath: pianoSounds.Array.data[5]
-      value: 
-      objectReference: {fileID: 8300000, guid: 10d40f77e3dccb14c9c364b54543d64b, type: 3}
-    - target: {fileID: 8695859202731957439, guid: 9b88f1ca55f364b47b929ee4123a77aa,
-        type: 3}
-      propertyPath: pianoSounds.Array.data[6]
-      value: 
-      objectReference: {fileID: 8300000, guid: 6bc4a79dfb49ed149bd86170d5b17574, type: 3}
-    - target: {fileID: 8695859202731957439, guid: 9b88f1ca55f364b47b929ee4123a77aa,
-        type: 3}
-      propertyPath: pianoSounds.Array.data[7]
-      value: 
-      objectReference: {fileID: 8300000, guid: 567c581388e71614a8e647488ea4a391, type: 3}
-    - target: {fileID: 8695859202731957439, guid: 9b88f1ca55f364b47b929ee4123a77aa,
-        type: 3}
-      propertyPath: pianoSounds.Array.data[8]
-      value: 
-      objectReference: {fileID: 8300000, guid: 4add0495c0dae24448b2c31463e98b21, type: 3}
-    - target: {fileID: 8695859202731957439, guid: 9b88f1ca55f364b47b929ee4123a77aa,
-        type: 3}
-      propertyPath: pianoSounds.Array.data[9]
-      value: 
-      objectReference: {fileID: 8300000, guid: 5f769218f09007941a126dcc853045b6, type: 3}
-    - target: {fileID: 8695859202731957439, guid: 9b88f1ca55f364b47b929ee4123a77aa,
-        type: 3}
-      propertyPath: pianoSounds.Array.data[10]
-      value: 
-      objectReference: {fileID: 8300000, guid: a6313bad1b1524449ad41f19ce5da53c, type: 3}
-    - target: {fileID: 8695859202731957439, guid: 9b88f1ca55f364b47b929ee4123a77aa,
-        type: 3}
-      propertyPath: pianoSounds.Array.data[11]
-      value: 
-      objectReference: {fileID: 8300000, guid: d9f44738ee32f9d45bfbc8c8dfe8e5e9, type: 3}
-    - target: {fileID: 8695859202731957439, guid: 9b88f1ca55f364b47b929ee4123a77aa,
-        type: 3}
-      propertyPath: pianoSounds.Array.data[12]
-      value: 
-      objectReference: {fileID: 8300000, guid: 5c37519a57de7694ab24bc2ff8ca65c7, type: 3}
-    - target: {fileID: 8695859202731957439, guid: 9b88f1ca55f364b47b929ee4123a77aa,
-        type: 3}
-      propertyPath: pianoSounds.Array.data[13]
-      value: 
-      objectReference: {fileID: 8300000, guid: 987567d42f4d134419bc79dcc7e5f908, type: 3}
-    - target: {fileID: 8695859202731957439, guid: 9b88f1ca55f364b47b929ee4123a77aa,
-        type: 3}
-      propertyPath: pianoSounds.Array.data[14]
-      value: 
-      objectReference: {fileID: 8300000, guid: c71ec0a79870249458b1eab005304767, type: 3}
-    - target: {fileID: 8695859202731957439, guid: 9b88f1ca55f364b47b929ee4123a77aa,
-        type: 3}
-      propertyPath: radioMusics.Array.data[0]
-      value: 
-      objectReference: {fileID: 8300000, guid: bd73c50f43d1a2c448f8eaf9bbcb3743, type: 3}
-    - target: {fileID: 8695859202731957439, guid: 9b88f1ca55f364b47b929ee4123a77aa,
-        type: 3}
-      propertyPath: radioMusics.Array.data[1]
-      value: 
-      objectReference: {fileID: 8300000, guid: efbeb449b3ff8ab489162bfa6e88456a, type: 3}
-    - target: {fileID: 8695859202731957439, guid: 9b88f1ca55f364b47b929ee4123a77aa,
-        type: 3}
-      propertyPath: radioMusics.Array.data[2]
-      value: 
-      objectReference: {fileID: 8300000, guid: 62ac432651b6e4462b30bdf2ee5216dc, type: 3}
-    - target: {fileID: 8695859202731957439, guid: 9b88f1ca55f364b47b929ee4123a77aa,
-        type: 3}
-      propertyPath: radioMusics.Array.data[3]
-      value: 
-      objectReference: {fileID: 8300000, guid: 44f45aebf3972964894d7af689a5814a, type: 3}
-    - target: {fileID: 8695859202731957439, guid: 9b88f1ca55f364b47b929ee4123a77aa,
-        type: 3}
-      propertyPath: radioMusics.Array.data[5]
-      value: 
-      objectReference: {fileID: 8300000, guid: 344d7d3cf6ccfb142a3a30c27150f94c, type: 3}
-    - target: {fileID: 1983399460455409572, guid: 9b88f1ca55f364b47b929ee4123a77aa,
-        type: 3}
-      propertyPath: m_Volume
-      value: 0.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 1983399460455409572, guid: 9b88f1ca55f364b47b929ee4123a77aa,
-        type: 3}
-      propertyPath: m_PlayOnAwake
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6646662831219535920, guid: 9b88f1ca55f364b47b929ee4123a77aa,
-        type: 3}
-      propertyPath: m_Volume
-      value: 0.346
-      objectReference: {fileID: 0}
-    - target: {fileID: 6646662831219535920, guid: 9b88f1ca55f364b47b929ee4123a77aa,
-        type: 3}
-      propertyPath: m_PlayOnAwake
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8695859201514891205, guid: 9b88f1ca55f364b47b929ee4123a77aa,
-        type: 3}
-      propertyPath: Loop
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8695859201514891205, guid: 9b88f1ca55f364b47b929ee4123a77aa,
-        type: 3}
-      propertyPath: m_PlayOnAwake
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8695859201514891205, guid: 9b88f1ca55f364b47b929ee4123a77aa,
-        type: 3}
-      propertyPath: m_Volume
-      value: 0.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 8695859202313296578, guid: 9b88f1ca55f364b47b929ee4123a77aa,
-        type: 3}
-      propertyPath: m_PlayOnAwake
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8695859202313296578, guid: 9b88f1ca55f364b47b929ee4123a77aa,
-        type: 3}
-      propertyPath: m_Volume
-      value: 0.8
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9b88f1ca55f364b47b929ee4123a77aa, type: 3}
 --- !u!4 &9022777108757242031 stripped
@@ -1243,16 +1004,6 @@ PrefabInstance:
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 9022777108757242000}
-    - target: {fileID: 916526334955191825, guid: 6ef707ac5b9888248a3c59e9aac13716,
-        type: 3}
-      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ChangeSoundVolume
-      objectReference: {fileID: 0}
-    - target: {fileID: 916526334955191825, guid: 6ef707ac5b9888248a3c59e9aac13716,
-        type: 3}
-      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 731253323080471194, guid: 6ef707ac5b9888248a3c59e9aac13716,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1363,151 +1114,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: PauseMenuCanvas
       objectReference: {fileID: 0}
-    - target: {fileID: 1166915050687476815, guid: 6ef707ac5b9888248a3c59e9aac13716,
-        type: 3}
-      propertyPath: m_textInfo.characterCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1166915050687476815, guid: 6ef707ac5b9888248a3c59e9aac13716,
-        type: 3}
-      propertyPath: m_textInfo.spaceCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1166915050687476815, guid: 6ef707ac5b9888248a3c59e9aac13716,
-        type: 3}
-      propertyPath: m_textInfo.wordCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1166915050687476815, guid: 6ef707ac5b9888248a3c59e9aac13716,
-        type: 3}
-      propertyPath: m_textInfo.lineCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1166915050687476815, guid: 6ef707ac5b9888248a3c59e9aac13716,
-        type: 3}
-      propertyPath: m_textInfo.pageCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3221372441504002657, guid: 6ef707ac5b9888248a3c59e9aac13716,
-        type: 3}
-      propertyPath: m_textInfo.characterCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3221372441504002657, guid: 6ef707ac5b9888248a3c59e9aac13716,
-        type: 3}
-      propertyPath: m_textInfo.spaceCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3221372441504002657, guid: 6ef707ac5b9888248a3c59e9aac13716,
-        type: 3}
-      propertyPath: m_textInfo.wordCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3221372441504002657, guid: 6ef707ac5b9888248a3c59e9aac13716,
-        type: 3}
-      propertyPath: m_textInfo.lineCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3221372441504002657, guid: 6ef707ac5b9888248a3c59e9aac13716,
-        type: 3}
-      propertyPath: m_textInfo.pageCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4469831496327277223, guid: 6ef707ac5b9888248a3c59e9aac13716,
-        type: 3}
-      propertyPath: m_textInfo.characterCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4469831496327277223, guid: 6ef707ac5b9888248a3c59e9aac13716,
-        type: 3}
-      propertyPath: m_textInfo.wordCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4469831496327277223, guid: 6ef707ac5b9888248a3c59e9aac13716,
-        type: 3}
-      propertyPath: m_textInfo.lineCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4469831496327277223, guid: 6ef707ac5b9888248a3c59e9aac13716,
-        type: 3}
-      propertyPath: m_textInfo.pageCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6173575396172557612, guid: 6ef707ac5b9888248a3c59e9aac13716,
-        type: 3}
-      propertyPath: m_textInfo.characterCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6173575396172557612, guid: 6ef707ac5b9888248a3c59e9aac13716,
-        type: 3}
-      propertyPath: m_textInfo.spaceCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6173575396172557612, guid: 6ef707ac5b9888248a3c59e9aac13716,
-        type: 3}
-      propertyPath: m_textInfo.wordCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6173575396172557612, guid: 6ef707ac5b9888248a3c59e9aac13716,
-        type: 3}
-      propertyPath: m_textInfo.lineCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6173575396172557612, guid: 6ef707ac5b9888248a3c59e9aac13716,
-        type: 3}
-      propertyPath: m_textInfo.pageCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7742778485278470865, guid: 6ef707ac5b9888248a3c59e9aac13716,
-        type: 3}
-      propertyPath: m_textInfo.characterCount
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7742778485278470865, guid: 6ef707ac5b9888248a3c59e9aac13716,
-        type: 3}
-      propertyPath: m_textInfo.spaceCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7742778485278470865, guid: 6ef707ac5b9888248a3c59e9aac13716,
-        type: 3}
-      propertyPath: m_textInfo.wordCount
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7742778485278470865, guid: 6ef707ac5b9888248a3c59e9aac13716,
-        type: 3}
-      propertyPath: m_textInfo.lineCount
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7742778485278470865, guid: 6ef707ac5b9888248a3c59e9aac13716,
-        type: 3}
-      propertyPath: m_textInfo.pageCount
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7652870416659194964, guid: 6ef707ac5b9888248a3c59e9aac13716,
-        type: 3}
-      propertyPath: m_textInfo.characterCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7652870416659194964, guid: 6ef707ac5b9888248a3c59e9aac13716,
-        type: 3}
-      propertyPath: m_textInfo.spaceCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7652870416659194964, guid: 6ef707ac5b9888248a3c59e9aac13716,
-        type: 3}
-      propertyPath: m_textInfo.wordCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7652870416659194964, guid: 6ef707ac5b9888248a3c59e9aac13716,
-        type: 3}
-      propertyPath: m_textInfo.lineCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7652870416659194964, guid: 6ef707ac5b9888248a3c59e9aac13716,
-        type: 3}
-      propertyPath: m_textInfo.pageCount
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 767150207727049684, guid: 6ef707ac5b9888248a3c59e9aac13716,
         type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -1524,121 +1130,6 @@ PrefabInstance:
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: ActivateToolTip
       objectReference: {fileID: 0}
-    - target: {fileID: 1645665368247665136, guid: 6ef707ac5b9888248a3c59e9aac13716,
-        type: 3}
-      propertyPath: m_textInfo.characterCount
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 1645665368247665136, guid: 6ef707ac5b9888248a3c59e9aac13716,
-        type: 3}
-      propertyPath: m_textInfo.wordCount
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1645665368247665136, guid: 6ef707ac5b9888248a3c59e9aac13716,
-        type: 3}
-      propertyPath: m_textInfo.lineCount
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1645665368247665136, guid: 6ef707ac5b9888248a3c59e9aac13716,
-        type: 3}
-      propertyPath: m_textInfo.pageCount
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1611162385694666113, guid: 6ef707ac5b9888248a3c59e9aac13716,
-        type: 3}
-      propertyPath: m_textInfo.characterCount
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 1611162385694666113, guid: 6ef707ac5b9888248a3c59e9aac13716,
-        type: 3}
-      propertyPath: m_textInfo.wordCount
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1611162385694666113, guid: 6ef707ac5b9888248a3c59e9aac13716,
-        type: 3}
-      propertyPath: m_textInfo.lineCount
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1611162385694666113, guid: 6ef707ac5b9888248a3c59e9aac13716,
-        type: 3}
-      propertyPath: m_textInfo.pageCount
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1165869169240067859, guid: 6ef707ac5b9888248a3c59e9aac13716,
-        type: 3}
-      propertyPath: m_textInfo.characterCount
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 1165869169240067859, guid: 6ef707ac5b9888248a3c59e9aac13716,
-        type: 3}
-      propertyPath: m_textInfo.spaceCount
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1165869169240067859, guid: 6ef707ac5b9888248a3c59e9aac13716,
-        type: 3}
-      propertyPath: m_textInfo.wordCount
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1165869169240067859, guid: 6ef707ac5b9888248a3c59e9aac13716,
-        type: 3}
-      propertyPath: m_textInfo.lineCount
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1165869169240067859, guid: 6ef707ac5b9888248a3c59e9aac13716,
-        type: 3}
-      propertyPath: m_textInfo.pageCount
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000808203835647472, guid: 6ef707ac5b9888248a3c59e9aac13716,
-        type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000808203835647472, guid: 6ef707ac5b9888248a3c59e9aac13716,
-        type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000808203835647472, guid: 6ef707ac5b9888248a3c59e9aac13716,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3474006467796442093, guid: 6ef707ac5b9888248a3c59e9aac13716,
-        type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3474006467796442093, guid: 6ef707ac5b9888248a3c59e9aac13716,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3643639911375754701, guid: 6ef707ac5b9888248a3c59e9aac13716,
-        type: 3}
-      propertyPath: m_textInfo.characterCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3643639911375754701, guid: 6ef707ac5b9888248a3c59e9aac13716,
-        type: 3}
-      propertyPath: m_textInfo.spaceCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3643639911375754701, guid: 6ef707ac5b9888248a3c59e9aac13716,
-        type: 3}
-      propertyPath: m_textInfo.wordCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3643639911375754701, guid: 6ef707ac5b9888248a3c59e9aac13716,
-        type: 3}
-      propertyPath: m_textInfo.lineCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3643639911375754701, guid: 6ef707ac5b9888248a3c59e9aac13716,
-        type: 3}
-      propertyPath: m_textInfo.pageCount
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4752637849634403264, guid: 6ef707ac5b9888248a3c59e9aac13716,
         type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -1648,31 +1139,6 @@ PrefabInstance:
         type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: RetroModeChange
-      objectReference: {fileID: 0}
-    - target: {fileID: 6891918175794194939, guid: 6ef707ac5b9888248a3c59e9aac13716,
-        type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6891918175794194939, guid: 6ef707ac5b9888248a3c59e9aac13716,
-        type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6891918175794194939, guid: 6ef707ac5b9888248a3c59e9aac13716,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8636086214120615254, guid: 6ef707ac5b9888248a3c59e9aac13716,
-        type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8636086214120615254, guid: 6ef707ac5b9888248a3c59e9aac13716,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8337757056412579393, guid: 6ef707ac5b9888248a3c59e9aac13716,
         type: 3}
