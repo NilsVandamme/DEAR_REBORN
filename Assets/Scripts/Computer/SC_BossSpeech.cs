@@ -21,7 +21,7 @@ public class SC_BossSpeech : MonoBehaviour
         // Init variables
         BossText.text = "";
         sentenceFinished = true;
-        DisplayNextSentence();
+        //DisplayNextSentence();
     }
 
     // Display next sentence
