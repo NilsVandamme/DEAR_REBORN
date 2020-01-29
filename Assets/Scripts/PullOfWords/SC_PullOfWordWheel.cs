@@ -142,6 +142,8 @@ public class SC_PullOfWordWheel : MonoBehaviour
             {
                 listOfWheel[pos].text = word.titre;
                 SC_GM_Local.gm.wheelOfWords.Add(word);
+                if (SC_GM_Local.gm.wheelOfWords.Count == listOfWheel.Length)
+                    startWrittingButton.interactable = true;
             }
         }
     }
@@ -168,11 +170,7 @@ public class SC_PullOfWordWheel : MonoBehaviour
     {
         for (int i = 0; i < listOfWheel.Length; i++)
             if (listOfWheel[i].text == "")
-            {
-                if (i == listOfWheel.Length - 1)
-                    startWrittingButton.interactable = true;
                 return i;
-            }
 
         return -1;
     }
