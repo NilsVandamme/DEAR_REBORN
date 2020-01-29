@@ -1,230 +1,136 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
-public class SC_InfoParagrapheOrdi : MonoBehaviour, IPointerClickHandler
+public class SC_InfoParagrapheOrdi : MonoBehaviour
 {
     public SC_ParagrapheOrdi paragrapheOrdi;
-    public TextMeshProUGUI myText;
     public Color CLRecoltColor;
     public Color timbresRecoltColor;
     public Color textNonRecoltableColor;
     public Camera cam;
     public float wait;
 
+    private TextMeshProUGUI text;
     private Color normalTextColor;
-    private SC_ChangeColorText listeTexteChangeColor;
-    private bool first;
-
-    // Lenght des composants des balises
-    private int lenghtBaliseColor = 10;
-    private int lenghtBaliseColorVerification = 8;
-
-    private bool oneClick = false;
-    private int elemCliquable;
-    private bool hover;
+    private bool firstClick;
 
     public GameObject fxGood;
     public GameObject fxbad;
 
     private void Start()
     {
-        elemCliquable = 0;
-        hover = false;
-
-        foreach (TextPart elem in paragrapheOrdi.texte)
-            if (elem.partText.Substring(7, 1).Equals("D"))
-                myText.text += SC_GM_Master.gm.namePlayer;
-            else
-            {
-                myText.text += elem.partText;
-                elemCliquable++;
-            }
-
-        first = true;
+        text = this.gameObject.GetComponentInChildren<TextMeshProUGUI>();
+        firstClick = true;
     }
 
-    private void Update()
-    {
-        if (listeTexteChangeColor != null)
-            if (listeTexteChangeColor.lerp < 1)
-            {
-                Color temp = Color.Lerp(normalTextColor, listeTexteChangeColor.color, listeTexteChangeColor.lerp);
-                listeTexteChangeColor.lerp += Time.deltaTime / wait;
-                string textColor = ColorUtility.ToHtmlStringRGBA(temp);
-                myText.text = listeTexteChangeColor.start + textColor + listeTexteChangeColor.end;
-            }
-            else
-            {
-                listeTexteChangeColor = null;
-                elemCliquable--;
 
-                NotPossible();
-            }
-    }
-
-    /*
-     * Lors du click wait
-     */
-    public void OnPointerClick(PointerEventData eventData)
+    public void OnClickNonRecoltable()
     {
-        if (!oneClick)
+        if (firstClick)
         {
-            oneClick = true;
+            firstClick = false;
+            text.color = textNonRecoltableColor;
 
-            int linkIndex = TMP_TextUtilities.FindIntersectingLink(myText, Input.mousePosition, cam);
+            Instantiate(fxbad, new Vector3(GetMouseWorldPos().x, GetMouseWorldPos().y, -4f), Quaternion.identity);
+            SC_GM_SoundManager.instance.PlaySound("ClickPhraseFail_2");
 
-            Collect(linkIndex);
+            //TO-DO --> feedback de refus de collect
         }
     }
 
 
-    /*
-     * Regarde si le CL est ajoutable ou non
-     */
-    private void Collect(int linkIndex)
+    public void OnClickCLRecolt()
     {
-        if (linkIndex != -1) //Collectable
+        if (paragrapheOrdi == null)
         {
-            TMP_LinkInfo linkInfo = myText.textInfo.linkInfo[linkIndex];
+            Debug.LogError("Le paragraphe ordi : \n" + text.text + "\n n'a pas des CL assigné");
+            return;
+        }
 
-            SC_GM_Cursor.gm.changeToLoadCursor();
+        if (firstClick)
+        {
+            firstClick = false;
 
-            if (linkInfo.GetLinkID()[0] == 'A') // Texte
+            if (SC_GM_Local.gm.numberOfCLRecover < SC_GM_Local.gm.numberOfCLRecoverable)
             {
-                Instantiate(fxbad, new Vector3(GetMouseWorldPos().x, GetMouseWorldPos().y, -4f), Quaternion.identity);
-                SC_GM_SoundManager.instance.PlaySound("ClickPhraseFail_2");
-                //TO-DO --> feedback de refus de collect
-                ChangeTextColor(linkInfo, textNonRecoltableColor);
+                List<int> elemToAdd = new List<int>();
+                
+                for (int i = 0; i < paragrapheOrdi.listChampLexicaux.listChampLexical[paragrapheOrdi.champLexical].listOfWords.Count; i++)
+                    if (paragrapheOrdi.motAccepterInCL[i])
+                        elemToAdd.Add(i);
+
+                AddWordInCollect(elemToAdd);
+                SC_GM_Local.gm.numberOfCLRecover++;
+                text.color = CLRecoltColor;
+
+                SC_CollectedCLFeedback.instance.text.text = paragrapheOrdi.listChampLexicaux.listNameChampLexical[paragrapheOrdi.champLexical];
+                SC_CollectedCLFeedback.instance.StartFeedback(SC_CollectedCLFeedback.instance.GetMouseWorldPos());
+
+                Instantiate(fxGood, new Vector3(GetMouseWorldPos().x, GetMouseWorldPos().y, -4f), Quaternion.identity);
+                SC_GM_SoundManager.instance.PlaySound("WordGet");
+
             }
-            else if (linkInfo.GetLinkID()[0] == 'B') // CL
-            {
-                int id = int.Parse(linkInfo.GetLinkID().Substring(1));
+        }
+    }
 
-                if (SC_GM_Local.gm.numberOfCLRecover < SC_GM_Local.gm.numberOfCLRecoverable)
+    public void OnClickTimbreRecoltable(string timbre)
+    {
+        if (firstClick)
+        {
+            firstClick = false;
+
+            for (int i = 0; i < SC_GM_Master.gm.timbres.timbres.Count; i++)
+                if (SC_GM_Master.gm.timbres.timbres[i].getName() == timbre)
                 {
-                    bool add = false;
+                    SC_GM_Master.gm.timbres.timbres[i].setVisible(true);
+                    text.color = timbresRecoltColor;
+
+                    SC_CollectedTimbresFeedback.instance.image.sprite = SC_GM_Master.gm.timbres.images[i];
+                    SC_CollectedTimbresFeedback.instance.StartFeedback(SC_CollectedTimbresFeedback.instance.GetMouseWorldPos());
+
                     Instantiate(fxGood, new Vector3(GetMouseWorldPos().x, GetMouseWorldPos().y, -4f), Quaternion.identity);
-                    SC_GM_SoundManager.instance.PlaySound("WordGet");
-                    int pos = 0;
-                    for (int i = 0; i < id; i++)
-                        pos += paragrapheOrdi.listChampLexicaux.listChampLexical[paragrapheOrdi.champLexical[i]].listOfWords.Count;
 
-                    for (int i = 0; i < paragrapheOrdi.listChampLexicaux.listChampLexical[paragrapheOrdi.champLexical[id]].listOfWords.Count; i++, pos++)
-                        if (paragrapheOrdi.motAccepterInCL[pos])
-                            if (AddWordInCollect(id, i))
-                                add = true;
+                    SC_GM_SoundManager.instance.PlaySound("TimbreGet");
 
-                    if (add)
-                    {
-                        SC_GM_Local.gm.numberOfCLRecover++;
-                        if (ChangeTextColor(linkInfo, CLRecoltColor))
-                        {
-                            // RECUPERER CL
-                            
-                            SC_CollectedCLFeedback.instance.text.text = paragrapheOrdi.listChampLexicaux.listNameChampLexical[paragrapheOrdi.champLexical[id]];
-                            SC_CollectedCLFeedback.instance.StartFeedback(SC_CollectedCLFeedback.instance.GetMouseWorldPos());
-                        }
-                    }
-                    else
-                        NotPossible();
                 }
-            }
-            else if (linkInfo.GetLinkID()[0] == 'C') // Timbres
-            {
-                for (int i = 0; i < SC_GM_Master.gm.timbres.timbres.Count; i++)
-                    if (SC_GM_Master.gm.timbres.timbres[i].getName() == linkInfo.GetLinkID().Substring(1, linkInfo.GetLinkID().Length - 1))
-                    {
-                        Debug.Log("aaaaahhhhh");
-                        SC_GM_Master.gm.timbres.timbres[i].setVisible(true);
-                        if (ChangeTextColor(linkInfo, timbresRecoltColor))
-                        {
-                            // RECUPERER TIMBRE
-                            SC_CollectedTimbresFeedback.instance.image.sprite = SC_GM_Master.gm.timbres.images[i];
-                            SC_GM_SoundManager.instance.PlaySound("TimbreGet");
-                            Instantiate(fxGood, new Vector3(GetMouseWorldPos().x, GetMouseWorldPos().y, -4f), Quaternion.identity);
-                            //  // CHANGER IMAGE TIMBRE
-                            SC_CollectedTimbresFeedback.instance.StartFeedback(SC_CollectedTimbresFeedback.instance.GetMouseWorldPos());
-                        }
-                    }
-
-                
-            }
-            else // Non collectable
-            {
-                
-            }
         }
-
     }
-
     /*
      * Ajoute le CL a la collect
      */
-    private bool AddWordInCollect(int link, int word)
+    private void AddWordInCollect(List<int> elemToAdd)
     {
-        string cl = paragrapheOrdi.listChampLexicaux.listChampLexical[paragrapheOrdi.champLexical[link]].fileCSVChampLexical.name;
+        string cl = paragrapheOrdi.listChampLexicaux.listChampLexical[paragrapheOrdi.champLexical].fileCSVChampLexical.name;
+        SC_CLInPull elem = new SC_CLInPull(cl, paragrapheOrdi.listChampLexicaux.listChampLexical[paragrapheOrdi.champLexical].listOfWords[elemToAdd[0]]);
 
-        SC_GM_Local.gm.wordsInCollect.Add(new SC_CLInPull(cl, paragrapheOrdi.listChampLexicaux.listChampLexical[paragrapheOrdi.champLexical[link]].listOfWords[word]));
-        return true;
+        for (int i = 1; i < elemToAdd.Count; i++)
+            elem.word.Add(paragrapheOrdi.listChampLexicaux.listChampLexical[paragrapheOrdi.champLexical].listOfWords[elemToAdd[i]]);
+
+        SC_GM_Local.gm.wordsInCollect.Add(elem);
+
     }
 
     /*
-     * Change le couleur du texte
+     * Gere quand on entre en hover du text
      */
-    private bool ChangeTextColor(TMP_LinkInfo linkInfo, Color color)
-    {
-        Color actualColor;
-        string textColor = ColorUtility.ToHtmlStringRGBA(color);
-
-        int lastIndexPart1 = linkInfo.linkIdFirstCharacterIndex + linkInfo.linkIdLength + lenghtBaliseColor;
-        int lenghtPart2 = myText.text.Length - (lastIndexPart1 + textColor.Length);
-
-        string start = myText.text.Substring(0, lastIndexPart1);
-        string actualColorString = myText.text.Substring(lastIndexPart1, textColor.Length);
-        string end = myText.text.Substring(lastIndexPart1 + textColor.Length, lenghtPart2);
-
-        if (ColorUtility.TryParseHtmlString("#" + actualColorString, out actualColor))
-        {
-            if (first)
-            {
-                normalTextColor = actualColor;
-                first = false;
-            }
-            
-            if (!actualColor.Equals(normalTextColor))
-            {
-                NotPossible();
-                return false;
-            }
-        }
-
-        if (start.Substring(start.Length - lenghtBaliseColorVerification, lenghtBaliseColorVerification).Equals("<color=#") && end[0].Equals('>'))
-            listeTexteChangeColor = new SC_ChangeColorText(start, end, 0, color);
-
-        return true;
-
-    }
-
     public void TextHover()
     {
-        if (elemCliquable > 0)
-        {
+        if (firstClick)
             SC_GM_Cursor.gm.changeToHoverCursor();
-            hover = true;
-        }
-
     }
 
+    /*
+     * Gere quand on sort du hover du text
+     */
     public void TextHoverExit()
     {
-        hover = false;
         SC_GM_Cursor.gm.changeToNormalCursor();
     }
 
-
+    /*
+     * Get la position de la souris sur le canvas
+     */
     public Vector3 GetMouseWorldPos()
     {
         Vector3 mousePoint = Input.mousePosition;
@@ -232,17 +138,5 @@ public class SC_InfoParagrapheOrdi : MonoBehaviour, IPointerClickHandler
         mousePoint.z = transform.position.z;
 
         return Camera.main.ScreenToWorldPoint(mousePoint) * -16;
-    }
-
-    private void NotPossible()
-    {
-        if (elemCliquable > 0)
-            oneClick = false;
-
-        if (hover && elemCliquable > 0)
-            SC_GM_Cursor.gm.changeToHoverCursor();
-        else
-            SC_GM_Cursor.gm.changeToNormalCursor();
-
     }
 }
