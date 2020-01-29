@@ -4,7 +4,7 @@ using UnityEngine;
 public class SC_InfoParagrapheLettre : MonoBehaviour
 {
     public SC_ParagrapheLettre textParagraphe;
-    public TextMeshProUGUI myText;
+    public TextMeshPro myText;
 
     void Start()
     {
