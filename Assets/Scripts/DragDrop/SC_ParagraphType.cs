@@ -8,15 +8,18 @@ public class SC_ParagraphType : MonoBehaviour
     public enum ParagraphType { Motivation, Clash, Orientation, WakeUp };
     public ParagraphType Type;
 
+    public Color OrientationColor;
+    public Color WakeupColor;
+    public Color MotivationColor;
+    public Color ClashColor;
+
     public float multiplicativeScore;
 
-    private Image TypeIcon;
+    public SpriteRenderer TypeIcon;
 
     // Start is called before the first frame update
     void Start()
     {
-
-        TypeIcon = GetComponentInChildren<Image>();
 
         if (Type == ParagraphType.Orientation)
         {
