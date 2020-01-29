@@ -50,7 +50,7 @@ public class SC_InfoParagrapheOrdi : MonoBehaviour
 
         if (firstClick)
         {
-            firstClick = false;
+            //firstClick = false;
 
             if (SC_GM_Local.gm.numberOfCLRecover < SC_GM_Local.gm.numberOfCLRecoverable)
             {
@@ -64,8 +64,11 @@ public class SC_InfoParagrapheOrdi : MonoBehaviour
                 SC_GM_Local.gm.numberOfCLRecover++;
                 text.color = CLRecoltColor;
 
-                SC_CollectedCLFeedback.instance.text.text = paragrapheOrdi.listChampLexicaux.listNameChampLexical[paragrapheOrdi.champLexical];
-                SC_CollectedCLFeedback.instance.StartFeedback(SC_CollectedCLFeedback.instance.GetMouseWorldPos());
+                //SC_CollectedCLFeedback.instance.text.text = paragrapheOrdi.listChampLexicaux.listNameChampLexical[paragrapheOrdi.champLexical];
+                //SC_CollectedCLFeedback.instance.StartFeedback(SC_CollectedCLFeedback.instance.GetMouseWorldPos());
+
+                SC_CollectedCLFeedbackUI.instance.text.text = paragrapheOrdi.listChampLexicaux.listNameChampLexical[paragrapheOrdi.champLexical];
+                SC_CollectedCLFeedbackUI.instance.StartFeedback();
 
                 Instantiate(fxGood, new Vector3(GetMouseWorldPos().x, GetMouseWorldPos().y, -4f), Quaternion.identity);
                 SC_GM_SoundManager.instance.PlaySound("WordGet");
@@ -86,8 +89,11 @@ public class SC_InfoParagrapheOrdi : MonoBehaviour
                     SC_GM_Master.gm.timbres.timbres[i].setVisible(true);
                     text.color = timbresRecoltColor;
 
-                    SC_CollectedTimbresFeedback.instance.image.sprite = SC_GM_Master.gm.timbres.images[i];
-                    SC_CollectedTimbresFeedback.instance.StartFeedback(SC_CollectedTimbresFeedback.instance.GetMouseWorldPos());
+                    //SC_CollectedTimbresFeedback.instance.image.sprite = SC_GM_Master.gm.timbres.images[i];
+                    //SC_CollectedTimbresFeedback.instance.StartFeedback(SC_CollectedTimbresFeedback.instance.GetMouseWorldPos());
+
+                    SC_CollectedStampsFeedbackUI.instance.img.sprite = SC_GM_Master.gm.timbres.images[i];
+                    SC_CollectedStampsFeedbackUI.instance.StartFeedback();
 
                     Instantiate(fxGood, new Vector3(GetMouseWorldPos().x, GetMouseWorldPos().y, -4f), Quaternion.identity);
 
@@ -137,6 +143,6 @@ public class SC_InfoParagrapheOrdi : MonoBehaviour
 
         mousePoint.z = transform.position.z;
 
-        return Camera.main.ScreenToWorldPoint(mousePoint) * -16;
+        return Camera.main.ScreenToWorldPoint(mousePoint) * -15.545f;
     }
 }
