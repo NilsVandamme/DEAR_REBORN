@@ -12,7 +12,6 @@ public class SC_GM_Master : MonoBehaviour
     // Ensemble des champs lexicaux
     public SC_ListChampLexicaux listChampsLexicaux;
     public SC_PullBase pullBase;
-    public SC_BaseTimbre timbres;
 
     [HideInInspector]
     // Name Player
