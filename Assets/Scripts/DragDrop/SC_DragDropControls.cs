@@ -50,6 +50,8 @@ public class SC_DragDropControls : MonoBehaviour
     {
         OriginalPosition = transform.position;
         rig = GetComponent<Rigidbody>();
+
+        removeButton.SetActive(false);
     }
 
     private void Update()
