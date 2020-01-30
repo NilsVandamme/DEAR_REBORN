@@ -61,7 +61,7 @@ public class SC_InfoParagrapheOrdi : MonoBehaviour
     {
         if (firstClick)
         {
-            firstClick = false;
+            //firstClick = false;
 
             if (SC_GM_Local.gm.numberOfCLRecover < SC_GM_Local.gm.numberOfCLRecoverable)
             {
@@ -103,6 +103,6 @@ public class SC_InfoParagrapheOrdi : MonoBehaviour
 
         mousePoint.z = transform.position.z;
 
-        return Camera.main.ScreenToWorldPoint(mousePoint) * -16;
+        return Camera.main.ScreenToWorldPoint(mousePoint) * -15.545f;
     }
 }
