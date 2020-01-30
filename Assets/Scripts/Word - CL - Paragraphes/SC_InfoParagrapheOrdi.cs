@@ -6,7 +6,6 @@ public class SC_InfoParagrapheOrdi : MonoBehaviour
     public SC_ListChampLexicaux listCL;
     public SimpleTooltip tooltip;
     public Color CLRecoltColor;
-    public Color timbresRecoltColor;
     public Color textNonRecoltableColor;
     public float wait;
     public bool recoltable;
@@ -66,7 +65,8 @@ public class SC_InfoParagrapheOrdi : MonoBehaviour
                 SC_GM_Local.gm.numberOfCLRecover++;
                 text.color = CLRecoltColor;
 
-                SC_CollectedCLFeedback.instance.StartFeedback(SC_CollectedCLFeedback.instance.GetMouseWorldPos());
+                SC_CollectedCLFeedbackUI.instance.text.text = listCL.listChampLexical[cl].listOfWords[word].titre;
+                SC_CollectedCLFeedbackUI.instance.StartFeedback();
                 Instantiate(fxGood, new Vector3(GetMouseWorldPos().x, GetMouseWorldPos().y, -4f), Quaternion.identity);
                 SC_GM_SoundManager.instance.PlaySound("WordGet");
 
