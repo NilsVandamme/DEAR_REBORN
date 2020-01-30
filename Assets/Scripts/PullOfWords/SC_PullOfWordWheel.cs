@@ -205,8 +205,6 @@ public class SC_PullOfWordWheel : MonoBehaviour
             for (int i = 0; i < listOfWheel.Length; i++)
                 if (i < wheelToLetter.Length)
                     wheelToLetter[i].text = listOfWheel[i].text;
-
-        SC_GM_Timbre.gm.LoadTimbreEnvelope();
-
+        
     }
 }

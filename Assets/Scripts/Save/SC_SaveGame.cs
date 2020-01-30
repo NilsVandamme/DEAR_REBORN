@@ -30,7 +30,7 @@ public class SC_SaveGame : MonoBehaviour
         if (nextScene.Equals(""))
             return;
 
-        SC_PlayerData saveObject = new SC_PlayerData(SC_GM_Master.gm.namePlayer, SC_GM_Master.gm.wordsInPull, SC_GM_Master.gm.timbres.timbres);
+        SC_PlayerData saveObject = new SC_PlayerData(SC_GM_Master.gm.namePlayer, SC_GM_Master.gm.wordsInPull);
         string json = JsonUtility.ToJson(saveObject);
         File.WriteAllText(SC_GM_Master.gm.path + nextScene + ".txt", json);
     }

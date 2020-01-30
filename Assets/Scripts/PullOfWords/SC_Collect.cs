@@ -6,65 +6,61 @@ using UnityEngine.UI;
 
 public class SC_Collect : MonoBehaviour
 {
-    public TextMeshProUGUI ratioText; // Text of showing how many CL have been collected on the buttonCL (X/Y)
-    public GameObject buttonCL; // Button openning or closing the panel
-    public Animator arboAnim; // Animator
- 
+    public GameObject diode;
+    public Sprite diodeON;
+    public Sprite diodeOFF;
 
-    private Image[] images; // All buttons showing collected CLs
-    private TextMeshProUGUI[] listOfButtons; // Text of the buttons showing CLs
+    public GameObject imageCL; // Button openning or closing the panel
 
-    public bool isHighlighted; // Is currently highlighted ?
+    private Image[] imagesDiodes;
+    private Image[] imagesCL; // All buttons showing collected CLs
+    private TextMeshProUGUI[] listOfTextCL; // Text of the buttons showing CLs
+
+    public static SC_Collect instance = null;
+
+    private void Awake()
+    {
+        if (instance == null)
+            instance = this;
+        else if (instance != null)
+            Destroy(gameObject);
+    }
 
     void Start()
     {
-        // Print the first value of ratioText
-        ratioText.text = 0 + "/" + SC_GM_Local.gm.numberOfCLRecoverable.ToString();
-
         // Get the lists
-        images = buttonCL.GetComponentsInChildren<Image>(true);
-        listOfButtons = new TextMeshProUGUI[images.Length];
-        for (int i = 0; i < images.Length; i++)
-            listOfButtons[i] = images[i].GetComponentInChildren<TextMeshProUGUI>(true);
+        imagesDiodes = diode.GetComponentsInChildren<Image>(true);
+        imagesCL = imageCL.GetComponentsInChildren<Image>(true);
+
+
+        listOfTextCL = new TextMeshProUGUI[imagesCL.Length];
+        for (int i = 0; i < imagesCL.Length; i++)
+            listOfTextCL[i] = imagesCL[i].GetComponentInChildren<TextMeshProUGUI>(true);
+
 
         // Activate the buttons according to the number of CLs to collect
-        for (int i = 0; i < images.Length; i++)
-        {
-            images[i].gameObject.SetActive(false);
-        }
+        for (int i = 0; i < imagesCL.Length; i++)
+            imagesCL[i].gameObject.SetActive(false);
+
+        for (int i = 0; i < imagesDiodes.Length; i++)
+            imagesDiodes[i].sprite = diodeOFF;
     }
 
-    void Update()
+    public void Recolt ()
     {
-        // Update the ratioText according to the recovered CLs
-        ratioText.text = SC_GM_Local.gm.numberOfCLRecover.ToString() + "/" + SC_GM_Local.gm.numberOfCLRecoverable.ToString();
+        if (SC_GM_Local.gm.numberOfCLRecover == 1)
+            PlayRecolt(0);
+        else if (SC_GM_Local.gm.numberOfCLRecover == 2)
+            PlayRecolt(1);
+        else if (SC_GM_Local.gm.numberOfCLRecover == 3)
+            PlayRecolt(2);
+    }
 
+    private void PlayRecolt(int nbCL)
+    {
+        imagesDiodes[nbCL].sprite = diodeON;
+        listOfTextCL[nbCL].text = SC_GM_Local.gm.wordsInCollect[nbCL].word[0].titre;
+        imagesCL[nbCL].gameObject.SetActive(true);
 
-
-        // Update the listOfButtons texts to the collected CLs      
-        for (int i = 0; i < SC_GM_Local.gm.wordsInCollect.Count; i++)
-            listOfButtons[i].text = SC_GM_Local.gm.wordsInCollect[i].GetCL();
-
-        // Open the panel if all CLs have been collected
-        if (SC_GM_Local.gm.numberOfCLRecover == SC_GM_Local.gm.numberOfCLRecoverable)
-        {
-
-            // Activate the used buttons only
-            for(int i =0; i< SC_GM_Local.gm.numberOfCLRecoverable; i++)
-            {
-                images[i].gameObject.SetActive(true);
-            }
-        }
-
-        if (SC_GM_Local.gm.numberOfCLRecover < SC_GM_Local.gm.numberOfCLRecoverable && SC_GM_Local.gm.numberOfCLRecover > 0 && isHighlighted == false)
-        {
-            //arboAnim.SetTrigger("Highlight");
-        }
-        if(SC_GM_Local.gm.numberOfCLRecover == SC_GM_Local.gm.numberOfCLRecoverable && isHighlighted == false)
-        {
-            //arboAnim.ResetTrigger("Highlight");
-            GetComponentInChildren<SC_AnimCollect>().SetCollectAnimBool();
-            isHighlighted = true;
-        }
     }
 }
