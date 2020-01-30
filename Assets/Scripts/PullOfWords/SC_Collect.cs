@@ -9,6 +9,7 @@ public class SC_Collect : MonoBehaviour
     public GameObject diode;
     public Sprite diodeON;
     public Sprite diodeOFF;
+    public Button GoToPreparatory;
 
     public GameObject imageCL; // Button openning or closing the panel
 
@@ -53,7 +54,10 @@ public class SC_Collect : MonoBehaviour
         else if (SC_GM_Local.gm.numberOfCLRecover == 2)
             PlayRecolt(1);
         else if (SC_GM_Local.gm.numberOfCLRecover == 3)
+        {
             PlayRecolt(2);
+            GoToPreparatory.interactable = true;
+        }
     }
 
     private void PlayRecolt(int nbCL)

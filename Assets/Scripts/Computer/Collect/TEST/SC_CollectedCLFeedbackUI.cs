@@ -41,6 +41,7 @@ public class SC_CollectedCLFeedbackUI : MonoBehaviour
         transform.GetChild(1).gameObject.SetActive(false);
         timer = 0;
         moving = false;
+        SC_Collect.instance.Recolt();
     }
 
     // Update is called once per frame
