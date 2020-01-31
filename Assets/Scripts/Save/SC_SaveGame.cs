@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 public class SC_SaveGame : MonoBehaviour
@@ -30,7 +31,9 @@ public class SC_SaveGame : MonoBehaviour
         if (nextScene.Equals(""))
             return;
 
-        SC_PlayerData saveObject = new SC_PlayerData(SC_GM_Master.gm.namePlayer, SC_GM_Master.gm.wordsInPull);
+        SC_GM_Master.gm.lastParagrapheLettrePerPerso[SC_GM_Local.gm.persoOfCurrentScene] = new List<SC_InfoParagrapheLettreRemplie>(SC_GM_Master.gm.choosenWordInLetter);
+
+        SC_PlayerData saveObject = new SC_PlayerData(SC_GM_Master.gm.namePlayer, SC_GM_Master.gm.wordsInPull, SC_GM_Master.gm.lastParagrapheLettrePerPerso);
         string json = JsonUtility.ToJson(saveObject);
         File.WriteAllText(SC_GM_Master.gm.path + nextScene + ".txt", json);
     }

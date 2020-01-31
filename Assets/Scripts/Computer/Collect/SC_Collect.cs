@@ -10,8 +10,7 @@ public class SC_Collect : MonoBehaviour
     public Sprite diodeON;
     public Sprite diodeOFF;
     public Button goToPreparatoryPhase;
-
-    public GameObject imageCL; // Button openning or closing the panel
+    public GameObject imageWords; // Button openning or closing the panel
 
     private Image[] imagesDiodes;
     private Image[] imagesCL; // All buttons showing collected CLs
@@ -31,20 +30,13 @@ public class SC_Collect : MonoBehaviour
     {
         // Get the lists
         imagesDiodes = diode.GetComponentsInChildren<Image>(true);
-        imagesCL = imageCL.GetComponentsInChildren<Image>(true);
+        imagesCL = imageWords.GetComponentsInChildren<Image>(true);
 
 
         listOfTextCL = new TextMeshProUGUI[imagesCL.Length];
         for (int i = 0; i < imagesCL.Length; i++)
             listOfTextCL[i] = imagesCL[i].GetComponentInChildren<TextMeshProUGUI>(true);
 
-
-        // Activate the buttons according to the number of CLs to collect
-        for (int i = 0; i < imagesCL.Length; i++)
-            imagesCL[i].gameObject.SetActive(false);
-
-        for (int i = 0; i < imagesDiodes.Length; i++)
-            imagesDiodes[i].sprite = diodeOFF;
     }
 
     public void Recolt ()

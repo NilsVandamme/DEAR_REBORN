@@ -23,7 +23,7 @@ public class SC_GMLocalEditor : Editor
         EditorGUILayout.BeginHorizontal();
 
         EditorGUILayout.LabelField("Perso de la scene");
-        gmLocal.peopleScore = EditorGUILayout.Popup(gmLocal.peopleScore, baseInfo.listOfPerso);
+        gmLocal.persoOfCurrentScene = EditorGUILayout.Popup(gmLocal.persoOfCurrentScene, baseInfo.listOfPerso);
 
         EditorGUILayout.EndHorizontal();
 

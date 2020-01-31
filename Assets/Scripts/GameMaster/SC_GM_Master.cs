@@ -16,9 +16,13 @@ public class SC_GM_Master : MonoBehaviour
     [HideInInspector]
     // Name Player
     public string namePlayer;
+
+    [HideInInspector]
+    // tableau des Listes des mots et texte entre par le joueur
+    public List<SC_InfoParagrapheLettreRemplie>[] lastParagrapheLettrePerPerso;
     [HideInInspector]
     // Liste des mots entre par le joueur
-    public List<(SC_Word, float)> choosenWordInLetter;
+    public List<SC_InfoParagrapheLettreRemplie> choosenWordInLetter;
 
     [HideInInspector]
     // Liste des mots choisi par le joueur (CL, Word)
@@ -40,11 +44,12 @@ public class SC_GM_Master : MonoBehaviour
         if (gm.wordsInPull.Count == 0)
         {
             gm.wordsInPull = new List<SC_CLInPull>();
+            lastParagrapheLettrePerPerso = new List<SC_InfoParagrapheLettreRemplie>[listChampsLexicaux.listOfPerso.Length];
 
             foreach (SC_CLInPull elem in pullBase.wordsInBasePull)
                 gm.wordsInPull.Add(elem);
 
-           choosenWordInLetter = new List<(SC_Word, float)>();
+            choosenWordInLetter = new List<SC_InfoParagrapheLettreRemplie>();
         }
     }
 }
