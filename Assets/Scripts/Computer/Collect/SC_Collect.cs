@@ -9,10 +9,13 @@ public class SC_Collect : MonoBehaviour
     public GameObject diode;
     public Sprite diodeON;
     public Sprite diodeOFF;
-    public Button goToPreparatoryPhase;
+    public Sprite startWritingON;
+    public Button goToPreparatoryPhaseBut;
+    public Image goToPreparatoryPhaseImage;
     public GameObject imageWords; // Button openning or closing the panel
 
     private Animator anim;
+
     private Image[] imagesDiodes;
     private Image[] imagesCL; // All buttons showing collected CLs
     private TextMeshProUGUI[] listOfTextCL; // Text of the buttons showing CLs
@@ -50,7 +53,9 @@ public class SC_Collect : MonoBehaviour
         else if (SC_GM_Local.gm.numberOfCLRecover == 3)
         {
             PlayRecolt(2);
-            goToPreparatoryPhase.interactable = true;
+            goToPreparatoryPhaseBut.interactable = true;
+            goToPreparatoryPhaseImage.sprite = startWritingON;
+
         }
     }
 
