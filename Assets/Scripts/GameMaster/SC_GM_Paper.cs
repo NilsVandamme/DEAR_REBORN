@@ -58,8 +58,8 @@ public class SC_GM_Paper : MonoBehaviour
     public void CalculateScore()
     {
         score = 0;
-        foreach ((SC_Word, float) elem in SC_GM_Master.gm.choosenWordInLetter)
-            score += (elem.Item1.scorePerso[SC_GM_Local.gm.peopleScore] * elem.Item2);
+        foreach (SC_InfoParagrapheLettreRemplie elem in SC_GM_Master.gm.choosenWordInLetter)
+            score += elem.scoreParagraphe;
     }
 
     //******************************************************

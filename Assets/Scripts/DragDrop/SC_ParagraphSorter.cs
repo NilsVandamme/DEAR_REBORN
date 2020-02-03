@@ -12,7 +12,6 @@ public class SC_ParagraphSorter : MonoBehaviour
     public List<GameObject> SpawnPositions;
     public List<GameObject> SnappedParagraphs;
 
-
     //[Header("All paragraphs types")]
 
     public List<GameObject> OrientationParagraphs;
@@ -36,14 +35,67 @@ public class SC_ParagraphSorter : MonoBehaviour
         //ParagraphsToSpawn.Clear();
     }
 
+    public void GetParagraphs(SC_ParagraphType.ParagraphType type)
+    {
+        List<GameObject> temp;
+
+        ClearSpawnList();
+        ParagraphsToSpawn = new List<GameObject>();
+
+        switch (type)
+        {
+            case SC_ParagraphType.ParagraphType.Clash:
+
+                
+
+                break;
+
+            case SC_ParagraphType.ParagraphType.Motivation:
+
+                foreach (GameObject elem in MotivationParagraphs)
+                    if (!SnappedParagraphs.Contains(elem))
+                        ParagraphsToSpawn.Add(elem);
+
+                break;
+
+            case SC_ParagraphType.ParagraphType.Orientation:
+
+                foreach (GameObject elem in OrientationParagraphs)
+                    if (!SnappedParagraphs.Contains(elem))
+                        ParagraphsToSpawn.Add(elem);
+
+                break;
+
+            case SC_ParagraphType.ParagraphType.WakeUp:
+
+                foreach (GameObject elem in WakeupParagraphs)
+                    if (!SnappedParagraphs.Contains(elem))
+                        ParagraphsToSpawn.Add(elem);
+
+                break;
+
+            default:
+                Debug.LogError("Probleme sur le parametre de click des buttons du ParagraphsSorter");
+                return;
+
+        }
+
+        foreach (GameObject elem in temp)
+            if (!SnappedParagraphs.Contains(elem))
+                ParagraphsToSpawn.Add(elem);
+
+        SpawnParagraphs();
+    }
+
+    /**
     public void GetOrientationParagraphs()
     {
         if (CurrentParagraphs == "Orientation")
             return;
         
-        // Add paragrpahs to the list
+        // Add paragraphs to the list
         ClearSpawnList();
-        ActivateSnappedParagraphs();
+        //ActivateSnappedParagraphs();
         ParagraphsToSpawn = new List<GameObject>(OrientationParagraphs);
         CurrentParagraphs = "Orientation";
 
@@ -58,7 +110,7 @@ public class SC_ParagraphSorter : MonoBehaviour
 
         // Add paragrpahs to the list
         ClearSpawnList();
-        ActivateSnappedParagraphs();
+        //ActivateSnappedParagraphs();
         ParagraphsToSpawn = new List<GameObject>(WakeupParagraphs);
         CurrentParagraphs = "WakeUp";
 
@@ -73,7 +125,7 @@ public class SC_ParagraphSorter : MonoBehaviour
 
         // Add paragrpahs to the list
         ClearSpawnList();
-        ActivateSnappedParagraphs();
+        //ActivateSnappedParagraphs();
         ParagraphsToSpawn = new List<GameObject>(MotivationParagraphs);
         CurrentParagraphs = "Motivation";
 
@@ -88,14 +140,14 @@ public class SC_ParagraphSorter : MonoBehaviour
 
         // Add paragrpahs to the list
         ClearSpawnList();
-        ActivateSnappedParagraphs();
+        //ActivateSnappedParagraphs();
         ParagraphsToSpawn = new List<GameObject>(ClashParagraphs);
         CurrentParagraphs = "Clash";
 
         // Move paragraphs to the spawn positions
         SpawnParagraphs();
     }
-
+    **/
 
     // SYSTEM
 

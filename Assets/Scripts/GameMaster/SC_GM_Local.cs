@@ -7,7 +7,7 @@ public class SC_GM_Local : MonoBehaviour
 {
     // Score personne courante
     [HideInInspector]
-    public int peopleScore;
+    public int persoOfCurrentScene;
 
     // Nombre de CL récupérables
     [HideInInspector]
@@ -39,8 +39,7 @@ public class SC_GM_Local : MonoBehaviour
     public List<SC_CLInPull> wordsInCollect = new List<SC_CLInPull>();
     [HideInInspector]
     public List<SC_CLInPull> wordsInPreparatory = new List<SC_CLInPull>();
-
-
+    
     public static SC_GM_Local gm = null;
 
     private void Awake()
@@ -56,12 +55,12 @@ public class SC_GM_Local : MonoBehaviour
 
     private void Start()
     {
-        foreach ((SC_Word, float) elem in SC_GM_Master.gm.choosenWordInLetter)
+        foreach (SC_InfoParagrapheLettreRemplie elem in SC_GM_Master.gm.choosenWordInLetter)
             foreach (string mot in wordsNeedsForPrintMailParagraphes)
-                if (elem.Item1.titre.Equals(mot))
+                if (elem.word.titre.Equals(mot))
                     paragrapheMailCache.SetActive(true);
 
-        SC_GM_Master.gm.choosenWordInLetter = new List<(SC_Word, float)>();
+        SC_GM_Master.gm.choosenWordInLetter = new List<SC_InfoParagrapheLettreRemplie>();
     }
 
 }
