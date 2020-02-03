@@ -7,6 +7,7 @@ public class SC_PageInfoPerso : MonoBehaviour
     // Left Part
     public Image iconeImage;
     public TextMeshProUGUI namePerso;
+    public TextMeshProUGUI infoPerso;
 
     // Right Part
     public GameObject lettre;
@@ -63,7 +64,10 @@ public class SC_PageInfoPerso : MonoBehaviour
         iconeImage.sprite = icone;
         namePerso.text = SC_GM_Master.gm.listChampsLexicaux.listOfPerso[perso];
 
-        // TO-DO --> text d'info recoltable
+        infoPerso.text = "";
+        for (int i = 0; i < SC_GM_Master.gm.infoPerso[SC_GM_Local.gm.persoOfCurrentScene].Count; i++)
+            infoPerso.text += SC_GM_Master.gm.infoPerso[SC_GM_Local.gm.persoOfCurrentScene][i] + "\n\n";
+
     }
 
 

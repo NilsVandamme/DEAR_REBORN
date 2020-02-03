@@ -12,6 +12,7 @@ public class SC_Collect : MonoBehaviour
     public Button goToPreparatoryPhase;
     public GameObject imageWords; // Button openning or closing the panel
 
+    private Animator anim;
     private Image[] imagesDiodes;
     private Image[] imagesCL; // All buttons showing collected CLs
     private TextMeshProUGUI[] listOfTextCL; // Text of the buttons showing CLs
@@ -31,6 +32,7 @@ public class SC_Collect : MonoBehaviour
         // Get the lists
         imagesDiodes = diode.GetComponentsInChildren<Image>(true);
         imagesCL = imageWords.GetComponentsInChildren<Image>(true);
+        anim = this.GetComponent<Animator>();
 
 
         listOfTextCL = new TextMeshProUGUI[imagesCL.Length];
@@ -57,6 +59,7 @@ public class SC_Collect : MonoBehaviour
         imagesDiodes[nbCL].sprite = diodeON;
         listOfTextCL[nbCL].text = SC_GM_Local.gm.wordsInCollect[nbCL].word[0].titre;
         imagesCL[nbCL].gameObject.SetActive(true);
+        anim.Play("Collect2_open");
 
     }
 }
