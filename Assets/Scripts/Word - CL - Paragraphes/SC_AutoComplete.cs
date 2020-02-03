@@ -4,7 +4,7 @@ using UnityEngine;
 public class SC_AutoComplete : MonoBehaviour
 {
     // Elements récupérer dans le canvas
-    public TextMeshProUGUI myText;
+    public TextMeshPro myText;
     private string myTextSave;
 
     private SC_ParagraphType typeParagraphe;
@@ -31,6 +31,12 @@ public class SC_AutoComplete : MonoBehaviour
     {
         startIndexRewrite = myText.text.IndexOf("    ");
 
+        if (startIndexRewrite < 0)
+        {
+            Debug.LogError("Il faut une zone de texte '      vide        ' pour la place du mot a ajouter");
+            return;
+        }
+
         for (int i = startIndexRewrite; i < myText.text.Length; i++)
             if (!myText.text[i].Equals(' '))
                 endIndexRewrite = i;
@@ -42,6 +48,9 @@ public class SC_AutoComplete : MonoBehaviour
      */
     public void OnClick()
     {
+        Debug.Log("cc");
+        Debug.Log(startIndexRewrite);
+        Debug.Log(endIndexRewrite);
         if (HasWordInListeMaster())
         {
             DeleteWord();
