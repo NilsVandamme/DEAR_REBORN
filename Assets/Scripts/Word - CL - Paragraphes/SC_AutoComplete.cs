@@ -39,7 +39,10 @@ public class SC_AutoComplete : MonoBehaviour
 
         for (int i = startIndexRewrite; i < myText.text.Length; i++)
             if (!myText.text[i].Equals(' '))
+            {
                 endIndexRewrite = i;
+                return;
+            }
     }
 
 
@@ -51,6 +54,8 @@ public class SC_AutoComplete : MonoBehaviour
         Debug.Log("cc");
         Debug.Log(startIndexRewrite);
         Debug.Log(endIndexRewrite);
+        Debug.Log(myText.text.Substring(endIndexRewrite, (myText.text.Length - endIndexRewrite)));
+
         if (HasWordInListeMaster())
         {
             DeleteWord();
@@ -79,7 +84,7 @@ public class SC_AutoComplete : MonoBehaviour
             if (actualWord != null && actualWord.titre.Equals(SC_GM_Master.gm.choosenWordInLetter[i].word.titre))
             {
                 SC_GM_Master.gm.choosenWordInLetter.Remove(SC_GM_Master.gm.choosenWordInLetter[i]);
-                break;
+                return;
             }
     }
 
