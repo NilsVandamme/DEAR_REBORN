@@ -9,6 +9,7 @@ public class SC_MailSelection : MonoBehaviour
 {
     public GameObject mailTextsListParent; // Parent of the texts content
     public GameObject mailButtonsListParent; // Parent of the buttons content
+    public GameObject returnButton; // Return to list button
     public List<GameObject> mailTextsList; // List of texts content
     public int currentIndex = 0;
 
@@ -31,7 +32,9 @@ public class SC_MailSelection : MonoBehaviour
         }
 
         mailTextsList[index].SetActive(true);
+        returnButton.SetActive(true);
         currentIndex = index;
+
     }
 
     public void NextMail()
@@ -79,5 +82,6 @@ public class SC_MailSelection : MonoBehaviour
             mailTextsList[i].SetActive(false);
         }
         mailButtonsListParent.SetActive(true);
+        returnButton.SetActive(false);
     }
 }
