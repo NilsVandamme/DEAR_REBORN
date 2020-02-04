@@ -4,7 +4,8 @@ using UnityEngine;
 public class SC_AutoComplete : MonoBehaviour
 {
     // Elements récupérer dans le canvas
-    public TextMeshPro myText;
+    public TextMeshPro myTextContenue;
+    public TextMeshPro myTextPresentation;
     private string myTextSave;
 
     private SC_ParagraphType typeParagraphe;
@@ -21,15 +22,17 @@ public class SC_AutoComplete : MonoBehaviour
     {
         typeParagraphe = this.gameObject.GetComponentInParent<SC_ParagraphType>();
         coef = typeParagraphe.multiplicativeScore;
-        myTextSave = myText.text;
+        myTextSave = myTextContenue.text;
         actualWord = null;
+
+        myTextContenue.gameObject.SetActive(false);
 
         GetZoneNewText();
     }
 
     private void GetZoneNewText()
     {
-        startIndexRewrite = myText.text.IndexOf("    ");
+        startIndexRewrite = myTextContenue.text.IndexOf("    ");
 
         if (startIndexRewrite < 0)
         {
@@ -37,8 +40,8 @@ public class SC_AutoComplete : MonoBehaviour
             return;
         }
 
-        for (int i = startIndexRewrite; i < myText.text.Length; i++)
-            if (!myText.text[i].Equals(' '))
+        for (int i = startIndexRewrite; i < myTextContenue.text.Length; i++)
+            if (!myTextContenue.text[i].Equals(' '))
             {
                 endIndexRewrite = i;
                 return;
@@ -54,7 +57,7 @@ public class SC_AutoComplete : MonoBehaviour
         Debug.Log("cc");
         Debug.Log(startIndexRewrite);
         Debug.Log(endIndexRewrite);
-        Debug.Log(myText.text.Substring(endIndexRewrite, (myText.text.Length - endIndexRewrite)));
+        Debug.Log(myTextContenue.text.Substring(endIndexRewrite, (myTextContenue.text.Length - endIndexRewrite)));
 
         if (HasWordInListeMaster())
         {
@@ -68,7 +71,7 @@ public class SC_AutoComplete : MonoBehaviour
      */
     public void OnRemove()
     {
-        myText.text = myTextSave;
+        myTextContenue.text = myTextSave;
 
         DeleteWord();
     }
@@ -97,9 +100,9 @@ public class SC_AutoComplete : MonoBehaviour
      */
     private void ChangeWordInText()
     {
-        myText.text = myText.text.Substring(0, startIndexRewrite) + " " +
+        myTextContenue.text = myTextContenue.text.Substring(0, startIndexRewrite) + " " +
                         SC_GM_WheelToLetter.instance.getCurrentWord().grammarCritere[grammarCritere] + " " +
-                        myText.text.Substring(endIndexRewrite, (myText.text.Length - endIndexRewrite));
+                        myTextContenue.text.Substring(endIndexRewrite, (myTextContenue.text.Length - endIndexRewrite));
 
         endIndexRewrite = startIndexRewrite + SC_GM_WheelToLetter.instance.getCurrentWord().grammarCritere[grammarCritere].Length + 2;
 
@@ -107,7 +110,7 @@ public class SC_AutoComplete : MonoBehaviour
 
         SC_GM_Master.gm.choosenWordInLetter.Add(new SC_InfoParagrapheLettreRemplie(SC_GM_WheelToLetter.instance.getCurrentWord(), 
                                                 SC_GM_WheelToLetter.instance.getCurrentWord().scorePerso[SC_GM_Local.gm.persoOfCurrentScene] * coef, 
-                                                myText.text));
+                                                myTextContenue.text));
 
     }
 
