@@ -8,186 +8,26 @@ public class SC_ParagraphSorter : MonoBehaviour
     public static SC_ParagraphSorter instance;
 
     public List<GameObject> AllParagraphs;
-    public List<GameObject> ParagraphsToSpawn;
+    public List<GameObject>[] Paragraphs;
     public List<GameObject> SpawnPositions;
     public List<GameObject> SnappedParagraphs;
 
-    //[Header("All paragraphs types")]
-
-    public List<GameObject> OrientationParagraphs;
-    public List<GameObject> WakeupParagraphs;
-    public List<GameObject> MotivationParagraphs;
-    public List<GameObject> ClashParagraphs;
-
-    public string CurrentParagraphs;
+    [HideInInspector]
+    public int lastParagrapheMove;
+    private int[] indexParagrapheAffiche;
 
     // Start is called before the first frame update
     void Start()
     {
         instance = this;
+
+        indexParagrapheAffiche = new int[4];
+        Paragraphs = new List<GameObject>[4];
+
+        for (int i = 0; i < Paragraphs.Length; i++)
+            Paragraphs[i] = new List<GameObject>();
+
         GetAllParagraphs();
-
-        // Spawn 3 random paragraphs
-        ParagraphsToSpawn.Add(OrientationParagraphs[0]);
-        ParagraphsToSpawn.Add(WakeupParagraphs[0]);
-        ParagraphsToSpawn.Add(MotivationParagraphs[0]);
-        SpawnParagraphs();
-        //ParagraphsToSpawn.Clear();
-    }
-
-    public void GetParagraphs(SC_ParagraphType.ParagraphType type)
-    {
-        List<GameObject> temp;
-
-        ClearSpawnList();
-        ParagraphsToSpawn = new List<GameObject>();
-
-        switch (type)
-        {
-            case SC_ParagraphType.ParagraphType.Clash:
-
-                
-
-                break;
-
-            case SC_ParagraphType.ParagraphType.Motivation:
-
-                foreach (GameObject elem in MotivationParagraphs)
-                    if (!SnappedParagraphs.Contains(elem))
-                        ParagraphsToSpawn.Add(elem);
-
-                break;
-
-            case SC_ParagraphType.ParagraphType.Orientation:
-
-                foreach (GameObject elem in OrientationParagraphs)
-                    if (!SnappedParagraphs.Contains(elem))
-                        ParagraphsToSpawn.Add(elem);
-
-                break;
-
-            case SC_ParagraphType.ParagraphType.WakeUp:
-
-                foreach (GameObject elem in WakeupParagraphs)
-                    if (!SnappedParagraphs.Contains(elem))
-                        ParagraphsToSpawn.Add(elem);
-
-                break;
-
-            default:
-                Debug.LogError("Probleme sur le parametre de click des buttons du ParagraphsSorter");
-                return;
-
-        }
-
-        foreach (GameObject elem in temp)
-            if (!SnappedParagraphs.Contains(elem))
-                ParagraphsToSpawn.Add(elem);
-
-        SpawnParagraphs();
-    }
-
-    /**
-    public void GetOrientationParagraphs()
-    {
-        if (CurrentParagraphs == "Orientation")
-            return;
-        
-        // Add paragraphs to the list
-        ClearSpawnList();
-        //ActivateSnappedParagraphs();
-        ParagraphsToSpawn = new List<GameObject>(OrientationParagraphs);
-        CurrentParagraphs = "Orientation";
-
-        // Move paragraphs to the spawn positions
-        SpawnParagraphs();
-    }
-
-    public void GetWakeUpParagraphs()
-    {
-        if (CurrentParagraphs == "WakeUp")
-            return;
-
-        // Add paragrpahs to the list
-        ClearSpawnList();
-        //ActivateSnappedParagraphs();
-        ParagraphsToSpawn = new List<GameObject>(WakeupParagraphs);
-        CurrentParagraphs = "WakeUp";
-
-        // Move paragraphs to the spawn positions
-        SpawnParagraphs();
-    }
-
-    public void GetMotivationalParagraphs()
-    {
-        if (CurrentParagraphs == "Motivation")
-            return;
-
-        // Add paragrpahs to the list
-        ClearSpawnList();
-        //ActivateSnappedParagraphs();
-        ParagraphsToSpawn = new List<GameObject>(MotivationParagraphs);
-        CurrentParagraphs = "Motivation";
-
-        // Move paragraphs to the spawn positions
-        SpawnParagraphs();
-    }
-
-    public void GetClashParagraphs()
-    {
-        if (CurrentParagraphs == "Clash")
-            return;
-
-        // Add paragrpahs to the list
-        ClearSpawnList();
-        //ActivateSnappedParagraphs();
-        ParagraphsToSpawn = new List<GameObject>(ClashParagraphs);
-        CurrentParagraphs = "Clash";
-
-        // Move paragraphs to the spawn positions
-        SpawnParagraphs();
-    }
-    **/
-
-    // SYSTEM
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.tag == "Paragraph")
-        {
-            SnappedParagraphs.Add(other.gameObject);
-            ParagraphsToSpawn.Remove(other.gameObject);
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if(other.tag == "Paragraph")
-        {
-            SnappedParagraphs.Remove(other.gameObject);
-            ParagraphsToSpawn.Add(other.gameObject);
-        }
-    }
-
-    public void ClearSpawnList()
-    {
-        for (int i = 0; i < ParagraphsToSpawn.Count; i++)
-        {
-            ParagraphsToSpawn[i].gameObject.SetActive(false);
-        }
-    }
-
-    public void SpawnParagraphs()
-    {
-        for (int i = 0; i < ParagraphsToSpawn.Count; i++)
-        {
-            if (!SnappedParagraphs.Contains(ParagraphsToSpawn[i].gameObject))
-            {
-                ParagraphsToSpawn[i].transform.position = SpawnPositions[i].transform.position;
-                ParagraphsToSpawn[i].GetComponent<SC_DragDropControls>().GetOriginalSnapPosition();
-                ParagraphsToSpawn[i].gameObject.SetActive(true);
-            }
-        }
     }
 
     public void GetAllParagraphs()
@@ -196,39 +36,105 @@ public class SC_ParagraphSorter : MonoBehaviour
         AllParagraphs.AddRange(GameObject.FindGameObjectsWithTag("Paragraph"));
 
         for (int i = 0; i < AllParagraphs.Count; i++)
+            Paragraphs[(int)AllParagraphs[i].GetComponent<SC_ParagraphType>().Type].Add(AllParagraphs[i]);
+
+        for (int i = 0; i < Paragraphs.Length; i++)
+            for (int j = 0; j < Paragraphs[i].Count; j++)
+            {
+                Paragraphs[i][j].transform.position = SpawnPositions[i].transform.position;
+                Paragraphs[i][j].GetComponent<SC_DragDropControls>().GetOriginalSnapPosition();
+
+                if (j == indexParagrapheAffiche[i])
+                    Paragraphs[i][j].gameObject.SetActive(true);
+                else
+                    Paragraphs[i][j].gameObject.SetActive(false);
+            }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Paragraph")
         {
-            if (AllParagraphs[i].GetComponent<SC_ParagraphType>().Type == SC_ParagraphType.ParagraphType.Orientation)
+            SnappedParagraphs.Add(other.gameObject);
+
+            for (int i = 0; i < Paragraphs.Length; i++)
             {
-                OrientationParagraphs.Add(AllParagraphs[i]);
-            }
-            else if (AllParagraphs[i].GetComponent<SC_ParagraphType>().Type == SC_ParagraphType.ParagraphType.WakeUp)
-            {
-                WakeupParagraphs.Add(AllParagraphs[i]);
-            }
-            else if (AllParagraphs[i].GetComponent<SC_ParagraphType>().Type == SC_ParagraphType.ParagraphType.Motivation)
-            {
-                MotivationParagraphs.Add(AllParagraphs[i]);
-            }
-            else if (AllParagraphs[i].GetComponent<SC_ParagraphType>().Type == SC_ParagraphType.ParagraphType.Clash)
-            {
-                ClashParagraphs.Add(AllParagraphs[i]);
+                if (Paragraphs[i].Contains(other.gameObject))
+                {
+                    Paragraphs[i].Remove(other.gameObject);
+                    lastParagrapheMove = i;
+                    break;
+                }
             }
         }
     }
 
-    public void ActivateSnappedParagraphs()
+    private void OnTriggerExit(Collider other)
     {
-        for(int i =0; i<SnappedParagraphs.Count; i++)
+        if (other.tag == "Paragraph")
         {
-            SnappedParagraphs[i].gameObject.SetActive(true);
+            SnappedParagraphs.Remove(other.gameObject);
+
+            int temp = (int)other.gameObject.GetComponent<SC_ParagraphType>().Type;
+
+            Paragraphs[temp].Add(other.gameObject);
         }
     }
 
-    public void DisableSnappedParagraphs()
+    public void Moins(int index)
     {
-        for (int i = 0; i < SnappedParagraphs.Count; i++)
+        if (!Check(index))
+            return;
+
+        indexParagrapheAffiche[index]--;
+
+        if (indexParagrapheAffiche[index] < 0)
+            indexParagrapheAffiche[index] = Paragraphs[index].Count - 1;
+
+        Affiche(index);
+    }
+
+    public void Plus(int index)
+    {
+        if (!Check(index))
+            return;
+
+        indexParagrapheAffiche[index]++;
+
+        if (indexParagrapheAffiche[index] >= Paragraphs[index].Count)
+            indexParagrapheAffiche[index] = 0;
+
+        Affiche(index);
+    }
+
+    public void Affiche(int index)
+    {
+        if (!Check(index))
+            return;
+
+        if (indexParagrapheAffiche[index] >= Paragraphs[index].Count)
+            indexParagrapheAffiche[index] = 0;
+
+        for (int i = 0; i < Paragraphs[index].Count; i++)
+            if (i != indexParagrapheAffiche[index])
+                Paragraphs[index][i].SetActive(false);
+
+        Debug.Log(Check(index));
+        Debug.Log(index);
+        Debug.Log(indexParagrapheAffiche[index]);
+        Debug.Log(Paragraphs[index].Count);
+
+        Paragraphs[index][indexParagrapheAffiche[index]].gameObject.SetActive(true);
+    }
+
+    private bool Check(int index)
+    {
+        if (Paragraphs[index].Count <= 0)
         {
-            SnappedParagraphs[i].gameObject.SetActive(false);
+            Debug.LogError("Plus de paragraphes");
+            return false;
         }
+
+        return true;
     }
 }

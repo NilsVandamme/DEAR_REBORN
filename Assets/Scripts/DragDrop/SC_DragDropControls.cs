@@ -169,6 +169,8 @@ public class SC_DragDropControls : MonoBehaviour
                             SnapPosition = OriginalPosition;
                         }
                     }
+
+                    SC_ParagraphSorter.instance.Affiche(SC_ParagraphSorter.instance.lastParagrapheMove);
                 }
                 // If the object has no snap point
                 else if(SnapPositionObjectTop == null && SnapPositionObjectDown == null) 
@@ -330,21 +332,12 @@ public class SC_DragDropControls : MonoBehaviour
         gameObject.SetActive(false);
         SC_ParagraphSorter.instance.SnappedParagraphs.Remove(gameObject);
 
-        if (GetComponent<SC_ParagraphType>().Type.ToString() == SC_ParagraphSorter.instance.CurrentParagraphs)
-        {
-            //Debug.Log("paragraph sent back to selection");
+        int temp = (int)gameObject.GetComponent<SC_ParagraphType>().Type;
+        SC_ParagraphSorter.instance.Paragraphs[temp].Add(gameObject);
+        SC_ParagraphSorter.instance.Affiche(temp);
 
-            // Put the paragraph in the selection
-            SC_ParagraphSorter.instance.ParagraphsToSpawn.Add(gameObject);
-            //SC_ParagraphSorter.instance.SpawnParagraphs();
-            transform.position = OriginalPosition;
-            gameObject.SetActive(true);
-        }
-        else
-        {
-            //Debug.Log("paragraph removed");
-            transform.position = OriginalPosition;
-        }
+        transform.position = OriginalPosition;
+        
         removeButton.SetActive(false);
         IsSnapped = false;
 
