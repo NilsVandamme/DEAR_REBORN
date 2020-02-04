@@ -171,6 +171,11 @@ public class SC_DragDropControls : MonoBehaviour
                     }
 
                     SC_ParagraphSorter.instance.Affiche(SC_ParagraphSorter.instance.lastParagrapheMove);
+
+                    SC_AutoComplete elem = gameObject.GetComponent<SC_AutoComplete>();
+                    elem.myTextContenue.gameObject.SetActive(true);
+                    elem.myTextPresentation.gameObject.SetActive(false);
+
                 }
                 // If the object has no snap point
                 else if(SnapPositionObjectTop == null && SnapPositionObjectDown == null) 
@@ -335,6 +340,10 @@ public class SC_DragDropControls : MonoBehaviour
         int temp = (int)gameObject.GetComponent<SC_ParagraphType>().Type;
         SC_ParagraphSorter.instance.Paragraphs[temp].Add(gameObject);
         SC_ParagraphSorter.instance.Affiche(temp);
+
+        SC_AutoComplete elem = gameObject.GetComponent<SC_AutoComplete>();
+        elem.myTextContenue.gameObject.SetActive(false);
+        elem.myTextPresentation.gameObject.SetActive(true);
 
         transform.position = OriginalPosition;
         
