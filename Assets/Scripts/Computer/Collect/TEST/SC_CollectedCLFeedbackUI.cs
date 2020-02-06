@@ -14,12 +14,6 @@ public class SC_CollectedCLFeedbackUI : MonoBehaviour
 
     public bool moving;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
     public void StartFeedback()
     {
         nbWordCollected = SC_GM_Local.gm.numberOfCLRecover;

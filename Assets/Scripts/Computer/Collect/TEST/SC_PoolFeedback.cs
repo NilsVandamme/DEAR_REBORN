@@ -21,8 +21,6 @@ public class SC_PoolFeedback : MonoBehaviour
         {
             if(poolCL[i].GetComponent<SC_CollectedCLFeedbackUI>().moving == false)
             {
-                Debug.Log("bruh 2");
-
                 poolCL[i].GetComponent<SC_CollectedCLFeedbackUI>().TargetPosition = SC_Collect.instance.imagesDiodes[SC_GM_Local.gm.numberOfCLRecover-1].transform;
                 poolCL[i].GetComponent<SC_CollectedCLFeedbackUI>().StartFeedback();
                 return;

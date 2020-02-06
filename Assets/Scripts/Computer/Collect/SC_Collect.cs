@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -14,7 +15,9 @@ public class SC_Collect : MonoBehaviour
     public Image goToPreparatoryPhaseImage;
     public GameObject imageWords; // Button openning or closing the panel
 
+    public float waitTime;
     private Animator anim;
+    private bool isOpen;
 
     [HideInInspector]
     public Image[] imagesDiodes;
@@ -44,6 +47,7 @@ public class SC_Collect : MonoBehaviour
         for (int i = 0; i < imagesCL.Length; i++)
             listOfTextCL[i] = imagesCL[i].GetComponentInChildren<TextMeshProUGUI>(true);
 
+        isOpen = false;
     }
 
     public void Recolt (int nbWordCollected)
@@ -65,7 +69,26 @@ public class SC_Collect : MonoBehaviour
         imagesDiodes[nbCL].sprite = diodeON;
         listOfTextCL[nbCL].text = SC_GM_Local.gm.wordsInCollect[nbCL].word[0].titre;
         imagesCL[nbCL].gameObject.SetActive(true);
-        anim.Play("Collect2_open");
 
+        if (!isOpen)
+        {
+            OnClick();
+            StartCoroutine("Wait");
+        }
+
+    }
+
+    private IEnumerator Wait()
+    {
+        yield return new WaitForSeconds(waitTime);
+        OnClick();
+    }
+
+    public void OnClick()
+    {
+        if (!isOpen) anim.Play("Collect2_open");
+        else anim.Play("Collect2_close");
+
+        isOpen = !isOpen;
     }
 }
