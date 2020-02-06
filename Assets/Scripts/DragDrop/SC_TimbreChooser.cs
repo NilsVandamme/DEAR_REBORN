@@ -8,9 +8,12 @@ public class SC_TimbreChooser : MonoBehaviour
     public static SC_TimbreChooser instance; // singleton instance
 
     public List<GameObject> stamps; // all stamps
-    public GameObject selectedStamp; // The stamp the player selected
     public GameObject StoryArbo; // Story treeview screen
+
+    [HideInInspector]
     public bool StampAlreadySelected; // Has a stamp been selected ?
+    [HideInInspector]
+    public GameObject selectedStamp; // The stamp the player selected
     [HideInInspector]
     public Animator anim; // Animator
 

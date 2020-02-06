@@ -20,7 +20,7 @@ public class SC_NamePlayer : MonoBehaviour
             SC_GM_Master.gm.namePlayer = namePlayer.text;
 
             SC_SaveGame save = new SC_SaveGame();
-            save.Save(sceneToLoad);
+            save.Save(sceneToLoad, true);
 
             SC_LoadingScreen.Instance.LoadThisScene(sceneToLoad);
         }
