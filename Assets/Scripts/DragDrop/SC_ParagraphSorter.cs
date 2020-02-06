@@ -119,11 +119,6 @@ public class SC_ParagraphSorter : MonoBehaviour
             if (i != indexParagrapheAffiche[index])
                 Paragraphs[index][i].SetActive(false);
 
-        Debug.Log(Check(index));
-        Debug.Log(index);
-        Debug.Log(indexParagrapheAffiche[index]);
-        Debug.Log(Paragraphs[index].Count);
-
         Paragraphs[index][indexParagrapheAffiche[index]].gameObject.SetActive(true);
     }
 
