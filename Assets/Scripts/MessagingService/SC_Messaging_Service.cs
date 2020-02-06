@@ -32,6 +32,7 @@ public class SC_Messaging_Service : MonoBehaviour
         Message newMessage = new Message();
 
         GameObject newText = Instantiate(listDiscussionOrder[count], chatPanel.transform);
+        //newMessage.image = newText.GetComponent<Image>();
         newMessage.textObject = newText.GetComponent<Text>();
 
         // Send message
@@ -61,6 +62,6 @@ public class SC_Messaging_Service : MonoBehaviour
 [System.Serializable]
 public class Message
 {
-    public string text;
+    public Image image;
     public Text textObject;
 }
