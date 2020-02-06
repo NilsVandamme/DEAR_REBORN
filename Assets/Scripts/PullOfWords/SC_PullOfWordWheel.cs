@@ -1,7 +1,6 @@
 ﻿using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 public class SC_PullOfWordWheel : MonoBehaviour
 {
@@ -9,7 +8,7 @@ public class SC_PullOfWordWheel : MonoBehaviour
     public GameObject GO_wheelWord;
     public GameObject GO_champsLexicaux;
     public Button startWrittingButton;
-    public GameObject GO_wheelToLetter;
+    public GameObject GO_wheelToLetterButtons;
 
     // Images des buttons qui ne contiennent pas de mot
     public Sprite hasNoWord;
@@ -25,7 +24,7 @@ public class SC_PullOfWordWheel : MonoBehaviour
 
     // Liste des mots de la wheel
     private TextMeshProUGUI[] listOfWheel;
-    private TextMeshProUGUI[] wheelToLetter;
+    private TextMeshPro[] wheelToLetter;
 
     //##############################################################################################################################################################
     //########################################################################        INIT           ###############################################################
@@ -39,7 +38,7 @@ public class SC_PullOfWordWheel : MonoBehaviour
         InitRightSide();
         InitChampsLexicauxWheel();
 
-        wheelToLetter = GO_wheelToLetter.GetComponentsInChildren<TextMeshProUGUI>(true);
+        wheelToLetter = GO_wheelToLetterButtons.GetComponentsInChildren<TextMeshPro>(true);
     }
 
     /*

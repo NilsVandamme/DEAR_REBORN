@@ -18,7 +18,7 @@ public class SC_GM_WheelToLetter : MonoBehaviour
     /*
      * Gère le click d'un Button
      */
-    public void OnClickButtonAutoComplete(TextMeshProUGUI text)
+    public void OnClickButtonAutoComplete(TextMeshPro text)
     {
         foreach (SC_Word word in SC_GM_Local.gm.wheelOfWords)
             if (word.titre == text.text)

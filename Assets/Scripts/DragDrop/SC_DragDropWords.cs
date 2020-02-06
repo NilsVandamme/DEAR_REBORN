@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using TMPro;
 using UnityEngine;
 
 public class SC_DragDropWords : MonoBehaviour
@@ -10,6 +9,7 @@ public class SC_DragDropWords : MonoBehaviour
     public float SpeedDivider;
     public float HoveringHeight;
     public float SnapSpeed;
+    public TextMeshPro text;
 
 
     private Vector3 OriginalPosition;
@@ -56,6 +56,8 @@ public class SC_DragDropWords : MonoBehaviour
         mouseOffset = gameObject.transform.position - GetMouseWorldPos();
         if (rig != null)
             rig.useGravity = false;
+
+        SC_GM_WheelToLetter.instance.OnClickButtonAutoComplete(text);
     }
 
     private void OnMouseUp()
@@ -63,7 +65,6 @@ public class SC_DragDropWords : MonoBehaviour
         if (Snapped && ddcontrols.IsSnapped)
         {
             autoc.OnClick();
-            Debug.Log("added the word to " + autoc.gameObject.name);
         }
         else
         {

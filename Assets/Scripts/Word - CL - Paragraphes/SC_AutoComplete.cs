@@ -32,7 +32,7 @@ public class SC_AutoComplete : MonoBehaviour
 
     private void GetZoneNewText()
     {
-        startIndexRewrite = myTextContenue.text.IndexOf("    ");
+        startIndexRewrite = myTextContenue.text.IndexOf("       ");
 
         if (startIndexRewrite < 0)
         {
@@ -54,11 +54,6 @@ public class SC_AutoComplete : MonoBehaviour
      */
     public void OnClick()
     {
-        Debug.Log("cc");
-        Debug.Log(startIndexRewrite);
-        Debug.Log(endIndexRewrite);
-        Debug.Log(myTextContenue.text.Substring(endIndexRewrite, (myTextContenue.text.Length - endIndexRewrite)));
-
         if (HasWordInListeMaster())
         {
             DeleteWord();
@@ -100,6 +95,10 @@ public class SC_AutoComplete : MonoBehaviour
      */
     private void ChangeWordInText()
     {
+        Debug.Log(myTextContenue.text.Substring(0, startIndexRewrite));
+        Debug.Log(SC_GM_WheelToLetter.instance.getCurrentWord());
+        Debug.Log(myTextContenue.text.Substring(endIndexRewrite, (myTextContenue.text.Length - endIndexRewrite)));
+
         myTextContenue.text = myTextContenue.text.Substring(0, startIndexRewrite) + " " +
                         SC_GM_WheelToLetter.instance.getCurrentWord().grammarCritere[grammarCritere] + " " +
                         myTextContenue.text.Substring(endIndexRewrite, (myTextContenue.text.Length - endIndexRewrite));
