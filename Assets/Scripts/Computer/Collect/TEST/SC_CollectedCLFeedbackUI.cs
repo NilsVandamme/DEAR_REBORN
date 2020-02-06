@@ -5,49 +5,45 @@ using TMPro;
 
 public class SC_CollectedCLFeedbackUI : MonoBehaviour
 {
-    public static SC_CollectedCLFeedbackUI instance;
-
     public Transform TargetPosition;
     public float startAnimDistance;
     public float MousePosMult;
     private float timer;
     public float WaitTime;
+    private int nbWordCollected;
 
-    private bool moving;
-    public TMP_Text text;
+    public bool moving;
 
     // Start is called before the first frame update
     void Start()
     {
-        instance = this;
-        text = GetComponentInChildren<TextMeshProUGUI>();
+
     }
 
     public void StartFeedback()
     {
-        transform.position = new Vector3(GetMouseWorldPos().x, GetMouseWorldPos().y, -0.5f);
-        transform.position = new Vector3(GetMouseWorldPos().x, GetMouseWorldPos().y, -0.5f);
+        nbWordCollected = SC_GM_Local.gm.numberOfCLRecover;
+
+        transform.position = new Vector3(GetMouseWorldPos().x, GetMouseWorldPos().y, Camera.main.WorldToScreenPoint(transform.position).z);
+        transform.position = new Vector3(GetMouseWorldPos().x, GetMouseWorldPos().y, Camera.main.WorldToScreenPoint(transform.position).z);
 
         moving = true;
         timer = 0;
 
         transform.GetChild(0).gameObject.SetActive(true);
-        transform.GetChild(1).gameObject.SetActive(true);
     }
 
     public void StopFeedback()
     {
         transform.GetChild(0).gameObject.SetActive(false);
-        transform.GetChild(1).gameObject.SetActive(false);
         timer = 0;
         moving = false;
-        SC_Collect.instance.Recolt();
+        SC_Collect.instance.Recolt(nbWordCollected);
     }
 
     // Update is called once per frame
     void Update()
     {
-
         if (moving)
         {
             timer += Time.deltaTime;

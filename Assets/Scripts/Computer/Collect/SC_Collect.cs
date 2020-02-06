@@ -16,7 +16,9 @@ public class SC_Collect : MonoBehaviour
 
     private Animator anim;
 
-    private Image[] imagesDiodes;
+    [HideInInspector]
+    public Image[] imagesDiodes;
+
     private Image[] imagesCL; // All buttons showing collected CLs
     private TextMeshProUGUI[] listOfTextCL; // Text of the buttons showing CLs
 
@@ -44,18 +46,17 @@ public class SC_Collect : MonoBehaviour
 
     }
 
-    public void Recolt ()
+    public void Recolt (int nbWordCollected)
     {
-        if (SC_GM_Local.gm.numberOfCLRecover == 1)
+        if (nbWordCollected == 1)
             PlayRecolt(0);
-        else if (SC_GM_Local.gm.numberOfCLRecover == 2)
+        else if (nbWordCollected == 2)
             PlayRecolt(1);
-        else if (SC_GM_Local.gm.numberOfCLRecover == 3)
+        else if (nbWordCollected == 3)
         {
             PlayRecolt(2);
             goToPreparatoryPhaseBut.interactable = true;
             goToPreparatoryPhaseImage.sprite = startWritingON;
-
         }
     }
 

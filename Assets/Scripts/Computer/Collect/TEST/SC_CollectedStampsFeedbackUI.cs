@@ -13,7 +13,7 @@ public class SC_CollectedStampsFeedbackUI : MonoBehaviour
     private float timer;
     public float WaitTime;
 
-    private bool moving;
+    public bool moving;
     public Image img;
 
     void Start()
