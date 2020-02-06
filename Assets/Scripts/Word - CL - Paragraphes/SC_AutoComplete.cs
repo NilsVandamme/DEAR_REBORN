@@ -95,10 +95,6 @@ public class SC_AutoComplete : MonoBehaviour
      */
     private void ChangeWordInText()
     {
-        Debug.Log(myTextContenue.text.Substring(0, startIndexRewrite));
-        Debug.Log(SC_GM_WheelToLetter.instance.getCurrentWord());
-        Debug.Log(myTextContenue.text.Substring(endIndexRewrite, (myTextContenue.text.Length - endIndexRewrite)));
-
         myTextContenue.text = myTextContenue.text.Substring(0, startIndexRewrite) + " " +
                         SC_GM_WheelToLetter.instance.getCurrentWord().grammarCritere[grammarCritere] + " " +
                         myTextContenue.text.Substring(endIndexRewrite, (myTextContenue.text.Length - endIndexRewrite));
