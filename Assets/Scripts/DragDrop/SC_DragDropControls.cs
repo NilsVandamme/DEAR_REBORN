@@ -176,6 +176,9 @@ public class SC_DragDropControls : MonoBehaviour
                     elem.myTextContenue.gameObject.SetActive(true);
                     elem.myTextPresentation.gameObject.SetActive(false);
 
+                    Animator anim = gameObject.GetComponent<Animator>();
+                    anim.Play("ScaleUp");
+
                 }
                 // If the object has no snap point
                 else if(SnapPositionObjectTop == null && SnapPositionObjectDown == null) 

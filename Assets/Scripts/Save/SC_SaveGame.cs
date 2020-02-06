@@ -26,12 +26,13 @@ public class SC_SaveGame : MonoBehaviour
         Save(nextScene);
     }
 
-    public void Save(string nextScene)
+    public void Save(string nextScene, bool firstSave = false)
     {
         if (nextScene.Equals(""))
             return;
 
-        SC_GM_Master.gm.lastParagrapheLettrePerPerso[SC_GM_Local.gm.persoOfCurrentScene] = new List<SC_InfoParagrapheLettreRemplie>(SC_GM_Master.gm.choosenWordInLetter);
+        if (!firstSave)
+            SC_GM_Master.gm.lastParagrapheLettrePerPerso[SC_GM_Local.gm.persoOfCurrentScene] = new List<SC_InfoParagrapheLettreRemplie>(SC_GM_Master.gm.choosenWordInLetter);
 
         SC_PlayerData saveObject = new SC_PlayerData(SC_GM_Master.gm.namePlayer, SC_GM_Master.gm.wordsInPull, SC_GM_Master.gm.lastParagrapheLettrePerPerso, SC_GM_Master.gm.infoPerso);
         string json = JsonUtility.ToJson(saveObject);

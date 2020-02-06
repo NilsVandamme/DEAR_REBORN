@@ -38,8 +38,10 @@ public class SC_SceneLockAndLoad : MonoBehaviour
 
         SC_GM_Master.gm.namePlayer = saveObject.namePlayer;
         SC_GM_Master.gm.wordsInPull = saveObject.wordsInPull;
-        SC_GM_Master.gm.lastParagrapheLettrePerPerso = saveObject.infoParagrapheLettre;
         SC_GM_Master.gm.infoPerso = saveObject.infoPerso;
+
+        if (saveObject.infoParagrapheLettre != null)
+            SC_GM_Master.gm.lastParagrapheLettrePerPerso = saveObject.infoParagrapheLettre;
 
         SC_LoadingScreen.Instance.LoadThisScene(sceneToLoad);
     }

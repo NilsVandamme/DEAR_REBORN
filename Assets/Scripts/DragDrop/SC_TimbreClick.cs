@@ -1,13 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 // Manage the click on the envelope stamp
 
 public class SC_TimbreClick : MonoBehaviour
 {
     public string triggerName;
-
 
     // Tell the main script this stamp was chosen
     private void OnMouseUp()
