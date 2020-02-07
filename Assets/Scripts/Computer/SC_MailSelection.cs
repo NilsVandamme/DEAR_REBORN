@@ -1,7 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 // Manage the mails in the mail window
 
@@ -18,7 +16,7 @@ public class SC_MailSelection : MonoBehaviour
         // Init the lists
         foreach (Transform child in mailTextsListParent.transform)
         {
-                mailTextsList.Add(child.gameObject);
+            mailTextsList.Add(child.gameObject);
         }
     }
 

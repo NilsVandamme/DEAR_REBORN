@@ -50,7 +50,10 @@ public class SC_GM_Master : MonoBehaviour
         {
             gm.wordsInPull = new List<SC_CLInPull>();
             lastParagrapheLettrePerPerso = new List<SC_InfoParagrapheLettreRemplie>[listChampsLexicaux.listOfPerso.Length];
+
             infoPerso = new List<string>[listChampsLexicaux.listOfPerso.Length];
+            for (int i = 0; i < listChampsLexicaux.listOfPerso.Length; i++)
+                infoPerso[i] = new List<string>();
 
             foreach (SC_CLInPull elem in pullBase.wordsInBasePull)
                 gm.wordsInPull.Add(elem);

@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -38,10 +39,17 @@ public class SC_SceneLockAndLoad : MonoBehaviour
 
         SC_GM_Master.gm.namePlayer = saveObject.namePlayer;
         SC_GM_Master.gm.wordsInPull = saveObject.wordsInPull;
-        SC_GM_Master.gm.infoPerso = saveObject.infoPerso;
+
+        SC_GM_Master.gm.infoPerso = new List<string>[SC_GM_Master.gm.listChampsLexicaux.listOfPerso.Length];
+        for (int i = 0; i < saveObject.infoPerso.Count; i++)
+            SC_GM_Master.gm.infoPerso[i] = saveObject.infoPerso[i].infoPerso;
 
         if (saveObject.infoParagrapheLettre != null)
-            SC_GM_Master.gm.lastParagrapheLettrePerPerso = saveObject.infoParagrapheLettre;
+        {
+            SC_GM_Master.gm.lastParagrapheLettrePerPerso = new List<SC_InfoParagrapheLettreRemplie>[SC_GM_Master.gm.listChampsLexicaux.listOfPerso.Length];
+            for (int i = 0; i < saveObject.infoParagrapheLettre.Count; i++)
+                SC_GM_Master.gm.lastParagrapheLettrePerPerso[i] = saveObject.infoParagrapheLettre[i].lettre;
+        }
 
         SC_LoadingScreen.Instance.LoadThisScene(sceneToLoad);
     }

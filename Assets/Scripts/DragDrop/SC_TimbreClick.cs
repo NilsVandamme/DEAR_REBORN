@@ -11,7 +11,6 @@ public class SC_TimbreClick : MonoBehaviour
     {
         if (!SC_TimbreChooser.instance.StampAlreadySelected)
         {
-            Debug.Log(gameObject.name + " has been clicked");
             SC_TimbreChooser.instance.selectedStamp = this.gameObject;
             SC_TimbreChooser.instance.ChooseStamp();
             SC_TimbreChooser.instance.anim.SetTrigger(triggerName);

@@ -37,13 +37,16 @@ public class SC_PageInfoPerso : MonoBehaviour
     {
         paragraphe = lettre.GetComponentsInChildren<TextMeshProUGUI>(true);
         plusMoins = lettre.GetComponentsInChildren<Image>(true);
+
+        RightPart();
+        LeftPart();
     }
 
 
-    public void Init()
+    public void Init(int persoOfButton, Sprite unlockScene)
     {
-        RightPart();
-        LeftPart();
+        perso = persoOfButton;
+        icone = unlockScene;
     }
 
     private void RightPart()

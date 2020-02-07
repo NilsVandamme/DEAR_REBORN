@@ -7,7 +7,6 @@ public class SC_GMLocalEditor : Editor
 {
     private SC_GM_Local gmLocal;
     SC_Base baseInfo;
-    SC_ListChampLexicaux listCL;
 
     private void OnEnable()
     {

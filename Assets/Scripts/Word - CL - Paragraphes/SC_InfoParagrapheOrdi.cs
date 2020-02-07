@@ -13,6 +13,7 @@ public class SC_InfoParagrapheOrdi : MonoBehaviour
     public GameObject fxGood;
     public GameObject fxbad;
 
+    public bool affichable = true;
     public bool recoltable;
 
     private TextMeshProUGUI text;
