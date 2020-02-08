@@ -66,11 +66,10 @@ public class SC_DragDropWords : MonoBehaviour
         {
             autoc.OnClick();
         }
-        else
-        {
-            SnapPosition = OriginalPosition;
-            SnapMovement = true;
-        }
+
+        // Send the element back to it's original position
+        SnapPosition = OriginalPosition;
+        SnapMovement = true;
     }
 
     private void OnMouseDrag()
