@@ -902,6 +902,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: GM_Audio
       objectReference: {fileID: 0}
+    - target: {fileID: 8695859202731957439, guid: 9b88f1ca55f364b47b929ee4123a77aa,
+        type: 3}
+      propertyPath: ASourceRandomizedSound
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8695859202731957439, guid: 9b88f1ca55f364b47b929ee4123a77aa,
+        type: 3}
+      propertyPath: soundSlider
+      value: 
+      objectReference: {fileID: 107282517637919284}
+    - target: {fileID: 8695859202731957439, guid: 9b88f1ca55f364b47b929ee4123a77aa,
+        type: 3}
+      propertyPath: musicSlider
+      value: 
+      objectReference: {fileID: 9110969958755203684}
     - target: {fileID: 8695859202731957376, guid: 9b88f1ca55f364b47b929ee4123a77aa,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -957,21 +972,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8695859202731957439, guid: 9b88f1ca55f364b47b929ee4123a77aa,
-        type: 3}
-      propertyPath: ASourceRandomizedSound
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 8695859202731957439, guid: 9b88f1ca55f364b47b929ee4123a77aa,
-        type: 3}
-      propertyPath: soundSlider
-      value: 
-      objectReference: {fileID: 107282517637919284}
-    - target: {fileID: 8695859202731957439, guid: 9b88f1ca55f364b47b929ee4123a77aa,
-        type: 3}
-      propertyPath: musicSlider
-      value: 
-      objectReference: {fileID: 9110969958755203684}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9b88f1ca55f364b47b929ee4123a77aa, type: 3}
 --- !u!4 &9022777108757242031 stripped
@@ -999,11 +999,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2415093599387375446}
     m_Modifications:
-    - target: {fileID: 916526334955191825, guid: 6ef707ac5b9888248a3c59e9aac13716,
+    - target: {fileID: 2770785637068668979, guid: 6ef707ac5b9888248a3c59e9aac13716,
         type: 3}
-      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 9022777108757242000}
+      propertyPath: m_Name
+      value: PauseMenuCanvas
+      objectReference: {fileID: 0}
     - target: {fileID: 731253323080471194, guid: 6ef707ac5b9888248a3c59e9aac13716,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1109,10 +1109,35 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2770785637068668979, guid: 6ef707ac5b9888248a3c59e9aac13716,
+    - target: {fileID: 4752637849634403264, guid: 6ef707ac5b9888248a3c59e9aac13716,
         type: 3}
-      propertyPath: m_Name
-      value: PauseMenuCanvas
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2415093599387375442}
+    - target: {fileID: 4752637849634403264, guid: 6ef707ac5b9888248a3c59e9aac13716,
+        type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: RetroModeChange
+      objectReference: {fileID: 0}
+    - target: {fileID: 916526334955191825, guid: 6ef707ac5b9888248a3c59e9aac13716,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 9022777108757242000}
+    - target: {fileID: 8337757056412579393, guid: 6ef707ac5b9888248a3c59e9aac13716,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 9022777108757242000}
+    - target: {fileID: 8337757056412579393, guid: 6ef707ac5b9888248a3c59e9aac13716,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ChangeMusicVolume
+      objectReference: {fileID: 0}
+    - target: {fileID: 8337757056412579393, guid: 6ef707ac5b9888248a3c59e9aac13716,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 767150207727049684, guid: 6ef707ac5b9888248a3c59e9aac13716,
         type: 3}
@@ -1129,31 +1154,6 @@ PrefabInstance:
         type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: ActivateToolTip
-      objectReference: {fileID: 0}
-    - target: {fileID: 4752637849634403264, guid: 6ef707ac5b9888248a3c59e9aac13716,
-        type: 3}
-      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 2415093599387375442}
-    - target: {fileID: 4752637849634403264, guid: 6ef707ac5b9888248a3c59e9aac13716,
-        type: 3}
-      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: RetroModeChange
-      objectReference: {fileID: 0}
-    - target: {fileID: 8337757056412579393, guid: 6ef707ac5b9888248a3c59e9aac13716,
-        type: 3}
-      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 9022777108757242000}
-    - target: {fileID: 8337757056412579393, guid: 6ef707ac5b9888248a3c59e9aac13716,
-        type: 3}
-      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ChangeMusicVolume
-      objectReference: {fileID: 0}
-    - target: {fileID: 8337757056412579393, guid: 6ef707ac5b9888248a3c59e9aac13716,
-        type: 3}
-      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2856578920962158201, guid: 6ef707ac5b9888248a3c59e9aac13716,
         type: 3}

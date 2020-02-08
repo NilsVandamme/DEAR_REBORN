@@ -1,6 +1,5 @@
-﻿using System;
-
-[Serializable]
+﻿
+[System.Serializable]
 public class SC_InfoParagrapheLettreRemplie
 {
     public SC_Word word;

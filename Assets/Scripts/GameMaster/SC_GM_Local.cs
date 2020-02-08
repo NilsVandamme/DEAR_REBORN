@@ -16,7 +16,7 @@ public class SC_GM_Local : MonoBehaviour
     public int numberOfCLRecoverable;
 
     // Mail a afficher avec les mots de la scene precedente
-    public GameObject paragrapheMailCache;
+    public SC_InfoParagrapheOrdi paragrapheMailCache;
     public List<string> wordsNeedsForPrintMailParagraphes = new List<string>();
 
     // Prochaines Scenes
@@ -58,7 +58,7 @@ public class SC_GM_Local : MonoBehaviour
         foreach (SC_InfoParagrapheLettreRemplie elem in SC_GM_Master.gm.choosenWordInLetter)
             foreach (string mot in wordsNeedsForPrintMailParagraphes)
                 if (elem.word.titre.Equals(mot))
-                    paragrapheMailCache.SetActive(true);
+                    paragrapheMailCache.affichable = true;
 
         SC_GM_Master.gm.choosenWordInLetter = new List<SC_InfoParagrapheLettreRemplie>();
     }

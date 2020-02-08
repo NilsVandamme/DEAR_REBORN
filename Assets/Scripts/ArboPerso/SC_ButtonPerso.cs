@@ -28,11 +28,9 @@ public class SC_ButtonPerso : MonoBehaviour
     {
         if (SC_GM_Master.gm.lastParagrapheLettrePerPerso[persoOfButton] != null && SC_GM_Master.gm.lastParagrapheLettrePerPerso[persoOfButton].Count != 0)
         {
-            SC_PageInfoPerso.instance.perso = persoOfButton;
-            SC_PageInfoPerso.instance.icone = unlockScene;
-            SC_PageInfoPerso.instance.Init();
             PageInfoPerso.SetActive(true);
             ArboPerso.SetActive(false);
+            SC_PageInfoPerso.instance.Init(persoOfButton, unlockScene);
         }
     }
 }

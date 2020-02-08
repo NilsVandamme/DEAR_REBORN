@@ -103,9 +103,13 @@ public class SC_AutoComplete : MonoBehaviour
 
         actualWord = SC_GM_WheelToLetter.instance.getCurrentWord();
 
-        SC_GM_Master.gm.choosenWordInLetter.Add(new SC_InfoParagrapheLettreRemplie(SC_GM_WheelToLetter.instance.getCurrentWord(), 
-                                                SC_GM_WheelToLetter.instance.getCurrentWord().scorePerso[SC_GM_Local.gm.persoOfCurrentScene] * coef, 
-                                                myTextContenue.text));
+        SC_GM_Master.gm.choosenWordInLetter.Add(
+                new SC_InfoParagrapheLettreRemplie(
+                        SC_GM_WheelToLetter.instance.getCurrentWord(), 
+                        SC_GM_WheelToLetter.instance.getCurrentWord().scorePerso[SC_GM_Local.gm.persoOfCurrentScene] * coef, 
+                        myTextContenue.text
+                )
+        );
 
     }
 
