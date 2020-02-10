@@ -173,9 +173,9 @@ namespace BDKCreate.Accessibility {
 			int tempNum = 0;
 
 			foreach (GameObject go in allGo) {
-				Text[] tempText = go.GetComponentsInChildren<Text> (true);
+                UnityEngine.UI.Text[] tempText = go.GetComponentsInChildren<UnityEngine.UI.Text> (true);
 				//tempNum += tempText.Length;
-				foreach (Text text in tempText) {
+				foreach (UnityEngine.UI.Text text in tempText) {
 					if (text.gameObject.GetComponents<BDKSettings_TextSize> ().Length < 1) {
 						text.gameObject.AddComponent<BDKSettings_TextSize> ();
 						text.gameObject.GetComponent<BDKSettings_TextSize> ().minSize = (int)(text.fontSize * minPercent);
@@ -227,7 +227,7 @@ namespace BDKCreate.Accessibility {
 		private void alltextResizeGetTextObjects(){
 			foreach (BDKSettings_TextSize bdkText in textManager.textList) {
 				if (bdkText.text == null) {
-					bdkText.text = bdkText.gameObject.GetComponent<Text> ();
+					bdkText.text = bdkText.gameObject.GetComponent<UnityEngine.UI.Text> ();
 				}
 			}
 			if (textManager != null) {

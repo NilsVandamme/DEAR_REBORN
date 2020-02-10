@@ -13,10 +13,10 @@ using UnityEngine.EventSystems;
 
 namespace BDKCreate.Accessibility {
 
-	[RequireComponent(typeof(Text))]
+	[RequireComponent(typeof(UnityEngine.UI.Text))]
 	public class BDKSettings_TextSize : MonoBehaviour {
 		
-		public Text text;
+		public UnityEngine.UI.Text text;
 
 		public int currentSize = 50;
 
@@ -31,7 +31,7 @@ namespace BDKCreate.Accessibility {
 		}
 		// Use this for initialization
 		void Start () {
-			text = GetComponent<Text> ();
+            text = GetComponent<UnityEngine.UI.Text>();
 
 			// verify sizes in right order
 			if (maxSize < minSize){

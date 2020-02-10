@@ -12,15 +12,15 @@ using UnityEngine.UI;
 
 
 namespace BDKCreate.Accessibility {
-	[RequireComponent(typeof(Text))]
+	[RequireComponent(typeof(UnityEngine.UI.Text))]
 	public class BDKSettings_TextPercentValue : MonoBehaviour {
 
-		private Text text;
+		private UnityEngine.UI.Text text;
 		public BDKSettings_Manager myManager;
 
 		// Use this for initialization
 		void Start () {
-			text = this.GetComponent<Text> ();
+            text = this.GetComponent<UnityEngine.UI.Text> ();
 		}
 		
 		// Update is called once per frame
