@@ -34,7 +34,7 @@ public class SC_GM_Paper : MonoBehaviour
     public void Update()
     {
         // Activate the send letter button
-        if(SC_ParagraphSorter.instance.SnappedParagraphs.Count >= 3 && SC_GM_Master.gm.choosenWordInLetter.Count > 0)
+        if(SC_ParagraphSorter.instance.SnappedParagraphs.Count >= 3 && SC_GM_Master.gm.choosenWordInLetter.Count >= 3)
         {
             SendButton.interactable = true;
         }
