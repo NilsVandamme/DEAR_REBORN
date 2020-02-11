@@ -16,7 +16,7 @@ public class SC_ButtonPerso : MonoBehaviour
 
     void Start()
     {
-        if (SC_GM_Master.gm.lastParagrapheLettrePerPerso[persoOfButton] != null && SC_GM_Master.gm.lastParagrapheLettrePerPerso[persoOfButton].Count != 0)
+        if (SC_GM_Master.gm.lastParagrapheLettrePerPerso[persoOfButton] != null && SC_GM_Master.gm.lastParagrapheLettrePerPerso[persoOfButton].Length != 0)
             image.sprite = unlockScene;
         else
             image.sprite = lockScene;
@@ -26,7 +26,7 @@ public class SC_ButtonPerso : MonoBehaviour
 
     private void AfficheInfoWindow()
     {
-        if (SC_GM_Master.gm.lastParagrapheLettrePerPerso[persoOfButton] != null && SC_GM_Master.gm.lastParagrapheLettrePerPerso[persoOfButton].Count != 0)
+        if (SC_GM_Master.gm.lastParagrapheLettrePerPerso[persoOfButton] != null && SC_GM_Master.gm.lastParagrapheLettrePerPerso[persoOfButton].Length != 0)
         {
             PageInfoPerso.SetActive(true);
             ArboPerso.SetActive(false);
