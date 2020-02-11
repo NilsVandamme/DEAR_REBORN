@@ -160,9 +160,6 @@ public class SC_DragDropControls : MonoBehaviour
                             SnapPosition = SnapPositionObjectDown.transform.position + Vector3.back * FirstLastSnapPositionOffset;
                             IsSnapped = true;
 
-                            Debug.Log(SnapPositionObjectDown.transform.position);
-                            Debug.Log(SnapPositionObjectDown.transform.position.z);
-
                             top = false;
                             middle = false;
                             down = false;
