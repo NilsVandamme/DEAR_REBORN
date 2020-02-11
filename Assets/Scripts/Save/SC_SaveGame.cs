@@ -50,18 +50,11 @@ public class SC_SaveGame : MonoBehaviour
         {
             dragAndDrop = SC_ParagraphSorter.instance.SnappedParagraphs[i].GetComponent<SC_DragDropControls>();
             autoComplete = SC_ParagraphSorter.instance.SnappedParagraphs[i].GetComponent<SC_AutoComplete>();
-
-            Debug.Log(i);
-            Debug.Log(autoComplete.actualWord.titre);
-
+            
             for (int j = 0; j < SC_GM_Master.gm.choosenWordInLetter.Count; j++)
             {
                 if (SC_GM_Master.gm.choosenWordInLetter[j].word.Equals(autoComplete.actualWord))
                 {
-                    Debug.Log("pass");
-                    Debug.Log(dragAndDrop.top);
-                    Debug.Log(dragAndDrop.middle);
-                    Debug.Log(dragAndDrop.down);
 
                     if (dragAndDrop.top)
                         SC_GM_Master.gm.lastParagrapheLettrePerPerso[SC_GM_Local.gm.persoOfCurrentScene][0] = SC_GM_Master.gm.choosenWordInLetter[j];
@@ -76,11 +69,6 @@ public class SC_SaveGame : MonoBehaviour
                         Debug.LogError("Probleme sur la position du paragraphe de la lettre");
 
                     break;
-                }
-                else
-                {
-                    Debug.Log(SC_GM_Master.gm.choosenWordInLetter[j].word.titre);
-                    Debug.Log(autoComplete.actualWord.titre);
                 }
             }
         }
