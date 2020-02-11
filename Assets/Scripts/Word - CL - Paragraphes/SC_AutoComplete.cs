@@ -13,10 +13,8 @@ public class SC_AutoComplete : MonoBehaviour
     private int startIndexRewrite;
     private int endIndexRewrite;
 
-    private SC_Word actualWord;
-
-    [HideInInspector]
-    public int grammarCritere;
+    [HideInInspector] public SC_Word actualWord;
+    [HideInInspector] public int grammarCritere;
 
     void Start()
     {

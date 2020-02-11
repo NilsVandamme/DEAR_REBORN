@@ -24,12 +24,6 @@ public class SC_GM_Paper : MonoBehaviour
 
     }
 
-    // Get all snap positions
-    private void Start()
-    {
-        snapPositions = FindObjectsOfType<SC_PaperSnapGrid>();
-    }
-
     // Activate/Disable the send button
     public void Update()
     {
@@ -63,7 +57,7 @@ public class SC_GM_Paper : MonoBehaviour
     }
 
     //******************************************************
-    //********************  DEBUG  ***************************
+    //********************  DEBUG  *************************
     //******************************************************
 
     // Get and return the score

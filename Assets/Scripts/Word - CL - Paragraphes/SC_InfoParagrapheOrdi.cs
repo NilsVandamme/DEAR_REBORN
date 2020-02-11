@@ -34,6 +34,25 @@ public class SC_InfoParagrapheOrdi : MonoBehaviour
         text = this.gameObject.GetComponentInChildren<TextMeshProUGUI>();
         firstClick = true;
         tooltip.infoLeft = listCL.listNameChampLexical[cl];
+
+        ReplaceName();
+    }
+
+    private void ReplaceName()
+    {
+        int startIndex = text.text.IndexOf("$$$$$$$");
+
+        if (startIndex < 0) return;
+
+        for (int i = startIndex; i < text.text.Length; i++)
+            if (text.text[i].Equals(' '))
+            {
+                text.text = text.text.Substring(0, startIndex) + " " +
+                            SC_GM_Master.gm.namePlayer + " " +
+                            text.text.Substring(i, (text.text.Length - i));
+            }
+
+
     }
 
     /*
