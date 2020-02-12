@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 [ExecuteInEditMode]
 public class SC_Messaging_Service : MonoBehaviour
@@ -83,7 +84,7 @@ public class SC_Messaging_Service : MonoBehaviour
     /* 
      * Write the next message in the chat
      * */
-    public void SendMessageToChat()
+    void SendMessageToChat()
     {
         // Creation of the new message
         chatMessageList.Add(
@@ -127,10 +128,43 @@ public class SC_Messaging_Service : MonoBehaviour
     IEnumerator BossIsTalking()
     {
         bossWrittingAnimationStarted = true;
+        animatorChat.SetBool("IsBossWritting", true);
 
-        animatorChat.Play("BossIsWritting");
         yield return new WaitForSeconds(2);
-        SendMessageToChat();
+
+        animatorChat.SetBool("IsBossWritting", false);
         bossWrittingAnimationStarted = false;
+
+        SendMessageToChat();
+    }
+
+    /**
+     * Make the text look like it's the boss writting
+     */
+    void FormatPlayerText()
+    {
+
+    }
+
+    /**
+     * Make the text look like it's the player writting
+     */
+    void FormatBossText(TextMeshProUGUI text, Image image)
+    {
+
+    }
+
+    void formatAllDialog()
+    {
+        for (int i = 0; i < TotalTextInDialog; i++)
+        {
+            if (listOrderDialog[i])
+            {
+                FormatBossText(
+                    listMessages[i].GetComponent<TextMeshProUGUI>(),
+                    listMessages[i].GetComponentInChildren<Image>());
+            }
+            
+        }
     }
 }
