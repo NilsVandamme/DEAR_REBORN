@@ -46,7 +46,7 @@ public class SC_SceneLockAndLoad : MonoBehaviour
 
         if (saveObject.infoParagrapheLettre != null)
         {
-            SC_GM_Master.gm.lastParagrapheLettrePerPerso = new List<SC_InfoParagrapheLettreRemplie>[SC_GM_Master.gm.listChampsLexicaux.listOfPerso.Length];
+            SC_GM_Master.gm.lastParagrapheLettrePerPerso = new SC_InfoParagrapheLettreRemplie[SC_GM_Master.gm.listChampsLexicaux.listOfPerso.Length][];
             for (int i = 0; i < saveObject.infoParagrapheLettre.Count; i++)
                 SC_GM_Master.gm.lastParagrapheLettrePerPerso[i] = saveObject.infoParagrapheLettre[i].lettre;
         }

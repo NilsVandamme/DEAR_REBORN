@@ -16,17 +16,21 @@ public class SC_ButtonPerso : MonoBehaviour
 
     void Start()
     {
-        if (SC_GM_Master.gm.lastParagrapheLettrePerPerso[persoOfButton] != null && SC_GM_Master.gm.lastParagrapheLettrePerPerso[persoOfButton].Count != 0)
+        if (SC_GM_Master.gm.lastParagrapheLettrePerPerso[persoOfButton] != null && SC_GM_Master.gm.lastParagrapheLettrePerPerso[persoOfButton].Length != 0)
+        {
             image.sprite = unlockScene;
+            button.onClick.AddListener(AfficheInfoWindow);
+        }
         else
+        {
             image.sprite = lockScene;
-
-        button.onClick.AddListener(AfficheInfoWindow);
+            button.interactable = false;
+        }
     }
 
     private void AfficheInfoWindow()
     {
-        if (SC_GM_Master.gm.lastParagrapheLettrePerPerso[persoOfButton] != null && SC_GM_Master.gm.lastParagrapheLettrePerPerso[persoOfButton].Count != 0)
+        if (SC_GM_Master.gm.lastParagrapheLettrePerPerso[persoOfButton] != null && SC_GM_Master.gm.lastParagrapheLettrePerPerso[persoOfButton].Length != 0)
         {
             PageInfoPerso.SetActive(true);
             ArboPerso.SetActive(false);

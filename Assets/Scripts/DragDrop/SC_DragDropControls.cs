@@ -46,6 +46,10 @@ public class SC_DragDropControls : MonoBehaviour
     //[Space]
     private float timer;
 
+    [HideInInspector] public bool top;
+    [HideInInspector] public bool middle;
+    [HideInInspector] public bool down;
+
     private void Start()
     {
         OriginalPosition = transform.position;
@@ -155,6 +159,19 @@ public class SC_DragDropControls : MonoBehaviour
                         { // Snap on the lower part of the paper
                             SnapPosition = SnapPositionObjectDown.transform.position + Vector3.back * FirstLastSnapPositionOffset;
                             IsSnapped = true;
+
+                            top = false;
+                            middle = false;
+                            down = false;
+
+                            if (SnapPositionObjectDown.transform.position.z > -3)
+                                top = true;
+                            else if (SnapPositionObjectDown.transform.position.z > -5)
+                                middle = true;
+                            else
+                                down = true;
+
+                            OnSnap();
                         }
                         else if (topSnapped == true && SnapPositionObjectDown == null && underDownSnapped == false && SnapPositionObjectTop.tag == "FirstSnapPosition")
                         { // Return to original position because there's not enough space
@@ -169,15 +186,6 @@ public class SC_DragDropControls : MonoBehaviour
                             SnapPosition = OriginalPosition;
                         }
                     }
-
-                    SC_ParagraphSorter.instance.Affiche(SC_ParagraphSorter.instance.lastParagrapheMove);
-
-                    SC_AutoComplete elem = gameObject.GetComponent<SC_AutoComplete>();
-                    elem.myTextContenue.gameObject.SetActive(true);
-                    elem.myTextPresentation.gameObject.SetActive(false);
-
-                    Animator anim = gameObject.GetComponent<Animator>();
-                    anim.Play("ScaleUp");
 
                 }
                 // If the object has no snap point
@@ -204,6 +212,18 @@ public class SC_DragDropControls : MonoBehaviour
                 }
             }
         }
+    }
+
+    private void OnSnap()
+    {
+        SC_ParagraphSorter.instance.Affiche(SC_ParagraphSorter.instance.lastParagrapheMove);
+
+        SC_AutoComplete elem = gameObject.GetComponent<SC_AutoComplete>();
+        elem.myTextContenue.gameObject.SetActive(true);
+        elem.myTextPresentation.gameObject.SetActive(false);
+
+        Animator anim = gameObject.GetComponent<Animator>();
+        anim.Play("ScaleUp");
     }
 
 

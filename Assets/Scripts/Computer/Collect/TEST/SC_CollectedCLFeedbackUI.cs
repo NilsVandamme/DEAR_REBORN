@@ -57,7 +57,7 @@ public class SC_CollectedCLFeedbackUI : MonoBehaviour
     {
         Vector3 mousePoint = Input.mousePosition;
 
-        mousePoint.z = transform.position.z;
+        mousePoint.z = Camera.main.WorldToScreenPoint(transform.position).z;
 
         return Camera.main.ScreenToWorldPoint(mousePoint) * MousePosMult;
     }
