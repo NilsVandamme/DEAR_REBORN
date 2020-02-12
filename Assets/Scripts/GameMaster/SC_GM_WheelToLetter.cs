@@ -6,7 +6,7 @@ public class SC_GM_WheelToLetter : MonoBehaviour
     public static SC_GM_WheelToLetter instance;
 
     private SC_Word currentWord = null;
-
+    
     private void Awake()
     {
         if (instance == null)
