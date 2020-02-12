@@ -78,11 +78,9 @@ public class SC_DragDropWords : MonoBehaviour
 
     private IEnumerator GoToPlace()
     {
-        Debug.Log("pass");
         yield return new WaitForSeconds(1);
 
         // Send the element back to it's original position
-        Debug.Log("pass");
         SnapPosition = OriginalPosition;
         SnapMovement = true;
     }
