@@ -2,20 +2,23 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 [ExecuteInEditMode]
 public class SC_Messaging_Service : MonoBehaviour
 {
     #region Public attributes
     [Header("ConfigTech")]
-    public GameObject chatPanel;
-    public GameObject listDialog;
+    public GameObject chatPanelObject;
+    public GameObject listBossDialogObject;
+    public GameObject listPlayerDialogObject;
+    public GameObject buttonsChoices;
+    public GameObject buttonEndChat;
 
     [Header("Icons chat")]
     public Sprite bossIcon;
-    public Sprite playerIcon;
 
+    [Header("List distrubition Talking time")]
+    [Tooltip("Check a case to let the player talk after a checked case")]
     public List<bool> listOrderDialog = new List<bool>();
     #endregion
 
@@ -23,27 +26,27 @@ public class SC_Messaging_Service : MonoBehaviour
     Animator animatorChat;
 
     List<TextMeshProUGUI> chatMessageList = new List<TextMeshProUGUI>();
-    TextMeshProUGUI[] listMessages;
+    TextMeshProUGUI[] listBossMessages;
+    TextMeshProUGUI[] listPlayerMessages;
 
-    int countPassedDialog = 0;
+    int countPassedDialog;
     int TotalTextInDialog;
 
-    bool bossTurn;
+    bool playerTurn = false;
     bool bossWrittingAnimationStarted = false;
+    bool ChatStarted = false;
     #endregion
+
+    private void Awake()
+    {
+        countPassedDialog = 0;
+
+        animatorChat = gameObject.GetComponent<Animator>();
+    }
 
     private void Start()
     {
-        animatorChat = gameObject.GetComponent<Animator>();
-
-        // Get the number of dialog
-        TotalTextInDialog = listDialog.GetComponentsInChildren<TextMeshProUGUI>().Length;
-
-        // Set the correct number of bool to the list
-        for (int i = 0; i < TotalTextInDialog; i++)
-        {
-            listMessages = listDialog.GetComponentsInChildren<TextMeshProUGUI>();
-        }
+        GetAllDialog();
     }
 
     /**
@@ -51,11 +54,12 @@ public class SC_Messaging_Service : MonoBehaviour
      */
     private void Update()
     {
+
         // When in editor
-        if (listDialog != null && runInEditMode)
+        if (listBossDialogObject != null && runInEditMode)
         {
             // Get the number of dialog
-            TotalTextInDialog = listDialog.GetComponentsInChildren<TextMeshProUGUI>().Length;
+            TotalTextInDialog = listBossDialogObject.GetComponentsInChildren<TextMeshProUGUI>(true).Length;
 
             // Delete the list only if modification
             if (listOrderDialog.Count != TotalTextInDialog)
@@ -68,30 +72,26 @@ public class SC_Messaging_Service : MonoBehaviour
             }
         }
 
-        // When not in editor
-        // Check the turn of the person who can talk
-        if (listOrderDialog[countPassedDialog]) bossTurn = true;
-        else bossTurn = false;
+        if (ChatStarted && countPassedDialog < TotalTextInDialog)
+        { 
 
-        if (bossTurn && !bossWrittingAnimationStarted)
-        {
-            StartCoroutine(BossIsTalking());
+            if (!playerTurn)
+            {
 
-            Debug.Log("Boss is talking");
+                if (!bossWrittingAnimationStarted)
+                {
+                    bossWrittingAnimationStarted = true;
+
+                    StartCoroutine(BossIsTalking());
+                }
+            }
         }
-    }
 
-    /* 
-     * Write the next message in the chat
-     * */
-    void SendMessageToChat()
-    {
-        // Creation of the new message
-        chatMessageList.Add(
-            Instantiate(listMessages[countPassedDialog],
-            chatPanel.transform));
-
-        countPassedDialog++;
+        if (countPassedDialog == TotalTextInDialog && !playerTurn)
+        {
+            buttonEndChat.SetActive(true);
+            buttonsChoices.SetActive(false);
+        }
     }
 
     /*
@@ -100,6 +100,8 @@ public class SC_Messaging_Service : MonoBehaviour
     public void OpenChat()
     {
         animatorChat.SetBool("IsChatOpen", true);
+
+        ChatStarted = true;
     }
 
     /*
@@ -113,11 +115,16 @@ public class SC_Messaging_Service : MonoBehaviour
     /**
      * Player send message to chat
      */
-    public void playerSendResponce()
+    public void playerSendResponce(int numeroSmilley)
     {
-        if (!bossTurn)
+        if (playerTurn)
         {
-            SendMessageToChat();
+            playerTurn = false;
+
+            // Creation of the new message
+            chatMessageList.Add(
+                Instantiate(listPlayerMessages[numeroSmilley],
+                chatPanelObject.transform));
         }
     }
 
@@ -127,7 +134,6 @@ public class SC_Messaging_Service : MonoBehaviour
      */
     IEnumerator BossIsTalking()
     {
-        bossWrittingAnimationStarted = true;
         animatorChat.SetBool("IsBossWritting", true);
 
         yield return new WaitForSeconds(2);
@@ -135,36 +141,34 @@ public class SC_Messaging_Service : MonoBehaviour
         animatorChat.SetBool("IsBossWritting", false);
         bossWrittingAnimationStarted = false;
 
-        SendMessageToChat();
+        // Creation of the new message
+        chatMessageList.Add(
+            Instantiate(listBossMessages[countPassedDialog],
+            chatPanelObject.transform));
+
+        Debug.Log("countPassedDialog : " + countPassedDialog);
+
+
+        // Check the turn of the person who can talk
+        // If it's the player turn
+        // The boss wait it's responce before talking
+        if (listOrderDialog[countPassedDialog]) playerTurn = true;
+        else playerTurn = false;
+
+        // Then pass to the next dialog
+        countPassedDialog++;
     }
 
     /**
-     * Make the text look like it's the boss writting
+     * Get All dialog from the scene 
      */
-    void FormatPlayerText()
+    void GetAllDialog()
     {
+        // Get the all the text of the boss
+        listBossMessages = listBossDialogObject.GetComponentsInChildren<TextMeshProUGUI>(true);
 
+        // Get the all the smilley of the player
+        listPlayerMessages = listPlayerDialogObject.GetComponentsInChildren<TextMeshProUGUI>(true);
     }
 
-    /**
-     * Make the text look like it's the player writting
-     */
-    void FormatBossText(TextMeshProUGUI text, Image image)
-    {
-
-    }
-
-    void formatAllDialog()
-    {
-        for (int i = 0; i < TotalTextInDialog; i++)
-        {
-            if (listOrderDialog[i])
-            {
-                FormatBossText(
-                    listMessages[i].GetComponent<TextMeshProUGUI>(),
-                    listMessages[i].GetComponentInChildren<Image>());
-            }
-            
-        }
-    }
 }
