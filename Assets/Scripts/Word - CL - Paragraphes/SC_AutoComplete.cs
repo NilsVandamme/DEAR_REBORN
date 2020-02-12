@@ -53,11 +53,12 @@ public class SC_AutoComplete : MonoBehaviour
     /*
      * Si on drag sur le button du paragraphe de la lettre
      */
-    public void OnClick()
+    public void OnClick(Animator anim)
     {
         if (HasWordInListeMaster())
         {
             DeleteWord();
+            animator = anim;
             ChangeWordInText();
         }
     }
