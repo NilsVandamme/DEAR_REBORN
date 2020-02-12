@@ -13,11 +13,14 @@ public class SC_AutoComplete : MonoBehaviour
     private int startIndexRewrite;
     private int endIndexRewrite;
 
+    private Animator animator;
+
     [HideInInspector] public SC_Word actualWord;
     [HideInInspector] public int grammarCritere;
 
     void Start()
     {
+        animator = this.gameObject.GetComponent<Animator>();
         typeParagraphe = this.gameObject.GetComponentInParent<SC_ParagraphType>();
         coef = typeParagraphe.multiplicativeScore;
         myTextSave = myTextContenue.text;
@@ -50,11 +53,12 @@ public class SC_AutoComplete : MonoBehaviour
     /*
      * Si on drag sur le button du paragraphe de la lettre
      */
-    public void OnClick()
+    public void OnClick(Animator anim)
     {
         if (HasWordInListeMaster())
         {
             DeleteWord();
+            animator = anim;
             ChangeWordInText();
         }
     }
@@ -79,6 +83,7 @@ public class SC_AutoComplete : MonoBehaviour
         for (int i = 0; i < SC_GM_Master.gm.choosenWordInLetter.Count; i++)
             if (actualWord != null && actualWord.titre.Equals(SC_GM_Master.gm.choosenWordInLetter[i].word.titre))
             {
+                animator.Play("Pop");
                 SC_GM_Master.gm.choosenWordInLetter.Remove(SC_GM_Master.gm.choosenWordInLetter[i]);
                 return;
             }
@@ -93,6 +98,8 @@ public class SC_AutoComplete : MonoBehaviour
      */
     private void ChangeWordInText()
     {
+        animator.Play("FadeOut");
+
         myTextContenue.text = myTextContenue.text.Substring(0, startIndexRewrite) + " " +
                         SC_GM_WheelToLetter.instance.getCurrentWord().grammarCritere[grammarCritere] + " " +
                         myTextContenue.text.Substring(endIndexRewrite, (myTextContenue.text.Length - endIndexRewrite));

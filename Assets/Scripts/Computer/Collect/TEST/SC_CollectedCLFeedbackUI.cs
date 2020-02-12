@@ -10,6 +10,7 @@ public class SC_CollectedCLFeedbackUI : MonoBehaviour
     public float MousePosMult;
     private float timer;
     public float WaitTime;
+    public float MoveSpeed;
     private int nbWordCollected;
 
     public bool moving;
@@ -43,7 +44,7 @@ public class SC_CollectedCLFeedbackUI : MonoBehaviour
             timer += Time.deltaTime;
             if(timer > WaitTime)
             {
-                transform.position = Vector3.Lerp(new Vector3(transform.position.x, transform.position.y, -0.5f), new Vector3(TargetPosition.position.x, TargetPosition.position.y, -0.5f) , 0.03f);
+                transform.position = Vector3.Lerp(new Vector3(transform.position.x, transform.position.y, -0.5f), new Vector3(TargetPosition.position.x, TargetPosition.position.y, -0.5f) , MoveSpeed);
 
                 if(Vector2.Distance(transform.position, TargetPosition.position) < startAnimDistance)
                 {
@@ -57,7 +58,8 @@ public class SC_CollectedCLFeedbackUI : MonoBehaviour
     {
         Vector3 mousePoint = Input.mousePosition;
 
-        mousePoint.z = Camera.main.WorldToScreenPoint(transform.position).z;
+        //mousePoint.z = Camera.main.WorldToScreenPoint(transform.position).z;
+        mousePoint.z = transform.position.z;
 
         return Camera.main.ScreenToWorldPoint(mousePoint) * MousePosMult;
     }
