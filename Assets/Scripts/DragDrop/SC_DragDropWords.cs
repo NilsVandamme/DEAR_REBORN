@@ -10,6 +10,7 @@ public class SC_DragDropWords : MonoBehaviour
     public float HoveringHeight;
     public float SnapSpeed;
     public TextMeshPro text;
+    public GameObject ParticleWin;
 
 
     private Vector3 OriginalPosition;
@@ -64,6 +65,7 @@ public class SC_DragDropWords : MonoBehaviour
     {
         if (Snapped && ddcontrols.IsSnapped)
         {
+            Instantiate(ParticleWin, transform.position, Quaternion.identity);
             autoc.OnClick();
         }
 
@@ -92,6 +94,8 @@ public class SC_DragDropWords : MonoBehaviour
                     autoc = topHit.transform.GetComponent<SC_AutoComplete>();
                     ddcontrols = topHit.transform.GetComponent<SC_DragDropControls>();
                     Snapped = true;
+
+                    
                 }
                 else
                 {
