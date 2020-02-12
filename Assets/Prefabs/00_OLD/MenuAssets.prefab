@@ -167,7 +167,6 @@ GameObject:
   - component: {fileID: 1054593457714661031}
   - component: {fileID: 2562609606048137163}
   - component: {fileID: 1864674213417498484}
-  - component: {fileID: 4618617929488586843}
   m_Layer: 5
   m_Name: Quit
   m_TagString: Untagged
@@ -274,9 +273,20 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4618617929488586843}
-        m_MethodName: Quit
-        m_Mode: 1
+      - m_Target: {fileID: 0}
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 1663619642038206807}
+        m_MethodName: SetActive
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -285,18 +295,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &4618617929488586843
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 615748837201636687}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0a6f96f3f98a28b4d927e77969fa8c85, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1663619641836824886
 GameObject:
   m_ObjectHideFlags: 0
@@ -5931,7 +5929,6 @@ GameObject:
   - component: {fileID: 7646376923307456452}
   - component: {fileID: 2598390696484581363}
   - component: {fileID: 5954499538225823311}
-  - component: {fileID: 6044195982023319151}
   m_Layer: 5
   m_Name: Reinit
   m_TagString: Untagged
@@ -6049,16 +6046,25 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &6044195982023319151
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8721965850196854437}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a813e6877c53554faffe0514aafcf2c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  but: {fileID: 5954499538225823311}
+      - m_Target: {fileID: 1663619642038206807}
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
