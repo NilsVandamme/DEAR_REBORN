@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using System.Collections;
+using TMPro;
 using UnityEngine;
 
 public class SC_DragDropWords : MonoBehaviour
@@ -21,11 +22,14 @@ public class SC_DragDropWords : MonoBehaviour
     private SC_DragDropControls ddcontrols;
     private Vector3 SnapPosition;
 
+    private Animator animator;
+
     // Start is called before the first frame update
     void Start()
     {
         OriginalPosition = transform.position;
         rig = GetComponent<Rigidbody>();
+        animator = this.gameObject.GetComponentInParent<Animator>();
     }
 
     // Update is called once per frame
@@ -66,8 +70,15 @@ public class SC_DragDropWords : MonoBehaviour
         if (Snapped && ddcontrols.IsSnapped)
         {
             Instantiate(ParticleWin, transform.position, Quaternion.identity);
-            autoc.OnClick();
+            autoc.OnClick(animator);
+
+            StartCoroutine("GoToPlace");
         }
+    }
+
+    private IEnumerator GoToPlace()
+    {
+        yield return new WaitForSeconds(1);
 
         // Send the element back to it's original position
         SnapPosition = OriginalPosition;
