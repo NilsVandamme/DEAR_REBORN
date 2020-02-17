@@ -54,6 +54,7 @@ public class SC_DragDropWords : MonoBehaviour
     private void OnMouseDown()
     {
         IsSelected = true;
+        SnapMovement = false;
 
         mouseZCoord = Camera.main.WorldToScreenPoint(gameObject.transform.position).z;
         mouseZCoord /= SpeedDivider;
@@ -73,6 +74,11 @@ public class SC_DragDropWords : MonoBehaviour
             autoc.OnClick(animator);
 
             StartCoroutine("GoToPlace");
+        }
+        else
+        {
+            SnapPosition = OriginalPosition;
+            SnapMovement = true;
         }
     }
 

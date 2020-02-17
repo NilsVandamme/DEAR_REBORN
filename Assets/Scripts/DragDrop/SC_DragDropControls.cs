@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 // This script make the object attached to drag & drop-able
 
@@ -11,7 +12,6 @@ public class SC_DragDropControls : MonoBehaviour
     public float HoveringHeight = -5.25f; // Height at which the object will hover while being dragged
     public float SpeedDivider = 2.5f; // Divide the drag speed
     public float SnapSpeed; // Speed of the snapping movement
-    public int ParagraphSize; // The number of lines the paragraph contains
     public float TimerDisableHover; // Timer after which the hover is disabled if it fails to get to snap position
     public float FirstLastSnapPositionOffset; // Offset at which the paragraph will snap if it snap only to first or last positions
 
@@ -50,6 +50,10 @@ public class SC_DragDropControls : MonoBehaviour
     [HideInInspector] public bool middle;
     [HideInInspector] public bool down;
 
+    public SpriteRenderer backgroundSR;
+    public SpriteRenderer colorSR;
+    public TextMeshPro textSR;
+
     private void Start()
     {
         OriginalPosition = transform.position;
@@ -85,6 +89,10 @@ public class SC_DragDropControls : MonoBehaviour
             rig.useGravity = true;
             if(IsSnapped)
                 removeButton.SetActive(true);
+
+            backgroundSR.sortingOrder = 0;
+            colorSR.sortingOrder = 0;
+            textSR.sortingOrder = 1;
         }
     }
 
@@ -105,6 +113,13 @@ public class SC_DragDropControls : MonoBehaviour
                 if (rig != null)
                     rig.useGravity = false;
         }
+
+        if (!IsSnapped)
+        {
+            backgroundSR.sortingOrder = 2;
+            colorSR.sortingOrder = 2;
+            textSR.sortingOrder = 3;
+        }
     }
 
     // When the mouse is being released
@@ -124,69 +139,49 @@ public class SC_DragDropControls : MonoBehaviour
                     snapMovementActive = true;
                     IsSelected = false;
 
-                    // Snap the paragraph to the right position if it's on the top or bottom position depending on it's size
-                    if (ParagraphSize == 1)
+
+                    // Give the position to snap to
+                    if (SnapPositionObjectTop != null && SnapPositionObjectDown != null) // Snap between the two spots
                     {
-                        // Give the position to snap to
-                        if (SnapPositionObjectTop != null)
-                        {
-                            SnapPosition = SnapPositionObjectTop.transform.position;
-                            IsSnapped = true;
-                        }
-                        else if (SnapPositionObjectDown != null)
-                        {
-                            SnapPosition = SnapPositionObjectDown.transform.position;
-                            IsSnapped = true;
-                        }
-                        else
-                        {
-                            SnapPosition = OriginalPosition;
-                        }
+                        SnapPosition = Vector3.Lerp(SnapPositionObjectTop.transform.position, SnapPositionObjectDown.transform.position, 0.5f);
+                        IsSnapped = true;
                     }
-                    else if (ParagraphSize == 2)
+                    else if (topSnapped == true && SnapPositionObjectDown == null && overTopSnapped == true && SnapPositionObjectTop.tag != "FirstSnapPosition")
+                    { // Snap on the upper part of the paper
+                        SnapPosition = SnapPositionObjectTop.transform.position + Vector3.forward * FirstLastSnapPositionOffset;
+                        IsSnapped = true;
+                    }
+                    else if (downSnapped == true && SnapPositionObjectTop == null && underDownSnapped == true && SnapPositionObjectDown.tag != "LastSnapPosition")
+                    { // Snap on the lower part of the paper
+                        SnapPosition = SnapPositionObjectDown.transform.position + Vector3.back * FirstLastSnapPositionOffset;
+                        IsSnapped = true;
+
+                        top = false;
+                        middle = false;
+                        down = false;
+
+                        if (SnapPositionObjectDown.transform.position.z > -3)
+                            top = true;
+                        else if (SnapPositionObjectDown.transform.position.z > -5)
+                            middle = true;
+                        else
+                            down = true;
+
+                        OnSnap();
+                    }
+                    else if (topSnapped == true && SnapPositionObjectDown == null && underDownSnapped == false && SnapPositionObjectTop.tag == "FirstSnapPosition")
+                    { // Return to original position because there's not enough space
+                        SnapPosition = OriginalPosition;
+                    }
+                    else if (downSnapped == true && SnapPositionObjectTop == null && overTopSnapped == false && SnapPositionObjectDown.tag == "LastSnapPosition")
+                    { // Return to original position because there's not enough space
+                        SnapPosition = OriginalPosition;
+                    }
+                    else
                     {
-                        // Give the position to snap to
-                        if (SnapPositionObjectTop != null && SnapPositionObjectDown != null) // Snap between the two spots
-                        {
-                            SnapPosition = Vector3.Lerp(SnapPositionObjectTop.transform.position, SnapPositionObjectDown.transform.position, 0.5f);
-                            IsSnapped = true;
-                        }
-                        else if (topSnapped == true && SnapPositionObjectDown == null && overTopSnapped == true && SnapPositionObjectTop.tag != "FirstSnapPosition")
-                        { // Snap on the upper part of the paper
-                            SnapPosition = SnapPositionObjectTop.transform.position + Vector3.forward * FirstLastSnapPositionOffset;
-                            IsSnapped = true;
-                        }
-                        else if (downSnapped == true && SnapPositionObjectTop == null && underDownSnapped == true && SnapPositionObjectDown.tag != "LastSnapPosition")
-                        { // Snap on the lower part of the paper
-                            SnapPosition = SnapPositionObjectDown.transform.position + Vector3.back * FirstLastSnapPositionOffset;
-                            IsSnapped = true;
-
-                            top = false;
-                            middle = false;
-                            down = false;
-
-                            if (SnapPositionObjectDown.transform.position.z > -3)
-                                top = true;
-                            else if (SnapPositionObjectDown.transform.position.z > -5)
-                                middle = true;
-                            else
-                                down = true;
-
-                            OnSnap();
-                        }
-                        else if (topSnapped == true && SnapPositionObjectDown == null && underDownSnapped == false && SnapPositionObjectTop.tag == "FirstSnapPosition")
-                        { // Return to original position because there's not enough space
-                            SnapPosition = OriginalPosition;
-                        }
-                        else if (downSnapped == true && SnapPositionObjectTop == null && overTopSnapped == false && SnapPositionObjectDown.tag == "LastSnapPosition")
-                        { // Return to original position because there's not enough space
-                            SnapPosition = OriginalPosition;
-                        }
-                        else
-                        {
-                            SnapPosition = OriginalPosition;
-                        }
+                        SnapPosition = OriginalPosition;
                     }
+                    
 
                 }
                 // If the object has no snap point
@@ -195,14 +190,7 @@ public class SC_DragDropControls : MonoBehaviour
                     snapMovementActive = true;
                     IsSelected = false;
 
-                    if (ParagraphSize == 1)
-                    {
-                        SnapPosition = OriginalPosition;
-                    }
-                    else if(ParagraphSize == 2)
-                    {
-                        SnapPosition = OriginalPosition;
-                    }
+                    SnapPosition = OriginalPosition;
                 }
                 else
                 {
@@ -254,13 +242,7 @@ public class SC_DragDropControls : MonoBehaviour
                     {
                         if (topHit.transform.gameObject.GetComponent<SC_PaperSnapGrid>().hasSnappedObject == false)
                         {
-                            if (topHit.transform.gameObject != SnapPositionObjectTop && ParagraphSize > 1)
-                            {
-                                //Debug.Log("Top raycast has found a free snap area");
-                                SnapPositionObjectTop = topHit.transform.gameObject;
-                                topSnapped = true;
-                            }
-                            else if (topHit.transform.gameObject != SnapPositionObjectTop && ParagraphSize == 1)
+                            if (topHit.transform.gameObject != SnapPositionObjectTop)
                             {
                                 //Debug.Log("Top raycast has found a free snap area");
                                 SnapPositionObjectTop = topHit.transform.gameObject;
@@ -282,13 +264,7 @@ public class SC_DragDropControls : MonoBehaviour
                     {
                         if (downHit.transform.gameObject.GetComponent<SC_PaperSnapGrid>().hasSnappedObject == false)
                         {
-                            if (downHit.transform.gameObject != SnapPositionObjectTop && ParagraphSize > 1)
-                            {
-                                //Debug.Log("Down raycast has found a free snap area");
-                                SnapPositionObjectDown = downHit.transform.gameObject;
-                                downSnapped = true;
-                            }
-                            else if (downHit.transform.gameObject != SnapPositionObjectTop && ParagraphSize == 1)
+                            if (downHit.transform.gameObject != SnapPositionObjectTop)
                             {
                                 //Debug.Log("Down raycast has found a free snap area");
                                 SnapPositionObjectDown = downHit.transform.gameObject;
@@ -305,32 +281,31 @@ public class SC_DragDropControls : MonoBehaviour
 
 
                 // Add more raycasts if the paragraph is larger than 1
-                if (ParagraphSize > 1)
+
+                Physics.Raycast(transform.GetChild(3).transform.position, Vector3.down, out RaycastHit overTopHit, 1000f);
+                Physics.Raycast(transform.GetChild(4).transform.position, Vector3.down, out RaycastHit underDownHit, 1000f);
+
+                Debug.DrawRay(transform.GetChild(3).transform.position, Vector3.down);
+                Debug.DrawRay(transform.GetChild(4).transform.position, Vector3.down);
+
+                if (Physics.Raycast(transform.GetChild(3).transform.position, Vector3.down, 1000f))
                 {
-                    Physics.Raycast(transform.GetChild(3).transform.position, Vector3.down, out RaycastHit overTopHit, 1000f);
-                    Physics.Raycast(transform.GetChild(4).transform.position, Vector3.down, out RaycastHit underDownHit, 1000f);
-
-                    Debug.DrawRay(transform.GetChild(3).transform.position, Vector3.down);
-                    Debug.DrawRay(transform.GetChild(4).transform.position, Vector3.down);
-
-                    if (Physics.Raycast(transform.GetChild(3).transform.position, Vector3.down, 1000f))
+                    // The over top raycast hit a snap area ?
+                    if (overTopHit.transform.gameObject.layer == 8)
                     {
-                        // The over top raycast hit a snap area ?
-                        if (overTopHit.transform.gameObject.layer == 8)
+                        if (overTopHit.transform.gameObject.GetComponent<SC_PaperSnapGrid>().hasSnappedObject == false)
                         {
-                            if (overTopHit.transform.gameObject.GetComponent<SC_PaperSnapGrid>().hasSnappedObject == false)
-                            {
-                                //Debug.Log("overTop raycast has found a free snap area");
-                                SnapPositionObjectOverTop = overTopHit.transform.gameObject;
-                                overTopSnapped = true;
-                            }
-                        }
-                        else
-                        {
-                            overTopSnapped = false;
-                            SnapPositionObjectOverTop = null;
+                            //Debug.Log("overTop raycast has found a free snap area");
+                            SnapPositionObjectOverTop = overTopHit.transform.gameObject;
+                            overTopSnapped = true;
                         }
                     }
+                    else
+                    {
+                        overTopSnapped = false;
+                        SnapPositionObjectOverTop = null;
+                    }
+                    
 
 
                     if (Physics.Raycast(transform.GetChild(4).transform.position, Vector3.down, 1000f))
