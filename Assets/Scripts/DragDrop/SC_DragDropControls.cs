@@ -13,43 +13,33 @@ public class SC_DragDropControls : MonoBehaviour
     public float SpeedDivider = 2.5f; // Divide the drag speed
     public float SnapSpeed; // Speed of the snapping movement
     public float TimerDisableHover; // Timer after which the hover is disabled if it fails to get to snap position
-    public float FirstLastSnapPositionOffset; // Offset at which the paragraph will snap if it snap only to first or last positions
 
     private bool IsSelected; // Is the object being selected ?
     private Vector3 OriginalPosition; // Position where the object is at start. Also where the object will return if it isn't snapped
-
-    //[Header("Debug")]
-
     private Vector3 SnapPosition; // Position at which the object snaps
 
     //[Space]
-    private GameObject SnapPositionObjectOverTop;
     private GameObject SnapPositionObjectTop; // Which object Top is it snapped to ?
-    private GameObject SnapPositionObjectDown; // Which object Down is it snapped to ?
-    private GameObject SnapPositionObjectUnderDown;
-
-    //[Space]
-    private bool overTopSnapped;
+    private GameObject SnapPositionObjectDown; // Which object Down is it snapped to ?    //[Space]
     private bool topSnapped;
     private bool downSnapped;
-    private bool underDownSnapped;
 
     //[Space]
-    public bool IsSnapped; // Is the object snapped ?
+    [HideInInspector] public bool IsSnapped; // Is the object snapped ?
     private bool snapMovementActive; // Is the object moving to it's snap ?
 
     private Vector3 mouseOffset;
     private float mouseZCoord;
     private Rigidbody rig; // Object rigidbidy
-    public GameObject removeButton;
 
-    //[Space]
     private float timer;
 
     [HideInInspector] public bool top;
     [HideInInspector] public bool middle;
     [HideInInspector] public bool down;
 
+    [Space]
+    public GameObject removeButton;
     public SpriteRenderer backgroundSR;
     public SpriteRenderer colorSR;
     public TextMeshPro textSR;
@@ -114,6 +104,7 @@ public class SC_DragDropControls : MonoBehaviour
                     rig.useGravity = false;
         }
 
+        // Change the sorting order of the sprites & text to render over all other elements
         if (!IsSnapped)
         {
             backgroundSR.sortingOrder = 2;
@@ -138,14 +129,16 @@ public class SC_DragDropControls : MonoBehaviour
                 {
                     snapMovementActive = true;
                     IsSelected = false;
-                    Debug.Log("snap movement activated");
+                    //Debug.Log("snap movement activated");
 
                     // Give the position to snap to
                     if (SnapPositionObjectTop != null && SnapPositionObjectDown != null)
                     {
+                        // Send the paragraph to it's snap zone position
                         SnapPosition = SnapPositionObjectTop.transform.position;
                         IsSnapped = true;
 
+                        // Determine which zone has a paragraph snapped
                         top = false;
                         middle = false;
                         down = false;
@@ -161,19 +154,21 @@ public class SC_DragDropControls : MonoBehaviour
                     }
                     else
                     {
+                        // Send the paragraph back to the sorter position
                         SnapPosition = OriginalPosition;
                     }                   
                 }
                 // If the object has no snap point
                 else if(SnapPositionObjectTop == null && SnapPositionObjectDown == null) 
                 {
+                    // Send the paragraph back to the sorter position
                     snapMovementActive = true;
                     IsSelected = false;
-
                     SnapPosition = OriginalPosition;
                 }
                 else
                 {
+                    // Drop the paragraph on the ground
                     if (rig != null)
                         rig.useGravity = true;
                     snapMovementActive = false;
@@ -208,27 +203,32 @@ public class SC_DragDropControls : MonoBehaviour
                 if (rig != null)
                     rig.position = new Vector3(GetMouseWorldPos().x + mouseOffset.x, Mathf.Lerp(transform.position.y, HoveringHeight, Time.deltaTime * 2), GetMouseWorldPos().z + mouseOffset.z);
 
-
+                // Raycasts - !!! DONT FORGET TO CHECK IF THE TRANSFORM.GETCHILD MATCH THE HIERARCHY !!! 
                 Physics.Raycast(transform.GetChild(2).transform.position, Vector3.down, out RaycastHit topHit, 1000f);
                 Physics.Raycast(transform.GetChild(3).transform.position, Vector3.down,out RaycastHit downHit, 1000f);
 
                 // The top raycast hit a snap area ?
+
+                // Is the raycast hitting something ?
                 if (Physics.Raycast(transform.GetChild(2).transform.position, Vector3.down,1000f) || Physics.Raycast(transform.GetChild(3).transform.position, Vector3.down, 1000f))
                 {
-                    Debug.Log("raycasts spotted an object");
+                    //Debug.Log("raycasts spotted an object");
+                    // Is the raycast hitting a zone ?
                     if (topHit.transform.gameObject.layer == 8 && downHit.transform.gameObject.layer == 8)
                     {
-                        Debug.Log("raycasts spotted an zone");
+                        //Debug.Log("raycasts spotted an zone");
+                        // Is the raycats hitting a free zone ?
                         if (topHit.transform.gameObject.GetComponent<SC_PaperSnapGrid>().hasSnappedObject == false && downHit.transform.gameObject.GetComponent<SC_PaperSnapGrid>().hasSnappedObject == false) 
                         {
-                            Debug.Log("raycasts spotted an unoccupied zone");
                             //Debug.Log("Top raycast has found a free snap area");
+                            // Snap the paragraph to the free zone
                             SnapPositionObjectTop = topHit.transform.gameObject;
                             SnapPositionObjectDown = downHit.transform.gameObject;
                             topSnapped = true;
                         }
                         else
                         {
+                            // Send the paragraph back to the sorter position
                             SnapPositionObjectTop = null;
                             SnapPositionObjectDown = null;
                             topSnapped = false;
@@ -236,6 +236,7 @@ public class SC_DragDropControls : MonoBehaviour
                     }
                     else
                     {
+                        // Send the paragraph back to the sorter position
                         SnapPositionObjectTop = null;
                         SnapPositionObjectDown = null;
                         topSnapped = false;
