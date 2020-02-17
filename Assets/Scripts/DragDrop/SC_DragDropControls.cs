@@ -134,26 +134,16 @@ public class SC_DragDropControls : MonoBehaviour
                 //Debug.Log("MOUSE UP");
 
                 // If the object has a snap point
-                if ((topSnapped == true && downSnapped == true) || (topSnapped == true && SnapPositionObjectDown == null) || (downSnapped == true && SnapPositionObjectTop == null))
+                if (topSnapped == true)
                 {
                     snapMovementActive = true;
                     IsSelected = false;
-
+                    Debug.Log("snap movement activated");
 
                     // Give the position to snap to
-                    if (SnapPositionObjectTop != null && SnapPositionObjectDown != null) // Snap between the two spots
+                    if (SnapPositionObjectTop != null && SnapPositionObjectDown != null)
                     {
-                        SnapPosition = Vector3.Lerp(SnapPositionObjectTop.transform.position, SnapPositionObjectDown.transform.position, 0.5f);
-                        IsSnapped = true;
-                    }
-                    else if (topSnapped == true && SnapPositionObjectDown == null && overTopSnapped == true && SnapPositionObjectTop.tag != "FirstSnapPosition")
-                    { // Snap on the upper part of the paper
-                        SnapPosition = SnapPositionObjectTop.transform.position + Vector3.forward * FirstLastSnapPositionOffset;
-                        IsSnapped = true;
-                    }
-                    else if (downSnapped == true && SnapPositionObjectTop == null && underDownSnapped == true && SnapPositionObjectDown.tag != "LastSnapPosition")
-                    { // Snap on the lower part of the paper
-                        SnapPosition = SnapPositionObjectDown.transform.position + Vector3.back * FirstLastSnapPositionOffset;
+                        SnapPosition = SnapPositionObjectTop.transform.position;
                         IsSnapped = true;
 
                         top = false;
@@ -169,20 +159,10 @@ public class SC_DragDropControls : MonoBehaviour
 
                         OnSnap();
                     }
-                    else if (topSnapped == true && SnapPositionObjectDown == null && underDownSnapped == false && SnapPositionObjectTop.tag == "FirstSnapPosition")
-                    { // Return to original position because there's not enough space
-                        SnapPosition = OriginalPosition;
-                    }
-                    else if (downSnapped == true && SnapPositionObjectTop == null && overTopSnapped == false && SnapPositionObjectDown.tag == "LastSnapPosition")
-                    { // Return to original position because there's not enough space
-                        SnapPosition = OriginalPosition;
-                    }
                     else
                     {
                         SnapPosition = OriginalPosition;
-                    }
-                    
-
+                    }                   
                 }
                 // If the object has no snap point
                 else if(SnapPositionObjectTop == null && SnapPositionObjectDown == null) 
@@ -229,102 +209,36 @@ public class SC_DragDropControls : MonoBehaviour
                     rig.position = new Vector3(GetMouseWorldPos().x + mouseOffset.x, Mathf.Lerp(transform.position.y, HoveringHeight, Time.deltaTime * 2), GetMouseWorldPos().z + mouseOffset.z);
 
 
-                Physics.Raycast(transform.GetChild(1).transform.position, Vector3.down, out RaycastHit topHit, 1000f);
-                Physics.Raycast(transform.GetChild(2).transform.position, Vector3.down,out RaycastHit downHit, 1000f);
-
-                Debug.DrawRay(transform.GetChild(1).transform.position, Vector3.down);
-                Debug.DrawRay(transform.GetChild(2).transform.position, Vector3.down);
+                Physics.Raycast(transform.GetChild(2).transform.position, Vector3.down, out RaycastHit topHit, 1000f);
+                Physics.Raycast(transform.GetChild(3).transform.position, Vector3.down,out RaycastHit downHit, 1000f);
 
                 // The top raycast hit a snap area ?
-                if (Physics.Raycast(transform.GetChild(1).transform.position, Vector3.down,1000f))
+                if (Physics.Raycast(transform.GetChild(2).transform.position, Vector3.down,1000f) || Physics.Raycast(transform.GetChild(3).transform.position, Vector3.down, 1000f))
                 {
-                    if (topHit.transform.gameObject.layer == 8)
+                    Debug.Log("raycasts spotted an object");
+                    if (topHit.transform.gameObject.layer == 8 && downHit.transform.gameObject.layer == 8)
                     {
-                        if (topHit.transform.gameObject.GetComponent<SC_PaperSnapGrid>().hasSnappedObject == false)
+                        Debug.Log("raycasts spotted an zone");
+                        if (topHit.transform.gameObject.GetComponent<SC_PaperSnapGrid>().hasSnappedObject == false && downHit.transform.gameObject.GetComponent<SC_PaperSnapGrid>().hasSnappedObject == false) 
                         {
-                            if (topHit.transform.gameObject != SnapPositionObjectTop)
-                            {
-                                //Debug.Log("Top raycast has found a free snap area");
-                                SnapPositionObjectTop = topHit.transform.gameObject;
-                                topSnapped = true;
-                            }
-                        }
-                    }
-                    else
-                    {
-                        topSnapped = false;
-                        SnapPositionObjectTop = null;
-                    }
-                }
-
-                if (Physics.Raycast(transform.GetChild(2).transform.position, Vector3.down, 1000f))
-                {
-                    // The down raycast hit a snap area ?
-                    if (downHit.transform.gameObject.layer == 8)
-                    {
-                        if (downHit.transform.gameObject.GetComponent<SC_PaperSnapGrid>().hasSnappedObject == false)
-                        {
-                            if (downHit.transform.gameObject != SnapPositionObjectTop)
-                            {
-                                //Debug.Log("Down raycast has found a free snap area");
-                                SnapPositionObjectDown = downHit.transform.gameObject;
-                                downSnapped = true;
-                            }
-                        }
-                    }
-                    else
-                    {
-                        downSnapped = false;
-                        SnapPositionObjectDown = null;
-                    }
-                }
-
-
-                // Add more raycasts if the paragraph is larger than 1
-
-                Physics.Raycast(transform.GetChild(3).transform.position, Vector3.down, out RaycastHit overTopHit, 1000f);
-                Physics.Raycast(transform.GetChild(4).transform.position, Vector3.down, out RaycastHit underDownHit, 1000f);
-
-                Debug.DrawRay(transform.GetChild(3).transform.position, Vector3.down);
-                Debug.DrawRay(transform.GetChild(4).transform.position, Vector3.down);
-
-                if (Physics.Raycast(transform.GetChild(3).transform.position, Vector3.down, 1000f))
-                {
-                    // The over top raycast hit a snap area ?
-                    if (overTopHit.transform.gameObject.layer == 8)
-                    {
-                        if (overTopHit.transform.gameObject.GetComponent<SC_PaperSnapGrid>().hasSnappedObject == false)
-                        {
-                            //Debug.Log("overTop raycast has found a free snap area");
-                            SnapPositionObjectOverTop = overTopHit.transform.gameObject;
-                            overTopSnapped = true;
-                        }
-                    }
-                    else
-                    {
-                        overTopSnapped = false;
-                        SnapPositionObjectOverTop = null;
-                    }
-                    
-
-
-                    if (Physics.Raycast(transform.GetChild(4).transform.position, Vector3.down, 1000f))
-                    {
-                        // The under down raycast hit a snap area ?
-                        if (underDownHit.transform.gameObject.layer == 8)
-                        {
-                            if (underDownHit.transform.gameObject.GetComponent<SC_PaperSnapGrid>().hasSnappedObject == false)
-                            {
-                                //Debug.Log("underDown raycast has found a free snap area");
-                                SnapPositionObjectUnderDown = underDownHit.transform.gameObject;
-                                underDownSnapped = true;
-                            }
+                            Debug.Log("raycasts spotted an unoccupied zone");
+                            //Debug.Log("Top raycast has found a free snap area");
+                            SnapPositionObjectTop = topHit.transform.gameObject;
+                            SnapPositionObjectDown = downHit.transform.gameObject;
+                            topSnapped = true;
                         }
                         else
                         {
-                            underDownSnapped = false;
-                            SnapPositionObjectUnderDown = null;
+                            SnapPositionObjectTop = null;
+                            SnapPositionObjectDown = null;
+                            topSnapped = false;
                         }
+                    }
+                    else
+                    {
+                        SnapPositionObjectTop = null;
+                        SnapPositionObjectDown = null;
+                        topSnapped = false;
                     }
                 }
             }

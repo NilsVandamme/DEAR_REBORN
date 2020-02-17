@@ -111,8 +111,6 @@ public class SC_DragDropWords : MonoBehaviour
                     autoc = topHit.transform.GetComponent<SC_AutoComplete>();
                     ddcontrols = topHit.transform.GetComponent<SC_DragDropControls>();
                     Snapped = true;
-
-                    
                 }
                 else
                 {
