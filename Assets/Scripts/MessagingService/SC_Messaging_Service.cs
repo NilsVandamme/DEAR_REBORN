@@ -11,11 +11,11 @@ public class SC_Messaging_Service : MonoBehaviour
     public GameObject chatPanelObject;
     public GameObject listBossDialogObject;
     public GameObject listPlayerDialogObject;
+    public GameObject scrollbar_Vertical;
+
+    [Header("Buttons")]
     public GameObject buttonsChoices;
     public GameObject buttonEndChat;
-
-    [Header("Icons chat")]
-    public Sprite bossIcon;
 
     [Header("List distrubition Talking time")]
     [Tooltip("Check a case to let the player talk after a checked case")]
@@ -170,5 +170,4 @@ public class SC_Messaging_Service : MonoBehaviour
         // Get the all the smilley of the player
         listPlayerMessages = listPlayerDialogObject.GetComponentsInChildren<TextMeshProUGUI>(true);
     }
-
 }
