@@ -54,6 +54,7 @@ public class SC_DragDropWords : MonoBehaviour
     private void OnMouseDown()
     {
         IsSelected = true;
+        SnapMovement = false;
 
         mouseZCoord = Camera.main.WorldToScreenPoint(gameObject.transform.position).z;
         mouseZCoord /= SpeedDivider;
@@ -69,10 +70,19 @@ public class SC_DragDropWords : MonoBehaviour
     {
         if (Snapped && ddcontrols.IsSnapped)
         {
+            // Put the particle effect on click
             Instantiate(ParticleWin, transform.position, Quaternion.identity);
+
+            // Add the word to the paragraph
             autoc.OnClick(animator);
 
             StartCoroutine("GoToPlace");
+        }
+        else
+        {
+            // Send the element back to it's original position
+            SnapPosition = OriginalPosition;
+            SnapMovement = true;
         }
     }
 
@@ -89,24 +99,24 @@ public class SC_DragDropWords : MonoBehaviour
     {
         if (IsSelected)
         {
+            // Move the object to mouse position
             if (rig != null)
                 rig.position = new Vector3(GetMouseWorldPos().x + mouseOffset.x, Mathf.Lerp(transform.position.y, HoveringHeight, Time.deltaTime * 2), GetMouseWorldPos().z + mouseOffset.z);
 
+            // Raycasts - !!! DONT FORGET TO CHECK IF THE TRANSFORM.GETCHILD MATCH THE HIERARCHY !!! 
             Physics.Raycast(transform.GetChild(1).transform.position, Vector3.down, out RaycastHit topHit, 1000f);
             Physics.Raycast(transform.GetChild(2).transform.position, Vector3.down, out RaycastHit downHit, 1000f);
 
-            Debug.DrawRay(transform.GetChild(1).transform.position, Vector3.down);
-            Debug.DrawRay(transform.GetChild(2).transform.position, Vector3.down);
-
+            // Is the raycast hitting something ?
             if(Physics.Raycast(transform.GetChild(1).transform.position, Vector3.down, 1000f) || Physics.Raycast(transform.GetChild(2).transform.position, Vector3.down, 1000f))
             {
+                // Is the raycast hitting a paragraph
                 if(topHit.transform.tag == "Paragraph" && downHit.transform.tag == "Paragraph")
                 {
+                    // Snap the word to the paragraph
                     autoc = topHit.transform.GetComponent<SC_AutoComplete>();
                     ddcontrols = topHit.transform.GetComponent<SC_DragDropControls>();
                     Snapped = true;
-
-                    
                 }
                 else
                 {

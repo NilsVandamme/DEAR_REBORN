@@ -9,7 +9,6 @@ public class SC_GM_Tooltip : MonoBehaviour
     public bool tooltipActive; // Are the tooltips active ?
     public Toggle tog; // Toggle from the main menu (no ref needed in game scenes)
 
-
     void Start()
     {
         // Get all tooltip components
@@ -64,12 +63,16 @@ public class SC_GM_Tooltip : MonoBehaviour
         if (tooltipActive)
         {
             for (int i = 0; i < ttips.Length; i++)
+            {
                 ttips[i].enabled = true;
+            }
         }
         else
         {
             for (int i = 0; i < ttips.Length; i++)
+            {
                 ttips[i].enabled = false;
+            }
         }
     }
 }

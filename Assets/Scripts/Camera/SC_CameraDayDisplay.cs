@@ -20,7 +20,7 @@ public class SC_CameraDayDisplay : MonoBehaviour
         anim = gameObject.GetComponent<Animator>();
         AnimInt = 0;
         anim.SetBool("tuto", false);
-        stampy.SetActive(false);
+        //stampy.SetActive(false);
     }
     public void appearStampy(){
 

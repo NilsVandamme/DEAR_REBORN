@@ -174,19 +174,16 @@ public class SC_GM_SoundManager : MonoBehaviour
  
     public void SkipMusicRadio()
     {
-       
-
         StartCoroutine(SkipEffect());
-       
-        
     }
 
 
     public void PreviousMusicRadio()
     {
-        
         StartCoroutine(PreviousEffect());
     }
+
+
     IEnumerator SkipEffect()
     {
         ASourceMusic.Stop();
@@ -198,8 +195,6 @@ public class SC_GM_SoundManager : MonoBehaviour
 
         ASourceMusic.clip = radioMusics[Random.Range(0, radioMusics.Length)];
         ASourceMusic.Play();
-
-       
     }
 
     IEnumerator PreviousEffect()
@@ -212,8 +207,6 @@ public class SC_GM_SoundManager : MonoBehaviour
         yield return new WaitWhile(() => ASourceRandomSounds.isPlaying);
         ASourceMusic.clip = radioMusics[Random.Range(0, radioMusics.Length)];
         ASourceMusic.Play();
-
-       
     }
 
     public void PlayMusic()

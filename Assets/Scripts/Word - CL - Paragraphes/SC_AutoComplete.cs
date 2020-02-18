@@ -100,8 +100,8 @@ public class SC_AutoComplete : MonoBehaviour
     {
         animator.Play("FadeOut");
 
-        myTextContenue.text = myTextContenue.text.Substring(0, startIndexRewrite) + " " +
-                        SC_GM_WheelToLetter.instance.getCurrentWord().grammarCritere[grammarCritere] + " " +
+        myTextContenue.text = myTextContenue.text.Substring(0, startIndexRewrite) + " <b>" +
+                        SC_GM_WheelToLetter.instance.getCurrentWord().grammarCritere[grammarCritere] + "</b> " +
                         myTextContenue.text.Substring(endIndexRewrite, (myTextContenue.text.Length - endIndexRewrite));
 
         endIndexRewrite = startIndexRewrite + SC_GM_WheelToLetter.instance.getCurrentWord().grammarCritere[grammarCritere].Length + 2;
