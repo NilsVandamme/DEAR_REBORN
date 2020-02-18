@@ -136,7 +136,14 @@ public class SC_DragDropControls : MonoBehaviour
                     {
                         // Send the paragraph to it's snap zone position
                         SnapPosition = SnapPositionObjectTop.transform.position;
+
+                        // Tell the zone it has a snapped paragraph
+                        SnapPositionObjectTop.GetComponent<SC_PaperSnapGrid>().hasSnappedObject = true;
+                        SnapPositionObjectDown.GetComponent<SC_PaperSnapGrid>().hasSnappedObject = true;
                         IsSnapped = true;
+
+                        // Tell the zone which paragraph is snapped
+                        SnapPositionObjectDown.GetComponent<SC_PaperSnapGrid>().currentSnappedObject = gameObject;
 
                         // Determine which zone has a paragraph snapped
                         top = false;
