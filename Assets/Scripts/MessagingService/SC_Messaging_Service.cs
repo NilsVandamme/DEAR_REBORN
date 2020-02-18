@@ -89,8 +89,7 @@ public class SC_Messaging_Service : MonoBehaviour
 
         if (countPassedDialog == TotalTextInDialog && !playerTurn)
         {
-            buttonEndChat.SetActive(true);
-            buttonsChoices.SetActive(false);
+            animatorChat.SetBool("IsChatFinished", true);
         }
     }
 
@@ -100,8 +99,7 @@ public class SC_Messaging_Service : MonoBehaviour
     public void OpenChat()
     {
         animatorChat.SetBool("IsChatOpen", true);
-
-        ChatStarted = true;
+        StartCoroutine(ChatIsOpenning());
     }
 
     /*
@@ -157,6 +155,13 @@ public class SC_Messaging_Service : MonoBehaviour
 
         // Then pass to the next dialog
         countPassedDialog++;
+    }
+
+    // Wait for the window to have finished to open to set the variable
+    IEnumerator ChatIsOpenning()
+    {
+        yield return new WaitForSeconds(1);
+        ChatStarted = true;
     }
 
     /**
