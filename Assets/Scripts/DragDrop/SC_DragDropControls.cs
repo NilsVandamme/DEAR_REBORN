@@ -267,7 +267,10 @@ public class SC_DragDropControls : MonoBehaviour
         elem.myTextPresentation.gameObject.SetActive(true);
 
         transform.position = OriginalPosition;
-        
+
+        SnapPositionObjectTop.GetComponent<SC_PaperSnapGrid>().currentSnappedObject = null;
+        SnapPositionObjectTop.GetComponent<SC_PaperSnapGrid>().hasSnappedObject = false;
+
         removeButton.SetActive(false);
         IsSnapped = false;
 
