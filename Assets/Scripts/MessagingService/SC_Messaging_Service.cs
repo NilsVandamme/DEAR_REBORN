@@ -62,8 +62,6 @@ public class SC_Messaging_Service : MonoBehaviour
             StartCoroutine(RefreshChat());
         }
 
-        
-
         // When in editor
         if (listBossDialogObject != null && runInEditMode)
         {
@@ -81,6 +79,7 @@ public class SC_Messaging_Service : MonoBehaviour
             }
         }
 
+        // Boucle dialog
         if (ChatStarted && countPassedDialog < TotalTextInDialog)
         { 
 
@@ -96,9 +95,11 @@ public class SC_Messaging_Service : MonoBehaviour
             }
         }
 
+
         if (countPassedDialog == TotalTextInDialog && !playerTurn)
         {
             animatorChat.SetBool("IsChatFinished", true);
+            Debug.Log("Chat finished");
         }
     }
 
@@ -124,6 +125,7 @@ public class SC_Messaging_Service : MonoBehaviour
      */
     public void playerSendResponce(int numeroSmilley)
     {
+
         if (playerTurn)
         {
             playerTurn = false;
@@ -145,7 +147,7 @@ public class SC_Messaging_Service : MonoBehaviour
 
             chatRefreshed = false;
 
-            Debug.Log("Chat refreshed");
+            Debug.Log("numéro smilley activé : " + numeroSmilley);
         }
     }
 
@@ -184,7 +186,7 @@ public class SC_Messaging_Service : MonoBehaviour
     // Wait for the window to have finished to open to set the variable
     IEnumerator ChatIsOpenning()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(1.3f);
         ChatStarted = true;
     }
 
@@ -194,7 +196,7 @@ public class SC_Messaging_Service : MonoBehaviour
 
         chatPanelObject.GetComponent<RectTransform>().localPosition = new Vector3(
         chatPanelObject.GetComponent<RectTransform>().localPosition.x,
-        chatPanelObject.GetComponent<RectTransform>().localPosition.y + 100,
+        chatPanelObject.GetComponent<RectTransform>().localPosition.y + 150,
         chatPanelObject.GetComponent<RectTransform>().localPosition.z);
     }
 
