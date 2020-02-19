@@ -11,7 +11,6 @@ public class SC_Messaging_Service : MonoBehaviour
     public GameObject chatPanelObject;
     public GameObject listBossDialogObject;
     public GameObject listPlayerDialogObject;
-    public GameObject scrollbar_Vertical;
 
     [Header("Buttons")]
     public GameObject buttonsChoices;
@@ -35,6 +34,7 @@ public class SC_Messaging_Service : MonoBehaviour
     bool playerTurn = false;
     bool bossWrittingAnimationStarted = false;
     bool ChatStarted = false;
+    bool chatRefreshed = true;
     #endregion
 
     private void Awake()
@@ -54,6 +54,13 @@ public class SC_Messaging_Service : MonoBehaviour
      */
     private void Update()
     {
+        // Make the chat go down when someone wrote
+        if (!chatRefreshed)
+        {
+            chatRefreshed = true;
+
+            StartCoroutine(RefreshChat());
+        }
 
         // When in editor
         if (listBossDialogObject != null && runInEditMode)
@@ -72,6 +79,7 @@ public class SC_Messaging_Service : MonoBehaviour
             }
         }
 
+        // Boucle dialog
         if (ChatStarted && countPassedDialog < TotalTextInDialog)
         { 
 
@@ -87,9 +95,11 @@ public class SC_Messaging_Service : MonoBehaviour
             }
         }
 
+
         if (countPassedDialog == TotalTextInDialog && !playerTurn)
         {
             animatorChat.SetBool("IsChatFinished", true);
+            Debug.Log("Chat finished");
         }
     }
 
@@ -115,14 +125,29 @@ public class SC_Messaging_Service : MonoBehaviour
      */
     public void playerSendResponce(int numeroSmilley)
     {
+
         if (playerTurn)
         {
             playerTurn = false;
+
+            // PlaceHolder
+            chatMessageList.Add(
+                Instantiate(listPlayerMessages[4],
+                chatPanelObject.transform));
 
             // Creation of the new message
             chatMessageList.Add(
                 Instantiate(listPlayerMessages[numeroSmilley],
                 chatPanelObject.transform));
+
+            // PlaceHolder
+            chatMessageList.Add(
+                Instantiate(listPlayerMessages[4],
+                chatPanelObject.transform));
+
+            chatRefreshed = false;
+
+            Debug.Log("numéro smilley activé : " + numeroSmilley);
         }
     }
 
@@ -144,7 +169,8 @@ public class SC_Messaging_Service : MonoBehaviour
             Instantiate(listBossMessages[countPassedDialog],
             chatPanelObject.transform));
 
-        Debug.Log("countPassedDialog : " + countPassedDialog);
+        chatRefreshed = false;
+        Debug.Log("Chat refreshed");
 
 
         // Check the turn of the person who can talk
@@ -160,8 +186,18 @@ public class SC_Messaging_Service : MonoBehaviour
     // Wait for the window to have finished to open to set the variable
     IEnumerator ChatIsOpenning()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(1.3f);
         ChatStarted = true;
+    }
+
+    IEnumerator RefreshChat()
+    {
+        yield return new WaitForSeconds(0.2f);
+
+        chatPanelObject.GetComponent<RectTransform>().localPosition = new Vector3(
+        chatPanelObject.GetComponent<RectTransform>().localPosition.x,
+        chatPanelObject.GetComponent<RectTransform>().localPosition.y + 150,
+        chatPanelObject.GetComponent<RectTransform>().localPosition.z);
     }
 
     /**
