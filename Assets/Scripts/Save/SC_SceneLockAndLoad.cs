@@ -5,26 +5,26 @@ using UnityEngine.UI;
 
 public class SC_SceneLockAndLoad : MonoBehaviour
 {
-    public Button button;
-    public Image image;
-    public Sprite lockScene;
-    public Sprite unlockScene;
+    public GameObject lockObject;
+    public GameObject unlockObject;
     public string sceneToLoad;
 
     void Start()
     {
         // Load scene B1 and B2
-        if (File.Exists(SC_GM_Master.gm.path + sceneToLoad + ".txt"))
-            image.sprite = unlockScene;
-        else if (sceneToLoad.Equals("L_B1") && File.Exists(SC_GM_Master.gm.path + "L_B2" + ".txt"))
-            image.sprite = unlockScene;
+        if (File.Exists(SC_GM_Master.gm.path + sceneToLoad + ".txt") || (sceneToLoad.Equals("L_B1") && File.Exists(SC_GM_Master.gm.path + "L_B2" + ".txt")))
+        {
+            lockObject.SetActive(false);
+            unlockObject.SetActive(true);
+        }
         else
-            image.sprite = lockScene;
-
-        button.onClick.AddListener(Load);
+        {
+            lockObject.SetActive(true);
+            unlockObject.SetActive(false);
+        }
     }
 
-    private void Load()
+    public void Load()
     {
         if (File.Exists(SC_GM_Master.gm.path + sceneToLoad + ".txt"))
             UnParse(sceneToLoad);
