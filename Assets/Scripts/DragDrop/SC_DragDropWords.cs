@@ -10,9 +10,11 @@ public class SC_DragDropWords : MonoBehaviour
     public float SpeedDivider;
     public float HoveringHeight;
     public float SnapSpeed;
+
+    [Space]
+    public SpriteRenderer backgroundSR;
     public TextMeshPro text;
     public GameObject ParticleWin;
-
 
     private Vector3 OriginalPosition;
     private Vector3 mouseOffset;
@@ -64,6 +66,9 @@ public class SC_DragDropWords : MonoBehaviour
             rig.useGravity = false;
 
         SC_GM_WheelToLetter.instance.OnClickButtonAutoComplete(text);
+
+        backgroundSR.sortingOrder = 2;
+        text.sortingOrder = 3;
     }
 
     private void OnMouseUp()
@@ -84,6 +89,8 @@ public class SC_DragDropWords : MonoBehaviour
             SnapPosition = OriginalPosition;
             SnapMovement = true;
         }
+
+        StartCoroutine("TextOrderReset");
     }
 
     private IEnumerator GoToPlace()
@@ -93,6 +100,13 @@ public class SC_DragDropWords : MonoBehaviour
         // Send the element back to it's original position
         SnapPosition = OriginalPosition;
         SnapMovement = true;
+    }
+
+    private IEnumerator TextOrderReset()
+    {
+        yield return new WaitForSeconds(1);
+        backgroundSR.sortingOrder = 0;
+        text.sortingOrder = 1;
     }
 
     private void OnMouseDrag()
