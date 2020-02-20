@@ -48,5 +48,6 @@ public class SC_TimbreChooser : MonoBehaviour
     public void OpenStoryArbo()
     {
         StoryArbo.SetActive(true);
+        SC_GM_Local.gm.finalAnimator.Play("Unlocked");
     }
 }

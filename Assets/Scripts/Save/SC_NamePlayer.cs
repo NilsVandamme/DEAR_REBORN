@@ -4,9 +4,12 @@ using UnityEngine.UI;
 
 public class SC_NamePlayer : MonoBehaviour
 {
+    public GameObject storyArbo;
+
     public TMP_InputField namePlayer;
     public Button next;
     public string sceneToLoad;
+    public Animator donnaA1;
 
     void Start()
     {
@@ -22,7 +25,8 @@ public class SC_NamePlayer : MonoBehaviour
             SC_SaveGame save = new SC_SaveGame();
             save.Save(sceneToLoad, true);
 
-            SC_LoadingScreen.Instance.LoadThisScene(sceneToLoad);
+            storyArbo.SetActive(true);
+            donnaA1.Play("Unlocked");
         }
     }
 }

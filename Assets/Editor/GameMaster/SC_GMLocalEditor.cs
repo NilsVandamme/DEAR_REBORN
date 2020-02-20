@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEditor;
+using UnityEngine;
 
 [CanEditMultipleObjects]
 [CustomEditor(typeof(SC_GM_Local))]
@@ -76,6 +77,13 @@ public class SC_GMLocalEditor : Editor
 
             EditorGUILayout.EndHorizontal();
         }
+
+        
+        gmLocal.firstSceneAnimator = EditorGUILayout.ObjectField("First Scene Animator : ", gmLocal.firstSceneAnimator, typeof(Animator), true) as Animator;
+        gmLocal.secondSceneAnimator = EditorGUILayout.ObjectField("Second Scene Animator : ", gmLocal.secondSceneAnimator, typeof(Animator), true) as Animator;
+        if (gmLocal.numberOfScene == 3)
+            gmLocal.thirdSceneAnimator = EditorGUILayout.ObjectField("Third Scene Animator : ", gmLocal.thirdSceneAnimator, typeof(Animator), true) as Animator;
+            
 
         EditorGUILayout.Space();
         EditorUtility.SetDirty(gmLocal);

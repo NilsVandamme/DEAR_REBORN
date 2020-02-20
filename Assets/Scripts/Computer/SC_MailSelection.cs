@@ -6,6 +6,7 @@ using UnityEngine;
 public class SC_MailSelection : MonoBehaviour
 {
     public GameObject mailTextsListParent; // Parent of the texts content
+    public GameObject mailTextsParent; // Parent of the texts and background
     public GameObject mailButtonsListParent; // Parent of the buttons content
     public GameObject returnButton; // Return to list button
     public List<GameObject> mailTextsList; // List of texts content
@@ -23,7 +24,7 @@ public class SC_MailSelection : MonoBehaviour
     // Open the specified mail and disable all others
     public void OpenMailText(int index)
     {
-        mailButtonsListParent.SetActive(false);
+        //mailButtonsListParent.SetActive(false);
         for (int i = 0; i < mailTextsList.Count; i++)
         {
             mailTextsList[i].SetActive(false);
@@ -79,7 +80,8 @@ public class SC_MailSelection : MonoBehaviour
         {
             mailTextsList[i].SetActive(false);
         }
-        mailButtonsListParent.SetActive(true);
+        mailTextsParent.SetActive(false);
+        //mailButtonsListParent.SetActive(true);
         returnButton.SetActive(false);
     }
 }

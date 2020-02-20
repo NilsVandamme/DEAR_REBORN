@@ -32,6 +32,14 @@ public class SC_GM_Local : MonoBehaviour
     public string secondScene;
     [HideInInspector]
     public string thirdScene;
+    [HideInInspector]
+    public Animator firstSceneAnimator;
+    [HideInInspector]
+    public Animator secondSceneAnimator;
+    [HideInInspector]
+    public Animator thirdSceneAnimator;
+    [HideInInspector]
+    public Animator finalAnimator;
 
     [HideInInspector]
     public List<SC_Word> wheelOfWords;
