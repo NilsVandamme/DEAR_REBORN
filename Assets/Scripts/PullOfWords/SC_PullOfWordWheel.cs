@@ -121,6 +121,19 @@ public class SC_PullOfWordWheel : MonoBehaviour
         return -1;
     }
 
+    /*
+     * Open CL
+     */
+    public void OpenCloseCL(int index)
+    {
+        bool openClose = champLexicalImage[index][0].gameObject.activeSelf;
+
+        for (int i = 0; i < champLexicalImage[index].Length; i++)
+            if (i != posElemCl)
+                champLexicalImage[index][i].gameObject.SetActive(!openClose);
+    }
+
+
     //##############################################################################################################################################################
     //########################################################################        FONCTION         #############################################################
     //##############################################################################################################################################################
