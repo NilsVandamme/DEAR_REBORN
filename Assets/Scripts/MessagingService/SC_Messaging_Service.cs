@@ -128,7 +128,7 @@ public class SC_Messaging_Service : MonoBehaviour
 
         if (playerTurn)
         {
-            playerTurn = false;
+            
 
             // PlaceHolder
             chatMessageList.Add(
@@ -147,8 +147,15 @@ public class SC_Messaging_Service : MonoBehaviour
 
             chatRefreshed = false;
 
-            Debug.Log("numéro smilley activé : " + numeroSmilley);
+            StartCoroutine(WaitForMessageToShow());
         }
+    }
+
+    IEnumerator WaitForMessageToShow()
+    {
+        yield return new WaitForSeconds(0.2f);
+
+        playerTurn = false;
     }
 
     /**
