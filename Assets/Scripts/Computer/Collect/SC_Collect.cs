@@ -70,12 +70,16 @@ public class SC_Collect : MonoBehaviour
         listOfTextCL[nbCL].text = SC_GM_Local.gm.wordsInCollect[nbCL].word[0].titre;
         imagesCL[nbCL].gameObject.SetActive(true);
 
+        OpenRecolt();
+    }
+
+    public void OpenRecolt()
+    {
         if (!isOpen)
         {
             OnClick();
             StartCoroutine("Wait");
         }
-
     }
 
     private IEnumerator Wait()
