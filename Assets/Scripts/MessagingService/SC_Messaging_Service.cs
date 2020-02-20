@@ -128,7 +128,7 @@ public class SC_Messaging_Service : MonoBehaviour
 
         if (playerTurn)
         {
-            
+            playerTurn = false;
 
             // PlaceHolder
             chatMessageList.Add(
@@ -146,16 +146,7 @@ public class SC_Messaging_Service : MonoBehaviour
                 chatPanelObject.transform));
 
             chatRefreshed = false;
-
-            StartCoroutine(WaitForMessageToShow());
         }
-    }
-
-    IEnumerator WaitForMessageToShow()
-    {
-        yield return new WaitForSeconds(0.2f);
-
-        playerTurn = false;
     }
 
     /**
