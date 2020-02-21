@@ -101,7 +101,6 @@ public class SC_Messaging_Service : MonoBehaviour
         if (countPassedDialog == TotalTextInDialog && !playerTurn)
         {
             animatorChat.SetBool("IsChatFinished", true);
-            Debug.Log("Chat finished");
         }
     }
 
@@ -172,8 +171,6 @@ public class SC_Messaging_Service : MonoBehaviour
             chatPanelObject.transform));
 
         chatRefreshed = false;
-        Debug.Log("Chat refreshed");
-
 
         // Check the turn of the person who can talk
         // If it's the player turn

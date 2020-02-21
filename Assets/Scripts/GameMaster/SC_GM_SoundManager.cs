@@ -25,6 +25,7 @@ public class SC_GM_SoundManager : MonoBehaviour
     [Header("Liens UI")]
     public Slider soundSlider; // Slider from the main menu (no refs needed in other scenes)
     public Slider musicSlider; // Slider from the main menu (no refs needed in other scenes)
+    public Slider radioSlider; // Slider from the main menu (no refs needed in other scenes)
 
     [Header("Audioclips PlayOnce")]
     public List<AudioClip> audioclips; // All audioclips which can be played
@@ -37,6 +38,8 @@ public class SC_GM_SoundManager : MonoBehaviour
     [Header("Liste musiques")]
     public AudioClip[] radioMusics;
     private int currentTrack = 0;
+    private int maximumTrack;
+    private bool playCurrentMusic = true;
 
     private void Awake()
     {
@@ -83,7 +86,8 @@ public class SC_GM_SoundManager : MonoBehaviour
            
         }
 
-       
+        // Change the volume of the radio
+        ASourceMusic.volume = radioSlider.value;
     }
     private void Start()
     {
@@ -120,6 +124,9 @@ public class SC_GM_SoundManager : MonoBehaviour
             PlayerPrefs.SetFloat("MusicVolume", 1);
             ASourceSound.volume = 1;
         }
+
+        // Get the maximum of music for the radio as an index
+        maximumTrack = radioMusics.Length - 1;
     }
 
     // Play the specified sound from audioclips list
@@ -187,25 +194,31 @@ public class SC_GM_SoundManager : MonoBehaviour
     IEnumerator SkipEffect()
     {
         ASourceMusic.Stop();
-        currentTrack++;
+
         ASourceRandomSounds.clip = AC_Radio[Random.Range(0, AC_Radio.Length)];
         ASourceRandomSounds.pitch = Random.Range(0.9f, 1f);
         ASourceRandomSounds.Play();
         yield return new WaitWhile(() => ASourceRandomSounds.isPlaying);
 
-        ASourceMusic.clip = radioMusics[Random.Range(0, radioMusics.Length)];
+        if (currentTrack + 1 > maximumTrack) currentTrack = 0;
+        else currentTrack++;
+
+        ASourceMusic.clip = radioMusics[currentTrack];
         ASourceMusic.Play();
     }
 
     IEnumerator PreviousEffect()
     {
         ASourceMusic.Stop();
-        currentTrack--;
         ASourceRandomSounds.clip = AC_Radio[Random.Range(0, AC_Radio.Length)];
         ASourceRandomSounds.pitch = Random.Range(0.9f, 1f);
         ASourceRandomSounds.Play();
         yield return new WaitWhile(() => ASourceRandomSounds.isPlaying);
-        ASourceMusic.clip = radioMusics[Random.Range(0, radioMusics.Length)];
+
+        if (currentTrack - 1 < 0) currentTrack = maximumTrack;
+        else currentTrack--;
+
+        ASourceMusic.clip = radioMusics[currentTrack];
         ASourceMusic.Play();
     }
 
@@ -232,4 +245,19 @@ public class SC_GM_SoundManager : MonoBehaviour
     }
 
 
+    // Stop or start the current music
+    public void StartStopCurrentMusic()
+    {
+        if (playCurrentMusic)
+        {
+            playCurrentMusic = false;
+            ASourceMusic.Stop();
+        }
+        else
+        {
+            playCurrentMusic = true;
+            ASourceMusic.clip = radioMusics[currentTrack];
+            ASourceMusic.Play();
+        }
+    }
 }
