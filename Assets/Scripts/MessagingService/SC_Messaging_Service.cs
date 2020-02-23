@@ -39,6 +39,8 @@ public class SC_Messaging_Service : MonoBehaviour
 
     private void Awake()
     {
+        gameObject.SetActive(true);
+
         countPassedDialog = 0;
 
         animatorChat = gameObject.GetComponent<Animator>();
@@ -99,7 +101,6 @@ public class SC_Messaging_Service : MonoBehaviour
         if (countPassedDialog == TotalTextInDialog && !playerTurn)
         {
             animatorChat.SetBool("IsChatFinished", true);
-            Debug.Log("Chat finished");
         }
     }
 
@@ -118,6 +119,8 @@ public class SC_Messaging_Service : MonoBehaviour
     public void CloseChat()
     {
         animatorChat.SetBool("IsChatOpen", false);
+
+        StartCoroutine(CloseChatDefinitively());
     }
 
     /**
@@ -168,8 +171,6 @@ public class SC_Messaging_Service : MonoBehaviour
             chatPanelObject.transform));
 
         chatRefreshed = false;
-        Debug.Log("Chat refreshed");
-
 
         // Check the turn of the person who can talk
         // If it's the player turn
@@ -188,6 +189,7 @@ public class SC_Messaging_Service : MonoBehaviour
         ChatStarted = true;
     }
 
+    // Make the chat go down when the text appear
     IEnumerator RefreshChat()
     {
         yield return new WaitForSeconds(0.2f);
@@ -196,6 +198,13 @@ public class SC_Messaging_Service : MonoBehaviour
         chatPanelObject.GetComponent<RectTransform>().localPosition.x,
         chatPanelObject.GetComponent<RectTransform>().localPosition.y + 150,
         chatPanelObject.GetComponent<RectTransform>().localPosition.z);
+    }
+
+    IEnumerator CloseChatDefinitively()
+    {
+        yield return new  WaitForSeconds(1.3f);
+
+        gameObject.SetActive(false);
     }
 
     /**
