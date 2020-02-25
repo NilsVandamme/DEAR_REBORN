@@ -11,6 +11,7 @@ public class PassText : MonoBehaviour
     public GameObject PrevButton;
     public GameObject NextButton;
     public GameObject Stampy;
+    public bool WaitForPlayer;
     
     
     void Start()
@@ -29,7 +30,14 @@ public class PassText : MonoBehaviour
         }
         else
         {
-            Stampy.GetComponent<StampyNext>().PlayAnim();
+            if (WaitForPlayer)
+            {
+                Stampy.GetComponent<StampyNext>().PlayAnim();
+            }
+            else
+            {
+                Stampy.GetComponent<StampyNext>().PlayAnim();
+            }
         }
         
     }

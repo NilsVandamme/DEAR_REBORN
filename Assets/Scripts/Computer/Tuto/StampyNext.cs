@@ -31,4 +31,14 @@ public class StampyNext : MonoBehaviour
         NumberBulles++;
     }
 
+    public void LeftForNow()
+    {
+        StampyAnimator.Play("Disapear");
+        Bulles[NumberBulles - 1].GetComponent<Animator>().Play("DisparitionBulle");
+    }
+
+    public void ReApper()
+    {
+        StampyAnimator.Play("Appear");
+    }
 }
