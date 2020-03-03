@@ -12,6 +12,7 @@ public class PassText : MonoBehaviour
     public GameObject NextButton;
     public GameObject Stampy;
     public bool WaitForPlayer;
+    public Animator TextAnimator;
     
     
     void Start()
@@ -69,5 +70,10 @@ public class PassText : MonoBehaviour
     public void Disapear()
     {
         gameObject.SetActive(false);
+    }
+
+    public void CallTextAnim()
+    {
+        TextAnimator.Play("");
     }
 }
