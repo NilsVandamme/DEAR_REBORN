@@ -7,6 +7,12 @@ using UnityEngine;
 public class SC_Messaging_Service : MonoBehaviour
 {
     #region Public attributes
+    [Header("Effects")]
+    public AudioClip soundBossMessage;
+    public AudioClip soundPlayerMessage;
+    public ParticleSystem particlEffectPlayerMessage;
+    public ParticleSystem particlEffectBossMessage;
+
     [Header("ConfigTech")]
     public GameObject chatPanelObject;
     public GameObject listBossDialogObject;
@@ -23,6 +29,8 @@ public class SC_Messaging_Service : MonoBehaviour
 
     #region privates attributes
     Animator animatorChat;
+
+    AudioSource messageAudioSource;
 
     List<TextMeshProUGUI> chatMessageList = new List<TextMeshProUGUI>();
     TextMeshProUGUI[] listBossMessages;
@@ -49,6 +57,8 @@ public class SC_Messaging_Service : MonoBehaviour
     private void Start()
     {
         GetAllDialog();
+
+        messageAudioSource = GetComponent<AudioSource>();
     }
 
     /**
@@ -143,6 +153,8 @@ public class SC_Messaging_Service : MonoBehaviour
                 Instantiate(listPlayerMessages[numeroSmilley],
                 chatPanelObject.transform));
 
+            messageAudioSource.PlayOneShot(soundPlayerMessage);
+
             // PlaceHolder
             chatMessageList.Add(
                 Instantiate(listPlayerMessages[4],
@@ -169,6 +181,8 @@ public class SC_Messaging_Service : MonoBehaviour
         chatMessageList.Add(
             Instantiate(listBossMessages[countPassedDialog],
             chatPanelObject.transform));
+
+        messageAudioSource.PlayOneShot(soundBossMessage);
 
         chatRefreshed = false;
 
