@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 [ExecuteInEditMode]
 public class SC_Messaging_Service : MonoBehaviour
@@ -10,8 +11,8 @@ public class SC_Messaging_Service : MonoBehaviour
     [Header("Effects")]
     public AudioClip soundBossMessage;
     public AudioClip soundPlayerMessage;
-    public ParticleSystem particlEffectPlayerMessage;
-    public ParticleSystem particlEffectBossMessage;
+    public GameObject particlEffectPlayerMessage;
+    public GameObject particlEffectBossMessage;
 
     [Header("ConfigTech")]
     public GameObject chatPanelObject;
@@ -149,11 +150,19 @@ public class SC_Messaging_Service : MonoBehaviour
                 chatPanelObject.transform));
 
             // Creation of the new message
-            chatMessageList.Add(
-                Instantiate(listPlayerMessages[numeroSmilley],
-                chatPanelObject.transform));
+            var message = Instantiate(listPlayerMessages[numeroSmilley],
+                chatPanelObject.transform);
 
-            messageAudioSource.PlayOneShot(soundPlayerMessage);
+            // Add the particleSystem
+            var particles = Instantiate(particlEffectPlayerMessage, message.GetComponentInChildren<Image>().transform);
+            particles.transform.SetParent(message.GetComponentInChildren<Image>().transform);
+            
+            StartCoroutine(PlayEffects(particles.GetComponent<ParticleSystem>(), 1));
+
+            // Add the message
+            chatMessageList.Add(message);
+
+            
 
             // PlaceHolder
             chatMessageList.Add(
@@ -178,11 +187,15 @@ public class SC_Messaging_Service : MonoBehaviour
         bossWrittingAnimationStarted = false;
 
         // Creation of the new message
-        chatMessageList.Add(
-            Instantiate(listBossMessages[countPassedDialog],
-            chatPanelObject.transform));
+        var message = Instantiate(listBossMessages[countPassedDialog],
+            chatPanelObject.transform);
 
-        messageAudioSource.PlayOneShot(soundBossMessage);
+        // Creation of the particles
+        var particles = Instantiate(particlEffectBossMessage, message.GetComponentInChildren<Image>().transform);
+        particles.transform.SetParent(message.GetComponentInChildren<Image>().transform);
+        StartCoroutine(PlayEffects(particles.GetComponent<ParticleSystem>(), 0));
+        
+        chatMessageList.Add(message);
 
         chatRefreshed = false;
 
@@ -194,6 +207,20 @@ public class SC_Messaging_Service : MonoBehaviour
 
         // Then pass to the next dialog
         countPassedDialog++;
+    }
+
+    IEnumerator PlayEffects(ParticleSystem particles, int type)
+    {
+        yield return new WaitForSeconds(0.2f);
+        particles.Play();
+
+        if (type == 0)
+        {
+            messageAudioSource.PlayOneShot(soundBossMessage);
+        } else
+        {
+            messageAudioSource.PlayOneShot(soundPlayerMessage);
+        }
     }
 
     // Wait for the window to have finished to open to set the variable
