@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641258, b: 0.574817, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -406,6 +406,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4473798412862147929, guid: 48dfb50199b8f68449fbbeaf85651280,
+        type: 3}
+      propertyPath: m_Name
+      value: Scene2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3508749337976625858, guid: 48dfb50199b8f68449fbbeaf85651280,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7042730561017408931, guid: 48dfb50199b8f68449fbbeaf85651280,
         type: 3}
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -475,11 +485,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 4473798412862147929, guid: 48dfb50199b8f68449fbbeaf85651280,
-        type: 3}
-      propertyPath: m_Name
-      value: Scene2
       objectReference: {fileID: 0}
     - target: {fileID: 4507108516405186296, guid: 48dfb50199b8f68449fbbeaf85651280,
         type: 3}
@@ -1275,7 +1280,7 @@ PrefabInstance:
     - target: {fileID: 3508749337470790391, guid: 48dfb50199b8f68449fbbeaf85651280,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 413.2
+      value: 199.99997
       objectReference: {fileID: 0}
     - target: {fileID: 3508749338237974609, guid: 48dfb50199b8f68449fbbeaf85651280,
         type: 3}
@@ -1341,11 +1346,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 16.300007
-      objectReference: {fileID: 0}
-    - target: {fileID: 3508749337976625858, guid: 48dfb50199b8f68449fbbeaf85651280,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3508749338233509215, guid: 48dfb50199b8f68449fbbeaf85651280,
         type: 3}
@@ -3025,6 +3025,28 @@ PrefabInstance:
       propertyPath: m_sharedMaterial
       value: 
       objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+    - target: {fileID: 3508749337469421100, guid: 48dfb50199b8f68449fbbeaf85651280,
+        type: 3}
+      propertyPath: particlEffectPlayerMessage
+      value: 
+      objectReference: {fileID: 3568949510752729654, guid: e5dbffcd585fff44ba5962fa9f79cf3c,
+        type: 3}
+    - target: {fileID: 3508749337469421100, guid: 48dfb50199b8f68449fbbeaf85651280,
+        type: 3}
+      propertyPath: particlEffectBossMessage
+      value: 
+      objectReference: {fileID: 3568949510752729654, guid: e5dbffcd585fff44ba5962fa9f79cf3c,
+        type: 3}
+    - target: {fileID: 3508749338662580993, guid: 48dfb50199b8f68449fbbeaf85651280,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4789778409101002754, guid: 48dfb50199b8f68449fbbeaf85651280,
+        type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 48dfb50199b8f68449fbbeaf85651280, type: 3}
 --- !u!1 &2080520244 stripped
