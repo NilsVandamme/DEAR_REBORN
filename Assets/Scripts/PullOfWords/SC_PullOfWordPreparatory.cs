@@ -8,7 +8,7 @@ public class SC_PullOfWordPreparatory : MonoBehaviour
     // Object de la fenetre
     public GameObject GO_champsLexicaux;
     public GameObject next;
-    public TextMeshProUGUI vs;
+    public Image vs;
 
     // Liste des Sprites des buttons en fct de s'il contiennent ou non un mot
     public Sprite hasWord;
