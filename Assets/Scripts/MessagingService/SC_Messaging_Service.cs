@@ -76,7 +76,7 @@ public class SC_Messaging_Service : MonoBehaviour
         }
 
         // When in editor
-        if (listBossDialogObject != null && runInEditMode)
+        if (listBossDialogObject != null)
         {
             // Get the number of dialog
             TotalTextInDialog = listBossDialogObject.GetComponentsInChildren<TextMeshProUGUI>(true).Length;

@@ -15,10 +15,10 @@ public class SC_GM_SoundManager : MonoBehaviour
 
 
     [Header("AudioSources")]
-    private AudioSource ASourceSound; // Audiosource for the sounds
-    private AudioSource ASourceRandomSounds;
-    private AudioSource ASourceMusic; // Audiosource for the music
-    private AudioSource ASourceOffice, ASourceComputer;
+    public AudioSource ASourceSound; // Audiosource for the sounds
+    public AudioSource ASourceRandomSounds;
+    public AudioSource ASourceMusic; // Audiosource for the music
+    public AudioSource ASourceOffice, ASourceComputer;
 
 
 
@@ -87,7 +87,6 @@ public class SC_GM_SoundManager : MonoBehaviour
         }
 
         // Change the volume of the radio
-        ASourceMusic.volume = radioSlider.value;
     }
     private void Start()
     {
@@ -101,28 +100,31 @@ public class SC_GM_SoundManager : MonoBehaviour
         // Get the saved setting from the playerprefs
         if (PlayerPrefs.HasKey("SoundVolume"))
         {
+            Debug.Log("Sound volume playerprefs = " + PlayerPrefs.GetFloat("SoundVolume").ToString());
             ASourceSound.volume = PlayerPrefs.GetFloat("SoundVolume");
             soundSlider.value = PlayerPrefs.GetFloat("SoundVolume");
-            
         }
         else
         {
-            PlayerPrefs.SetFloat("SoundVolume", 1) ;
-            ASourceSound.volume = 1;
-
+            PlayerPrefs.SetFloat("SoundVolume", 0.5f) ;
+            ASourceSound.volume = 0.5f;
+            soundSlider.value = 0.5f;
         }
 
         // Get the saved setting from the playerprefs
         if (PlayerPrefs.HasKey("MusicVolume"))
         {
-            
+            Debug.Log("Music volume playerprefs = " + PlayerPrefs.GetFloat("MusicVolume").ToString());
             ASourceMusic.volume = PlayerPrefs.GetFloat("MusicVolume");
             musicSlider.value = PlayerPrefs.GetFloat("MusicVolume");
+            radioSlider.value = PlayerPrefs.GetFloat("MusicVolume");
         }
         else
         {
-            PlayerPrefs.SetFloat("MusicVolume", 1);
-            ASourceSound.volume = 1;
+            PlayerPrefs.SetFloat("MusicVolume", 0.5f);
+            ASourceSound.volume = 0.5f;
+            musicSlider.value = 0.5f;
+            radioSlider.value = 0.5f;
         }
 
         // Get the maximum of music for the radio as an index
@@ -169,13 +171,17 @@ public class SC_GM_SoundManager : MonoBehaviour
     {
         ASourceSound.volume = SliderValue;
         PlayerPrefs.SetFloat("SoundVolume", SliderValue);
+        Debug.Log("Sound volume current = " + PlayerPrefs.GetFloat("SoundVolume").ToString());
     }
 
     // Change the volume in main menu
     public void ChangeMusicVolume(float SliderValue)
     {
         ASourceMusic.volume = SliderValue;
+        musicSlider.value = SliderValue;
+        radioSlider.value = SliderValue;
         PlayerPrefs.SetFloat("MusicVolume", SliderValue);
+        Debug.Log("Music volume current = " + PlayerPrefs.GetFloat("MusicVolume").ToString());
     }
 
  
