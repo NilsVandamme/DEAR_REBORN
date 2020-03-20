@@ -33,20 +33,20 @@ public class SC_AutoComplete : MonoBehaviour
 
     private void GetZoneNewText()
     {
-        startIndexRewrite = myTextContenue.text.IndexOf("       ");
+        startIndexRewrite = myTextContenue.text.IndexOf("__________");
 
         if (startIndexRewrite < 0)
         {
-            Debug.LogError("Il faut une zone de texte '      vide        ' pour la place du mot a ajouter");
+            Debug.LogError("Il faut une zone de texte '__________' pour la place du mot a ajouter => (au moins 10)");
             return;
         }
 
-        for (int i = startIndexRewrite; i < myTextContenue.text.Length; i++)
-            if (!myTextContenue.text[i].Equals(' '))
-            {
-                endIndexRewrite = i;
-                return;
-            }
+        endIndexRewrite = startIndexRewrite;
+        while (myTextContenue.text[endIndexRewrite].Equals('_') || endIndexRewrite >= myTextContenue.text.Length)
+        {
+            endIndexRewrite++;
+        }
+        
     }
 
 
@@ -101,10 +101,10 @@ public class SC_AutoComplete : MonoBehaviour
         animator.Play("FadeOut");
 
         myTextContenue.text = myTextContenue.text.Substring(0, startIndexRewrite) + " <b>" +
-                        SC_GM_WheelToLetter.instance.getCurrentWord().grammarCritere[grammarCritere] + "</b> " +
+                        SC_GM_WheelToLetter.instance.getCurrentWord().grammarCritere[grammarCritere] + "</b>" +
                         myTextContenue.text.Substring(endIndexRewrite, (myTextContenue.text.Length - endIndexRewrite));
 
-        endIndexRewrite = startIndexRewrite + SC_GM_WheelToLetter.instance.getCurrentWord().grammarCritere[grammarCritere].Length + 2;
+        endIndexRewrite = startIndexRewrite + SC_GM_WheelToLetter.instance.getCurrentWord().grammarCritere[grammarCritere].Length + 4; // 2 espaces + 2 balises
 
         actualWord = SC_GM_WheelToLetter.instance.getCurrentWord();
 
