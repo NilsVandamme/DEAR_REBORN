@@ -10,6 +10,7 @@ public class SC_MailSelection : MonoBehaviour
     public GameObject mailButtonsListParent; // Parent of the buttons content
     public GameObject returnButton; // Return to list button
     public List<GameObject> mailTextsList; // List of texts content
+    public List<GameObject> mailButtonsHighlights; // List of all the hightligth images
     public int currentIndex = 0;
 
     void Start()
@@ -28,9 +29,11 @@ public class SC_MailSelection : MonoBehaviour
         for (int i = 0; i < mailTextsList.Count; i++)
         {
             mailTextsList[i].SetActive(false);
+            mailButtonsHighlights[i].SetActive(false);
         }
 
         mailTextsList[index].SetActive(true);
+        mailButtonsHighlights[index].SetActive(true);
         returnButton.SetActive(true);
         currentIndex = index;
 
@@ -79,6 +82,7 @@ public class SC_MailSelection : MonoBehaviour
         for (int i = 0; i < mailTextsList.Count; i++)
         {
             mailTextsList[i].SetActive(false);
+            mailButtonsHighlights[i].SetActive(false);
         }
         mailTextsParent.SetActive(false);
         //mailButtonsListParent.SetActive(true);

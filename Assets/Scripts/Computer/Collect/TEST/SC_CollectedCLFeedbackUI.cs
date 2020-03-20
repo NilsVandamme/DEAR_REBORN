@@ -12,6 +12,7 @@ public class SC_CollectedCLFeedbackUI : MonoBehaviour
     public float WaitTime;
     public float MoveSpeed;
     private int nbWordCollected;
+    private Vector3 velocity = Vector3.zero;
 
     public bool moving;
 
@@ -44,7 +45,8 @@ public class SC_CollectedCLFeedbackUI : MonoBehaviour
             timer += Time.deltaTime;
             if(timer > WaitTime)
             {
-                transform.position = Vector3.Lerp(new Vector3(transform.position.x, transform.position.y, -0.5f), new Vector3(TargetPosition.position.x, TargetPosition.position.y, -0.5f) , MoveSpeed);
+                //transform.position = Vector3.Lerp(new Vector3(transform.position.x, transform.position.y, -0.5f), new Vector3(TargetPosition.position.x, TargetPosition.position.y, -0.5f) , MoveSpeed);
+                transform.position = Vector3.SmoothDamp(new Vector3(transform.position.x, transform.position.y, -0.5f), new Vector3(TargetPosition.position.x, TargetPosition.position.y, -0.5f), ref velocity, MoveSpeed);
 
                 if(Vector2.Distance(transform.position, TargetPosition.position) < startAnimDistance)
                 {
