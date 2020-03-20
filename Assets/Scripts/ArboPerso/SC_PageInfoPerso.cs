@@ -11,10 +11,7 @@ public class SC_PageInfoPerso : MonoBehaviour
 
     // Right Part
     public GameObject lettre;
-    public Sprite plus;
-    public Sprite moins;
-
-    private Image[] plusMoins;
+    
     private TextMeshProUGUI[] paragraphe;
 
     // info passer depuis SC_ButtonPerso
@@ -36,7 +33,6 @@ public class SC_PageInfoPerso : MonoBehaviour
     private void Start()
     {
         paragraphe = lettre.GetComponentsInChildren<TextMeshProUGUI>(true);
-        plusMoins = lettre.GetComponentsInChildren<Image>(true);
 
         RightPart();
         LeftPart();
@@ -51,14 +47,10 @@ public class SC_PageInfoPerso : MonoBehaviour
 
     private void RightPart()
     {
-        for (int i = 0; i < plusMoins.Length; i++)
-        {
-            if (SC_GM_Master.gm.lastParagrapheLettrePerPerso[perso][i].scoreParagraphe > 0)
-                plusMoins[i].sprite = plus;
-            else
-                plusMoins[i].sprite = moins;
-
-            paragraphe[i].text = SC_GM_Master.gm.lastParagrapheLettrePerPerso[perso][i].textParagraphe;
+        for (int i = 0; i < SC_GM_Master.gm.lastParagrapheLettrePerPerso[perso].Length; i++)
+        { 
+            paragraphe[i + 1].text = SC_GM_Master.gm.lastParagrapheLettrePerPerso[perso][i].textParagraphe;
+            paragraphe[i + 1].color = (SC_GM_Master.gm.lastParagrapheLettrePerPerso[perso][i].scoreParagraphe > 0) ? (Color.green) : (Color.red);
         }
     }
 

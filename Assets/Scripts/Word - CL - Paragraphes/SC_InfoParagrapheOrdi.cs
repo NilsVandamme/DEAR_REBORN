@@ -48,8 +48,10 @@ public class SC_InfoParagrapheOrdi : MonoBehaviour
             if (text.text[i].Equals(' '))
             {
                 text.text = text.text.Substring(0, startIndex) + " " +
-                            SC_GM_Master.gm.namePlayer + " " +
+                            SC_GM_Master.gm.namePlayer +
                             text.text.Substring(i, (text.text.Length - i));
+
+                break;
             }
 
 
@@ -82,8 +84,12 @@ public class SC_InfoParagrapheOrdi : MonoBehaviour
         Instantiate(fxbad, new Vector3(GetMouseWorldPos().x, GetMouseWorldPos().y, -4f), Quaternion.identity);
         SC_GM_SoundManager.instance.PlaySound("ClickPhraseFail_2");
 
+        // #######################################################################################################################################
+        // #######################################################################################################################################
+        // #######################################################################################################################################
         //TO-DO --> feedback de refus de collect
     }
+
 
     /*
      * Si on recolt
@@ -116,6 +122,7 @@ public class SC_InfoParagrapheOrdi : MonoBehaviour
 
         }
     }
+    
 
     /*
      * Si on recolt des infos
@@ -125,8 +132,12 @@ public class SC_InfoParagrapheOrdi : MonoBehaviour
         SC_GM_Master.gm.infoPerso[SC_GM_Local.gm.persoOfCurrentScene].Add(textInfos);
         text.color = infoRecoltColor;
 
-        // TO-DO --> feedback
+        // #######################################################################################################################################
+        // #######################################################################################################################################
+        // #######################################################################################################################################
+        // TO-DO --> feedback : on a obtenue des infos, dispo a la lettre suivante
     }
+
 
     /*
      * Gere quand on entre en hover du text
@@ -137,6 +148,7 @@ public class SC_InfoParagrapheOrdi : MonoBehaviour
             SC_GM_Cursor.gm.changeToHoverCursor();
     }
 
+
     /*
      * Gere quand on sort du hover du text
      */
@@ -144,6 +156,7 @@ public class SC_InfoParagrapheOrdi : MonoBehaviour
     {
         SC_GM_Cursor.gm.changeToNormalCursor();
     }
+
 
     /*
      * Get la position de la souris sur le canvas
