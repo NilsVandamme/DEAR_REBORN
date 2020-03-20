@@ -13,8 +13,11 @@ public class PassText : MonoBehaviour
     public GameObject Stampy;
     public bool WaitForPlayer;
     public Animator TextAnimator;
-    
-    
+    public bool ActiveObject;
+    public bool[] NewValue;
+    public GameObject[] ObjectsToActivate;
+
+
     void Start()
     {
         NumberText = 0;
@@ -39,6 +42,12 @@ public class PassText : MonoBehaviour
             {
                 Stampy.GetComponent<StampyNext>().PlayAnim();
             }
+
+            if (ActiveObject)
+            {
+                UnlockObject();
+            }
+
         }
         
     }
@@ -75,5 +84,13 @@ public class PassText : MonoBehaviour
     public void CallTextAnim()
     {
         TextAnimator.Play("");
+    }
+
+    public void UnlockObject()
+    {
+        for (int i = 0; i < ObjectsToActivate.Length; i++)
+        {
+            ObjectsToActivate[i].SetActive(NewValue[i]);
+        }
     }
 }
