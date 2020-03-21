@@ -30,7 +30,7 @@ public class SC_Messaging_Service : MonoBehaviour
     [Header("Translate Parameters")]
     //Je savais pas trop où mettre ça donc j'ai fait un autre header, déso !
 
-    public float newPositionLerp = 0f;
+    public float newPositionLerp = 170f;
     #endregion
 
     #region privates attributes
