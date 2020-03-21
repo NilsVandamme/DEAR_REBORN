@@ -32,11 +32,11 @@ public class PassText : MonoBehaviour
         {
             ActualText.GetComponent<Text>().text = TextTuto[NumberText];
         }
-        else
+        if (TextTuto[NumberText] == "")
         {
             if (WaitForPlayer)
             {
-                Stampy.GetComponent<StampyNext>().PlayAnim();
+                Stampy.GetComponent<StampyNext>().LeftForNow();
             }
             else
             {
@@ -93,4 +93,5 @@ public class PassText : MonoBehaviour
             ObjectsToActivate[i].SetActive(NewValue[i]);
         }
     }
+
 }
