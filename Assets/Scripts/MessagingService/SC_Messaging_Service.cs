@@ -52,7 +52,7 @@ public class SC_Messaging_Service : MonoBehaviour
     bool bossWrittingAnimationStarted = false;
     bool ChatStarted = false;
     bool chatRefreshed = true;
-    bool lerpUpdate = false;
+    public bool lerpUpdate = false;
     #endregion
 
     private void Awake()
@@ -137,10 +137,13 @@ public class SC_Messaging_Service : MonoBehaviour
        Mathf.SmoothDamp(chatPanelObject.GetComponent<RectTransform>().localPosition.y, newPositionLerp, ref LerpVelocity, LerpTime, 500f, Time.deltaTime),
        chatPanelObject.GetComponent<RectTransform>().localPosition.z);
 
-            if(Mathf.Approximately(chatPanelObject.GetComponent<RectTransform>().localPosition.y, newPositionLerp))
+            if(Input.GetAxis("Mouse ScrollWheel") > 0f)
             {
                 lerpUpdate = false;
             }
+
+          
+            
         }
     }
 
@@ -199,6 +202,7 @@ public class SC_Messaging_Service : MonoBehaviour
                 chatPanelObject.transform));
 
             chatRefreshed = false;
+            lerpUpdate = true;
         }
     }
 
@@ -236,6 +240,8 @@ public class SC_Messaging_Service : MonoBehaviour
 
         // Then pass to the next dialog
         countPassedDialog++;
+       
+
     }
 
     IEnumerator PlayEffects(ParticleSystem particles, int type)
@@ -262,10 +268,9 @@ public class SC_Messaging_Service : MonoBehaviour
     // Make the chat go down when the text appear
     IEnumerator RefreshChat()
     {
-        newPositionLerp = chatPanelObject.GetComponent<RectTransform>().localPosition.y + 150f;
+        newPositionLerp = chatPanelObject.GetComponent<RectTransform>().localPosition.y + 1000f;
         yield return new WaitForSeconds(0.2f);
-        lerpUpdate = true;
-
+       
        
     }
 
