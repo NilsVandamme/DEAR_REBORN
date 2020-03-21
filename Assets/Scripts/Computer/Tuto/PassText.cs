@@ -34,6 +34,11 @@ public class PassText : MonoBehaviour
         }
         if (TextTuto[NumberText] == "")
         {
+            if (ActiveObject)
+            {
+                UnlockObject();
+            }
+
             if (WaitForPlayer)
             {
                 Stampy.GetComponent<StampyNext>().LeftForNow();
@@ -42,12 +47,6 @@ public class PassText : MonoBehaviour
             {
                 Stampy.GetComponent<StampyNext>().PlayAnim();
             }
-
-            if (ActiveObject)
-            {
-                UnlockObject();
-            }
-
         }
         
     }
@@ -88,7 +87,8 @@ public class PassText : MonoBehaviour
 
     public void UnlockObject()
     {
-        
+        Debug.Log("oui");
+        ObjectsToActivate.GetComponent<Button>().interactable = NewValue;
     }
 
 }
