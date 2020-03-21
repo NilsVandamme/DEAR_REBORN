@@ -191,8 +191,6 @@ public class SC_Messaging_Service : MonoBehaviour
             // Add the message
             chatMessageList.Add(message);
 
-            
-
             // PlaceHolder
             chatMessageList.Add(
                 Instantiate(listPlayerMessages[4],
@@ -223,7 +221,7 @@ public class SC_Messaging_Service : MonoBehaviour
         var particles = Instantiate(particlEffectBossMessage, message.GetComponentInChildren<Image>().transform);
         particles.transform.SetParent(message.GetComponentInChildren<Image>().transform);
         StartCoroutine(PlayEffects(particles.GetComponent<ParticleSystem>(), 0));
-        
+
         chatMessageList.Add(message);
 
         chatRefreshed = false;
@@ -266,7 +264,10 @@ public class SC_Messaging_Service : MonoBehaviour
         yield return new WaitForSeconds(0.2f);
         lerpUpdate = true;
 
-       
+        chatPanelObject.GetComponent<RectTransform>().localPosition = new Vector3(
+        chatPanelObject.GetComponent<RectTransform>().localPosition.x,
+        chatPanelObject.GetComponent<RectTransform>().localPosition.y + 170,
+        chatPanelObject.GetComponent<RectTransform>().localPosition.z);
     }
 
     IEnumerator CloseChatDefinitively()
