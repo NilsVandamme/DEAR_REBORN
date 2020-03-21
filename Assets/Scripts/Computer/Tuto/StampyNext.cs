@@ -7,6 +7,8 @@ public class StampyNext : MonoBehaviour
     public GameObject[] Bulles;
     private int NumberBulles;
     public Animator StampyAnimator;
+    public GameObject Object;
+    public bool NewState;
 
     void Start()
     {
@@ -33,12 +35,17 @@ public class StampyNext : MonoBehaviour
 
     public void LeftForNow()
     {
-        StampyAnimator.Play("Disapear");
+        StampyAnimator.Play("disapear");
         Bulles[NumberBulles - 1].GetComponent<Animator>().Play("DisparitionBulle");
     }
 
     public void ReApper()
     {
         StampyAnimator.Play("Appear");
+    }
+
+    public void NewObject()
+    {
+        Object.SetActive(NewState);
     }
 }

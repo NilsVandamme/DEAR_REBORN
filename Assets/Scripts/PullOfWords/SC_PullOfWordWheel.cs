@@ -10,8 +10,7 @@ public class SC_PullOfWordWheel : MonoBehaviour
     public Button startWrittingButton;
     public GameObject GO_wheelToLetterButtons;
 
-    // Images des buttons qui ne contiennent pas de mot
-    public Sprite hasNoWord;
+    public Color recoltedWord;
 
     // Info sur le CL
     private int numberOfElemInCL = 9;
@@ -20,7 +19,7 @@ public class SC_PullOfWordWheel : MonoBehaviour
     // Liste des CL et leurs Words
     private LayoutGroup[] champsLexicaux;
     private TextMeshProUGUI[][] champLexical;
-    private Image[][] champLexicalImage;
+    private Button[][] champLexicalButtons;
 
     // Liste des mots de la wheel
     private TextMeshProUGUI[] listOfWheel;
@@ -61,7 +60,7 @@ public class SC_PullOfWordWheel : MonoBehaviour
         champsLexicaux = GO_champsLexicaux.GetComponentsInChildren<LayoutGroup>(true);
 
         champLexical = new TextMeshProUGUI[champsLexicaux.Length][];
-        champLexicalImage = new Image[champsLexicaux.Length][];
+        champLexicalButtons = new Button[champsLexicaux.Length][];
 
         for (int i = 0; i < champsLexicaux.Length; i++)
         {
@@ -69,7 +68,7 @@ public class SC_PullOfWordWheel : MonoBehaviour
             foreach (TextMeshProUGUI elem in champLexical[i])
                 elem.text = "";
 
-            champLexicalImage[i] = champsLexicaux[i].GetComponentsInChildren<Image>(true);
+            champLexicalButtons[i] = champsLexicaux[i].GetComponentsInChildren<Button>(true);
         }
 
         WriteWordAndCL();
@@ -88,24 +87,21 @@ public class SC_PullOfWordWheel : MonoBehaviour
 
             for (int j = 0; j < numberOfElemInCL; j++)
             {
-                pos = GetFirstCLWordFree(i);
-                if (pos != -1)
-                    if (j < cl.GetListWord().Count)
-                        champLexical[i][pos].text = cl.GetListWord()[j].titre;
-                    else
+                if (j < cl.GetListWord().Count)
+                {
+                    pos = GetFirstCLWordFree(i);
+                    if (pos != -1)
                     {
-                        while (pos < champLexicalImage[i].Length)
-                        { 
-                            if (pos != posElemCl)
-                                champLexicalImage[i][pos].sprite = hasNoWord;
-
-                            pos++;
-                        }
-
-                        break;
+                        champLexical[i][pos].text = cl.GetListWord()[j].titre;
                     }
+                }
+
+                else if (j != posElemCl)
+                {
+                    champLexicalButtons[i][j].interactable = false;
+                }
             }
-                    
+
         }
     }
 
@@ -126,11 +122,19 @@ public class SC_PullOfWordWheel : MonoBehaviour
      */
     public void OpenCloseCL(int index)
     {
-        bool openClose = champLexicalImage[index][0].gameObject.activeSelf;
+        bool openClose = champLexicalButtons[index][0].gameObject.activeSelf;
 
-        for (int i = 0; i < champLexicalImage[index].Length; i++)
-            if (i != posElemCl)
-                champLexicalImage[index][i].gameObject.SetActive(!openClose);
+        if (openClose) return;
+
+        for (int i = 0; i < champLexicalButtons.Length; i++)
+            for (int j = 0; j < champLexicalButtons[i].Length; j++)
+                if (j != posElemCl)
+                {
+                    if (i == index)
+                        champLexicalButtons[i][j].gameObject.SetActive(true);
+                    else
+                        champLexicalButtons[i][j].gameObject.SetActive(false);
+                }
     }
 
 
@@ -154,8 +158,18 @@ public class SC_PullOfWordWheel : MonoBehaviour
             {
                 listOfWheel[pos].text = word.titre;
                 SC_GM_Local.gm.wheelOfWords.Add(word);
+
                 if (SC_GM_Local.gm.wheelOfWords.Count == listOfWheel.Length)
                     startWrittingButton.interactable = true;
+
+
+                Button but = tmp.GetComponentInParent<Button>();
+
+                ColorBlock colors = but.colors;
+                colors.disabledColor = recoltedWord;
+                but.colors = colors;
+
+                but.interactable = false;
             }
         }
     }
@@ -189,9 +203,12 @@ public class SC_PullOfWordWheel : MonoBehaviour
 
     /*
      * Remove le mot de la wheel
+     * Remet interactable le button word correspondant
      */
-     public void OnClickRemoveWordInWheel(TextMeshProUGUI tmp)
+    public void OnClickRemoveWordInWheel(TextMeshProUGUI tmp)
     {
+        string text = tmp.text;
+
         for (int i = 0; i < listOfWheel.Length; i++)
             if (listOfWheel[i] == tmp)
             {
@@ -200,6 +217,15 @@ public class SC_PullOfWordWheel : MonoBehaviour
             }
 
         startWrittingButton.interactable = false;
+
+        for (int i = 0; i < champLexical.Length; i++)
+            for (int j = 0; j < champLexical[i].Length; j++)
+                if (champLexical[i][j].text == text)
+                {
+                    champLexicalButtons[i][j].interactable = true;
+                    return;
+                }
+
     }
 
     //##############################################################################################################################################################
@@ -217,6 +243,6 @@ public class SC_PullOfWordWheel : MonoBehaviour
             for (int i = 0; i < listOfWheel.Length; i++)
                 if (i < wheelToLetter.Length)
                     wheelToLetter[i].text = listOfWheel[i].text;
-        
+
     }
 }

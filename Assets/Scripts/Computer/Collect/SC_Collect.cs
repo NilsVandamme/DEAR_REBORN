@@ -77,21 +77,36 @@ public class SC_Collect : MonoBehaviour
     {
         if (!isOpen)
         {
-            OnClick();
-            StartCoroutine("Wait");
+            OnClickFeedback();
+            //StartCoroutine("Wait");
         }
     }
 
     private IEnumerator Wait()
     {
         yield return new WaitForSeconds(waitTime);
-        OnClick();
+        OnClickFeedback();
     }
 
     public void OnClick()
     {
         if (!isOpen) anim.Play("Collect2_open");
         else anim.Play("Collect2_close");
+
+        isOpen = !isOpen;
+    }
+
+    public void OnClickFeedback()
+    {
+        if (!isOpen) anim.Play("Collect2_open");
+        //else anim.Play("Collect2_close");
+
+        isOpen = !isOpen;
+    }
+
+    public void OnClickClose()
+    {
+        if (isOpen) anim.Play("Collect2_close");
 
         isOpen = !isOpen;
     }
