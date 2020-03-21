@@ -14,8 +14,8 @@ public class PassText : MonoBehaviour
     public bool WaitForPlayer;
     public Animator TextAnimator;
     public bool ActiveObject;
-    public bool[] NewValue;
-    public GameObject[] ObjectsToActivate;
+    public bool NewValue;
+    public GameObject ObjectsToActivate;
 
 
     void Start()
@@ -88,10 +88,7 @@ public class PassText : MonoBehaviour
 
     public void UnlockObject()
     {
-        for (int i = 0; i < ObjectsToActivate.Length; i++)
-        {
-            ObjectsToActivate[i].SetActive(NewValue[i]);
-        }
+        
     }
 
 }
