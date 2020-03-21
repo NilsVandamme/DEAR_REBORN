@@ -30,7 +30,7 @@ public class SC_Messaging_Service : MonoBehaviour
     [Header("Translate Parameters")]
     //Je savais pas trop où mettre ça donc j'ai fait un autre header, déso !
 
-    public float newPositionLerp = 0f;
+    public float newPositionLerp = 170f;
     #endregion
 
     #region privates attributes
@@ -191,8 +191,6 @@ public class SC_Messaging_Service : MonoBehaviour
             // Add the message
             chatMessageList.Add(message);
 
-            
-
             // PlaceHolder
             chatMessageList.Add(
                 Instantiate(listPlayerMessages[4],
@@ -223,7 +221,7 @@ public class SC_Messaging_Service : MonoBehaviour
         var particles = Instantiate(particlEffectBossMessage, message.GetComponentInChildren<Image>().transform);
         particles.transform.SetParent(message.GetComponentInChildren<Image>().transform);
         StartCoroutine(PlayEffects(particles.GetComponent<ParticleSystem>(), 0));
-        
+
         chatMessageList.Add(message);
 
         chatRefreshed = false;
@@ -262,11 +260,9 @@ public class SC_Messaging_Service : MonoBehaviour
     // Make the chat go down when the text appear
     IEnumerator RefreshChat()
     {
-        newPositionLerp = chatPanelObject.GetComponent<RectTransform>().localPosition.y + 150f;
+        newPositionLerp = chatPanelObject.GetComponent<RectTransform>().localPosition.y + 170f;
         yield return new WaitForSeconds(0.2f);
         lerpUpdate = true;
-
-       
     }
 
     IEnumerator CloseChatDefinitively()
