@@ -260,14 +260,9 @@ public class SC_Messaging_Service : MonoBehaviour
     // Make the chat go down when the text appear
     IEnumerator RefreshChat()
     {
-        newPositionLerp = chatPanelObject.GetComponent<RectTransform>().localPosition.y + 150f;
+        newPositionLerp = chatPanelObject.GetComponent<RectTransform>().localPosition.y + 170f;
         yield return new WaitForSeconds(0.2f);
         lerpUpdate = true;
-
-        chatPanelObject.GetComponent<RectTransform>().localPosition = new Vector3(
-        chatPanelObject.GetComponent<RectTransform>().localPosition.x,
-        chatPanelObject.GetComponent<RectTransform>().localPosition.y + 170,
-        chatPanelObject.GetComponent<RectTransform>().localPosition.z);
     }
 
     IEnumerator CloseChatDefinitively()
