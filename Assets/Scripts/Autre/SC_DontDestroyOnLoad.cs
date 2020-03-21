@@ -8,6 +8,7 @@ public class SC_DontDestroyOnLoad : MonoBehaviour
 {
     void Start()
     {
+        this.transform.parent = null;
         DontDestroyOnLoad(gameObject);
     }
 

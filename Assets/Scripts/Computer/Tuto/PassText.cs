@@ -14,8 +14,8 @@ public class PassText : MonoBehaviour
     public bool WaitForPlayer;
     public Animator TextAnimator;
     public bool ActiveObject;
-    public bool[] NewValue;
-    public GameObject[] ObjectsToActivate;
+    public bool NewValue;
+    public GameObject ObjectsToActivate;
 
 
     void Start()
@@ -32,22 +32,21 @@ public class PassText : MonoBehaviour
         {
             ActualText.GetComponent<Text>().text = TextTuto[NumberText];
         }
-        else
+        if (TextTuto[NumberText] == "")
         {
-            if (WaitForPlayer)
-            {
-                Stampy.GetComponent<StampyNext>().PlayAnim();
-            }
-            else
-            {
-                Stampy.GetComponent<StampyNext>().PlayAnim();
-            }
-
             if (ActiveObject)
             {
                 UnlockObject();
             }
 
+            if (WaitForPlayer)
+            {
+                Stampy.GetComponent<StampyNext>().LeftForNow();
+            }
+            else
+            {
+                Stampy.GetComponent<StampyNext>().PlayAnim();
+            }
         }
         
     }
@@ -88,9 +87,8 @@ public class PassText : MonoBehaviour
 
     public void UnlockObject()
     {
-        for (int i = 0; i < ObjectsToActivate.Length; i++)
-        {
-            ObjectsToActivate[i].SetActive(NewValue[i]);
-        }
+        Debug.Log("oui");
+        ObjectsToActivate.GetComponent<Button>().interactable = NewValue;
     }
+
 }

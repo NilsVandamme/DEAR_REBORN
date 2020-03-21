@@ -26,6 +26,11 @@ public class SC_Messaging_Service : MonoBehaviour
     [Header("List distrubition Talking time")]
     [Tooltip("Check a case to let the player talk after a checked case")]
     public List<bool> listOrderDialog = new List<bool>();
+
+    [Header("Translate Parameters")]
+    //Je savais pas trop où mettre ça donc j'ai fait un autre header, déso !
+
+    public float newPositionLerp = 0f;
     #endregion
 
     #region privates attributes
@@ -40,10 +45,14 @@ public class SC_Messaging_Service : MonoBehaviour
     int countPassedDialog;
     int TotalTextInDialog;
 
+    float LerpVelocity = 0.0f;
+    float LerpTime = 0.1f;
+
     bool playerTurn = false;
     bool bossWrittingAnimationStarted = false;
     bool ChatStarted = false;
     bool chatRefreshed = true;
+    bool lerpUpdate = false;
     #endregion
 
     private void Awake()
@@ -53,6 +62,8 @@ public class SC_Messaging_Service : MonoBehaviour
         countPassedDialog = 0;
 
         animatorChat = gameObject.GetComponent<Animator>();
+
+        
     }
 
     private void Start()
@@ -60,6 +71,8 @@ public class SC_Messaging_Service : MonoBehaviour
         GetAllDialog();
 
         messageAudioSource = GetComponent<AudioSource>();
+
+      
     }
 
     /**
@@ -112,6 +125,22 @@ public class SC_Messaging_Service : MonoBehaviour
         if (countPassedDialog == TotalTextInDialog && !playerTurn)
         {
             animatorChat.SetBool("IsChatFinished", true);
+        }
+
+
+        if (lerpUpdate)
+        {
+            
+
+            chatPanelObject.GetComponent<RectTransform>().localPosition = new Vector3(
+       chatPanelObject.GetComponent<RectTransform>().localPosition.x,
+       Mathf.SmoothDamp(chatPanelObject.GetComponent<RectTransform>().localPosition.y, newPositionLerp, ref LerpVelocity, LerpTime, 500f, Time.deltaTime),
+       chatPanelObject.GetComponent<RectTransform>().localPosition.z);
+
+            if(Mathf.Approximately(chatPanelObject.GetComponent<RectTransform>().localPosition.y, newPositionLerp))
+            {
+                lerpUpdate = false;
+            }
         }
     }
 
@@ -233,12 +262,11 @@ public class SC_Messaging_Service : MonoBehaviour
     // Make the chat go down when the text appear
     IEnumerator RefreshChat()
     {
+        newPositionLerp = chatPanelObject.GetComponent<RectTransform>().localPosition.y + 150f;
         yield return new WaitForSeconds(0.2f);
+        lerpUpdate = true;
 
-        chatPanelObject.GetComponent<RectTransform>().localPosition = new Vector3(
-        chatPanelObject.GetComponent<RectTransform>().localPosition.x,
-        chatPanelObject.GetComponent<RectTransform>().localPosition.y + 150,
-        chatPanelObject.GetComponent<RectTransform>().localPosition.z);
+       
     }
 
     IEnumerator CloseChatDefinitively()
