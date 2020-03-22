@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class FinalButton : MonoBehaviour
 {
@@ -16,9 +17,9 @@ public class FinalButton : MonoBehaviour
         {
             if (!trigger)
             {
-                if (!stop)
+                if (!Stop)
                 {
-                    ObjectsToActivate.GetComponent<Button>().interactable = false;
+                    Button.GetComponent<Button>().interactable = false;
                     Stop = true;
                 }
             }
@@ -27,7 +28,7 @@ public class FinalButton : MonoBehaviour
             {
                 if(!Stop2)
                 {
-                    ObjectsToActivate.GetComponent<Button>().interactable = true;
+                    Button.GetComponent<Button>().interactable = true;
                     Stampy.SetActive(true);
 
                 }
