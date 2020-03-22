@@ -41,6 +41,7 @@ public class StampyNext : MonoBehaviour
 
     public void ReApper()
     {
+        Debug.Log("onyest");
         StampyAnimator.Play("Appear");
     }
 
