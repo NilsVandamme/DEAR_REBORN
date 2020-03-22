@@ -16,6 +16,7 @@ public class PassText : MonoBehaviour
     public bool ActiveObject;
     public bool NewValue;
     public GameObject ObjectsToActivate;
+    public GameObject Background;
 
 
     void Start()
@@ -89,6 +90,23 @@ public class PassText : MonoBehaviour
     {
         Debug.Log("oui");
         ObjectsToActivate.GetComponent<Button>().interactable = NewValue;
+    }
+
+    public void OpenBackground()
+    {
+        if (Background != null)
+        {
+            Background.SetActive(true);
+        }
+        
+    }
+
+    public void CloseBackground()
+    {
+        if (Background != null)
+        {
+            Background.SetActive(false);
+        }
     }
 
 }
