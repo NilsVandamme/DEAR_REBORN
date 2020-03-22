@@ -8,27 +8,32 @@ public class FinalButton : MonoBehaviour
     public GameObject Button;
     public GameObject Stampy;
     public TriggerEndScript trigger;
+    private bool GetBoolTrigger;
     private bool Stop;
     private bool Stop2;
 
+
     void Update()
     {
+
+        GetBoolTrigger = trigger.CanFinish;
+        Debug.Log(GetBoolTrigger);
         if (SC_GM_Local.gm.numberOfCLRecover == 3)
         {
-            if (!trigger)
+            if (!GetBoolTrigger)
             {
                 if (!Stop)
                 {
-                    Button.GetComponent<Button>().interactable = false;
+                    Button.SetActive(true);
                     Stop = true;
                 }
             }
 
-            if (trigger)
+            if (GetBoolTrigger)
             {
                 if(!Stop2)
                 {
-                    Button.GetComponent<Button>().interactable = true;
+                    Button.SetActive(false);
                     Stampy.SetActive(true);
 
                 }
