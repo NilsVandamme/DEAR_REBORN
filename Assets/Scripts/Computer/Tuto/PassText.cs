@@ -88,7 +88,6 @@ public class PassText : MonoBehaviour
 
     public void UnlockObject()
     {
-        Debug.Log("oui");
         ObjectsToActivate.GetComponent<Button>().interactable = NewValue;
     }
 
