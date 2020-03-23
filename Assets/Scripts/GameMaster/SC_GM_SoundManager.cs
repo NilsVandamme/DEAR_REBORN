@@ -134,6 +134,7 @@ public class SC_GM_SoundManager : MonoBehaviour
     // Play the specified sound from audioclips list
     public void PlaySound(string name)
     {
+        /*
             foreach(AudioClip clip in audioclips)
             {
                 if (clip.name == name)
@@ -145,6 +146,7 @@ public class SC_GM_SoundManager : MonoBehaviour
                     ASourceSound.PlayOneShot(clip);
                 }
             }
+            */
     }
 
   
