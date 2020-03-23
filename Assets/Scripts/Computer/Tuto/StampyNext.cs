@@ -39,6 +39,7 @@ public class StampyNext : MonoBehaviour
 
     public void Initialized()
     {
+        NumberBulles = 0;
         Bulles[NumberBulles].SetActive(true);
         NumberBulles++;
     }

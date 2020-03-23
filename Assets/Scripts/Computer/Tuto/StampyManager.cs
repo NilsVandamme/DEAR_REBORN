@@ -31,22 +31,25 @@ public class StampyManager : MonoBehaviour
 
     public void SelectBulle()
     {
-        if (Mails.SetActive == true)
+        if (Mails.active)
         {
             Stampy.GetComponent<StampyNext>().Bulles[0] = BulleMails;
-            Stampy.SetActive = true;
+            Stampy.SetActive(true);
+            Stampy.GetComponent<Animator>().Play("0");
             return;
         }
-        if (Daily.SetActive == true)
+        if (Daily.active)
         {
             Stampy.GetComponent<StampyNext>().Bulles[0] = BulleDaily;
-            Stampy.SetActive = true;
+            Stampy.SetActive(true);
+            Stampy.GetComponent<Animator>().Play("0");
             return;
         }
-        if (Arbo.SetActive == true)
+        if (Arbo.active)
         {
             Stampy.GetComponent<StampyNext>().Bulles[0] = BulleArbo;
-            Stampy.SetActive = true;
+            Stampy.SetActive(true);
+            Stampy.GetComponent<Animator>().Play("0");
             return;
         }
     }
