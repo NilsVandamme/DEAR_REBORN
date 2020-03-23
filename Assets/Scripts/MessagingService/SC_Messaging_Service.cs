@@ -31,6 +31,8 @@ public class SC_Messaging_Service : MonoBehaviour
     //Je savais pas trop où mettre ça donc j'ai fait un autre header, déso !
 
     public float newPositionLerp = 0f;
+
+    public bool CanStartTuto;
     #endregion
 
     #region privates attributes
@@ -277,7 +279,7 @@ public class SC_Messaging_Service : MonoBehaviour
     IEnumerator CloseChatDefinitively()
     {
         yield return new  WaitForSeconds(1.3f);
-
+        CanStartTuto = true;
         gameObject.SetActive(false);
     }
 
@@ -291,5 +293,10 @@ public class SC_Messaging_Service : MonoBehaviour
 
         // Get the all the smilley of the player
         listPlayerMessages = listPlayerDialogObject.GetComponentsInChildren<TextMeshProUGUI>(true);
+    }
+
+    public void StartTuto()
+    {
+        CanStartTuto = true;
     }
 }

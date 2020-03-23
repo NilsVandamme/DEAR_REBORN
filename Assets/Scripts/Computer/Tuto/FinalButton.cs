@@ -9,17 +9,20 @@ public class FinalButton : MonoBehaviour
     public GameObject Button;
     public GameObject Stampy;
     public TriggerEndScript trigger;
+    public GameObject StampyStartTuto;
+    public SC_Messaging_Service BossCall;
     private bool GetBoolTrigger;
     private bool Stop;
     private bool Stop2;
+    private bool Stop3;
 
 
     void Update()
     {
         if (Stop && Stop2) return;
+        if (Stop3) return;
         
         GetBoolTrigger = trigger.CanFinish;
-        Debug.Log(GetBoolTrigger);
         
         if (SC_GM_Local.gm.numberOfCLRecover == 3)
         {
@@ -40,6 +43,15 @@ public class FinalButton : MonoBehaviour
                     Stampy.SetActive(true);
                     Stop2 = true;
                 }
+            }
+        }
+
+        if (BossCall.CanStartTuto)
+        {
+            if (!Stop3)
+            {
+                StampyStartTuto.SetActive(true);
+                Stop3 = true;
             }
         }
     }
