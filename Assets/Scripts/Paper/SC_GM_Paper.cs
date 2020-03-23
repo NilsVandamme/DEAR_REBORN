@@ -30,11 +30,13 @@ public class SC_GM_Paper : MonoBehaviour
         // Activate the send letter button
         if(SC_ParagraphSorter.instance.SnappedParagraphs.Count >= 3 && SC_GM_Master.gm.choosenWordInLetter.Count >= 3)
         {
-            SendButton.interactable = true;
+            //SendButton.interactable = true;
+            SC_ValidationStamp.instance.canDoValidationState = true;
         }
         else
         {
-            SendButton.interactable = false;
+            //SendButton.interactable = false;
+            SC_ValidationStamp.instance.canDoValidationState = false;
         }
 
         if(SC_ParagraphSorter.instance.SnappedParagraphs.Count >= 3)
