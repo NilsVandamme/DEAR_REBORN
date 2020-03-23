@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,6 +19,7 @@ public class SC_PullOfWordWheel : MonoBehaviour
 
     // Liste des CL et leurs Words
     private LayoutGroup[] champsLexicaux;
+    private Animator[] animator;
     private TextMeshProUGUI[][] champLexical;
     private Button[][] champLexicalButtons;
 
@@ -58,6 +60,7 @@ public class SC_PullOfWordWheel : MonoBehaviour
     private void InitChampsLexicauxWheel()
     {
         champsLexicaux = GO_champsLexicaux.GetComponentsInChildren<LayoutGroup>(true);
+        animator = GO_champsLexicaux.GetComponentsInChildren<Animator>(true);
 
         champLexical = new TextMeshProUGUI[champsLexicaux.Length][];
         champLexicalButtons = new Button[champsLexicaux.Length][];
@@ -131,9 +134,15 @@ public class SC_PullOfWordWheel : MonoBehaviour
                 if (j != posElemCl)
                 {
                     if (i == index)
+                    {
                         champLexicalButtons[i][j].gameObject.SetActive(true);
+                        animator[i].Play("Open");
+                    }
+
                     else
+                    {
                         champLexicalButtons[i][j].gameObject.SetActive(false);
+                    }
                 }
     }
 
