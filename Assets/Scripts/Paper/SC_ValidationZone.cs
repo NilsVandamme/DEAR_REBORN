@@ -10,6 +10,14 @@ public class SC_ValidationZone : MonoBehaviour
 
     public UnityEvent validationEvent;
 
+    private void Update()
+    {
+        if(SC_ValidationStamp.instance.ValidationState && !done)
+        {
+            SC_GM_Cursor.gm.changeToValidationCursor();
+        }
+    }
+
     private void OnMouseDown()
     {
         if (SC_ValidationStamp.instance.ValidationState && !done)

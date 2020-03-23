@@ -32,6 +32,7 @@ public class SC_GM_Paper : MonoBehaviour
         {
             //SendButton.interactable = true;
             SC_ValidationStamp.instance.canDoValidationState = true;
+            SC_ValidationStamp.instance.anim.SetTrigger("Play");
         }
         else
         {

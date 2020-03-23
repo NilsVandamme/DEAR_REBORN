@@ -11,6 +11,8 @@ public class SC_ValidationStamp : MonoBehaviour
     public bool canDoValidationState;
     [Space]
     public Collider validationStampCollider;
+    public Animator anim;
+    public GameObject animObj;
     [Space]
     public List<Button> paragraphSorterBtn;
     public List<Button> dragDropWindowsbtn;
@@ -20,8 +22,14 @@ public class SC_ValidationStamp : MonoBehaviour
     private void Awake()
     {
         instance = this;
+        anim = GetComponent<Animator>();
     }
 
+
+    private void Update()
+    {
+        
+    }
 
     // Active le tampon de validation
     private void OnMouseDown()
@@ -53,6 +61,9 @@ public class SC_ValidationStamp : MonoBehaviour
             {
                 dragDropWords[j].constraints = RigidbodyConstraints.FreezeAll;
             }
+
+            //Finish the anim
+            animObj.SetActive(false);
 
             // Active validation state
             ValidationState = true;
