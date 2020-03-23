@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class FinalButton : MonoBehaviour
@@ -15,9 +16,11 @@ public class FinalButton : MonoBehaviour
 
     void Update()
     {
-
+        if (Stop && Stop2) return;
+        
         GetBoolTrigger = trigger.CanFinish;
         Debug.Log(GetBoolTrigger);
+        
         if (SC_GM_Local.gm.numberOfCLRecover == 3)
         {
             if (!GetBoolTrigger)
@@ -35,7 +38,7 @@ public class FinalButton : MonoBehaviour
                 {
                     Button.SetActive(false);
                     Stampy.SetActive(true);
-
+                    Stop2 = true;
                 }
             }
         }
