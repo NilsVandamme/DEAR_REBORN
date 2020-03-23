@@ -26,11 +26,6 @@ public class SC_ValidationStamp : MonoBehaviour
     }
 
 
-    private void Update()
-    {
-        
-    }
-
     // Active le tampon de validation
     private void OnMouseDown()
     {
