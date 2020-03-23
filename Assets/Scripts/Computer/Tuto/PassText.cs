@@ -15,7 +15,7 @@ public class PassText : MonoBehaviour
     public Animator TextAnimator;
     public bool ActiveObject;
     public bool NewValue;
-    public GameObject ObjectsToActivate;
+    public GameObject[] ObjectsToActivate;
     public GameObject Background;
 
 
@@ -88,7 +88,11 @@ public class PassText : MonoBehaviour
 
     public void UnlockObject()
     {
-        ObjectsToActivate.GetComponent<Button>().interactable = NewValue;
+        for (int i = 0; i < ObjectsToActivate.Length; i++)
+        {
+            ObjectsToActivate[i].GetComponent<Button>().interactable = NewValue;
+        }
+        
     }
 
     public void OpenBackground()

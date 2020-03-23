@@ -98,11 +98,13 @@ MonoBehaviour:
   PrevButton: {fileID: 1167470966}
   NextButton: {fileID: 1835117268}
   Stampy: {fileID: 1468923820}
-  WaitForPlayer: 0
+  WaitForPlayer: 1
   TextAnimator: {fileID: 0}
-  ActiveObject: 0
-  NewValue: 0
-  ObjectsToActivate: {fileID: 0}
+  ActiveObject: 1
+  NewValue: 1
+  ObjectsToActivate:
+  - {fileID: 8313497870155967275}
+  - {fileID: 8784044254525562006}
   Background: {fileID: 0}
 --- !u!95 &94715316
 Animator:
@@ -634,7 +636,7 @@ MonoBehaviour:
   TextAnimator: {fileID: 96347184}
   ActiveObject: 0
   NewValue: 0
-  ObjectsToActivate: {fileID: 0}
+  ObjectsToActivate: []
   Background: {fileID: 0}
 --- !u!95 &395496603
 Animator:
@@ -750,6 +752,7 @@ MonoBehaviour:
   StampyAnimator: {fileID: 480105440}
   Object: {fileID: 1583990214163061358}
   NewState: 1
+  Buttons: []
 --- !u!95 &480105440
 Animator:
   serializedVersion: 3
@@ -1696,7 +1699,7 @@ MonoBehaviour:
   TextAnimator: {fileID: 0}
   ActiveObject: 0
   NewValue: 0
-  ObjectsToActivate: {fileID: 0}
+  ObjectsToActivate: []
   Background: {fileID: 0}
 --- !u!95 &1010255561
 Animator:
@@ -1986,7 +1989,7 @@ MonoBehaviour:
   TextAnimator: {fileID: 1984581510}
   ActiveObject: 0
   NewValue: 0
-  ObjectsToActivate: {fileID: 0}
+  ObjectsToActivate: []
   Background: {fileID: 0}
 --- !u!95 &1085357634
 Animator:
@@ -2444,7 +2447,7 @@ MonoBehaviour:
   TextAnimator: {fileID: 0}
   ActiveObject: 0
   NewValue: 0
-  ObjectsToActivate: {fileID: 0}
+  ObjectsToActivate: []
   Background: {fileID: 0}
 --- !u!95 &1258728423
 Animator:
@@ -2929,6 +2932,9 @@ MonoBehaviour:
   StampyAnimator: {fileID: 1441637523}
   Object: {fileID: 5224450745504989068}
   NewState: 1
+  Buttons:
+  - {fileID: 1583990214163061358}
+  - {fileID: 8784044254525562006}
 --- !u!95 &1441637523
 Animator:
   serializedVersion: 3
@@ -3043,6 +3049,8 @@ MonoBehaviour:
   StampyAnimator: {fileID: 1468923821}
   Object: {fileID: 8313497870155967275}
   NewState: 1
+  Buttons:
+  - {fileID: 8784044254525562006}
 --- !u!95 &1468923821
 Animator:
   serializedVersion: 3
@@ -3612,7 +3620,7 @@ MonoBehaviour:
   TextAnimator: {fileID: 0}
   ActiveObject: 0
   NewValue: 0
-  ObjectsToActivate: {fileID: 0}
+  ObjectsToActivate: []
   Background: {fileID: 0}
 --- !u!95 &1622323593
 Animator:
@@ -3999,7 +4007,7 @@ MonoBehaviour:
   TextAnimator: {fileID: 1836668872}
   ActiveObject: 0
   NewValue: 0
-  ObjectsToActivate: {fileID: 0}
+  ObjectsToActivate: []
   Background: {fileID: 0}
 --- !u!95 &1674658031
 Animator:
@@ -4489,12 +4497,13 @@ MonoBehaviour:
   PrevButton: {fileID: 544483230}
   NextButton: {fileID: 233414943}
   Stampy: {fileID: 480105439}
-  WaitForPlayer: 0
+  WaitForPlayer: 1
   TextAnimator: {fileID: 614643205}
-  ActiveObject: 0
-  NewValue: 0
-  ObjectsToActivate: {fileID: 0}
-  Background: {fileID: 0}
+  ActiveObject: 1
+  NewValue: 1
+  ObjectsToActivate:
+  - {fileID: 1583990214163061358}
+  Background: {fileID: 4174937892725095836}
 --- !u!95 &1914407796
 Animator:
   serializedVersion: 3
@@ -5266,7 +5275,9 @@ MonoBehaviour:
   TextAnimator: {fileID: 1387015798}
   ActiveObject: 1
   NewValue: 1
-  ObjectsToActivate: {fileID: 0}
+  ObjectsToActivate:
+  - {fileID: 1583990214163061358}
+  - {fileID: 8784044254525562006}
   Background: {fileID: 0}
 --- !u!95 &2127514553
 Animator:
@@ -8801,9 +8812,10 @@ MonoBehaviour:
   Stampy: {fileID: 2149865093673796173}
   WaitForPlayer: 1
   TextAnimator: {fileID: 8249472373141063933}
-  ActiveObject: 0
-  NewValue: 0
-  ObjectsToActivate: {fileID: 0}
+  ActiveObject: 1
+  NewValue: 1
+  ObjectsToActivate:
+  - {fileID: 8784044254525562006}
   Background: {fileID: 0}
 --- !u!95 &1784825780669401026
 Animator:
@@ -9543,11 +9555,13 @@ MonoBehaviour:
   PrevButton: {fileID: 7711831275613671277}
   NextButton: {fileID: 7428250862607299805}
   Stampy: {fileID: 8680014295570189870}
-  WaitForPlayer: 0
+  WaitForPlayer: 1
   TextAnimator: {fileID: 9113573854220541793}
   ActiveObject: 0
   NewValue: 0
-  ObjectsToActivate: {fileID: 0}
+  ObjectsToActivate:
+  - {fileID: 1583990214163061358}
+  - {fileID: 8313497870155967275}
   Background: {fileID: 0}
 --- !u!95 &8070839121288639204
 Animator:
@@ -29919,7 +29933,7 @@ MonoBehaviour:
   TextAnimator: {fileID: 380313854563565290}
   ActiveObject: 0
   NewValue: 0
-  ObjectsToActivate: {fileID: 0}
+  ObjectsToActivate: []
   Background: {fileID: 0}
 --- !u!95 &5321343263613924143
 Animator:
@@ -30265,6 +30279,7 @@ MonoBehaviour:
   StampyAnimator: {fileID: 8753234867703308889}
   Object: {fileID: 690854671513087259}
   NewState: 1
+  Buttons: []
 --- !u!95 &8753234867703308889
 Animator:
   serializedVersion: 3
@@ -53243,6 +53258,9 @@ MonoBehaviour:
   StampyAnimator: {fileID: 5139238570847608102}
   Object: {fileID: 0}
   NewState: 0
+  Buttons:
+  - {fileID: 1583990214163061358}
+  - {fileID: 8313497870155967275}
 --- !u!95 &5139238570847608102
 Animator:
   serializedVersion: 3
@@ -54742,7 +54760,7 @@ MonoBehaviour:
   TextAnimator: {fileID: 3610431031741448014}
   ActiveObject: 0
   NewValue: 0
-  ObjectsToActivate: {fileID: 0}
+  ObjectsToActivate: []
   Background: {fileID: 0}
 --- !u!95 &5011555850659301834
 Animator:

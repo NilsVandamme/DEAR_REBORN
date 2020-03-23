@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class StampyNext : MonoBehaviour
 {
@@ -9,10 +10,19 @@ public class StampyNext : MonoBehaviour
     public Animator StampyAnimator;
     public GameObject Object;
     public bool NewState;
+    public GameObject[] Buttons;
 
     void Start()
     {
         NumberBulles = 0;
+        if (Buttons.Length != 0)
+        {
+            for (int i = 0; i < Buttons.Length; i++)
+            {
+                Buttons[i].GetComponent<Button>().interactable = false;
+            }
+        }
+        
     }
 
     public void PlayAnim()
