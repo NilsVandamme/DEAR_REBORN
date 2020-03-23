@@ -1,11 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class SC_ValidationZone : MonoBehaviour
 {
     public GameObject validationStamp;
     private bool done;
+
+    public UnityEvent validationEvent;
 
     private void OnMouseDown()
     {
@@ -36,6 +39,6 @@ public class SC_ValidationZone : MonoBehaviour
     IEnumerator LaunchSendAnim()
     {
         yield return new WaitForSeconds(1);
-        // Do whatever anim you want
+        validationEvent.Invoke();
     }
 }
