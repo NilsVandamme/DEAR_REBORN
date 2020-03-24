@@ -78,4 +78,13 @@ public class PassText1 : MonoBehaviour
         TextAnimator.Play("");
     }
 
+    public void OpenBackground()
+    {
+
+    }
+
+    public void CloseBackground()
+    {
+
+    }
 }
