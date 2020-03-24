@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -2793,6 +2793,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Scene2
       objectReference: {fileID: 0}
+    - target: {fileID: 2099758447, guid: 48dfb50199b8f68449fbbeaf85651280, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2998987730592296108, guid: 48dfb50199b8f68449fbbeaf85651280,
         type: 3}
       propertyPath: m_IsActive
@@ -2812,6 +2816,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: backgroundMail1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7862746084932484398, guid: 48dfb50199b8f68449fbbeaf85651280,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2149865093673796173, guid: 48dfb50199b8f68449fbbeaf85651280,
         type: 3}
@@ -2827,6 +2836,10 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1954436695, guid: 48dfb50199b8f68449fbbeaf85651280, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8313497870155967275, guid: 48dfb50199b8f68449fbbeaf85651280,
         type: 3}
@@ -3952,10 +3965,6 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 8
       objectReference: {fileID: 0}
-    - target: {fileID: 1954436695, guid: 48dfb50199b8f68449fbbeaf85651280, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 1839090829919146818, guid: 48dfb50199b8f68449fbbeaf85651280,
         type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -4191,10 +4200,6 @@ PrefabInstance:
     - target: {fileID: 1914407794, guid: 48dfb50199b8f68449fbbeaf85651280, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 365
-      objectReference: {fileID: 0}
-    - target: {fileID: 2099758447, guid: 48dfb50199b8f68449fbbeaf85651280, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1629365284088227300, guid: 48dfb50199b8f68449fbbeaf85651280,
         type: 3}
@@ -4653,21 +4658,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 756271614488537017, guid: 48dfb50199b8f68449fbbeaf85651280,
         type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 756271614488537017, guid: 48dfb50199b8f68449fbbeaf85651280,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 756271614488537017, guid: 48dfb50199b8f68449fbbeaf85651280,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 756271614488537017, guid: 48dfb50199b8f68449fbbeaf85651280,
-        type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
       value: 1
       objectReference: {fileID: 0}
@@ -4675,21 +4665,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
       value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 756271614488537017, guid: 48dfb50199b8f68449fbbeaf85651280,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 2080520251}
-    - target: {fileID: 756271614488537017, guid: 48dfb50199b8f68449fbbeaf85651280,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: StampyButton
-      objectReference: {fileID: 0}
-    - target: {fileID: 756271614488537017, guid: 48dfb50199b8f68449fbbeaf85651280,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 6929535798428670171, guid: 48dfb50199b8f68449fbbeaf85651280,
         type: 3}
@@ -6227,11 +6202,6 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 7862746084932484398, guid: 48dfb50199b8f68449fbbeaf85651280,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2185823013387814845, guid: 48dfb50199b8f68449fbbeaf85651280,
         type: 3}
       propertyPath: m_LocalRotation.x
@@ -6757,37 +6727,5 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9b44e964d338fe14cad4dc30dd93512b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!1 &2080520248 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4481801732306007659, guid: 48dfb50199b8f68449fbbeaf85651280,
-    type: 3}
-  m_PrefabInstance: {fileID: 2080520243}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &2080520250
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2080520248}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 18575892c149bb646bf49e5924b1ea6b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animator: {fileID: 0}
-  BoolToLookAt: 
---- !u!114 &2080520251 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1489341633195812007, guid: 48dfb50199b8f68449fbbeaf85651280,
-    type: 3}
-  m_PrefabInstance: {fileID: 2080520243}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 350e30f329b19254ea3d17804e2323fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
