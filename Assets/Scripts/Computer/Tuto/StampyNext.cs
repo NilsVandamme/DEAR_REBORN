@@ -11,6 +11,8 @@ public class StampyNext : MonoBehaviour
     public GameObject Object;
     public bool NewState;
     public GameObject[] Buttons;
+    public GameObject TutoManager;
+    public bool Delete;
 
     void Start()
     {
@@ -58,5 +60,16 @@ public class StampyNext : MonoBehaviour
     public void NewObject()
     {
         Object.SetActive(NewState);
+    }
+
+    public void DeleteTuto()
+    {
+        if (TutoManager != null)
+        {
+            if (Delete)
+            {
+                TutoManager.SetActive(false);
+            }
+        }
     }
 }

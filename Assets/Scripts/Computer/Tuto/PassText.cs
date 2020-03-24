@@ -18,7 +18,6 @@ public class PassText : MonoBehaviour
     public GameObject[] ObjectsToActivate;
     public GameObject Background;
 
-
     void Start()
     {
         NumberText = 0;
@@ -91,6 +90,7 @@ public class PassText : MonoBehaviour
         for (int i = 0; i < ObjectsToActivate.Length; i++)
         {
             ObjectsToActivate[i].GetComponent<Button>().interactable = NewValue;
+            Stampy.GetComponent<StampyNext>().Delete = true;
         }
         
     }
