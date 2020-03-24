@@ -3,15 +3,19 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 
-// Manage the audio of the game
 
 public class SC_GM_SoundManager : MonoBehaviour
 {
     public static SC_GM_SoundManager instance; // singleton instance
 
     [Header("Audioclips pour Random")]
-    public AudioClip[] AC_Click;
+    public AudioClip[] AC_ClickEnter;
+    public AudioClip[] AC_ClickLeave;
     public AudioClip[] AC_Radio;
+    public AudioClip[] AC_MessageBoss;
+    public AudioClip[] AC_MessageEmployee;
+    public AudioClip[] AC_Hover;
+
 
 
     [Header("AudioSources")]
@@ -78,7 +82,7 @@ public class SC_GM_SoundManager : MonoBehaviour
         {
             if(clickSoundEnabled == true)
             {
-                ASourceRandomSounds.clip = AC_Click[Random.Range(0, AC_Click.Length)];
+                ASourceRandomSounds.clip = AC_ClickEnter[Random.Range(0, AC_ClickEnter.Length)];
                 ASourceRandomSounds.pitch = Random.Range(0.9f, 1f);
                 ASourceRandomSounds.Play();
 
@@ -86,6 +90,17 @@ public class SC_GM_SoundManager : MonoBehaviour
            
         }
 
+        if (Input.GetMouseButtonUp(0))
+        {
+            if (clickSoundEnabled == true)
+            {
+                ASourceRandomSounds.clip = AC_ClickEnter[Random.Range(0, AC_ClickEnter.Length)];
+                ASourceRandomSounds.pitch = Random.Range(0.9f, 1f);
+                ASourceRandomSounds.Play();
+
+            }
+
+        }
         // Change the volume of the radio
     }
     private void Start()
@@ -134,7 +149,7 @@ public class SC_GM_SoundManager : MonoBehaviour
     // Play the specified sound from audioclips list
     public void PlaySound(string name)
     {
-        /*
+        
             foreach(AudioClip clip in audioclips)
             {
                 if (clip.name == name)
@@ -146,10 +161,26 @@ public class SC_GM_SoundManager : MonoBehaviour
                     ASourceSound.PlayOneShot(clip);
                 }
             }
-            */
+            
     }
 
-  
+    public void PlayMessageBossSound()
+    {
+        ASourceSound.clip = AC_MessageBoss[Random.Range(0, AC_MessageBoss.Length)];
+        ASourceSound.Play();
+    }
+
+    public void PlayMessageEmployeeSound()
+    {
+        ASourceSound.clip = AC_MessageEmployee[Random.Range(0, AC_MessageBoss.Length)];
+        ASourceSound.Play();
+    }
+
+    public void PlayHoverOnPhraseSound()
+    {
+        ASourceRandomSounds.clip = AC_Hover[Random.Range(0, AC_Hover.Length)];
+        ASourceRandomSounds.Play();
+    }
 
     public void FadeAmbiance()
     {
