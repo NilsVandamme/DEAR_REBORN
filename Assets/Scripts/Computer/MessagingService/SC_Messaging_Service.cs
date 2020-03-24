@@ -216,7 +216,7 @@ public class SC_Messaging_Service : MonoBehaviour
     {
         animatorChat.SetBool("IsBossWritting", true);
 
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(2f);
 
         animatorChat.SetBool("IsBossWritting", false);
         bossWrittingAnimationStarted = false;
