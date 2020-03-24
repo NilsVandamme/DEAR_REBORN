@@ -129,7 +129,7 @@ public class SC_ParagraphSorter : MonoBehaviour
     {
         if (Paragraphs[index].Count <= 0)
         {
-            Debug.LogError("Plus de paragraphes");
+            Debug.LogWarning("Plus de paragraphes");
             return false;
         }
 
