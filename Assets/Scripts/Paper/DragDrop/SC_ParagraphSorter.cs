@@ -120,6 +120,9 @@ public class SC_ParagraphSorter : MonoBehaviour
                 Paragraphs[index][i].SetActive(false);
 
         Paragraphs[index][indexParagrapheAffiche[index]].gameObject.SetActive(true);
+
+        Paragraphs[index][indexParagrapheAffiche[index]].transform.position = SpawnPositions[index].transform.position;
+        Paragraphs[index][indexParagrapheAffiche[index]].GetComponent<SC_DragDropControls>().GetOriginalSnapPosition();
     }
 
     private bool Check(int index)
