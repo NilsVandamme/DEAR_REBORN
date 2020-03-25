@@ -117,6 +117,9 @@ public class SC_GM_SoundManager : MonoBehaviour
         {
             Debug.Log("Sound volume playerprefs = " + PlayerPrefs.GetFloat("SoundVolume").ToString());
             ASourceSound.volume = PlayerPrefs.GetFloat("SoundVolume");
+            ASourceComputer.volume = PlayerPrefs.GetFloat("SoundVolume");
+            ASourceOffice.volume = PlayerPrefs.GetFloat("SoundVolume");
+            ASourceRandomSounds.volume = PlayerPrefs.GetFloat("SoundVolume");
             soundSlider.value = PlayerPrefs.GetFloat("SoundVolume");
         }
         else
@@ -227,6 +230,9 @@ public class SC_GM_SoundManager : MonoBehaviour
     public void ChangeSoundVolume(float SliderValue)
     {
         ASourceSound.volume = SliderValue;
+        ASourceComputer.volume = SliderValue;
+        ASourceOffice.volume = SliderValue;
+        ASourceRandomSounds.volume = SliderValue;
         PlayerPrefs.SetFloat("SoundVolume", SliderValue);
     }
 
