@@ -106,11 +106,13 @@ public class SC_GM_SoundManager : MonoBehaviour
     private void Start()
     {
         // Get audiosources from childs
+        /*
         ASourceSound = transform.GetChild(0).GetComponent<AudioSource>();
         ASourceMusic = transform.GetChild(1).GetComponent<AudioSource>();
         ASourceOffice = transform.GetChild(2).GetComponent<AudioSource>();
         ASourceComputer = transform.GetChild(3).GetComponent<AudioSource>();
         ASourceRandomSounds = transform.GetChild(4).GetComponent<AudioSource>();
+        */
 
         // Get the saved setting from the playerprefs
         if (PlayerPrefs.HasKey("SoundVolume"))
