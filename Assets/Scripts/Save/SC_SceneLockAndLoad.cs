@@ -11,11 +11,6 @@ public class SC_SceneLockAndLoad : MonoBehaviour
 
     void Start()
     {
-        if (SC_GM_Local.gm.firstScene == "L_3DMENU")
-        {
-            SC_LoadingScreen.Instance.LoadThisScene("L_3DMENU");
-        }
-
         // Load scene B1 and B2
         if (File.Exists(SC_GM_Master.gm.path + sceneToLoad + ".txt") || (sceneToLoad.Equals("L_B1") && File.Exists(SC_GM_Master.gm.path + "L_B2" + ".txt")))
         {
@@ -26,6 +21,12 @@ public class SC_SceneLockAndLoad : MonoBehaviour
         {
             lockObject.SetActive(true);
             unlockObject.SetActive(false);
+        }
+
+
+        if (SC_GM_Local.gm.firstScene == "L_3DMENU")
+        {
+            SC_LoadingScreen.Instance.LoadThisScene("L_3DMENU");
         }
     }
 
