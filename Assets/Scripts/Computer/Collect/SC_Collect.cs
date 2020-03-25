@@ -14,6 +14,7 @@ public class SC_Collect : MonoBehaviour
     public Button goToPreparatoryPhaseBut;
     public Image goToPreparatoryPhaseImage;
     public GameObject imageWords; // Button openning or closing the panel
+    public GameObject GM_Audio;
 
     public float waitTime;
     private Animator anim;
@@ -61,6 +62,7 @@ public class SC_Collect : MonoBehaviour
             PlayRecolt(2);
             goToPreparatoryPhaseBut.interactable = true;
             goToPreparatoryPhaseImage.sprite = startWritingON;
+            GM_Audio.GetComponent<SC_GM_SoundManager>().PlaySound("DailyCase_UnlockWriting");
         }
     }
 
@@ -90,15 +92,27 @@ public class SC_Collect : MonoBehaviour
 
     public void OnClick()
     {
-        if (!isOpen) anim.Play("Collect2_open");
-        else anim.Play("Collect2_close");
+        if (!isOpen)
+        {
+            anim.Play("Collect2_open");
+            SC_GM_SoundManager.instance.PlaySound("Misc_SwipeBase");
+        }
+        else
+        {
+            anim.Play("Collect2_close");
+            SC_GM_SoundManager.instance.PlaySound("Misc_UnSwipe");
+        }
 
         isOpen = !isOpen;
     }
 
     public void OnClickFeedback()
     {
-        if (!isOpen) anim.Play("Collect2_open");
+        if (!isOpen)
+        {
+            anim.Play("Collect2_open");
+            SC_GM_SoundManager.instance.PlaySound("Misc_SwipeBase");
+        }
         //else anim.Play("Collect2_close");
 
         isOpen = !isOpen;
@@ -107,6 +121,8 @@ public class SC_Collect : MonoBehaviour
     public void OnClickClose()
     {
         if (isOpen) anim.Play("Collect2_close");
+
+        SC_GM_SoundManager.instance.PlaySound("Misc_UnSwipe");
 
         isOpen = !isOpen;
     }

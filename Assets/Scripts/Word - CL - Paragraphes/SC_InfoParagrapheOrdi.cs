@@ -12,6 +12,7 @@ public class SC_InfoParagrapheOrdi : MonoBehaviour
 
     public GameObject fxGood;
     public GameObject fxbad;
+    public GameObject GM_Audio;
 
     public bool affichable = true;
     public bool recoltable;
@@ -82,7 +83,8 @@ public class SC_InfoParagrapheOrdi : MonoBehaviour
         text.color = textNonRecoltableColor;
 
         Instantiate(fxbad, new Vector3(GetMouseWorldPos().x, GetMouseWorldPos().y, -4f), Quaternion.identity);
-        SC_GM_SoundManager.instance.PlaySound("ClickPhraseFail_2");
+        SC_GM_SoundManager.instance.PlaySoundRandomPitch("DailyCase_ClickPhraseFail_SoftHigh");
+        
 
         // #######################################################################################################################################
         // #######################################################################################################################################
@@ -118,7 +120,7 @@ public class SC_InfoParagrapheOrdi : MonoBehaviour
 
             SC_PoolFeedback.instance.LaunchFeedbackForCL();
             Instantiate(fxGood, new Vector3(GetMouseWorldPos().x, GetMouseWorldPos().y, -4f), Quaternion.identity);
-            SC_GM_SoundManager.instance.PlaySound("WordGet");
+            SC_GM_SoundManager.instance.PlaySoundRandomPitch("DailyCase_WordGet");
 
         }
     }
@@ -129,7 +131,7 @@ public class SC_InfoParagrapheOrdi : MonoBehaviour
      */
     private void OnClickInfoRecolt()
     {
-        SC_GM_Master.gm.infoPerso[SC_GM_Local.gm.persoOfCurrentScene].Add(textInfos);
+        SC_GM_Master.gm.infoRecoltPerso[SC_GM_Local.gm.persoOfCurrentScene].Add(textInfos);
         text.color = infoRecoltColor;
 
         // #######################################################################################################################################

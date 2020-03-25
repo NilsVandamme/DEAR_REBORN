@@ -5,6 +5,7 @@
 public class SC_TimbreClick : MonoBehaviour
 {
     public string triggerName;
+    public Animator anim;
 
     // Tell the main script this stamp was chosen
     private void OnMouseUp()
@@ -17,5 +18,16 @@ public class SC_TimbreClick : MonoBehaviour
         }
     }
 
+    private void OnMouseEnter()
+    {
+        anim.SetTrigger("ScaleUp");
+        SC_GM_Cursor.gm.changeToHoverCursor();
+    }
+
+    private void OnMouseExit()
+    {
+        anim.SetTrigger("ScaleDown");
+        SC_GM_Cursor.gm.changeToNormalCursor();
+    }
 
 }

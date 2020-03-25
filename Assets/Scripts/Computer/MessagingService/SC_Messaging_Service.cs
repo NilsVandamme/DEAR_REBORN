@@ -9,8 +9,7 @@ public class SC_Messaging_Service : MonoBehaviour
 {
     #region Public attributes
     [Header("Effects")]
-    public AudioClip soundBossMessage;
-    public AudioClip soundPlayerMessage;
+    public GameObject GM_Audio;
     public GameObject particlEffectPlayerMessage;
     public GameObject particlEffectBossMessage;
 
@@ -53,6 +52,9 @@ public class SC_Messaging_Service : MonoBehaviour
     bool playerTurn = false;
     bool bossWrittingAnimationStarted = false;
     bool ChatStarted = false;
+    bool isChatFinished = false;
+    bool isCallMusicStarted = false;
+    bool isCallMusicStopped= false;
     bool chatRefreshed = true;
     public bool lerpUpdate = false;
     #endregion
@@ -74,7 +76,7 @@ public class SC_Messaging_Service : MonoBehaviour
 
         messageAudioSource = GetComponent<AudioSource>();
 
-      
+        isChatFinished = animatorChat.GetBool("IsChatFinished");
     }
 
     /**
@@ -132,20 +134,29 @@ public class SC_Messaging_Service : MonoBehaviour
 
         if (lerpUpdate)
         {
-            
-
             chatPanelObject.GetComponent<RectTransform>().localPosition = new Vector3(
-       chatPanelObject.GetComponent<RectTransform>().localPosition.x,
-       Mathf.SmoothDamp(chatPanelObject.GetComponent<RectTransform>().localPosition.y, newPositionLerp, ref LerpVelocity, LerpTime, 500f, Time.deltaTime),
-       chatPanelObject.GetComponent<RectTransform>().localPosition.z);
+                chatPanelObject.GetComponent<RectTransform>().localPosition.x,
+                Mathf.SmoothDamp(chatPanelObject.GetComponent<RectTransform>().localPosition.y, newPositionLerp, ref LerpVelocity, LerpTime, 500f, Time.deltaTime),
+                chatPanelObject.GetComponent<RectTransform>().localPosition.z);
 
             if(Input.GetAxis("Mouse ScrollWheel") > 0f)
             {
                 lerpUpdate = false;
             }
+        }
 
-          
-            
+        // Play the ringing sound of the call
+        if (!ChatStarted && !isChatFinished && !isCallMusicStarted)
+        {
+            GM_Audio.GetComponent<SC_GM_SoundManager>().PlayBossCallIncomingSound();
+            isCallMusicStarted = true;
+
+            GM_Audio.GetComponent<SC_GM_SoundManager>().ChangeSoundVolume(0.3f);
+        }
+        if (ChatStarted && !isCallMusicStopped)
+        {
+            GM_Audio.GetComponent<SC_GM_SoundManager>().StopBossCallIncomingSound();
+            isCallMusicStopped = true;
         }
     }
 
@@ -154,6 +165,8 @@ public class SC_Messaging_Service : MonoBehaviour
      */
     public void OpenChat()
     {
+        GM_Audio.GetComponent<SC_GM_SoundManager>().PlayPickupBossCallSound();
+
         animatorChat.SetBool("IsChatOpen", true);
         StartCoroutine(ChatIsOpenning());
     }
@@ -253,10 +266,13 @@ public class SC_Messaging_Service : MonoBehaviour
 
         if (type == 0)
         {
-            messageAudioSource.PlayOneShot(soundBossMessage);
+          
+            GM_Audio.GetComponent<SC_GM_SoundManager>().PlayMessageBossSound();
+
         } else
         {
-            messageAudioSource.PlayOneShot(soundPlayerMessage);
+           
+            GM_Audio.GetComponent<SC_GM_SoundManager>().PlayMessageEmployeeSound();
         }
     }
 

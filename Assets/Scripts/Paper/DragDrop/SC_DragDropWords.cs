@@ -15,6 +15,7 @@ public class SC_DragDropWords : MonoBehaviour
     public SpriteRenderer backgroundSR;
     public TextMeshPro text;
     public GameObject ParticleWin;
+    public GameObject GM_Audio;
 
     private Vector3 OriginalPosition;
     private Vector3 mouseOffset;
@@ -69,6 +70,8 @@ public class SC_DragDropWords : MonoBehaviour
 
         backgroundSR.sortingOrder = 2;
         text.sortingOrder = 3;
+
+        SC_GM_SoundManager.instance.PlaySound("Redaction_PickUpItem");
     }
 
     private void OnMouseUp()
@@ -82,12 +85,15 @@ public class SC_DragDropWords : MonoBehaviour
             autoc.OnClick(animator);
 
             StartCoroutine("GoToPlace");
+            SC_GM_SoundManager.instance.PlaySound("Redaction_PlaceWordWriteSound");
         }
         else
         {
             // Send the element back to it's original position
             SnapPosition = OriginalPosition;
             SnapMovement = true;
+
+            SC_GM_SoundManager.instance.PlaySound("Redaction_Swipe_Papier_Aigu");
         }
 
         StartCoroutine("TextOrderReset");

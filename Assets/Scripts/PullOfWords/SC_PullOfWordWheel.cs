@@ -179,6 +179,20 @@ public class SC_PullOfWordWheel : MonoBehaviour
                 but.colors = colors;
 
                 but.interactable = false;
+
+                // SOUND
+                if (SC_GM_Local.gm.wheelOfWords.Count == 1)
+                    SC_GM_SoundManager.instance.PlaySound("Arbo_PickWordOne");
+                else if (SC_GM_Local.gm.wheelOfWords.Count == 2)
+                    SC_GM_SoundManager.instance.PlaySound("Arbo_PickWordTwo");
+                else if (SC_GM_Local.gm.wheelOfWords.Count == 3)
+                    SC_GM_SoundManager.instance.PlaySound("Arbo_PickWordThree");
+                else if (SC_GM_Local.gm.wheelOfWords.Count == 4)
+                    SC_GM_SoundManager.instance.PlaySound("Arbo_PickWordFour");
+                else if (SC_GM_Local.gm.wheelOfWords.Count == 5)
+                    SC_GM_SoundManager.instance.PlaySound("Arbo_PickWordFive");
+                else if (SC_GM_Local.gm.wheelOfWords.Count == 6)
+                    SC_GM_SoundManager.instance.PlaySound("Arbo_PickWordSix");
             }
         }
     }

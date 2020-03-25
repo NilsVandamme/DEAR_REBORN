@@ -102,6 +102,9 @@ public class SC_DragDropControls : MonoBehaviour
                 mouseOffset = gameObject.transform.position - GetMouseWorldPos();
                 if (rig != null)
                     rig.useGravity = false;
+            
+            // SON
+            SC_GM_SoundManager.instance.PlaySoundRandomPitch("Redaction_PickUpItem");
         }
 
         // Change the sorting order of the sprites & text to render over all other elements
@@ -172,6 +175,9 @@ public class SC_DragDropControls : MonoBehaviour
                     snapMovementActive = true;
                     IsSelected = false;
                     SnapPosition = OriginalPosition;
+
+                    // SON
+                    SC_GM_SoundManager.instance.PlaySound("Redaction_Swipe_Papier_Aigu");
                 }
                 else
                 {
