@@ -27,7 +27,13 @@ public class SC_GM_Master : MonoBehaviour
     public List<SC_CLInPull> wordsInPull; // Liste des mots choisi par le joueur (CL, Word)
 
     [HideInInspector]
-    public List<string>[] infoPerso; // Liste des infos récolté sur les joueurs
+    public string[] descriptionPerso; // Liste des descriptions des joueurs
+
+    [HideInInspector]
+    public string[] infoPerso; // Liste des infos des joueurs
+
+    [HideInInspector]
+    public List<string>[] infoRecoltPerso; // Liste des infos récolté sur les joueurs
 
 
 
@@ -51,9 +57,13 @@ public class SC_GM_Master : MonoBehaviour
             gm.wordsInPull = new List<SC_CLInPull>();
             lastParagrapheLettrePerPerso = new SC_InfoParagrapheLettreRemplie[listChampsLexicaux.listOfPerso.Length][];
 
-            infoPerso = new List<string>[listChampsLexicaux.listOfPerso.Length];
+            descriptionPerso = new string[listChampsLexicaux.listOfPerso.Length];
+            infoPerso = new string[listChampsLexicaux.listOfPerso.Length];
+            infoRecoltPerso = new List<string>[listChampsLexicaux.listOfPerso.Length];
             for (int i = 0; i < listChampsLexicaux.listOfPerso.Length; i++)
-                infoPerso[i] = new List<string>();
+            {
+                infoRecoltPerso[i] = new List<string>();
+            }
 
             foreach (SC_CLInPull elem in pullBase.wordsInBasePull)
                 gm.wordsInPull.Add(elem);
