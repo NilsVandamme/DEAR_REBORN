@@ -189,6 +189,23 @@ public class SC_GM_SoundManager : MonoBehaviour
         ASourceSound.Play();
     }
 
+    public void PlayBossCallIncomingSound()
+    {
+        ASourceSound.clip = AC_MessageEmployee[Random.Range(0, AC_MessageBoss.Length)];
+        ASourceSound.Play();
+    }
+
+    public void StopBossCallIncomingSound()
+    {
+        ASourceSound.Stop();
+    }
+
+    public void PlayPickupBossCallSound()
+    {
+        ASourceSound.clip = AC_MessageEmployee[Random.Range(0, AC_MessageBoss.Length)];
+        ASourceSound.Play();
+    }
+
     public void PlayHoverOnPhraseSound()
     {
         ASourceRandomSounds.clip = AC_Hover[Random.Range(0, AC_Hover.Length)];
