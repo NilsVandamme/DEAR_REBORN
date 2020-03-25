@@ -70,7 +70,8 @@ public class SC_DragDropWords : MonoBehaviour
 
         backgroundSR.sortingOrder = 2;
         text.sortingOrder = 3;
-        GM_Audio.GetComponent<SC_GM_SoundManager>().PlaySound("Redaction_PickUpItem");
+
+        SC_GM_SoundManager.instance.PlaySound("Redaction_PickUpItem");
     }
 
     private void OnMouseUp()
@@ -84,13 +85,15 @@ public class SC_DragDropWords : MonoBehaviour
             autoc.OnClick(animator);
 
             StartCoroutine("GoToPlace");
-            GM_Audio.GetComponent<SC_GM_SoundManager>().PlaySound("Redaction_PlaceWordWriteSound");
+            SC_GM_SoundManager.instance.PlaySound("Redaction_PlaceWordWriteSound");
         }
         else
         {
             // Send the element back to it's original position
             SnapPosition = OriginalPosition;
             SnapMovement = true;
+
+            SC_GM_SoundManager.instance.PlaySound("Redaction_Swipe_Papier_Aigu");
         }
 
         StartCoroutine("TextOrderReset");

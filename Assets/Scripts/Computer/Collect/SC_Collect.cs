@@ -92,15 +92,27 @@ public class SC_Collect : MonoBehaviour
 
     public void OnClick()
     {
-        if (!isOpen) anim.Play("Collect2_open");
-        else anim.Play("Collect2_close");
+        if (!isOpen)
+        {
+            anim.Play("Collect2_open");
+            SC_GM_SoundManager.instance.PlaySound("Misc_SwipeBase");
+        }
+        else
+        {
+            anim.Play("Collect2_close");
+            SC_GM_SoundManager.instance.PlaySound("Misc_UnSwipe");
+        }
 
         isOpen = !isOpen;
     }
 
     public void OnClickFeedback()
     {
-        if (!isOpen) anim.Play("Collect2_open");
+        if (!isOpen)
+        {
+            anim.Play("Collect2_open");
+            SC_GM_SoundManager.instance.PlaySound("Misc_SwipeBase");
+        }
         //else anim.Play("Collect2_close");
 
         isOpen = !isOpen;
@@ -109,6 +121,8 @@ public class SC_Collect : MonoBehaviour
     public void OnClickClose()
     {
         if (isOpen) anim.Play("Collect2_close");
+
+        SC_GM_SoundManager.instance.PlaySound("Misc_UnSwipe");
 
         isOpen = !isOpen;
     }

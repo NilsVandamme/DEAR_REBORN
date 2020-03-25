@@ -30,6 +30,8 @@ public class SC_ValidationZone : MonoBehaviour
             StartCoroutine("LaunchSendAnim");
             SC_GM_Cursor.gm.changeToNormalCursor();
             done = true;
+
+            SC_GM_SoundManager.instance.PlaySound("Redaction_Tampon");
         }
     }
 

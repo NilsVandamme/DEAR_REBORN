@@ -234,6 +234,9 @@ public class SC_PullOfWordPreparatory : MonoBehaviour
                         champLexicalImage[i][j].sprite = hasNotWord;
                 }
         }
+
+        // SON
+        SC_GM_SoundManager.instance.PlaySoundRandomPitch("TinderPhase_WordAppear");
     }
 
     /*
@@ -258,6 +261,9 @@ public class SC_PullOfWordPreparatory : MonoBehaviour
         SC_GM_Local.gm.wordsInPreparatory.Add(temp);
         
         MakeVersus();
+
+        // SON
+        SC_GM_SoundManager.instance.PlaySound("TinderPhase_WordChose");
     }
 
     /*
