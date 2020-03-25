@@ -22,6 +22,8 @@ public class SC_GetAnimatorParameter : MonoBehaviour
         else
         {
             animator.SetBool(BoolToLookAt, true);
+            SC_GM_SoundManager.instance.ChangeMusicVolume(PlayerPrefs.GetFloat("MusicVolume"));
+            Debug.Log("Changed volume");
             return;
         }
     }
