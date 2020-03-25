@@ -9,7 +9,6 @@ public class SC_Messaging_Service : MonoBehaviour
 {
     #region Public attributes
     [Header("Effects")]
-    public GameObject GM_Audio;
     public GameObject particlEffectPlayerMessage;
     public GameObject particlEffectBossMessage;
 
@@ -148,14 +147,14 @@ public class SC_Messaging_Service : MonoBehaviour
         // Play the ringing sound of the call
         if (!ChatStarted && !isChatFinished && !isCallMusicStarted)
         {
-            GM_Audio.GetComponent<SC_GM_SoundManager>().PlayBossCallIncomingSound();
+            //SC_GM_SoundManager.instance.PlayBossCallIncomingSound();
             isCallMusicStarted = true;
 
-            GM_Audio.GetComponent<SC_GM_SoundManager>().ChangeSoundVolume(0.3f);
+            //SC_GM_SoundManager.instance.ChangeSoundVolume(0.3f);
         }
         if (ChatStarted && !isCallMusicStopped)
         {
-            GM_Audio.GetComponent<SC_GM_SoundManager>().StopBossCallIncomingSound();
+            //SC_GM_SoundManager.instance.StopBossCallIncomingSound();
             isCallMusicStopped = true;
         }
     }
@@ -165,7 +164,7 @@ public class SC_Messaging_Service : MonoBehaviour
      */
     public void OpenChat()
     {
-        GM_Audio.GetComponent<SC_GM_SoundManager>().PlayPickupBossCallSound();
+        //SC_GM_SoundManager.instance.PlayPickupBossCallSound();
 
         animatorChat.SetBool("IsChatOpen", true);
         StartCoroutine(ChatIsOpenning());
@@ -294,13 +293,13 @@ public class SC_Messaging_Service : MonoBehaviour
 
         if (type == 0)
         {
-          
-            GM_Audio.GetComponent<SC_GM_SoundManager>().PlayMessageBossSound();
+
+            SC_GM_SoundManager.instance.PlayMessageBossSound();
 
         } else
         {
-           
-            GM_Audio.GetComponent<SC_GM_SoundManager>().PlayMessageEmployeeSound();
+
+            SC_GM_SoundManager.instance.PlayMessageEmployeeSound();
         }
     }
 
