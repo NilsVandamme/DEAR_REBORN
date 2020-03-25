@@ -15,7 +15,7 @@ MonoBehaviour:
   wordsInBasePull:
   - champLexical: Career
     word:
-    - scorePerso: ffffffff0200000003000000000000000200000003000000
+    - scorePerso: ffffffff0200000003000000000000000200000003000000feffffff
       titre: Ambition
       grammarCritere:
       - be ambitious
@@ -23,7 +23,7 @@ MonoBehaviour:
       - being ambitious
       - ambition
       - ambitious
-    - scorePerso: 01000000020000000300000002000000ffffffff02000000
+    - scorePerso: 01000000020000000300000002000000ffffffff0200000003000000
       titre: Determination
       grammarCritere:
       - be determined
@@ -33,7 +33,7 @@ MonoBehaviour:
       - determined
   - champLexical: Communication
     word:
-    - scorePerso: 01000000feffffff0200000001000000ffffffff03000000
+    - scorePerso: 01000000feffffff0200000001000000ffffffff0300000001000000
       titre: Charisma
       grammarCritere:
       - be charismatic
@@ -41,7 +41,7 @@ MonoBehaviour:
       - being charismatic
       - charisma
       - charismatic
-    - scorePerso: 04000000040000000200000001000000ffffffff02000000
+    - scorePerso: 04000000040000000200000001000000ffffffff0200000002000000
       titre: Eloquence
       grammarCritere:
       - be eloquent
@@ -51,7 +51,7 @@ MonoBehaviour:
       - eloquent
   - champLexical: Fears
     word:
-    - scorePerso: fefffffffdfffffffffffffffeffffffffffffff01000000
+    - scorePerso: fefffffffdfffffffffffffffeffffffffffffff01000000feffffff
       titre: Anxiety
       grammarCritere:
       - feel anxious
@@ -59,7 +59,7 @@ MonoBehaviour:
       - getting anxious
       - anxiety
       - anxious
-    - scorePerso: 01000000fefffffffffffffffffffffffdffffff01000000
+    - scorePerso: 01000000fefffffffffffffffffffffffdffffff01000000fdffffff
       titre: Paranoia
       grammarCritere:
       - be paranoid
@@ -67,17 +67,17 @@ MonoBehaviour:
       - being paranoid
       - paranoia
       - paranoid
-  - champLexical: Feelings
-    word:
-    - scorePerso: fefffffffefffffffffffffffefffffffeffffff00000000
+    - scorePerso: 01000000fdfffffffffffffffefffffffefffffffffffffffdffffff
       titre: Stress
       grammarCritere:
-      - stressed out
+      - feel stressed
       - were stressed out
-      - stressing more
+      - feeling stressed
       - stress
-      - stressed out
-    - scorePerso: 010000000200000002000000010000000300000003000000
+      - stressed
+  - champLexical: Feelings
+    word:
+    - scorePerso: 010000000200000002000000010000000300000003000000feffffff
       titre: Motivation
       grammarCritere:
       - motivate yourself
@@ -85,9 +85,17 @@ MonoBehaviour:
       - motivating yourself
       - motivation
       - motivated
+    - scorePerso: 0200000002000000ffffffff0200000001000000fffffffffeffffff
+      titre: Happiness
+      grammarCritere:
+      - happy
+      - enjoyed yourself
+      - enjoying yourself
+      - happiness
+      - happy
   - champLexical: Flaws
     word:
-    - scorePerso: fefffffffdfffffffefffffffdffffffffffffff01000000
+    - scorePerso: fefffffffdfffffffefffffffdffffffffffffff01000000feffffff
       titre: Arrogance
       grammarCritere:
       - be arrogant
@@ -95,7 +103,7 @@ MonoBehaviour:
       - being arrogant
       - arrogance
       - arrogant
-    - scorePerso: fdfffffffeffffff02000000fdffffff0100000003000000
+    - scorePerso: fdfffffffeffffff02000000fdffffff0100000003000000feffffff
       titre: Rigidity
       grammarCritere:
       - be rigid
@@ -105,7 +113,7 @@ MonoBehaviour:
       - rigid
   - champLexical: Health
     word:
-    - scorePerso: 030000000100000001000000010000000100000003000000
+    - scorePerso: 03000000010000000100000001000000010000000300000002000000
       titre: Exercise
       grammarCritere:
       - to exercise
@@ -113,7 +121,7 @@ MonoBehaviour:
       - exercising
       - exercise
       - sportive
-    - scorePerso: 0200000002000000feffffffffffffff0200000001000000
+    - scorePerso: 0200000002000000feffffffffffffff020000000100000001000000
       titre: Relaxation
       grammarCritere:
       - to relax
@@ -123,7 +131,7 @@ MonoBehaviour:
       - relax
   - champLexical: Knowledge
     word:
-    - scorePerso: 0100000001000000feffffffffffffff0100000003000000
+    - scorePerso: 0100000001000000feffffffffffffff0100000003000000feffffff
       titre: Patience
       grammarCritere:
       - be patient
@@ -131,7 +139,7 @@ MonoBehaviour:
       - being patient
       - patience
       - patient
-    - scorePerso: 0100000001000000020000000100000002000000ffffffff
+    - scorePerso: 0100000001000000020000000100000002000000ffffffff02000000
       titre: Caution
       grammarCritere:
       - stay cautious
@@ -141,7 +149,7 @@ MonoBehaviour:
       - cautious
   - champLexical: Rationality
     word:
-    - scorePerso: 01000000fefffffffeffffff020000000100000003000000
+    - scorePerso: 01000000fefffffffeffffff02000000010000000300000001000000
       titre: Utopism
       grammarCritere:
       - be utopian
@@ -149,7 +157,7 @@ MonoBehaviour:
       - having utopian views
       - utopianism
       - utopian
-    - scorePerso: 010000000100000002000000ffffffffffffffff02000000
+    - scorePerso: 010000000100000002000000ffffffffffffffff0200000003000000
       titre: Pragmatism
       grammarCritere:
       - be pragmatic
@@ -159,7 +167,7 @@ MonoBehaviour:
       - pragmatic
   - champLexical: Social
     word:
-    - scorePerso: 01000000020000000100000003000000fffffffffeffffff
+    - scorePerso: 01000000020000000100000003000000fffffffffeffffff01000000
       titre: Compassion
       grammarCritere:
       - be compassionate
@@ -167,7 +175,7 @@ MonoBehaviour:
       - being too compassionate
       - compassion
       - compassionate
-    - scorePerso: 0100000002000000ffffffff0300000002000000ffffffff
+    - scorePerso: 0100000002000000ffffffff0300000002000000ffffffff01000000
       titre: Empathy
       grammarCritere:
       - have empathy
@@ -177,7 +185,7 @@ MonoBehaviour:
       - empathic
   - champLexical: Status
     word:
-    - scorePerso: 03000000ffffffff01000000ffffffff03000000ffffffff
+    - scorePerso: 03000000ffffffff01000000ffffffff03000000fffffffffeffffff
       titre: Toughness
       grammarCritere:
       - get tougher
@@ -185,7 +193,7 @@ MonoBehaviour:
       - being tough
       - toughness
       - tough
-    - scorePerso: 03000000fdffffff01000000fdffffffffffffff03000000
+    - scorePerso: 03000000fdffffff01000000fdffffffffffffff03000000feffffff
       titre: Perfection
       grammarCritere:
       - be perfect
@@ -195,4 +203,4 @@ MonoBehaviour:
       - perfect
   listChampLexicaux: {fileID: 11400000, guid: 3014ad97b364d0a48af8158102efff53, type: 2}
   foldoutList: 01010101010101010101
-  motAccepterInCL: 0101000000000000010100000000010100000000010100000000000001010001010000000001010000010100000000010100000000000001010000000000
+  motAccepterInCL: 01010000000000000101000000000101000000000101000000000001010001010000000001010000010100000000010100000000000001010000000000

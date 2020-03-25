@@ -40,9 +40,9 @@ public class SC_SceneLockAndLoad : MonoBehaviour
         SC_GM_Master.gm.namePlayer = saveObject.namePlayer;
         SC_GM_Master.gm.wordsInPull = saveObject.wordsInPull;
 
-        SC_GM_Master.gm.infoPerso = new List<string>[SC_GM_Master.gm.listChampsLexicaux.listOfPerso.Length];
+        SC_GM_Master.gm.infoRecoltPerso = new List<string>[SC_GM_Master.gm.listChampsLexicaux.listOfPerso.Length];
         for (int i = 0; i < saveObject.infoPerso.Count; i++)
-            SC_GM_Master.gm.infoPerso[i] = saveObject.infoPerso[i].infoPerso;
+            SC_GM_Master.gm.infoRecoltPerso[i] = saveObject.infoPerso[i].infoRecoltPerso;
 
         if (saveObject.infoParagrapheLettre != null)
         {

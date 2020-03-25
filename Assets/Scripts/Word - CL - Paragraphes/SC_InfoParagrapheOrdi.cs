@@ -131,7 +131,7 @@ public class SC_InfoParagrapheOrdi : MonoBehaviour
      */
     private void OnClickInfoRecolt()
     {
-        SC_GM_Master.gm.infoPerso[SC_GM_Local.gm.persoOfCurrentScene].Add(textInfos);
+        SC_GM_Master.gm.infoRecoltPerso[SC_GM_Local.gm.persoOfCurrentScene].Add(textInfos);
         text.color = infoRecoltColor;
 
         // #######################################################################################################################################

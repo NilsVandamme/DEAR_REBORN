@@ -9,7 +9,8 @@ public class SC_PlayerData
     public List<SC_InfoParagrapheLettre> infoParagrapheLettre;
     public List<SC_InfoPerso> infoPerso;
 
-    public SC_PlayerData(string namePlayer, List<SC_CLInPull> wordsInPull, SC_InfoParagrapheLettreRemplie[][] infoParagrapheLettre, List<string>[] infoPerso)
+    public SC_PlayerData(string namePlayer, List<SC_CLInPull> wordsInPull, SC_InfoParagrapheLettreRemplie[][] infoParagrapheLettre,
+                            List<string>[] infoRecoltPerso, string[] infoPerso, string[] descriptionPerso)
     {
         this.namePlayer = namePlayer;
         this.wordsInPull = wordsInPull;
@@ -19,8 +20,10 @@ public class SC_PlayerData
             this.infoParagrapheLettre.Add(new SC_InfoParagrapheLettre(elem));
 
         this.infoPerso = new List<SC_InfoPerso>();
-        foreach (List<string> elem in infoPerso)
-            this.infoPerso.Add(new SC_InfoPerso(elem));
+        for (int i = 0; i < infoRecoltPerso.Length; i++)
+        {
+            this.infoPerso.Add(new SC_InfoPerso(infoRecoltPerso[i], infoPerso[i], descriptionPerso[i]));
+        }
     }
 
     [Serializable]
@@ -37,11 +40,15 @@ public class SC_PlayerData
     [Serializable]
     public class SC_InfoPerso
     {
-        public List<string> infoPerso;
+        public string descPerso;
+        public string infoPerso;
+        public List<string> infoRecoltPerso;
 
-        public SC_InfoPerso(List<string> infoPerso)
+        public SC_InfoPerso(List<string> infoRecoltPerso, string infoPerso, string descriptionPerso)
         {
             this.infoPerso = infoPerso;
+            this.infoRecoltPerso = infoRecoltPerso;
+            this.descPerso = descriptionPerso;
         }
     }
 }
