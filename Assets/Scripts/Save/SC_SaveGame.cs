@@ -12,12 +12,12 @@ public class SC_SaveGame : MonoBehaviour
         {
             SC_GM_Paper.instance.CalculateScore();
 
-            if (SC_GM_Paper.instance.score > SC_GM_Local.gm.firstPivotScene)
+            if (SC_GM_Paper.instance.score < SC_GM_Local.gm.firstPivotScene)
             {
                 nextScene = SC_GM_Local.gm.firstScene;
                 SC_GM_Local.gm.finalAnimator = SC_GM_Local.gm.firstSceneAnimator;
             }
-            else if (SC_GM_Local.gm.numberOfScene == 2 || (SC_GM_Paper.instance.score > SC_GM_Local.gm.secondPivotScene && SC_GM_Local.gm.numberOfScene == 3))
+            else if (SC_GM_Local.gm.numberOfScene == 2 || (SC_GM_Paper.instance.score < SC_GM_Local.gm.secondPivotScene && SC_GM_Local.gm.numberOfScene == 3))
             {
                 nextScene = SC_GM_Local.gm.secondScene;
                 SC_GM_Local.gm.finalAnimator = SC_GM_Local.gm.secondSceneAnimator;
