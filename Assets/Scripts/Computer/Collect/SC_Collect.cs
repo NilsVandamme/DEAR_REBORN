@@ -119,14 +119,10 @@ public class SC_Collect : MonoBehaviour
 
     public void OnClickClose()
     {
-        Debug.Log("COllect closed start");
-
         if (isOpen) anim.Play("Collect2_close");
 
         SC_GM_SoundManager.instance.PlaySound("Misc_UnSwipe");
 
         isOpen = false;
-
-        Debug.Log("COllect closed end");
     }
 }
