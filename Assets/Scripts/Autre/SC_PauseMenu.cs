@@ -26,7 +26,7 @@ public class SC_PauseMenu : MonoBehaviour
 
     public void ExitToMainMenu()
     {
-        SC_LoadingScreen.Instance.LoadThisScene("L_00Menu");
+        SC_LoadingScreen.Instance.LoadThisScene("L_3DMENU");
     }
 
     public void Restart()
