@@ -149,17 +149,13 @@ public class SC_GM_SoundManager : MonoBehaviour
     // Play the specified sound from audioclips list
     public void PlaySound(string name)
     {
-        
             foreach(AudioClip clip in audioclips)
             {
                 if (clip.name == name)
                 {
-
-
-                ASourceSound.PlayOneShot(clip);
+                    ASourceSound.PlayOneShot(clip);
                 }
             }
-            
     }
 
     public void PlaySoundRandomPitch(string name)
@@ -168,15 +164,13 @@ public class SC_GM_SoundManager : MonoBehaviour
         {
             if (clip.name == name)
             {
-
-
                 ASourceSound.pitch = Random.Range(0.9f, 1.1f);
-
                 ASourceSound.PlayOneShot(clip);
             }
         }
     }
 
+    #region Boss Call
     public void PlayMessageBossSound()
     {
         ASourceSound.clip = AC_MessageBoss[Random.Range(0, AC_MessageBoss.Length)];
@@ -185,13 +179,13 @@ public class SC_GM_SoundManager : MonoBehaviour
 
     public void PlayMessageEmployeeSound()
     {
-        ASourceSound.clip = AC_MessageEmployee[Random.Range(0, AC_MessageBoss.Length)];
+        ASourceSound.clip = AC_MessageEmployee[0];
         ASourceSound.Play();
     }
 
     public void PlayBossCallIncomingSound()
     {
-        ASourceSound.clip = AC_MessageEmployee[Random.Range(0, AC_MessageBoss.Length)];
+        ASourceSound.clip = AC_MessageBoss[0];
         ASourceSound.Play();
     }
 
@@ -205,6 +199,7 @@ public class SC_GM_SoundManager : MonoBehaviour
         ASourceSound.clip = AC_MessageEmployee[Random.Range(0, AC_MessageBoss.Length)];
         ASourceSound.Play();
     }
+    #endregion
 
     public void PlayHoverOnPhraseSound()
     {
@@ -302,15 +297,11 @@ public class SC_GM_SoundManager : MonoBehaviour
             ASourceMusic.clip= radioMusics[0];
             ASourceMusic.Play();
         }
-       
-
-       
     }
+
     public void StopMusic()
     {
-    
         ASourceMusic.Stop();
-
     }
 
 
