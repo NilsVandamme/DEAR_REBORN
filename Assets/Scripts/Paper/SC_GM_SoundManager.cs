@@ -292,7 +292,7 @@ public class SC_GM_SoundManager : MonoBehaviour
         }
         else
         {
-            ASourceMusic.clip= radioMusics[0];
+            ASourceMusic.clip = radioMusics[0];
             ASourceMusic.Play();
         }
     }
