@@ -14,7 +14,6 @@ public class SC_Collect : MonoBehaviour
     public Button goToPreparatoryPhaseBut;
     public Image goToPreparatoryPhaseImage;
     public GameObject imageWords; // Button openning or closing the panel
-    public GameObject GM_Audio;
 
     public float waitTime;
     private Animator anim;
@@ -62,7 +61,7 @@ public class SC_Collect : MonoBehaviour
             PlayRecolt(2);
             goToPreparatoryPhaseBut.interactable = true;
             goToPreparatoryPhaseImage.sprite = startWritingON;
-            GM_Audio.GetComponent<SC_GM_SoundManager>().PlaySound("DailyCase_UnlockWriting");
+            SC_GM_SoundManager.instance.PlaySound("DailyCase_UnlockWriting");
         }
     }
 
@@ -120,10 +119,14 @@ public class SC_Collect : MonoBehaviour
 
     public void OnClickClose()
     {
+        Debug.Log("COllect closed start");
+
         if (isOpen) anim.Play("Collect2_close");
 
         SC_GM_SoundManager.instance.PlaySound("Misc_UnSwipe");
 
-        isOpen = !isOpen;
+        isOpen = false;
+
+        Debug.Log("COllect closed end");
     }
 }
