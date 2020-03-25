@@ -94,7 +94,7 @@ public class SC_GM_SoundManager : MonoBehaviour
         {
             if (clickSoundEnabled == true)
             {
-                ASourceRandomSounds.clip = AC_ClickEnter[Random.Range(0, AC_ClickEnter.Length)];
+                ASourceRandomSounds.clip = AC_ClickLeave[Random.Range(0, AC_ClickLeave.Length)];
                 ASourceRandomSounds.pitch = Random.Range(0.9f, 1f);
                 ASourceRandomSounds.Play();
 
@@ -154,14 +154,27 @@ public class SC_GM_SoundManager : MonoBehaviour
             {
                 if (clip.name == name)
                 {
-                     ASourceSound.pitch = Random.Range(0.9f, 1.1f);
-                    
-                    
-                                            
-                    ASourceSound.PlayOneShot(clip);
+
+
+                ASourceSound.PlayOneShot(clip);
                 }
             }
             
+    }
+
+    public void PlaySoundRandomPitch(string name)
+    {
+        foreach (AudioClip clip in audioclips)
+        {
+            if (clip.name == name)
+            {
+
+
+                ASourceSound.pitch = Random.Range(0.9f, 1.1f);
+
+                ASourceSound.PlayOneShot(clip);
+            }
+        }
     }
 
     public void PlayMessageBossSound()

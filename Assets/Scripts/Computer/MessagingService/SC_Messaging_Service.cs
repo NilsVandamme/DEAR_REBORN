@@ -9,8 +9,7 @@ public class SC_Messaging_Service : MonoBehaviour
 {
     #region Public attributes
     [Header("Effects")]
-    public AudioClip soundBossMessage;
-    public AudioClip soundPlayerMessage;
+    public GameObject GM_Audio;
     public GameObject particlEffectPlayerMessage;
     public GameObject particlEffectBossMessage;
 
@@ -73,7 +72,7 @@ public class SC_Messaging_Service : MonoBehaviour
         GetAllDialog();
 
         messageAudioSource = GetComponent<AudioSource>();
-
+        
       
     }
 
@@ -253,10 +252,13 @@ public class SC_Messaging_Service : MonoBehaviour
 
         if (type == 0)
         {
-            messageAudioSource.PlayOneShot(soundBossMessage);
+          
+            GM_Audio.GetComponent<SC_GM_SoundManager>().PlayMessageBossSound();
+
         } else
         {
-            messageAudioSource.PlayOneShot(soundPlayerMessage);
+           
+            GM_Audio.GetComponent<SC_GM_SoundManager>().PlayMessageEmployeeSound();
         }
     }
 

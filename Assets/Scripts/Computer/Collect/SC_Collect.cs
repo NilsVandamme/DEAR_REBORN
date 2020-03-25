@@ -14,6 +14,7 @@ public class SC_Collect : MonoBehaviour
     public Button goToPreparatoryPhaseBut;
     public Image goToPreparatoryPhaseImage;
     public GameObject imageWords; // Button openning or closing the panel
+    public GameObject GM_Audio;
 
     public float waitTime;
     private Animator anim;
@@ -61,6 +62,7 @@ public class SC_Collect : MonoBehaviour
             PlayRecolt(2);
             goToPreparatoryPhaseBut.interactable = true;
             goToPreparatoryPhaseImage.sprite = startWritingON;
+            GM_Audio.GetComponent<SC_GM_SoundManager>().PlaySound("DailyCase_UnlockWriting");
         }
     }
 
