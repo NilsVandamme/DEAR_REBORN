@@ -223,7 +223,6 @@ public class SC_GM_SoundManager : MonoBehaviour
     }
 
 
-
     // Change the volume in main menu
     public void ChangeSoundVolume(float SliderValue)
     {
