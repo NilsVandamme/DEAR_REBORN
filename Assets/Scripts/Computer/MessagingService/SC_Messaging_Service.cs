@@ -229,7 +229,35 @@ public class SC_Messaging_Service : MonoBehaviour
     {
         animatorChat.SetBool("IsBossWritting", true);
 
+        // PlaceHolder
+        var placeholder = Instantiate(listPlayerMessages[4],
+            chatPanelObject.transform);
+
+        var placeholder2 = Instantiate(listPlayerMessages[4],
+            chatPanelObject.transform);
+
+        var placeholder3 = Instantiate(listPlayerMessages[4],
+            chatPanelObject.transform);
+
+        var placeholder4 = Instantiate(listPlayerMessages[4],
+            chatPanelObject.transform);
+
+        chatMessageList.Add(placeholder);
+        chatMessageList.Add(placeholder2);
+        chatMessageList.Add(placeholder3);
+        chatMessageList.Add(placeholder4);
+
         yield return new WaitForSeconds(2f);
+
+        chatMessageList.RemoveAt(chatMessageList.Count - 1);
+        chatMessageList.RemoveAt(chatMessageList.Count - 1);
+        chatMessageList.RemoveAt(chatMessageList.Count - 1);
+        chatMessageList.RemoveAt(chatMessageList.Count - 1);
+
+        Destroy(placeholder);
+        Destroy(placeholder2);
+        Destroy(placeholder3);
+        Destroy(placeholder4);
 
         animatorChat.SetBool("IsBossWritting", false);
         bossWrittingAnimationStarted = false;
