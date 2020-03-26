@@ -68,6 +68,8 @@ public class SC_GM_SoundManager : MonoBehaviour
 
     private void Update()
     {
+        Debug.Log("UPDATE - Music volume = " + ASourceMusic.volume);
+
         if (currentTrack < 0)
         {
             currentTrack = 1;
@@ -236,6 +238,7 @@ public class SC_GM_SoundManager : MonoBehaviour
         ASourceOffice.volume = SliderValue;
         ASourceRandomSounds.volume = SliderValue;
         PlayerPrefs.SetFloat("SoundVolume", SliderValue);
+        Debug.Log(PlayerPrefs.GetFloat("SoundVolume"));
     }
 
     // Change the volume in main menu
@@ -245,6 +248,8 @@ public class SC_GM_SoundManager : MonoBehaviour
         musicSlider.value = SliderValue;
         radioSlider.value = SliderValue;
         PlayerPrefs.SetFloat("MusicVolume", SliderValue);
+        Debug.Log(PlayerPrefs.GetFloat("MusicVolume") + " source = " + ASourceMusic);
+        Debug.Log(" source volume = " + ASourceMusic.volume);
     }
 
  
