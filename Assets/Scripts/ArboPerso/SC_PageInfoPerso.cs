@@ -4,6 +4,10 @@ using UnityEngine.UI;
 
 public class SC_PageInfoPerso : MonoBehaviour
 {
+    // COLORS
+    public Color colorGood;
+    public Color colorBad;
+
     // Left Part
     public Image iconeImage;
     public TextMeshProUGUI namePerso;
@@ -38,7 +42,7 @@ public class SC_PageInfoPerso : MonoBehaviour
         for (int i = 0; i < SC_GM_Master.gm.lastParagrapheLettrePerPerso[perso].Length; i++)
         { 
             paragraphe[i + 1].text = SC_GM_Master.gm.lastParagrapheLettrePerPerso[perso][i].textParagraphe;
-            paragraphe[i + 1].color = (SC_GM_Master.gm.lastParagrapheLettrePerPerso[perso][i].scoreParagraphe > 0) ? (Color.green) : (Color.red);
+            paragraphe[i + 1].color = (SC_GM_Master.gm.lastParagrapheLettrePerPerso[perso][i].scoreParagraphe > 0) ? (colorGood) : (colorBad);
         }
     }
 
