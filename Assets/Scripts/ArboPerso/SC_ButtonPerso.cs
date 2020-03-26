@@ -34,7 +34,7 @@ public class SC_ButtonPerso : MonoBehaviour
         {
             PageInfoPerso.SetActive(true);
             ArboPerso.SetActive(false);
-            SC_PageInfoPerso.instance.Init(persoOfButton, unlockScene);
+            PageInfoPerso.GetComponent<SC_PageInfoPerso>().Init(persoOfButton, unlockScene);
         }
     }
 }

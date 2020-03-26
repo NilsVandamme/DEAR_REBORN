@@ -22,29 +22,15 @@ public class SC_PageInfoPerso : MonoBehaviour
     [HideInInspector]
     public Sprite icone;
 
-    public static SC_PageInfoPerso instance = null;
-
-    private void Awake()
-    {
-        if (instance == null)
-            instance = this;
-        else if (instance != null)
-            Destroy(gameObject);
-    }
-
-    private void Start()
+    public void Init(int persoOfButton, Sprite unlockScene)
     {
         paragraphe = lettre.GetComponentsInChildren<TextMeshProUGUI>(true);
 
-        RightPart();
-        LeftPart();
-    }
-
-
-    public void Init(int persoOfButton, Sprite unlockScene)
-    {
         perso = persoOfButton;
         icone = unlockScene;
+
+        RightPart();
+        LeftPart();
     }
 
     private void RightPart()
