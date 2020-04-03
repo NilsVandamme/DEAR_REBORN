@@ -153,7 +153,7 @@ public class SC_DragDropControls : MonoBehaviour
                         middle = false;
                         down = false;
 
-                        if (SnapPositionObjectDown.transform.position.z > -3)
+                        if (SnapPositionObjectDown.transform.position.z > -4)
                             top = true;
                         else if (SnapPositionObjectDown.transform.position.z > -5)
                             middle = true;

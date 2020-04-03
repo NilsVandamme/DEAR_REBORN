@@ -18,7 +18,8 @@ public class SC_PageInfoPerso : MonoBehaviour
     // Right Part
     public GameObject lettre;
     
-    private TextMeshProUGUI[] paragraphe;
+    private TextMeshProUGUI[] paragrapheText;
+    private Image[] paragrapheImage;
 
     // info passer depuis SC_ButtonPerso
     [HideInInspector]
@@ -28,7 +29,8 @@ public class SC_PageInfoPerso : MonoBehaviour
 
     public void Init(int persoOfButton, Sprite unlockScene)
     {
-        paragraphe = lettre.GetComponentsInChildren<TextMeshProUGUI>(true);
+        paragrapheText = lettre.GetComponentsInChildren<TextMeshProUGUI>(true);
+        paragrapheImage = lettre.GetComponentsInChildren<Image>(true);
 
         perso = persoOfButton;
         icone = unlockScene;
@@ -41,8 +43,8 @@ public class SC_PageInfoPerso : MonoBehaviour
     {
         for (int i = 0; i < SC_GM_Master.gm.lastParagrapheLettrePerPerso[perso].Length; i++)
         { 
-            paragraphe[i + 1].text = SC_GM_Master.gm.lastParagrapheLettrePerPerso[perso][i].textParagraphe;
-            paragraphe[i + 1].color = (SC_GM_Master.gm.lastParagrapheLettrePerPerso[perso][i].scoreParagraphe > 0) ? (colorGood) : (colorBad);
+            paragrapheText[i + 1].text = SC_GM_Master.gm.lastParagrapheLettrePerPerso[perso][i].textParagraphe;
+            paragrapheImage[i + 1].color = (SC_GM_Master.gm.lastParagrapheLettrePerPerso[perso][i].scoreParagraphe > 0) ? (colorGood) : (colorBad);
         }
     }
 
