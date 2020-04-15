@@ -7,7 +7,7 @@ public class PassText : MonoBehaviour
 {
     public string[] TextTuto;
     public Text ActualText;
-    private int NumberText;
+    public int NumberText;
     public GameObject PrevButton;
     public GameObject NextButton;
     public GameObject Stampy;
