@@ -9,7 +9,6 @@ public class DeactivateObjetc : MonoBehaviour
 
     public void Deactivate()
     {
-        Debug.Log("oui");
         TheObject.GetComponent<Button>().interactable = false;
     }
 }

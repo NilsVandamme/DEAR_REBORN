@@ -68,7 +68,7 @@ public class SC_GM_SoundManager : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log("UPDATE - Music volume = " + ASourceMusic.volume);
+        //Debug.Log("UPDATE - Music volume = " + ASourceMusic.volume);
 
         if (currentTrack < 0)
         {

@@ -84,6 +84,14 @@ public class SC_DragDropControls : MonoBehaviour
             colorSR.sortingOrder = 0;
             textSR.sortingOrder = 1;
         }
+        else
+        {
+            timer = 0;
+            snapMovementActive = false;
+            rig.useGravity = true;
+            if (IsSnapped)
+                removeButton.SetActive(true);
+        }
     }
 
     // When the mouse is being pressed
