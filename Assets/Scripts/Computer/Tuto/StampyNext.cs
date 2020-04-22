@@ -13,6 +13,7 @@ public class StampyNext : MonoBehaviour
     public GameObject[] Buttons;
     public GameObject TutoManager;
     public bool Delete;
+    private bool Control;
 
     void Start()
     {
@@ -55,6 +56,16 @@ public class StampyNext : MonoBehaviour
     public void ReApper()
     {
         StampyAnimator.Play("Appear");
+    }
+
+    public void ReApperControl()
+    {
+        if (!Control)
+        {
+            StampyAnimator.Play("Appear");
+            Control = true;
+        }
+        
     }
 
     public void NewObject()
