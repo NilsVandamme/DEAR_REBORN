@@ -108,7 +108,7 @@ public class PassText : MonoBehaviour
     {
         if (Background != null)
         {
-            Background.SetActive(false);
+            Background.GetComponent<Animator>().Play("FadeOut");
         }
     }
 
