@@ -6,9 +6,12 @@ using UnityEngine.UI;
 public class NumberOfPage : MonoBehaviour
 {
     public PassText BulleScript;
+    private int Number;
 
     void Update()
     {
-        GetComponent<Text>().text = (BulleScript.TextTuto.Length).ToString();
+        Number = Mathf.Clamp(Number, 0, BulleScript.TextTuto.Length - 1);
+        Number = (BulleScript.TextTuto.Length - 1);
+        GetComponent<Text>().text = Number.ToString();
     }
 }
