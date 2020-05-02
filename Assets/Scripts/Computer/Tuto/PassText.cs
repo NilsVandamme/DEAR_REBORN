@@ -17,6 +17,8 @@ public class PassText : MonoBehaviour
     public bool NewValue;
     public GameObject[] ObjectsToActivate;
     public GameObject Background;
+    public RuntimeAnimatorController FinalAnimator;
+    public RuntimeAnimatorController NormalAnimator;
 
     void Start()
     {
@@ -31,6 +33,10 @@ public class PassText : MonoBehaviour
         if (TextTuto[NumberText] != "")
         {
             ActualText.GetComponent<Text>().text = TextTuto[NumberText];
+            if (TextTuto[NumberText+1] == "")
+            {
+                NextButton.GetComponent<Animator>().runtimeAnimatorController = FinalAnimator as RuntimeAnimatorController;
+            }
         }
         if (TextTuto[NumberText] == "")
         {
@@ -54,6 +60,7 @@ public class PassText : MonoBehaviour
     public void PrevText()
     {
         NumberText--;
+        NextButton.GetComponent<Animator>().runtimeAnimatorController = NormalAnimator as RuntimeAnimatorController;
         if (NumberText >= 0)
         {
             ActualText.GetComponent<Text>().text = TextTuto[NumberText];
