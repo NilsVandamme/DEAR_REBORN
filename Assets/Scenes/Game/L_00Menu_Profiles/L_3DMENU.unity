@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -230,6 +230,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Colors.m_NormalColor.a
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1663619642530476028, guid: e45273be4e97118459ee23bbe321c8f1,
+        type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1404629342}
+    - target: {fileID: 1663619642530476028, guid: e45273be4e97118459ee23bbe321c8f1,
+        type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: RetroModeChange
+      objectReference: {fileID: 0}
+    - target: {fileID: 1663619642530476028, guid: e45273be4e97118459ee23bbe321c8f1,
+        type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1663619643009193440, guid: e45273be4e97118459ee23bbe321c8f1,
         type: 3}
@@ -5155,6 +5170,18 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 9428291}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1196143875 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1663619642530476028, guid: e45273be4e97118459ee23bbe321c8f1,
+    type: 3}
+  m_PrefabInstance: {fileID: 9428291}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9085046f02f69544eb97fd06b6048fe2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1267923029
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5359,6 +5386,7 @@ GameObject:
   - component: {fileID: 1404629339}
   - component: {fileID: 1404629338}
   - component: {fileID: 1404629337}
+  - component: {fileID: 1404629342}
   - component: {fileID: 1404629340}
   - component: {fileID: 1404629341}
   m_Layer: 0
@@ -5504,12 +5532,29 @@ MonoBehaviour:
       colorBlindnessType: 0
       colorBlindnessStrength: 1
   m_Resources: {fileID: 11400000, guid: d82512f9c8e5d4a4d938b575d47f88d4, type: 2}
-  m_ShowToolkit: 0
+  m_ShowToolkit: 1
   m_ShowCustomSorter: 0
   breakBeforeColorGrading: 0
   m_BeforeTransparentBundles: []
   m_BeforeStackBundles: []
   m_AfterStackBundles: []
+--- !u!114 &1404629342
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1404629336}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: adee2eeddf6468149a2f728ef0ae10c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pplist:
+  - {fileID: 1404629340}
+  retroMode: 0
+  tog: {fileID: 1196143875}
+  colorGradingLayer: {fileID: 0}
 --- !u!1 &1417364399
 GameObject:
   m_ObjectHideFlags: 0
@@ -9977,16 +10022,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 7605183703382155505, guid: 042f22022b48a754cb69fe1387b6045d,
-        type: 3}
-      propertyPath: m_Name
-      value: StoryArboCanvas
-      objectReference: {fileID: 0}
-    - target: {fileID: 7605183703382155505, guid: 042f22022b48a754cb69fe1387b6045d,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7605183703382155517, guid: 042f22022b48a754cb69fe1387b6045d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -10092,10 +10127,15 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7605183703382155519, guid: 042f22022b48a754cb69fe1387b6045d,
+    - target: {fileID: 7605183703382155505, guid: 042f22022b48a754cb69fe1387b6045d,
         type: 3}
-      propertyPath: m_ScaleFactor
-      value: 0.5
+      propertyPath: m_Name
+      value: StoryArboCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 7605183703382155505, guid: 042f22022b48a754cb69fe1387b6045d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6207597037013608936, guid: 042f22022b48a754cb69fe1387b6045d,
         type: 3}
@@ -10109,6 +10149,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2538567004081708464, guid: 48dfb50199b8f68449fbbeaf85651280,
         type: 3}
+    - target: {fileID: 7605183703382155519, guid: 042f22022b48a754cb69fe1387b6045d,
+        type: 3}
+      propertyPath: m_ScaleFactor
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 7580398522440019046, guid: 042f22022b48a754cb69fe1387b6045d,
         type: 3}
       propertyPath: m_Controller
@@ -10471,16 +10516,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2385855585707110378, guid: 4ce2c528c415a6a4baa885a572e7b6d8,
-        type: 3}
-      propertyPath: m_Name
-      value: WheelToLetter
-      objectReference: {fileID: 0}
-    - target: {fileID: 2385855585707110378, guid: 4ce2c528c415a6a4baa885a572e7b6d8,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2385855585707110379, guid: 4ce2c528c415a6a4baa885a572e7b6d8,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -10535,6 +10570,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2385855585707110378, guid: 4ce2c528c415a6a4baa885a572e7b6d8,
+        type: 3}
+      propertyPath: m_Name
+      value: WheelToLetter
+      objectReference: {fileID: 0}
+    - target: {fileID: 2385855585707110378, guid: 4ce2c528c415a6a4baa885a572e7b6d8,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5324880380478519398, guid: 4ce2c528c415a6a4baa885a572e7b6d8,
         type: 3}
@@ -11564,16 +11609,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 5811195497259703338, guid: d7298c357a253844ba4c3a17c3190ec1,
-        type: 3}
-      propertyPath: m_Name
-      value: GM_Cursor
-      objectReference: {fileID: 0}
-    - target: {fileID: 5811195497259703338, guid: d7298c357a253844ba4c3a17c3190ec1,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5811195497259703316, guid: d7298c357a253844ba4c3a17c3190ec1,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -11628,6 +11663,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5811195497259703338, guid: d7298c357a253844ba4c3a17c3190ec1,
+        type: 3}
+      propertyPath: m_Name
+      value: GM_Cursor
+      objectReference: {fileID: 0}
+    - target: {fileID: 5811195497259703338, guid: d7298c357a253844ba4c3a17c3190ec1,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d7298c357a253844ba4c3a17c3190ec1, type: 3}

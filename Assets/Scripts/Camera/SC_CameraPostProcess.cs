@@ -9,11 +9,14 @@ public class SC_CameraPostProcess : MonoBehaviour
     public PostProcessVolume[] pplist; // List of postprocess components on the camera
     public bool retroMode; // Is b&w postproc active ?
     public Toggle tog; // The toggle from the menu options (no ref needed in other scenes) 
+    public ColorGrading colorGradingLayer = null;
 
     void Start()
     {
         // Get all postproc components
         pplist = GetComponents<PostProcessVolume>();
+
+        pplist[0].profile.TryGetSettings(out colorGradingLayer);
 
         // Get the saved option from the playerprefs
         if (PlayerPrefs.HasKey("retroMode"))
@@ -46,7 +49,7 @@ public class SC_CameraPostProcess : MonoBehaviour
     //Activate the retro mode and save in the playerprefs
     public void RetroModeChange(bool value)
     {
-        pplist[0].enabled = value;
+        colorGradingLayer.active = value;
 
         if (value)
         {
@@ -56,14 +59,18 @@ public class SC_CameraPostProcess : MonoBehaviour
         {
             PlayerPrefs.SetInt("retroMode", 0);
         }
+
+        //Debug.Log("retro mode " + value);
     }
 
     // Activate or disable the b&w postproc
     public void ActivateRetroMode()
     {
         if (retroMode)
-            pplist[0].enabled = true;
+            colorGradingLayer.active = true;
         else
-            pplist[0].enabled = false;
+            colorGradingLayer.active = false;
+
+        //Debug.Log("postprocesss active");
     }
 }
