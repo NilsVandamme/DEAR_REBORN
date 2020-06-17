@@ -214,7 +214,6 @@ public class SC_Messaging_Service : MonoBehaviour
         Canvas.ForceUpdateCanvases();
         scrollbar.value = 1;
         scrollbar.value = 0;
-        Canvas.ForceUpdateCanvases();
 
         /*
         // Creation of the particles
