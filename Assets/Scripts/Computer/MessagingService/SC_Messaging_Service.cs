@@ -9,28 +9,21 @@ public class SC_Messaging_Service : MonoBehaviour
 {
     #region Public attributes
     [Header("Effects")]
-    public GameObject particlEffectPlayerMessage;
     public GameObject particlEffectBossMessage;
 
     [Header("ConfigTech")]
     public GameObject chatPanelObject;
     public GameObject listBossDialogObject;
-    public GameObject listPlayerDialogObject;
-
-    [Header("Buttons")]
-    public GameObject buttonsChoices;
-    public GameObject buttonEndChat;
 
     [Header("List distrubition Talking time")]
     [Tooltip("Check a case to let the player talk after a checked case")]
     public List<bool> listOrderDialog = new List<bool>();
 
     [Header("Translate Parameters")]
-    //Je savais pas trop où mettre ça donc j'ai fait un autre header, déso !
-
+    public Scrollbar scrollbar;
     public float newPositionLerp = 0f;
-
     public bool CanStartTuto;
+
     #endregion
 
     #region privates attributes
@@ -38,9 +31,7 @@ public class SC_Messaging_Service : MonoBehaviour
 
     AudioSource messageAudioSource;
 
-    List<TextMeshProUGUI> chatMessageList = new List<TextMeshProUGUI>();
-    TextMeshProUGUI[] listBossMessages;
-    TextMeshProUGUI[] listPlayerMessages;
+    List<GameObject> listBossMessages = new List<GameObject>();
 
     int countPassedDialog;
     int TotalTextInDialog;
@@ -65,12 +56,23 @@ public class SC_Messaging_Service : MonoBehaviour
         countPassedDialog = 0;
 
         animatorChat = gameObject.GetComponent<Animator>();
-
-        
     }
 
     private void Start()
     {
+        // Get the number of dialog
+        TotalTextInDialog = listBossDialogObject.GetComponentsInChildren<TextMeshProUGUI>(true).Length;
+
+        // Delete the list only if modification
+        if (listOrderDialog.Count != TotalTextInDialog)
+        {
+            // Empty the list
+            listOrderDialog.Clear();
+
+            // Set the correct number of bool to the list
+            for (int i = 0; i < TotalTextInDialog; i++) listOrderDialog.Add(false);
+        }
+
         GetAllDialog();
 
         messageAudioSource = GetComponent<AudioSource>();
@@ -162,10 +164,8 @@ public class SC_Messaging_Service : MonoBehaviour
     /*
      * Open the window boss call
      */
-    public void OpenChat()
+    public void PickUpCall()
     {
-        //SC_GM_SoundManager.instance.PlayPickupBossCallSound();
-
         animatorChat.SetBool("IsChatOpen", true);
         StartCoroutine(ChatIsOpenning());
     }
@@ -181,42 +181,18 @@ public class SC_Messaging_Service : MonoBehaviour
     }
 
     /**
-     * Player send message to chat
+     * Player responde with an emojy while clicking on it
      */
-    public void playerSendResponce(int numeroSmilley)
+    public void playerSendResponce()
     {
+        Debug.Log("Début du choix du joueur");
 
         if (playerTurn)
         {
             playerTurn = false;
 
-            // PlaceHolder
-            chatMessageList.Add(
-                Instantiate(listPlayerMessages[4],
-                chatPanelObject.transform));
-
             // Creation of the new message
-            var message = Instantiate(listPlayerMessages[numeroSmilley],
-                chatPanelObject.transform);
-
-            // Add the particleSystem
-            var particles = Instantiate(particlEffectPlayerMessage, message.GetComponentInChildren<Image>().transform);
-            particles.transform.SetParent(message.GetComponentInChildren<Image>().transform);
-            
-            StartCoroutine(PlayEffects(particles.GetComponent<ParticleSystem>(), 1));
-
-            // Add the message
-            chatMessageList.Add(message);
-
-            
-
-            // PlaceHolder
-            chatMessageList.Add(
-                Instantiate(listPlayerMessages[4],
-                chatPanelObject.transform));
-
-            chatRefreshed = false;
-            lerpUpdate = true;
+            // Il faut faire que les deux autres icones fades
         }
     }
 
@@ -226,51 +202,28 @@ public class SC_Messaging_Service : MonoBehaviour
      */
     IEnumerator BossIsTalking()
     {
-        animatorChat.SetBool("IsBossWritting", true);
-
-        // PlaceHolder
-        var placeholder = Instantiate(listPlayerMessages[4],
-            chatPanelObject.transform);
-
-        var placeholder2 = Instantiate(listPlayerMessages[4],
-            chatPanelObject.transform);
-
-        var placeholder3 = Instantiate(listPlayerMessages[4],
-            chatPanelObject.transform);
-
-        var placeholder4 = Instantiate(listPlayerMessages[4],
-            chatPanelObject.transform);
-
-        chatMessageList.Add(placeholder);
-        chatMessageList.Add(placeholder2);
-        chatMessageList.Add(placeholder3);
-        chatMessageList.Add(placeholder4);
-
-        yield return new WaitForSeconds(2f);
-
-        chatMessageList.RemoveAt(chatMessageList.Count - 1);
-        chatMessageList.RemoveAt(chatMessageList.Count - 1);
-        chatMessageList.RemoveAt(chatMessageList.Count - 1);
-        chatMessageList.RemoveAt(chatMessageList.Count - 1);
-
-        Destroy(placeholder);
-        Destroy(placeholder2);
-        Destroy(placeholder3);
-        Destroy(placeholder4);
-
-        animatorChat.SetBool("IsBossWritting", false);
-        bossWrittingAnimationStarted = false;
 
         // Creation of the new message
-        var message = Instantiate(listBossMessages[countPassedDialog],
+        GameObject message = Instantiate(listBossMessages[countPassedDialog],
             chatPanelObject.transform);
+        message.transform.localScale = new Vector3(1, 1, 1);
+        message.transform.position.Set(message.transform.position.x, 
+            message.transform.position.y,
+            0);
 
+        Canvas.ForceUpdateCanvases();
+        scrollbar.value = 1;
+        scrollbar.value = 0;
+
+        /*
         // Creation of the particles
         var particles = Instantiate(particlEffectBossMessage, message.GetComponentInChildren<Image>().transform);
         particles.transform.SetParent(message.GetComponentInChildren<Image>().transform);
         StartCoroutine(PlayEffects(particles.GetComponent<ParticleSystem>(), 0));
-        
-        chatMessageList.Add(message);
+        */
+
+        yield return new WaitForSeconds(2f);
+        bossWrittingAnimationStarted = false;
 
         chatRefreshed = false;
 
@@ -282,8 +235,6 @@ public class SC_Messaging_Service : MonoBehaviour
 
         // Then pass to the next dialog
         countPassedDialog++;
-       
-
     }
 
     IEnumerator PlayEffects(ParticleSystem particles, int type)
@@ -306,7 +257,7 @@ public class SC_Messaging_Service : MonoBehaviour
     // Wait for the window to have finished to open to set the variable
     IEnumerator ChatIsOpenning()
     {
-        yield return new WaitForSeconds(1.3f);
+        yield return new WaitForSeconds(1.2f);
         ChatStarted = true;
     }
 
@@ -315,8 +266,6 @@ public class SC_Messaging_Service : MonoBehaviour
     {
         newPositionLerp = chatPanelObject.GetComponent<RectTransform>().localPosition.y + 1000f;
         yield return new WaitForSeconds(0.2f);
-       
-       
     }
 
     IEnumerator CloseChatDefinitively()
@@ -331,11 +280,10 @@ public class SC_Messaging_Service : MonoBehaviour
      */
     void GetAllDialog()
     {
-        // Get the all the text of the boss
-        listBossMessages = listBossDialogObject.GetComponentsInChildren<TextMeshProUGUI>(true);
-
-        // Get the all the smilley of the player
-        listPlayerMessages = listPlayerDialogObject.GetComponentsInChildren<TextMeshProUGUI>(true);
+        for (int i = 0; i < TotalTextInDialog; i++)
+        {
+            listBossMessages.Add(listBossDialogObject.transform.GetChild(i).gameObject);
+        }
     }
 
     public void StartTuto()

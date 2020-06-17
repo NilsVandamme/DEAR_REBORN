@@ -248,8 +248,6 @@ public class SC_GM_SoundManager : MonoBehaviour
         musicSlider.value = SliderValue;
         radioSlider.value = SliderValue;
         PlayerPrefs.SetFloat("MusicVolume", SliderValue);
-        Debug.Log(PlayerPrefs.GetFloat("MusicVolume") + " source = " + ASourceMusic);
-        Debug.Log(" source volume = " + ASourceMusic.volume);
     }
 
  
