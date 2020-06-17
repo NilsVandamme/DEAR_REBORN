@@ -20,6 +20,7 @@ public class SC_Messaging_Service : MonoBehaviour
     public List<bool> listOrderDialog = new List<bool>();
 
     [Header("Translate Parameters")]
+    public Scrollbar scrollbar;
     public float newPositionLerp = 0f;
     public bool CanStartTuto;
 
@@ -201,12 +202,6 @@ public class SC_Messaging_Service : MonoBehaviour
      */
     IEnumerator BossIsTalking()
     {
-        //animatorChat.SetBool("IsBossWritting", true);
-
-        yield return new WaitForSeconds(2f);
-
-        //animatorChat.SetBool("IsBossWritting", false);
-        bossWrittingAnimationStarted = false;
 
         // Creation of the new message
         GameObject message = Instantiate(listBossMessages[countPassedDialog],
@@ -215,12 +210,21 @@ public class SC_Messaging_Service : MonoBehaviour
         message.transform.position.Set(message.transform.position.x, 
             message.transform.position.y,
             0);
+
+        Canvas.ForceUpdateCanvases();
+        scrollbar.value = 1;
+        scrollbar.value = 0;
+        Canvas.ForceUpdateCanvases();
+
         /*
         // Creation of the particles
         var particles = Instantiate(particlEffectBossMessage, message.GetComponentInChildren<Image>().transform);
         particles.transform.SetParent(message.GetComponentInChildren<Image>().transform);
         StartCoroutine(PlayEffects(particles.GetComponent<ParticleSystem>(), 0));
         */
+
+        yield return new WaitForSeconds(2f);
+        bossWrittingAnimationStarted = false;
 
         chatRefreshed = false;
 
