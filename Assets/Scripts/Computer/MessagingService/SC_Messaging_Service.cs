@@ -19,12 +19,15 @@ public class SC_Messaging_Service : MonoBehaviour
     [Tooltip("Check a case to let the player talk after a checked case")]
     public List<bool> listOrderDialog = new List<bool>();
 
+    [Header("Time Paremeters")]
+    public float waitBetweenTwoMessage;
+    public float waitAfterResponceFromPlayer;
+
     [Header("Translate Parameters")]
     public Scrollbar scrollbar;
-    public float newPositionLerp = 0f;
     public bool CanStartTuto;
-
     #endregion
+
 
     #region privates attributes
     Animator animatorChat;
@@ -46,7 +49,6 @@ public class SC_Messaging_Service : MonoBehaviour
     bool isCallMusicStarted = false;
     bool isCallMusicStopped= false;
     bool chatRefreshed = true;
-    public bool lerpUpdate = false;
     #endregion
 
     private void Awake()
@@ -85,14 +87,6 @@ public class SC_Messaging_Service : MonoBehaviour
      */
     private void Update()
     {
-        // Make the chat go down when someone wrote
-        if (!chatRefreshed)
-        {
-            chatRefreshed = true;
-
-            StartCoroutine(RefreshChat());
-        }
-
         // When in editor
         if (listBossDialogObject != null)
         {
@@ -130,20 +124,6 @@ public class SC_Messaging_Service : MonoBehaviour
         if (countPassedDialog == TotalTextInDialog && !playerTurn)
         {
             animatorChat.SetBool("IsChatFinished", true);
-        }
-
-
-        if (lerpUpdate)
-        {
-            chatPanelObject.GetComponent<RectTransform>().localPosition = new Vector3(
-                chatPanelObject.GetComponent<RectTransform>().localPosition.x,
-                Mathf.SmoothDamp(chatPanelObject.GetComponent<RectTransform>().localPosition.y, newPositionLerp, ref LerpVelocity, LerpTime, 500f, Time.deltaTime),
-                chatPanelObject.GetComponent<RectTransform>().localPosition.z);
-
-            if(Input.GetAxis("Mouse ScrollWheel") > 0f)
-            {
-                lerpUpdate = false;
-            }
         }
 
         // Play the ringing sound of the call
@@ -185,15 +165,13 @@ public class SC_Messaging_Service : MonoBehaviour
      */
     public void playerSendResponce()
     {
-        Debug.Log("Début du choix du joueur");
+        StartCoroutine(playerResponce());
+    }
 
-        if (playerTurn)
-        {
-            playerTurn = false;
-
-            // Creation of the new message
-            // Il faut faire que les deux autres icones fades
-        }
+    IEnumerator playerResponce()
+    {
+        yield return new WaitForSeconds(waitAfterResponceFromPlayer);
+        playerTurn = false;
     }
 
     /**
@@ -211,9 +189,13 @@ public class SC_Messaging_Service : MonoBehaviour
             message.transform.position.y,
             0);
 
+       
         Canvas.ForceUpdateCanvases();
+
         scrollbar.value = 1;
         scrollbar.value = 0;
+
+        Canvas.ForceUpdateCanvases();
 
         /*
         // Creation of the particles
@@ -222,7 +204,7 @@ public class SC_Messaging_Service : MonoBehaviour
         StartCoroutine(PlayEffects(particles.GetComponent<ParticleSystem>(), 0));
         */
 
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(waitBetweenTwoMessage);
         bossWrittingAnimationStarted = false;
 
         chatRefreshed = false;
@@ -261,12 +243,6 @@ public class SC_Messaging_Service : MonoBehaviour
         ChatStarted = true;
     }
 
-    // Make the chat go down when the text appear
-    IEnumerator RefreshChat()
-    {
-        newPositionLerp = chatPanelObject.GetComponent<RectTransform>().localPosition.y + 1000f;
-        yield return new WaitForSeconds(0.2f);
-    }
 
     IEnumerator CloseChatDefinitively()
     {
