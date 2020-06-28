@@ -1,28 +1,23 @@
 ﻿using System.Collections;
-using TMPro;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class SC_DragDropWords : MonoBehaviour
+public class SC_TimbreDragDrop : MonoBehaviour
 {
     public bool IsSelected;
     public bool Snapped;
     public bool SnapMovement;
-    public float SpeedDivider;
-    public float HoveringHeight;
-    public float SnapSpeed;
+    public float SpeedDivider = 1.1f;
+    public float HoveringHeight = -3;
+    public float SnapSpeed = 3;
+
+    public string triggerName;
 
     [Space]
-    public SpriteRenderer backgroundSR;
-    public TextMeshPro text;
-    public GameObject ParticleWin;
-    public GameObject GM_Audio;
-
     private Vector3 OriginalPosition;
     private Vector3 mouseOffset;
     private float mouseZCoord;
     private Rigidbody rig; // Object rigidbidy
-    private SC_AutoComplete autoc;
-    private SC_DragDropControls ddcontrols;
     private Vector3 SnapPosition;
 
     private Animator animator;
@@ -32,7 +27,7 @@ public class SC_DragDropWords : MonoBehaviour
     {
         OriginalPosition = transform.position;
         rig = GetComponent<Rigidbody>();
-        animator = this.gameObject.GetComponentInParent<Animator>();
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -40,16 +35,23 @@ public class SC_DragDropWords : MonoBehaviour
     {
         if (SnapMovement)
         {
-            if (Vector3.Distance(transform.position, SnapPosition) > 0.03)
+            if (Vector3.Distance(transform.position, SnapPosition) > 0.03f)
             {
                 //Debug.Log("aligning");
                 rig.position = Vector3.Lerp(rig.position, SnapPosition, SnapSpeed * Time.deltaTime);
             }
-            else if (Vector3.Distance(transform.position, SnapPosition) <= 0.03)
+            else if (Vector3.Distance(transform.position, SnapPosition) <= 0.03f)
             {
-                SnapMovement = false;
-                rig.useGravity = true;
+                Debug.Log("hehey");
+                if (Snapped)
+                {  
+                    SC_TimbreChooser.instance.selectedStamp = this.gameObject;
+                    SC_TimbreChooser.instance.ChooseStamp();
+                    SC_TimbreChooser.instance.anim.SetTrigger(triggerName);
+                }
 
+                rig.useGravity = true;
+                SnapMovement = false;
             }
         }
     }
@@ -66,26 +68,15 @@ public class SC_DragDropWords : MonoBehaviour
         if (rig != null)
             rig.useGravity = false;
 
-        SC_GM_WheelToLetter.instance.OnClickButtonAutoComplete(text);
-
-        backgroundSR.sortingOrder = 2;
-        text.sortingOrder = 3;
-
-        SC_GM_SoundManager.instance.PlaySound("Redaction_PickUpItem");
+        //SC_GM_SoundManager.instance.PlaySound("Redaction_PickUpItem");
     }
 
     private void OnMouseUp()
     {
-        if (Snapped && ddcontrols.IsSnapped)
+        if (Snapped)
         {
-            // Put the particle effect on click
-            Instantiate(ParticleWin, transform.position, Quaternion.identity);
-
-            // Add the word to the paragraph
-            autoc.OnClick(animator);
-
-            StartCoroutine("GoToPlace");
-            SC_GM_SoundManager.instance.PlaySound("Redaction_PlaceWordWriteSound");
+            SnapMovement = true;
+            //SC_GM_SoundManager.instance.PlaySound("Redaction_PlaceWordWriteSound");
         }
         else
         {
@@ -93,26 +84,8 @@ public class SC_DragDropWords : MonoBehaviour
             SnapPosition = OriginalPosition;
             SnapMovement = true;
 
-            SC_GM_SoundManager.instance.PlaySound("Redaction_Swipe_Papier_Aigu");
+            //SC_GM_SoundManager.instance.PlaySound("Redaction_Swipe_Papier_Aigu");
         }
-
-        StartCoroutine("TextOrderReset");
-    }
-
-    private IEnumerator GoToPlace()
-    {
-        yield return new WaitForSeconds(1);
-
-        // Send the element back to it's original position
-        SnapPosition = OriginalPosition;
-        SnapMovement = true;
-    }
-
-    private IEnumerator TextOrderReset()
-    {
-        yield return new WaitForSeconds(1);
-        backgroundSR.sortingOrder = 0;
-        text.sortingOrder = 1;
     }
 
     private void OnMouseDrag()
@@ -124,24 +97,27 @@ public class SC_DragDropWords : MonoBehaviour
                 rig.position = new Vector3(GetMouseWorldPos().x + mouseOffset.x, Mathf.Lerp(transform.position.y, HoveringHeight, Time.deltaTime * 2), GetMouseWorldPos().z + mouseOffset.z);
 
             // Raycasts - !!! DONT FORGET TO CHECK IF THE TRANSFORM.GETCHILD MATCH THE HIERARCHY !!! 
-            Physics.Raycast(transform.GetChild(1).transform.position, Vector3.down, out RaycastHit topHit, 1000f);
-            Physics.Raycast(transform.GetChild(2).transform.position, Vector3.down, out RaycastHit downHit, 1000f);
+            Physics.Raycast(transform.position, Vector3.down, out RaycastHit topHit, 1000f);
+            //Debug.DrawRay(transform.position, Vector3.down, Color.red);
 
             // Is the raycast hitting something ?
-            if(Physics.Raycast(transform.GetChild(1).transform.position, Vector3.down, 1000f) || Physics.Raycast(transform.GetChild(2).transform.position, Vector3.down, 1000f))
+            if (Physics.Raycast(transform.position, Vector3.down, 1000f))
             {
                 // Is the raycast hitting a paragraph
-                if(topHit.transform.tag == "Paragraph" && downHit.transform.tag == "Paragraph")
+                if (topHit.transform.tag == "StampZone")
                 {
                     // Snap the word to the paragraph
-                    autoc = topHit.transform.GetComponent<SC_AutoComplete>();
-                    ddcontrols = topHit.transform.GetComponent<SC_DragDropControls>();
+                    SnapPosition = topHit.transform.position;
                     Snapped = true;
                 }
                 else
                 {
                     Snapped = false;
                 }
+            }
+            else
+            {
+                Snapped = false;
             }
         }
     }
