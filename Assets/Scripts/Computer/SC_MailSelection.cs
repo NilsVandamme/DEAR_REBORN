@@ -12,9 +12,11 @@ public class SC_MailSelection : MonoBehaviour
     public List<GameObject> mailTextsList; // List of texts content
     public List<GameObject> mailButtonsHighlights; // List of all the hightligth images
     public int currentIndex = 0;
+    private Animator animMail;
 
     void Start()
     {
+        animMail = mailTextsParent.GetComponent<Animator>();
         // Init the lists
         foreach (Transform child in mailTextsListParent.transform)
         {
@@ -50,11 +52,13 @@ public class SC_MailSelection : MonoBehaviour
         {
             mailTextsList[currentIndex + 1].SetActive(true);
             currentIndex += 1;
+            animMail.Play("switchMailContent");
         }
         else
         {
             mailTextsList[0].SetActive(true);
             currentIndex = 0;
+            animMail.Play("switchMailContent");
         }
     }
 
@@ -69,23 +73,26 @@ public class SC_MailSelection : MonoBehaviour
         {
             mailTextsList[currentIndex - 1].SetActive(true);
             currentIndex -= 1;
+            animMail.Play("switchMailContent");
         }
         else
         {
             mailTextsList[mailTextsList.Count-1].SetActive(true);
             currentIndex = mailTextsList.Count-1;
+            animMail.Play("switchMailContent");
         }
     }
 
     public void ReturnToMailsList()
     {
+        animMail.Play("disappearMailContent");
         for (int i = 0; i < mailTextsList.Count; i++)
         {
             mailTextsList[i].SetActive(false);
             mailButtonsHighlights[i].SetActive(false);
         }
-        mailTextsParent.SetActive(false);
+        //mailTextsParent.SetActive(false);
         //mailButtonsListParent.SetActive(true);
-        returnButton.SetActive(false);
+        //returnButton.SetActive(false);
     }
 }
