@@ -26,28 +26,36 @@ public class StampyManager : MonoBehaviour
             FlipFlop = false;
             Stampy.GetComponent<StampyNext>().LeftForNow();
             return;
+            
         }
     }
 
     public void SelectBulle()
     {
-        if (Mails.active)
+        if (Mails.activeSelf)
         {
             Stampy.GetComponent<StampyNext>().Bulles[0] = BulleMails;
             Stampy.SetActive(true);
             Stampy.GetComponent<Animator>().Play("0");
             return;
         }
-        if (Daily.active)
+        if (Daily.activeSelf)
         {
             Stampy.GetComponent<StampyNext>().Bulles[0] = BulleDaily;
             Stampy.SetActive(true);
             Stampy.GetComponent<Animator>().Play("0");
             return;
         }
-        if (Arbo.active)
+        if (Arbo.activeSelf)
         {
             Stampy.GetComponent<StampyNext>().Bulles[0] = BulleArbo;
+            Stampy.SetActive(true);
+            Stampy.GetComponent<Animator>().Play("0");
+            return;
+        }
+        if (!Mails.activeSelf & !Daily.activeSelf & !Arbo.activeSelf)
+        {
+            Stampy.GetComponent<StampyNext>().Bulles[0] = BulleDaily;
             Stampy.SetActive(true);
             Stampy.GetComponent<Animator>().Play("0");
             return;
