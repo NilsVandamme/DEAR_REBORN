@@ -5,21 +5,24 @@ using UnityEngine;
 public class SC_MailLinkButton : MonoBehaviour
 {
     // Start is called before the first frame update
-    public GameObject PopUp;
+    public GameObject PopUpCanvas;
+    private Animator anim;
     void Start()
     {
-        
+        anim = gameObject.GetComponent<Animator>();
     }
 
     public void SetActivePopUp()
     {
-        PopUp.SetActive(true);
+        anim.Play("AppearPopUp");
+       
 
     }
 
     public void ClosePopUp()
     {
-        PopUp.SetActive(false);
+        anim.Play("DisappearPopUp");
+        
     }
     
    
