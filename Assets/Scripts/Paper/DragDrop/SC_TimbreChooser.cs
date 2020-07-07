@@ -9,6 +9,7 @@ public class SC_TimbreChooser : MonoBehaviour
 
     public List<GameObject> stamps; // all stamps
     public GameObject StoryArbo; // Story treeview screen
+    public SpriteRenderer rend; // Enveloppe stamp renderer
 
     [HideInInspector]
     public bool StampAlreadySelected; // Has a stamp been selected ?
@@ -41,7 +42,7 @@ public class SC_TimbreChooser : MonoBehaviour
             {
                 stamps[i].SetActive(false);
             }
-            selectedStamp.SetActive(true);
+            rend.sprite = selectedStamp.GetComponent<SpriteRenderer>().sprite;
         }
     }
 
