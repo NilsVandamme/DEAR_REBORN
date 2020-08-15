@@ -156,7 +156,7 @@ public class SC_CameraDayDisplay : MonoBehaviour
         if (scene.name == "L_F4")
         {
             DayText.text = "May 04th";
-            DayNameText.text = "Glared at";
+            DayNameText.text = "Glares";
             IncidentText.text = "11 days before the Incident";
             GM_Audio.PlayPiano(14);
         }
