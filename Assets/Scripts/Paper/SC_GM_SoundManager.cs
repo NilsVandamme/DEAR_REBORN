@@ -45,6 +45,12 @@ public class SC_GM_SoundManager : MonoBehaviour
     private int maximumTrack;
     private bool playCurrentMusic = true;
 
+
+    [Header("Sprites music player")]
+    public Image playButtonImg;
+    public Sprite playSprite;
+    public Sprite pauseSprite;
+
     private void Awake()
     {
         // Singleton logic
@@ -319,12 +325,14 @@ public class SC_GM_SoundManager : MonoBehaviour
         if (playCurrentMusic)
         {
             playCurrentMusic = false;
+            playButtonImg.sprite = playSprite;
             ASourceMusic.Stop();
         }
         else
         {
             playCurrentMusic = true;
             ASourceMusic.clip = radioMusics[currentTrack];
+            playButtonImg.sprite = pauseSprite;
             ASourceMusic.Play();
         }
     }

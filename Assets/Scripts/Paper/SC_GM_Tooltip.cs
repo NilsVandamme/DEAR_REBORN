@@ -37,6 +37,8 @@ public class SC_GM_Tooltip : MonoBehaviour
             tog.isOn = false;
         }
 
+        Debug.Log("tooltip status = " + tooltipActive);
+
         TurnOn();
     }
 
