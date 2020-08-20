@@ -204,7 +204,7 @@ public class SC_Messaging_Service : MonoBehaviour
         StartCoroutine(PlayEffects(particles.GetComponent<ParticleSystem>(), 0));
         */
 
-        yield return new WaitForSeconds(waitBetweenTwoMessage);
+        yield return new WaitForSeconds(waitBetweenTwoMessage + message.GetComponent<SC_BossSpeechAddTime>().additiveTime);
         bossWrittingAnimationStarted = false;
 
         chatRefreshed = false;
