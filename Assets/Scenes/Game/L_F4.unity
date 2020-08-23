@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -710,17 +710,17 @@ PrefabInstance:
     - target: {fileID: 2185823014365053812, guid: 48dfb50199b8f68449fbbeaf85651280,
         type: 3}
       propertyPath: m_BoundingSphereOverride.y
-      value: 1.83672e-40
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2185823014365053812, guid: 48dfb50199b8f68449fbbeaf85651280,
         type: 3}
       propertyPath: m_BoundingSphereOverride.z
-      value: -1.14e-42
+      value: 2.45e-43
       objectReference: {fileID: 0}
     - target: {fileID: 2185823014365053812, guid: 48dfb50199b8f68449fbbeaf85651280,
         type: 3}
       propertyPath: m_BoundingSphereOverride.w
-      value: 6.2e-44
+      value: 3e-45
       objectReference: {fileID: 0}
     - target: {fileID: 4468949193281559154, guid: 48dfb50199b8f68449fbbeaf85651280,
         type: 3}
@@ -795,7 +795,7 @@ PrefabInstance:
     - target: {fileID: 3717765167691240134, guid: 48dfb50199b8f68449fbbeaf85651280,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8072168700273971903, guid: 48dfb50199b8f68449fbbeaf85651280,
         type: 3}
@@ -936,7 +936,7 @@ PrefabInstance:
     - target: {fileID: 8081557585863312963, guid: 48dfb50199b8f68449fbbeaf85651280,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2425823216357577023, guid: 48dfb50199b8f68449fbbeaf85651280,
         type: 3}
@@ -1084,15 +1084,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 793222366923258, guid: 48dfb50199b8f68449fbbeaf85651280, type: 3}
       propertyPath: m_textInfo.characterCount
-      value: 45
+      value: 41
       objectReference: {fileID: 0}
     - target: {fileID: 793222366923258, guid: 48dfb50199b8f68449fbbeaf85651280, type: 3}
       propertyPath: m_textInfo.spaceCount
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 793222366923258, guid: 48dfb50199b8f68449fbbeaf85651280, type: 3}
       propertyPath: m_textInfo.wordCount
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 793222366923258, guid: 48dfb50199b8f68449fbbeaf85651280, type: 3}
       propertyPath: m_textInfo.lineCount
@@ -1112,7 +1112,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 793222366923258, guid: 48dfb50199b8f68449fbbeaf85651280, type: 3}
       propertyPath: m_text
-      value: Leak him informations while dissing your Boss
+      value: Leak informations while dissing your Boss
       objectReference: {fileID: 0}
     - target: {fileID: 793222366923258, guid: 48dfb50199b8f68449fbbeaf85651280, type: 3}
       propertyPath: m_sharedMaterial
@@ -1633,7 +1633,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2340497850282771807, guid: 80ae640a78e05464286c8bcb2b4e94c6,
+      objectReference: {fileID: 6267517528062524110, guid: ffc4c807875ad4343882d0fd95b9153e,
         type: 2}
     - target: {fileID: 8428387325204174047, guid: 48dfb50199b8f68449fbbeaf85651280,
         type: 3}
@@ -2246,7 +2246,7 @@ PrefabInstance:
     - target: {fileID: 8621052611588887118, guid: 48dfb50199b8f68449fbbeaf85651280,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3647088624204791960, guid: 48dfb50199b8f68449fbbeaf85651280,
         type: 3}
@@ -2276,12 +2276,12 @@ PrefabInstance:
     - target: {fileID: 2816419451648088704, guid: 48dfb50199b8f68449fbbeaf85651280,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2816419451648088704, guid: 48dfb50199b8f68449fbbeaf85651280,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 984156399581775974, guid: 48dfb50199b8f68449fbbeaf85651280,
         type: 3}
@@ -2600,6 +2600,11 @@ PrefabInstance:
       value: "Reinforcement of the Harmony Forces \u2018necessary\u2019 to its Commander\r\nAs
         things are currently doing well for the State, Harmony Forces Commander says
         that he stills have several plans for the Nation\u2019s citizens\r"
+      objectReference: {fileID: 0}
+    - target: {fileID: 3220444331650668297, guid: 48dfb50199b8f68449fbbeaf85651280,
+        type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8035287670995743102, guid: 48dfb50199b8f68449fbbeaf85651280,
         type: 3}
@@ -2970,6 +2975,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1313286806, guid: 48dfb50199b8f68449fbbeaf85651280, type: 3}
       propertyPath: m_textInfo.pageCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2648139309924796061, guid: 48dfb50199b8f68449fbbeaf85651280,
+        type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
@@ -4235,6 +4245,78 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 662050708}
   m_CullTransparentMesh: 0
+--- !u!1 &694091984
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 694091985}
+  - component: {fileID: 694091987}
+  - component: {fileID: 694091986}
+  m_Layer: 5
+  m_Name: TMP SubMeshUI [Orkney Light Atlas Material + LiberationSans SDF Atlas]
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &694091985
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 694091984}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 260732169}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &694091986
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 694091984}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 058cba836c1846c3aa1c5fd2e28aea77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_fontAsset: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
+  m_spriteAsset: {fileID: 0}
+  m_material: {fileID: 0}
+  m_sharedMaterial: {fileID: 0}
+  m_isDefaultMaterial: 0
+  m_padding: 1.25
+  m_canvasRenderer: {fileID: 694091987}
+  m_TextComponent: {fileID: 260732170}
+  m_materialReferenceIndex: 1
+--- !u!222 &694091987
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 694091984}
+  m_CullTransparentMesh: 0
 --- !u!1 &736559974
 GameObject:
   m_ObjectHideFlags: 0
@@ -5305,6 +5387,78 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1279378737}
+  m_CullTransparentMesh: 0
+--- !u!1 &1418610362
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1418610363}
+  - component: {fileID: 1418610365}
+  - component: {fileID: 1418610364}
+  m_Layer: 5
+  m_Name: TMP SubMeshUI [Orkney Light Atlas Material + LiberationSans SDF Atlas]
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1418610363
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1418610362}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 260732169}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1418610364
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1418610362}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 058cba836c1846c3aa1c5fd2e28aea77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_fontAsset: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
+  m_spriteAsset: {fileID: 0}
+  m_material: {fileID: 0}
+  m_sharedMaterial: {fileID: 0}
+  m_isDefaultMaterial: 0
+  m_padding: 1.25
+  m_canvasRenderer: {fileID: 1418610365}
+  m_TextComponent: {fileID: 260732170}
+  m_materialReferenceIndex: 1
+--- !u!222 &1418610365
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1418610362}
   m_CullTransparentMesh: 0
 --- !u!1001 &1478486958
 PrefabInstance:
