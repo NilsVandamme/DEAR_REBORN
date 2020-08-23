@@ -38,6 +38,7 @@ public class SC_MailSelection : MonoBehaviour
         mailButtonsHighlights[index].SetActive(true);
         returnButton.SetActive(true);
         currentIndex = index;
+        animMail.Play("appearMailContent");
 
     }
 
