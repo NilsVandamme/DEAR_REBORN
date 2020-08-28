@@ -27,3 +27,5 @@ public class SC_WindowContent : MonoBehaviour
         content.transform.SetParent(contentEmplacement.transform, false);
     }
 }
+
+// Good afternoon I hate women <3
