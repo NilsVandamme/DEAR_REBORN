@@ -7,7 +7,7 @@ public class SC_FeedbackPlayerScript : MonoBehaviour
 {
     private SC_FeedbackCanvasText fb;
     public GameObject bulleThemeWord1, bulleThemeWord2, bulleThemeWord3;
-    public int bulleInt;
+    public int bulleInt=0;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,6 +17,11 @@ public class SC_FeedbackPlayerScript : MonoBehaviour
     public void UpdateText()
     {
         fb.updateText();
+    }
+
+    public void IncrementBulleInt()
+    {
+        bulleInt++;
     }
 
     public void SpawnBulle()
@@ -38,7 +43,8 @@ public class SC_FeedbackPlayerScript : MonoBehaviour
         {
             bulleThemeWord3.SetActive(true);
         }
-
+        bulleInt++;
+       
     }
  
     // Update is called once per frame

@@ -5,6 +5,7 @@ using TMPro;
 using UnityEditor.UI;
 using UnityEngine.SceneManagement;
 
+
 public class SC_FeedbackCanvasText : MonoBehaviour
 {
 
@@ -14,6 +15,7 @@ public class SC_FeedbackCanvasText : MonoBehaviour
     private string characterName="[CHARA]";
     public static int characterCurrentInt=0;
     public int characterMaxInt=3;
+    private float randomfloat = 0f;
     public static bool Cyrus1 = false, Cyrus2 = false, Cyrus3 = false, Donna1 = false, Donna2 = false, Donna3 = false, MrS1 = false, MrS2 = false, MrS3 = false, Ash1 = false, Ash2 = false, Ash3 = false, Kat1 = false, Kat2 = false, Kat3 = false, Lyle1 = false, Lyle2 = false, Lyle3 = false , Kosong1 = false, Kosong2 = false, Kosong3 = false;
     
     // Start is called before the first frame update
@@ -46,11 +48,22 @@ public class SC_FeedbackCanvasText : MonoBehaviour
     public void FeedbackCL()
     {
         WordGetObject.SetActive(true);
+        randomfloat = Random.Range(0, 10);
+        if (randomfloat <= 5)
+        {
+            WordGetObject.GetComponent<Animator>().Play("WordGetAppear");
+        }
+        else
+        {
+            WordGetObject.GetComponent<Animator>().Play("WordGetAppear2");
+        }
+       
     }
 
     public void FeedbackInfo()
     {
         InfoGetObject.SetActive(true);
+        WordGetObject.GetComponent<Animator>().Play("WordGet");
     }
 
     public void setInfoBoolTrue(string charName)
