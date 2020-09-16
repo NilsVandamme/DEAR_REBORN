@@ -12,12 +12,13 @@ public class PassText1 : MonoBehaviour
     public GameObject NextButton;
     public GameObject Stampy;
     public Animator TextAnimator;
+    public StampyManager sm;
 
 
     void Start()
     {
         Debug.Log(TextTuto.Length);
-        NumberText = 0;
+        NumberText = 1;
         PrevButton.SetActive(false);
     }
 
@@ -25,20 +26,16 @@ public class PassText1 : MonoBehaviour
     {
         NumberText++;
         PrevButton.SetActive(true);
-        if (NumberText <= TextTuto.Length-1)
+        if (NumberText <= TextTuto.Length)
         {
-            ActualText.GetComponent<Text>().text = TextTuto[NumberText];
+            ActualText.GetComponent<Text>().text = TextTuto[NumberText-1];
         }
 
-        if (NumberText == TextTuto.Length-1)
+        if (NumberText > TextTuto.Length)
         {
-            NextButton.SetActive(false);
-        }
-
-        if (NumberText >= TextTuto.Length-1)
-        {
-            NextButton.SetActive(false);
-            NumberText = TextTuto.Length-1;
+            PrevButton.SetActive(false);
+            sm.StampyButton();
+            NumberText = 1;
         }
 
     }
@@ -49,9 +46,9 @@ public class PassText1 : MonoBehaviour
         NextButton.SetActive(true);
         if (NumberText >= 0)
         {
-            ActualText.GetComponent<Text>().text = TextTuto[NumberText];
+            ActualText.GetComponent<Text>().text = TextTuto[NumberText-1];
         }
-        if (NumberText == 0)
+        if (NumberText == 1)
         {
             PrevButton.SetActive(false);
         }
@@ -65,7 +62,8 @@ public class PassText1 : MonoBehaviour
 
     public void GenerateText()
     {
-        ActualText.GetComponent<Text>().text = TextTuto[NumberText];
+        NumberText = 1;
+        ActualText.GetComponent<Text>().text = TextTuto[NumberText-1];
     }
 
     public void Disapear()
