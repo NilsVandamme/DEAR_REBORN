@@ -10,10 +10,6 @@ public class SC_PullOfWordPreparatory : MonoBehaviour
     public GameObject next;
     public Image vs;
 
-    // Liste des Sprites des buttons en fct de s'il contiennent ou non un mot
-    public Sprite hasWord;
-    public Sprite hasNotWord;
-
     // Info sur le CL
     private int posElemCl = 4;
 
@@ -148,7 +144,6 @@ public class SC_PullOfWordPreparatory : MonoBehaviour
         if (nbCLRestant <= 0)
         {
             next.gameObject.SetActive(true);
-            vs.gameObject.SetActive(false);
 
             foreach (LayoutGroup elem in champsLexicaux)
                 elem.gameObject.SetActive(false);
@@ -170,6 +165,7 @@ public class SC_PullOfWordPreparatory : MonoBehaviour
             if (versus2.Contains(nbCLRestant))
             {
                 Swap(x, y);
+                vs.gameObject.SetActive(false);
             }
             else if (versus3.Contains(nbCLRestant))
             {
@@ -180,6 +176,7 @@ public class SC_PullOfWordPreparatory : MonoBehaviour
                 while (z == x || z == y);
 
                 Swap(x, y, z);
+                vs.gameObject.SetActive(true);
             }
         }
 
@@ -228,10 +225,10 @@ public class SC_PullOfWordPreparatory : MonoBehaviour
                     if (nbMot > 0)
                     {
                         nbMot--;
-                        champLexicalImage[i][j].sprite = hasWord;
+                        //champLexicalImage[i][j].sprite = hasWord;
                     }
-                    else
-                        champLexicalImage[i][j].sprite = hasNotWord;
+                    //else
+                        //champLexicalImage[i][j].sprite = hasNotWord;
                 }
         }
 
