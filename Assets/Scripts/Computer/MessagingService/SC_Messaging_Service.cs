@@ -114,7 +114,6 @@ public class SC_Messaging_Service : MonoBehaviour
                 if (!bossWrittingAnimationStarted)
                 {
                     bossWrittingAnimationStarted = true;
-
                     StartCoroutine(BossIsTalking());
                 }
             }
@@ -180,7 +179,6 @@ public class SC_Messaging_Service : MonoBehaviour
      */
     IEnumerator BossIsTalking()
     {
-
         // Creation of the new message
         GameObject message = Instantiate(listBossMessages[countPassedDialog],
             chatPanelObject.transform);
@@ -204,7 +202,7 @@ public class SC_Messaging_Service : MonoBehaviour
         StartCoroutine(PlayEffects(particles.GetComponent<ParticleSystem>(), 0));
         */
 
-        yield return new WaitForSeconds(waitBetweenTwoMessage + message.GetComponent<SC_BossSpeechAddTime>().additiveTime);
+        yield return new WaitForSeconds(waitBetweenTwoMessage + message.GetComponent<SC_BossSpeechAddTime>().additiveTime); 
         bossWrittingAnimationStarted = false;
 
         chatRefreshed = false;
