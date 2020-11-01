@@ -19,6 +19,8 @@ public class FinalButton : MonoBehaviour
 
     void Update()
     {
+        Debug.Log("finalbutton update is running | msgsystem status = " + BossCall.CanStartTuto );
+
         if (Stop && Stop2) return;
         if (Stop3) return;
         
@@ -48,6 +50,7 @@ public class FinalButton : MonoBehaviour
 
         if (BossCall.CanStartTuto)
         {
+            Debug.Log("canstarttuto received");
             if (!Stop3)
             {
                 StampyStartTuto.SetActive(true);

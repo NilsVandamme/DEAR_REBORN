@@ -244,6 +244,7 @@ public class SC_Messaging_Service : MonoBehaviour
 
     IEnumerator CloseChatDefinitively()
     {
+
         yield return new  WaitForSeconds(1.3f);
         CanStartTuto = true;
         gameObject.SetActive(false);
